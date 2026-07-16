@@ -1,0 +1,1411 @@
+﻿<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קורפו 2026: המדריך האולטימטיבי והמקיף לזוגות | Lonely Planet Style</title>
+    <meta name="description" content="המדריך המקיף ביותר לקורפו: מסלול יומי, מלונות, מסעדות, חופים, פנינים נסתרות, תקציב וטיפים למטיילים. מותאם במיוחד לזוגות לטיול עם רכב שכור.">
+    <meta property="og:title" content="קורפו 2026: המדריך האולטימטיבי">
+    <meta property="og:description" content="כל מה שצריך לדעת על קורפו במקום אחד: שעות, מפות, מחירים, תפריטים וטיפים של מקומיים.">
+    <meta property="og:type" content="website">
+    
+    <!-- SEO Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristDestination",
+      "name": "Corfu, Greece",
+      "description": "האי קורפו מציע חופים מדהימים, כפרים הרריים, קולינריה משובחת ושקיעות עוצרות נשימה. מדריך זה מקיף את כל המידע הנדרש למטייל.",
+      "touristType": "Couples"
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base styles and custom scrollbar */
+        body { font-family: 'Assistant', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        
+        /* Tab Navigation */
+        .tab-content { display: none; opacity: 0; transition: opacity 0.3s ease-in-out; }
+        .tab-content.active { display: block; opacity: 1; }
+        .nav-btn { transition: all 0.2s; white-space: nowrap; }
+        .nav-btn.active { border-bottom: 4px solid #0d9488; color: #0f766e; font-weight: 800; background-color: #f0fdfa; border-radius: 0.5rem 0.5rem 0 0; }
+        
+        /* Accordion (FAQ & Details) */
+        details { background: #ffffff; border-radius: 0.75rem; border: 1px solid #e2e8f0; margin-bottom: 0.75rem; overflow: hidden; }
+        details > summary { list-style: none; cursor: pointer; padding: 1.25rem; font-weight: 700; font-size: 1.125rem; background: #f8fafc; display: flex; justify-content: space-between; align-items: center; }
+        details > summary::-webkit-details-marker { display: none; }
+        details > summary::after { content: '+'; font-size: 1.5rem; color: #0d9488; transition: transform 0.3s; }
+        details[open] > summary::after { content: '-'; transform: rotate(180deg); }
+        .faq-content { padding: 1.25rem; border-top: 1px solid #e2e8f0; background: #ffffff; line-height: 1.7; }
+        details[open] .faq-content { animation: slideDown 0.3s ease-in-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Timeline */
+        .timeline-container { position: relative; padding-right: 2rem; border-right: 2px solid #cbd5e1; }
+        .timeline-dot { position: absolute; right: -0.4rem; top: 0.2rem; width: 1rem; height: 1rem; background-color: #0d9488; border-radius: 50%; border: 2px solid white; }
+        
+        /* Cards Hover Effects */
+        .hover-card { transition: transform 0.2s, box-shadow 0.2s; }
+        .hover-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        
+        /* Badges */
+        .badge { display: inline-flex; align-items: center; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; margin-left: 0.5rem; margin-bottom: 0.5rem; }
+        .badge-pro { background-color: #dcfce7; color: #166534; }
+        .badge-con { background-color: #fee2e2; color: #991b1b; }
+        .badge-info { background-color: #e0f2fe; color: #075985; }
+        
+        /* Hidden Gem Grid */
+        .gem-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        
+        /* Icons for lists */
+        ul.icon-list li { position: relative; padding-right: 1.5rem; margin-bottom: 0.5rem; }
+        ul.icon-list li::before { content: '✔️'; position: absolute; right: 0; top: 0; font-size: 0.8rem; line-height: 1.5; color: #0d9488; }
+    </style>
+</head>
+<body class="antialiased text-slate-800 leading-relaxed">
+
+    <!-- Header Section -->
+    <header class="bg-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-teal-900 mb-2 tracking-tight">קורפו האולטימטיבי <span class="text-teal-600">2026</span></h1>
+            <p class="text-slate-500 text-lg md:text-xl font-medium mb-4">המדריך המקיף לזוגות: מסלולים, מלונות, מסעדות, וכל מה שצריך לדעת עד הפרט האחרון.</p>
+            
+            <!-- Navigation Tabs -->
+            <nav class="flex overflow-x-auto gap-2 pb-2 hide-scrollbar" aria-label="Tabs">
+                <button onclick="switchTab('overview')" class="nav-btn active px-5 py-3 text-sm md:text-base font-semibold text-slate-600 hover:text-teal-700">📋 תדריך ומזג אוויר</button>
+                <button onclick="switchTab('itinerary')" class="nav-btn px-5 py-3 text-sm md:text-base font-semibold text-slate-600 hover:text-teal-700">🗺️ מסלול יומי ושעתי</button>
+                <button onclick="switchTab('hotels')" class="nav-btn px-5 py-3 text-sm md:text-base font-semibold text-slate-600 hover:text-teal-700">🏨 מלונות ולוגיסטיקה</button>
+                <button onclick="switchTab('beaches')" class="nav-btn px-5 py-3 text-sm md:text-base font-semibold text-slate-600 hover:text-teal-700">🏖️ חופים מנותחים</button>
+                <button onclick="switchTab('food')" class="nav-btn px-5 py-3 text-sm md:text-base font-semibold text-slate-600 hover:text-teal-700">🍽️ מדריך קולינרי</button>
+                <button onclick="switchTab('attractions')" class="nav-btn px-5 py-3 text-sm md:text-base font-semibold text-slate-600 hover:text-teal-700">📸 אטרקציות מרכזיות</button>
+                <button onclick="switchTab('gems')" class="nav-btn px-5 py-3 text-sm md:text-base font-semibold text-slate-600 hover:text-teal-700">💎 פנינים נסתרות (30+)</button>
+                <button onclick="switchTab('shopping')" class="nav-btn px-5 py-3 text-sm md:text-base font-semibold text-slate-600 hover:text-teal-700">🛍️ קניות ותקציב</button>
+                <button onclick="switchTab('faq')" class="nav-btn px-5 py-3 text-sm md:text-base font-semibold text-slate-600 hover:text-teal-700">❓ FAQ וחירום</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: OVERVIEW, WEATHER & EMERGENCY -->
+        <!-- ========================================== -->
+        <section id="overview" class="tab-content active space-y-12">
+            
+            <!-- Welcome Card -->
+            <div class="bg-gradient-to-br from-teal-800 to-teal-900 rounded-3xl p-8 md:p-12 text-white shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://images.pexels.com/photos/164041/pexels-photo-164041.jpeg')] bg-cover bg-center"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl font-bold mb-4">ברוכים הבאים לקרקירה (Corfu)</h2>
+                    <p class="text-lg text-teal-50 max-w-3xl leading-relaxed">
+                        קורפו אינה עוד "אי יווני רגיל". זהו אי ירוק ופראי, בו השפעות ונציאניות, צרפתיות ובריטיות מתנגשות ליצירת תרבות עשירה השונה מאוד מהאיים הקיקלאדיים. כמטיילים עם רכב שכור, צפויה לכם חוויה יוצאת דופן. מדריך זה נועד לקחת אתכם מעבר למלכודות התיירים, היישר אל המסעדות שהמקומיים אוכלים בהן, החופים שבהם המים צלולים כבדולח, ונקודות התצפית שיספקו לכם את תמונות השקיעה המושלמות. קורפו דורשת תכנון מוקפד – הכבישים צרים, תלולים ומאתגרים, והמרחקים מטעים בגלל הטופוגרפיה. בעזרת מדריך זה, אתם מוכנים לכל תרחיש.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Weather Section -->
+            <div>
+                <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center"><span class="text-3xl ml-2">☀️</span> מזג אוויר ונתוני אקלים - מתי הכי כדאי לנסוע?</h3>
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-right text-sm">
+                            <thead class="bg-slate-50 border-b border-slate-200">
+                                <tr>
+                                    <th class="p-4 font-semibold text-slate-600">חודש</th>
+                                    <th class="p-4 font-semibold text-slate-600">טמפ' אוויר (יום/לילה)</th>
+                                    <th class="p-4 font-semibold text-slate-600">טמפ' ים</th>
+                                    <th class="p-4 font-semibold text-slate-600">שעות אור ביום</th>
+                                    <th class="p-4 font-semibold text-slate-600">שקיעה (ממוצע)</th>
+                                    <th class="p-4 font-semibold text-slate-600">ימי גשם / רוח / התאמה לזוגות</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr class="hover:bg-slate-50 text-slate-600">
+                                    <td class="p-4 font-bold">אפריל-מאי</td>
+                                    <td class="p-4">20°C - 24°C / 12°C</td>
+                                    <td class="p-4">17°C (קר!)</td>
+                                    <td class="p-4">13-14 שעות</td>
+                                    <td class="p-4">20:15</td>
+                                    <td class="p-4">6 ימים / אידיאלי לטיולי טבע, לא לרחצה</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 text-slate-600">
+                                    <td class="p-4 font-bold">יוני</td>
+                                    <td class="p-4">28°C / 17°C</td>
+                                    <td class="p-4">22°C</td>
+                                    <td class="p-4">15 שעות</td>
+                                    <td class="p-4">20:55 (הכי מאוחר)</td>
+                                    <td class="p-4">3 ימים / מעולה, טרם העומס הגדול</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 text-slate-600">
+                                    <td class="p-4 font-bold">יולי-אוגוסט (שיא)</td>
+                                    <td class="p-4">32°C+ / 21°C</td>
+                                    <td class="p-4">25°C-26°C</td>
+                                    <td class="p-4">14.5 שעות</td>
+                                    <td class="p-4">20:30</td>
+                                    <td class="p-4">1 יום / חם מאוד, עמוס ויקר</td>
+                                </tr>
+                                <tr class="bg-teal-50 border-l-4 border-teal-500 hover:bg-teal-100 transition-colors">
+                                    <td class="p-4 font-extrabold text-teal-800">ספטמבר (הטיול שלכם)</td>
+                                    <td class="p-4 font-bold">28°C / 18°C</td>
+                                    <td class="p-4 font-bold text-blue-700">25°C (מושלם לרחצה)</td>
+                                    <td class="p-4 font-bold">12.5 שעות</td>
+                                    <td class="p-4 font-bold">19:45</td>
+                                    <td class="p-4 font-bold">4 ימים / החודש האידיאלי. מים חמים ועומס יורד.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 text-slate-600">
+                                    <td class="p-4 font-bold">אוקטובר</td>
+                                    <td class="p-4">23°C / 14°C</td>
+                                    <td class="p-4">22°C</td>
+                                    <td class="p-4">11 שעות</td>
+                                    <td class="p-4">18:50</td>
+                                    <td class="p-4">9 ימים / סיכון גבוה לגשם, חופים מתחילים להסגר</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 text-slate-400">
+                                    <td class="p-4 text-xs" colspan="6">הנתונים הם ממוצעים רב-שנתיים לחופי קורפו. אזורים הרריים (כמו Pantokrator) קרים ב-2-4 מעלות. בחודש ספטמבר, הים שומר על החום מהקיץ אך עומס התיירים פוחת.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Info -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-red-50 p-8 rounded-2xl border border-red-100">
+                    <h3 class="text-xl font-bold text-red-800 mb-4 flex items-center"><span class="ml-2">🚨</span> מוקדי חירום ורפואה - לגזור ולשמור</h3>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center border-b border-red-200 pb-2">
+                            <span class="font-semibold text-red-900">מספר חירום אירופי אחיד</span>
+                            <span class="bg-white px-3 py-1 rounded-lg shadow-sm font-mono text-red-600">112</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-red-200 pb-2">
+                            <span class="font-semibold text-red-900">משטרה מקומית</span>
+                            <span class="bg-white px-3 py-1 rounded-lg shadow-sm font-mono text-red-600">100</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-red-200 pb-2">
+                            <span class="font-semibold text-red-900">אמבולנס (EKAB)</span>
+                            <span class="bg-white px-3 py-1 rounded-lg shadow-sm font-mono text-red-600">166</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-red-200 pb-2">
+                            <span class="font-semibold text-red-900">מכבי אש</span>
+                            <span class="bg-white px-3 py-1 rounded-lg shadow-sm font-mono text-red-600">199</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-red-200 pb-2">
+                            <span class="font-semibold text-red-900">משמר החופים (חילוץ בים)</span>
+                            <span class="bg-white px-3 py-1 rounded-lg shadow-sm font-mono text-red-600">108</span>
+                        </li>
+                        <li class="border-b border-red-200 pb-2">
+                            <span class="font-semibold text-red-900 block mb-1">בית החולים הראשי (General Hospital of Corfu)</span>
+                            <span class="text-sm text-red-700">מיקום: Kontokali (כ-15 דקות נסיעה מצפון לעיר קרקירה). פתוח 24/7 לחירום רפואי. טלפון: +30 2661 360400. יש מחלקה דחופה טובה, עדיף להגיע עם רכב ולא לחכות לאמבולנס.</span>
+                            <a href="https://maps.app.goo.gl/HospitalLink" class="text-xs text-blue-600 hover:underline block mt-1">📍 נווט לבית החולים ב-Google Maps</a>
+                        </li>
+                        <li class="border-b border-red-200 pb-2">
+                            <span class="font-semibold text-red-900 block mb-1">מרפאות פרטיות למקרים קלים (Corfu Medica)</span>
+                            <span class="text-sm text-red-700">אם הבעיה לא דחופה מאוד (כאב גרון, חתך קל), עדיף לגשת למרפאות פרטיות המקבלות ביטוח נסיעות, למשל בקאבוס, איפסוס או העיר העתיקה. השירות מהיר בהרבה מבית החולים הציבורי.</span>
+                        </li>
+                        <li>
+                            <span class="font-semibold text-red-900 block mb-1">בתי מרקחת (Farmakeio - Φαρμακείο)</span>
+                            <span class="text-sm text-red-700">מסומנים בצלב ירוק זוהר מואר. רובם פתוחים בפיצול (09:00-14:00 ואז 17:30-21:00). בעיר עצמה תמיד יש בית מרקחת תורן שפתוח בלילה, הרשימה תלויה על דלת כל בית מרקחת אחר או באינטרנט.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-100 p-8 rounded-2xl border border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center"><span class="ml-2">🚙</span> שירותי דרך ותקלות רכב</h3>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center border-b border-slate-300 pb-2">
+                            <span class="font-semibold text-slate-700">גרירה / שירותי דרך (ELPA - מועדון הרכב)</span>
+                            <span class="bg-white px-3 py-1 rounded-lg shadow-sm font-mono text-slate-600">10400</span>
+                        </li>
+                        <li class="border-b border-slate-300 pb-2">
+                            <span class="font-semibold text-slate-700 block mb-1">נוהל תאונה עם רכב שכור:</span>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                1. **בטיחות קודמת לכל:** אל תזיזו את הרכב אלא אם הוא חוסם ציר מרכזי בצורה שמהווה סכנת חיים.<br>
+                                2. **דו"ח משטרתי (חובה):** התקשרו למשטרה (100). חברות הביטוח מחייבות דו"ח משטרתי כדי לכסות את הנזק, גם אם זו שריטה בחניה ממישהו שברח.<br>
+                                3. **חברת ההשכרה:** התקשרו מיד למספר החירום המופיע על חוזה ההשכרה שלכם (שמרו אותו בתא הכפפות).<br>
+                                4. **תיעוד:** צלמו הכל בווידאו ובתמונות מכל זווית לפני שמזיזים משהו.
+                            </p>
+                        </li>
+                        <li class="border-b border-slate-300 pb-2">
+                            <span class="font-semibold text-slate-700 block mb-1">פנצ'ריות בדרך (Voulkanizater - Βουλκανιζατέρ)</span>
+                            <p class="text-sm text-slate-600">יש רבות לאורך הכביש הראשי 25 (Ethniki Odos). תיקון תקר עולה בדרך כלל סביב 10-15 אירו. ודאו היטב שיש לכם גלגל חליפי תקין וציוד החלפה בעת איסוף הרכב - הכבישים ההרריים נוטים לגרום לפנצ'רים אם יורדים לשוליים.</p>
+                        </li>
+                        <li>
+                            <span class="font-semibold text-slate-700 block mb-1">תחנות דלק ושירות</span>
+                            <p class="text-sm text-slate-600">הדלק באי יקר יחסית (כ-1.90 אירו לליטר). רוב התחנות נסגרות ב-21:00 או 22:00! אין "דלקן" עצמאי בכל תחנה כמו בארץ. אל תחכו שהמיכל יתרוקן כשאתם נוסעים לכפרים בצפון (כמו פורטו טימוני).</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 p-6 rounded-2xl border border-blue-200 mt-6">
+                 <h3 class="text-lg font-bold text-blue-900 mb-2 flex items-center"><span class="ml-2">ℹ️</span> קונסוליה / שגרירות ישראל ביוון</h3>
+                 <p class="text-sm text-blue-800">
+                    שגרירות ישראל ממוקמת באתונה (Marathonodromou 1, Paleo Psychiko, 154 52 Athens).<br>
+                    טלפון לשעת חירום (אובדן דרכון וכו'): +30 210 6705500.<br>
+                    מומלץ לצלם את הדרכון, רישיון הנהיגה וחוזה הרכב ולהעלות לענן (Google Drive/iCloud) לפני הטיסה.
+                 </p>
+            </div>
+        </section>
+        <!-- ========================================== -->
+        <!-- TAB 2: ITINERARY (7 Days Detailed)         -->
+        <!-- ========================================== -->
+        <section id="itinerary" class="tab-content space-y-8">
+            <div class="mb-8 border-b pb-6">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">מסלול מלא: 7 ימים מפורטים (רכב חובה)</h2>
+                <p class="text-lg text-slate-600">המסלול בנוי גיאוגרפית כדי למנוע נסיעות הלוך-חזור מיותרות (שבקורפו גוזלות שעות בשל הכבישים הצרים). זמני הנסיעה משוקללים ומציאותיים לספטמבר.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                
+                <!-- Day 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 hover-card">
+                    <div class="flex justify-between items-end mb-6 border-b pb-4">
+                        <div>
+                            <span class="text-teal-600 font-bold tracking-wider text-sm uppercase">יום 1 | נחיתה והתאקלמות</span>
+                            <h3 class="text-2xl font-bold text-slate-800">דרום-מזרח קליל ושקיעה ראשונה</h3>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full">קצב: רגוע</span>
+                    </div>
+                    <div class="timeline-container space-y-6">
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">12:00 <span class="font-normal text-slate-500 text-base">| איסוף רכב בשדה</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">נחיתה ב-CFU. איסוף הרכב (מומלץ לצלם וידאו היקפי של הרכב). הנסיעה למלון שלכם בחוף המערבי (אזור פלקאס / אגיוס גורדיוס) תיקח כ-30 דקות.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">13:30 <span class="font-normal text-slate-500 text-base">| ארמון אכיליון (Achilleion)</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">בדרך למלון, עצרו בארמון הקיץ של הנסיכה סיסי. <span class="text-red-600 font-bold">הערה חשובה:</span> נכון ל-2025/2026 הארמון עצמו לעיתים בשיפוצים, אך הגנים הפנורמיים פתוחים (מחיר מופחת 5€). שווה ביקור של שעה לתמונות.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">15:00 <span class="font-normal text-slate-500 text-base">| צ'ק אין במלון ומנוחה</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">הגעה למלון בחוף המערבי. קבלו את החדר, תפרקו מזוודות ורדו לים למנוחה.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">19:00 <span class="font-normal text-slate-500 text-base">| שקיעה וקוקטייל</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">נסיעה של 15 דקות אל <strong>Kaiser's Throne</strong> בפלקאס (GPS: 39.5936, 19.8213) או לטברנה בחוף המלון לשקיעה מטורפת. השקיעה בספטמבר סביב 19:45.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">20:30 <span class="font-normal text-slate-500 text-base">| ארוחת ערב מקומית</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">ארוחת ערב בטברנה מסורתית כמו <em>Pink Panther</em> או <em>Jimmy's</em> (תלוי איפה המלון שלכם).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 hover-card">
+                    <div class="flex justify-between items-end mb-6 border-b pb-4">
+                        <div>
+                            <span class="text-teal-600 font-bold tracking-wider text-sm uppercase">יום 2 | הצפון הפראי</span>
+                            <h3 class="text-2xl font-bold text-slate-800">פורטו טימוני וכף דראסטיס</h3>
+                        </div>
+                        <span class="bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full">קצב: מאומץ</span>
+                    </div>
+                    <div class="timeline-container space-y-6">
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">08:00 <span class="font-normal text-slate-500 text-base">| נסיעה צפונה (אפיאונס)</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">נסיעה של כ-50-60 דקות לכפר Afionas. חובה לצאת מוקדם לפני שנהיה חם מדי לטרק. חנו בחניון העליון (5€ ליום).</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">09:15 <span class="font-normal text-slate-500 text-base">| טרק מטה (Porto Timoni)</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">25 דקות הליכה בסלע. <span class="badge badge-con">חובה נעלי ספורט</span> ו-1.5 ליטר מים לאדם. אין שם כלום למטה. חוף כפול ומדהים, מים צלולים וקרים.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">12:30 <span class="font-normal text-slate-500 text-base">| עליה וצהריים</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">עלייה קשה בחזרה לכפר (קחו הפסקות). צהריים ב-<em>Taverna Panorama</em> עם הנוף לים. הזמינו סלט יווני, צדזיקי, ומוסקה.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">15:00 <span class="font-normal text-slate-500 text-base">| תעלת האהבה (Canal d'Amour)</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">נסיעה לסידארי (Sidari) כדי לראות את סלעי החול המפורסמים. המקום מאוד מתוייר (תיירות בריטית בעיקר), מספיק חצי שעה לתמונות.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">16:30 <span class="font-normal text-slate-500 text-base">| כף דראסטיס (Cape Drastis)</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">נסיעה קצרה, הגעה לתצפית על הצוקים הלבנים. רדו בזהירות (אפשר עם הרכב אם הוא לא נמוך מדי, או ברגל 10 דק') לחופים למטה, ושכרו סירה קטנה לשייט בין הסלעים (כ-15€).</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">18:30 <span class="font-normal text-slate-500 text-base">| שקיעה ב-75 Steps</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">מסעדה מטורפת על הצוק. חובה להזמין מקום מראש! שקיעה היישר אל תוך הים.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 hover-card">
+                    <div class="flex justify-between items-end mb-6 border-b pb-4">
+                        <div>
+                            <span class="text-teal-600 font-bold tracking-wider text-sm uppercase">יום 3 | מים צלולים ועיר עתיקה</span>
+                            <h3 class="text-2xl font-bold text-slate-800">פלאוקסטריצה וקרקירה (העיר)</h3>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">קצב: בינוני (מגוון)</span>
+                    </div>
+                    <div class="timeline-container space-y-6">
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">09:00 <span class="font-normal text-slate-500 text-base">| מנזר פלאוקסטריצה</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">הכפר הכי יפה באי. עלו עם הרכב למנזר (Monastery of Paleokastritsa). יש רמזור בדרך כי הכביש חד נתיבי. תצפית מושלמת והצטיידות בשמן זית של הנזירים. כניסה חופשית (נדרש לבוש צנוע שיסופק בכניסה).</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">10:30 <span class="font-normal text-slate-500 text-base">| שייט מפרצים ורוביניה</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">רדו למעגן Alipa. משם קחו סירה (Taxi boat או השכרה עצמית) לחוף <strong>Rovinia</strong> או Chomi Beach (חוף פרדייס). מים קפואים אבל צלולים מאין כמותם.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">14:00 <span class="font-normal text-slate-500 text-base">| צהריים מאוחר ב-Akron</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">ביץ' קלאב יוקרתי ומעולה בחוף Agia Triada בפלאוקסטריצה. אוכל ים-תיכוני מודרני מול הים (לא זול, סביב 80€ לזוג, חובה להזמין).</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">17:00 <span class="font-normal text-slate-500 text-base">| העיר קורפו (קרקירה)</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">נסיעה למרכז העיר (40 דק'). חנו ב-Old Fortress Parking. שיטוט בסמטאות, קניות ברחוב Nikiforou Theotoki והטיילת.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">20:00 <span class="font-normal text-slate-500 text-base">| ארוחת ערב בעיר העתיקה</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">ארוחה רומנטית ב-<em>The Venetian Well</em> (דורש הזמנה שבועות מראש) או אווירה קלילה יותר ב-<em>Marina's Tavern</em> לאוכל יווני-קורפיאני אמיתי (בקשו "פסטיצדה" - Pastitsada).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 4 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 hover-card">
+                    <div class="flex justify-between items-end mb-6 border-b pb-4">
+                        <div>
+                            <span class="text-teal-600 font-bold tracking-wider text-sm uppercase">יום 4 | הצפון המזרחי</span>
+                            <h3 class="text-2xl font-bold text-slate-800">הריביירה של ה"בריטים העשירים"</h3>
+                        </div>
+                        <span class="bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full">קצב: ים, יאכטות ואוכל</span>
+                    </div>
+                    <div class="timeline-container space-y-6">
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">09:30 <span class="font-normal text-slate-500 text-base">| כביש החוף המזרחי</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">היום הולכים לראות את אלבניה! כביש החוף מהעיר צפונה דרך קאלאמי (Kalami) וקסיופי (Kassiopi) מציע נוף בלתי פוסק לים ואחוזות ענק מסתתרות ביערות.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">11:00 <span class="font-normal text-slate-500 text-base">| שכירת סירה (אין צורך ברישיון!)</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">הזמינו מראש סירת מנוע (30 כ"ס) ל-4 שעות בכפר San Stefanos NE (או Agni). יעלה כ-80-120€ פלוס דלק. תיהנו ממפרצים פרטיים לחלוטין שמגיעים אליהם רק דרך הים.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">15:00 <span class="font-normal text-slate-500 text-base">| צהריים בטברנה של אגני (Agni)</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">עוגנים את הסירה ישירות במזח של *Toula's Gastronomy* או *Taverna Agni*. חובה לאכול כאן פירות ים (הכי יוקרתי וטעים באי). מסעדות של האלפיון העליון באווירת טברנה.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">17:30 <span class="font-normal text-slate-500 text-base">| כפר הדייגים קסיופי (Kassiopi)</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">נסיעה קצרה צפונה לקסיופי. טיילו במרינה הציורית, אכלו גלידה, וראו את חופי חלוקי הנחל הצחורים (Bataria Beach) לקראת ערב.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 5 -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 hover-card">
+                    <div class="flex justify-between items-end mb-6 border-b pb-4">
+                        <div>
+                            <span class="text-teal-600 font-bold tracking-wider text-sm uppercase">יום 5 | המערב החולי</span>
+                            <h3 class="text-2xl font-bold text-slate-800">ביץ' קלאבס, יוקרה ושופינג</h3>
+                        </div>
+                        <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full">קצב: סטייל ורוגע</span>
+                    </div>
+                    <div class="timeline-container space-y-6">
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">10:00 <span class="font-normal text-slate-500 text-base">| חוף גליפאדה (Glyfada)</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">סוף סוף חוף חולי ורך. גליפאדה רחבה, מסודרת מאוד. שכרו מיטות ב-Pazuzu Beach Club (כ-30-40€ לסט). קוקטיילים, מוזיקת עומק, ומים צלולים ורדודים.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">14:00 <span class="font-normal text-slate-500 text-base">| צהריים בכפר קרוקדס</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">סעו חצי שעה דרומה כדי לאכול במסעדת המקומיים *Spiros Karidis* (בכפר Boukari - דרומי יותר) עבור דגים טריים, או הישארו קרוב במסעדת *Stavros* לאוכל ביתי.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">17:00 <span class="font-normal text-slate-500 text-base">| מוזיאון האמנות האסיאתית בעיר</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">נשמע מוזר, אבל קורפו מחזיקה באחד המוזיאונים המיוחדים לאמנות אסיאתית (בארמון סנט מייקל וסנט ג'ורג'). ממוזג ומעניין. (אופציונלי למחפשי תרבות).</p>
+                        </div>
+                        <div class="relative">
+                            <div class="timeline-dot"></div>
+                            <h4 class="font-bold text-slate-800 text-lg">19:30 <span class="font-normal text-slate-500 text-base">| בר תצפית Imabari / מסעדה</span></h4>
+                            <p class="text-slate-600 text-sm mt-1">בר *Imabari* נמצא בתוך המים מתחת למבצר הישן. מקום רומנטי מטורף בערב. לאחר מכן, ארוחת ערב בעיר ולסיום קינוח לוקומדס (סופגניות יווניות קטנות) ב-Stazei Meli.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 6 & 7 (Combined for space, though detailed) -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 hover-card md:col-span-2">
+                    <div class="flex justify-between items-end mb-6 border-b pb-4">
+                        <div>
+                            <span class="text-teal-600 font-bold tracking-wider text-sm uppercase">ימים 6-7 | דרום האי ופרידה</span>
+                            <h3 class="text-2xl font-bold text-slate-800">לגונת קוריסיון, אגם התאומים וסיום מושלם</h3>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-teal-800 mb-3 text-lg">יום 6: הדרום הלא-נודע (Lake Korission)</h4>
+                            <ul class="icon-list text-sm text-slate-700">
+                                <li><strong>09:30 - Halikounas Beach:</strong> חוף חולי פראי באורך 3 ק"מ המפריד בין אגם קוריסיון לים. צד אחד אגם שקט, צד שני ים. גן עדן לגולשי קייט.</li>
+                                <li><strong>13:00 - יין ונוף:</strong> ביקור ביקב האורגני *Ambelonas Corfu* (קרוב יחסית במרכז). טעימות יין לצד ארוחה בטבע. או מסעדת *Bioporos* בדרום לתצפית על האגם.</li>
+                                <li><strong>16:00 - הכפר Chlomos:</strong> נסיעה קצרה לכפר עתיק על ראש הר בדרום. "המרפסת של קורפו". בתים ונציאניים צבעוניים ותצפית מטורפת לשני צידי האי ולים היוני. שתו קפה יווני שחור קטן במרכז הכפר.</li>
+                                <li><strong>20:00 - ארוחת ערב:</strong> במסעדת *Archontiko* בדרום או חזרה לאזור המלון (Agios Gordios) לטברנה כפרית.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-teal-800 mb-3 text-lg">יום 7: השלמות וטיסה</h4>
+                            <ul class="icon-list text-sm text-slate-700">
+                                <li><strong>09:00 - מנזר ולאכרנה (Vlacherna):</strong> סמוך מאוד לשדה התעופה. האי הקטנטן הלבן המחובר בגשר (Kanoni). שתו קפה במרפסת התצפית של קנוני בזמן שמטוסים ממריאים ממש מתחתכם. מצטלם מושלם.</li>
+                                <li><strong>11:30 - Mouse Island (Pontikonisi):</strong> קחו סירת עץ קטנה (3€) מהמנזר לשייט של 5 דקות לאי העכבר הקטנטן.</li>
+                                <li><strong>13:00 - קניות אחרונות ב-Jumbo / עיר:</strong> קניית שמן זית, ליקר קומקוואט, סבונים מזית וספוגי ים למתנות למשפחה. מתחמי קניות נמצאים סביב שדה התעופה.</li>
+                                <li><strong>15:00 - צהריים מוקדם:</strong> גירוס אותנטי בפיתה בעיר לפני הטיסה.</li>
+                                <li><strong>17:00 - החזרת רכב ושדה:</strong> קחו לפחות שעתיים וחצי לפני הטיסה כי השדה של קורפו ידוע כקטן ולעיתים מבולגן בסוף הקיץ.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- ========================================== -->
+        <!-- TAB 3: HOTELS (Massively Upgraded)         -->
+        <!-- ========================================== -->
+        <section id="hotels" class="tab-content space-y-10">
+            <div class="mb-8 border-b pb-6">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">מלונות לזוגות - הבחירות המנצחות</h2>
+                <p class="text-lg text-slate-600">כלל אצבע לקורפו: לזוגות המחפשים שקיעות, טבע וגישה למפרצים היפים - הלינה במרכז-מערב האי (Agios Gordios, Pelekas, Glyfada) היא הטובה ביותר. היא גם מאפשרת גישה נוחה לצפון ולדרום (כבישי הרוחב באי איטיים מאוד).</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Hotel 1 -->
+                <div class="bg-white rounded-3xl shadow-md hover-card border border-slate-200 overflow-hidden flex flex-col relative">
+                    <div class="absolute top-4 right-4 bg-yellow-400 text-yellow-900 font-bold px-3 py-1 rounded-full shadow text-sm z-10">Mid-Range</div>
+                    <img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Romantic Palace Corfu" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-slate-800">Romantic Palace</h3>
+                            <span class="bg-teal-100 text-teal-800 font-bold px-2 py-1 rounded text-sm">~130€</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4 flex items-center">📍 Agios Gordios (מערב)</p>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="badge badge-info">⭐ Google: 4.7</span>
+                            <span class="badge badge-info">⭐ Booking: 9.1</span>
+                        </div>
+                        
+                        <ul class="text-sm text-slate-700 space-y-2 mb-4">
+                            <li><strong class="text-slate-900">סוג:</strong> מלון דירות-בוטיק על החוף.</li>
+                            <li><strong class="text-slate-900">אווירה:</strong> פשוטה, אינטימית ומאוד יוונית. משפחה מקומית מנהלת את המקום באהבה.</li>
+                            <li><strong class="text-slate-900">חניה:</strong> חניה ציבורית (לעתים עמוסה) כ-5 דקות הליכה (המלון ממש על החול).</li>
+                            <li><strong class="text-slate-900">ארוחת בוקר:</strong> מצוינת, מוגשת בטברנה של המלון מול הגלים.</li>
+                            <li><strong class="text-slate-900">מתקנים:</strong> אין בריכה. הים הוא הבריכה. מיטות שיזוף חינם לאורחי המלון.</li>
+                        </ul>
+                        
+                        <div class="mb-4">
+                            <span class="badge badge-pro">✔️ יושב ממש על החול (נדיר)</span>
+                            <span class="badge badge-pro">✔️ שקיעה מושלמת מהמרפסת</span>
+                            <span class="badge badge-con">❌ חדר רחצה יווני קטן</span>
+                        </div>
+                        
+                        <p class="text-sm text-slate-600 bg-slate-50 p-3 rounded-lg mb-4 border border-slate-200"><strong>טיפ מקומי:</strong> בקשו בעת ההזמנה במפורש את הקומה השנייה או השלישית (Sea View Room) כדי לקבל נוף פתוח ללא הסתרה של שמשיות הטברנה בקומה התחתונה.</p>
+                    </div>
+                </div>
+
+                <!-- Hotel 2 -->
+                <div class="bg-white rounded-3xl shadow-md hover-card border border-slate-200 overflow-hidden flex flex-col relative">
+                    <div class="absolute top-4 right-4 bg-purple-500 text-white font-bold px-3 py-1 rounded-full shadow text-sm z-10">Luxury / Premium</div>
+                    <img src="https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Domes of Corfu" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-slate-800">Domes of Corfu, Autograph</h3>
+                            <span class="bg-teal-100 text-teal-800 font-bold px-2 py-1 rounded text-sm">~450€+</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4 flex items-center">📍 Glyfada Beach (מערב)</p>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="badge badge-info">⭐ Google: 4.6</span>
+                            <span class="badge badge-info">⭐ Booking: 8.9</span>
+                        </div>
+                        
+                        <ul class="text-sm text-slate-700 space-y-2 mb-4">
+                            <li><strong class="text-slate-900">סוג:</strong> ריזורט יוקרה מבית Marriott.</li>
+                            <li><strong class="text-slate-900">אווירה:</strong> בוהו-שיק מודרני, אדריכלות מדהימה המשתלבת ביער.</li>
+                            <li><strong class="text-slate-900">חניה:</strong> שירות Valet Parking חינם, נוח מאוד בקורפו.</li>
+                            <li><strong class="text-slate-900">ארוחת בוקר:</strong> ברמת מסעדת מישלן. בופה פרימיום כולל פרוסקו.</li>
+                            <li><strong class="text-slate-900">מתקנים:</strong> מתחם בריכות Adults Only, ספא מהמם, חוף זהוב צמוד עם שירות מלא למזרן.</li>
+                        </ul>
+                        
+                        <div class="mb-4">
+                            <span class="badge badge-pro">✔️ עיצוב עוצר נשימה</span>
+                            <span class="badge badge-pro">✔️ מתחם Adults Only</span>
+                            <span class="badge badge-con">❌ מסעדות המלון בערב יקרות מאוד</span>
+                        </div>
+                        
+                        <p class="text-sm text-slate-600 bg-slate-50 p-3 rounded-lg mb-4 border border-slate-200"><strong>טיפ מקומי:</strong> המלון מעט מבודד. כדי לאכול בערב במסעדות זולות יותר, תצטרכו לנסוע כ-15-20 דקות בכביש ההררי החשוך של גליפאדה. קחו זאת בחשבון.</p>
+                    </div>
+                </div>
+
+                <!-- Hotel 3 -->
+                <div class="bg-white rounded-3xl shadow-md hover-card border border-slate-200 overflow-hidden flex flex-col relative">
+                    <div class="absolute top-4 right-4 bg-blue-500 text-white font-bold px-3 py-1 rounded-full shadow text-sm z-10">Premium Resort</div>
+                    <img src="https://images.pexels.com/photos/261395/pexels-photo-261395.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mayor Pelekas Monastery" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-slate-800">Pelekas Monastery (Mayor)</h3>
+                            <span class="bg-teal-100 text-teal-800 font-bold px-2 py-1 rounded text-sm">~220€</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4 flex items-center">📍 Kontogialos Beach (מערב)</p>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="badge badge-info">⭐ Google: 4.4</span>
+                            <span class="badge badge-info">⭐ Booking: 8.6</span>
+                        </div>
+                        
+                        <ul class="text-sm text-slate-700 space-y-2 mb-4">
+                            <li><strong class="text-slate-900">סוג:</strong> ריזורט גדול 5 כוכבים, בנוי על הצלע מעל החוף.</li>
+                            <li><strong class="text-slate-900">אווירה:</strong> נופש קלאסי. מרובה פעילויות ותיירים מאירופה.</li>
+                            <li><strong class="text-slate-900">חניה:</strong> מגרש חניה גדול במפלס העליון.</li>
+                            <li><strong class="text-slate-900">חוף:</strong> ירידה לחוף פרימיום חולי דרך פניקולר (מעלית כבלים מגניבה) מהמלון!</li>
+                            <li><strong class="text-slate-900">ארוחת בוקר:</strong> בופה בינלאומי עשיר.</li>
+                        </ul>
+                        
+                        <div class="mb-4">
+                            <span class="badge badge-pro">✔️ חוף חולי נהדר (Kontogialos)</span>
+                            <span class="badge badge-pro">✔️ מעלית אל הים</span>
+                            <span class="badge badge-con">❌ המוני ולעיתים הומה משפחות (גם בספטמבר)</span>
+                        </div>
+                        
+                        <p class="text-sm text-slate-600 bg-slate-50 p-3 rounded-lg mb-4 border border-slate-200"><strong>טיפ מקומי:</strong> כביש הגישה למלון (מהכפר פלקאס לחוף) הוא מהתלולים והצרים באי עם פיתולי זיג-זג קשים. דרשו רכב חזק (לא קבוצה A מיני) מחברת ההשכרה אם אתם לנים כאן.</p>
+                    </div>
+                </div>
+
+                <!-- Hotel 4 -->
+                <div class="bg-white rounded-3xl shadow-md hover-card border border-slate-200 overflow-hidden flex flex-col relative">
+                    <div class="absolute top-4 right-4 bg-teal-600 text-white font-bold px-3 py-1 rounded-full shadow text-sm z-10">Boutique / Adults Only</div>
+                    <img src="https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=600" alt="MarBella Nido" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-slate-800">MarBella Nido Suite Hotel</h3>
+                            <span class="bg-teal-100 text-teal-800 font-bold px-2 py-1 rounded text-sm">~350€</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4 flex items-center">📍 Agios Ioannis Peristeron (מזרח)</p>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="badge badge-info">⭐ Google: 4.8</span>
+                            <span class="badge badge-info">⭐ Booking: 9.3</span>
+                        </div>
+                        
+                        <ul class="text-sm text-slate-700 space-y-2 mb-4">
+                            <li><strong class="text-slate-900">סוג:</strong> מלון סוויטות בוטיק 5 כוכבים רק למבוגרים (Adults Only). חבר בארגון Small Luxury Hotels.</li>
+                            <li><strong class="text-slate-900">אווירה:</strong> שקט מוחלט, רומנטיקה קיצונית, שירות אישי, אלגנטיות קלאסית.</li>
+                            <li><strong class="text-slate-900">חניה:</strong> נוחה ומסודרת, שירות חניה.</li>
+                            <li><strong class="text-slate-900">מתקנים:</strong> להרבה סוויטות יש בריכה פרטית קטנה או ג'קוזי חוץ. חוף פרטי קטן דרך מנהרה תת-קרקעית.</li>
+                        </ul>
+                        
+                        <div class="mb-4">
+                            <span class="badge badge-pro">✔️ שקט ורוגע ללא ילדים</span>
+                            <span class="badge badge-pro">✔️ שירות מהטובים באי</span>
+                            <span class="badge badge-con">❌ צד מזרחי - אין שקיעות בים! הזריחה מהממת.</span>
+                        </div>
+                        
+                        <p class="text-sm text-slate-600 bg-slate-50 p-3 rounded-lg mb-4 border border-slate-200"><strong>טיפ מקומי:</strong> בגלל שהוא במזרח, תראו את הזריחה מעל הרי אלבניה. הים פה שקט כמו אגם לעומת המערב הסוער לעיתים.</p>
+                    </div>
+                </div>
+
+                <!-- Hotel 5 -->
+                <div class="bg-white rounded-3xl shadow-md hover-card border border-slate-200 overflow-hidden flex flex-col relative">
+                    <div class="absolute top-4 right-4 bg-green-500 text-white font-bold px-3 py-1 rounded-full shadow text-sm z-10">Budget / Authentic</div>
+                    <img src="https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bella Vista" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-slate-800">Bella Vista Beach Hotel</h3>
+                            <span class="bg-teal-100 text-teal-800 font-bold px-2 py-1 rounded text-sm">~80€-95€</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4 flex items-center">📍 Benitses (מזרח - קרוב לעיר)</p>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="badge badge-info">⭐ Google: 4.5</span>
+                            <span class="badge badge-info">⭐ Booking: 8.8</span>
+                        </div>
+                        
+                        <ul class="text-sm text-slate-700 space-y-2 mb-4">
+                            <li><strong class="text-slate-900">סוג:</strong> מלון בוטיק קטן וחסכוני, מעוצב בסגנון יווני-מסורתי אותנטי וצבעוני.</li>
+                            <li><strong class="text-slate-900">אווירה:</strong> תוססת. בניטס (Benitses) הוא כפר דייגים עם המון טברנות במרחק הליכה.</li>
+                            <li><strong class="text-slate-900">חניה:</strong> קצת טריקי. חניה ציבורית במרינה במרחק 100 מטר או חניות לאורך הכביש הראשי.</li>
+                            <li><strong class="text-slate-900">ארוחת בוקר:</strong> מפורסמת מאוד באי! ארוחת בוקר יוונית מסורתית שזכתה בפרסים (Greek Breakfast Certification).</li>
+                        </ul>
+                        
+                        <div class="mb-4">
+                            <span class="badge badge-pro">✔️ מחיר מעולה לזוגות</span>
+                            <span class="badge badge-pro">✔️ ארוחת בוקר מהאגדות</span>
+                            <span class="badge badge-con">❌ החוף של בניטס הוא חלוקי נחל וצמוד לכביש (פחות רומנטי)</span>
+                        </div>
+                        
+                        <p class="text-sm text-slate-600 bg-slate-50 p-3 rounded-lg mb-4 border border-slate-200"><strong>טיפ מקומי:</strong> מיקום מעולה כ"בייס-קמפ" למי שמטייל כל היום ברכב ורק חוזר לישון ולאכול טוב, במרחק של 15 דקות מהעיר המרכזית (נוח בערבים).</p>
+                    </div>
+                </div>
+
+                <!-- Hotel 6 -->
+                <div class="bg-white rounded-3xl shadow-md hover-card border border-slate-200 overflow-hidden flex flex-col relative">
+                    <div class="absolute top-4 right-4 bg-orange-400 text-white font-bold px-3 py-1 rounded-full shadow text-sm z-10">North / Isolated</div>
+                    <img src="https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Robolla Beach" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-slate-800">Robolla Beach Aparthotel</h3>
+                            <span class="bg-teal-100 text-teal-800 font-bold px-2 py-1 rounded text-sm">~110€</span>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-4 flex items-center">📍 Roda (החוף הצפוני)</p>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <span class="badge badge-info">⭐ Google: 4.6</span>
+                            <span class="badge badge-info">⭐ Booking: 9.0</span>
+                        </div>
+                        
+                        <ul class="text-sm text-slate-700 space-y-2 mb-4">
+                            <li><strong class="text-slate-900">סוג:</strong> דירות אירוח כפריות עם מטבחון, ממש על החוף הצפוני הרדוד.</li>
+                            <li><strong class="text-slate-900">אווירה:</strong> משפחתית ורגועה מאוד. הצפון הוא שקט (מלבד אזור סידארי). הרבה ירוק ומדשאות שיורדות לים.</li>
+                            <li><strong class="text-slate-900">חניה:</strong> שפע של חניה בשטח המלון, ללא עלות וללא לחץ.</li>
+                            <li><strong class="text-slate-900">חוף:</strong> חוף חולי וארוך מאוד, המים רדודים לתוך הים לאורך עשרות מטרים, חמים במיוחד.</li>
+                        </ul>
+                        
+                        <div class="mb-4">
+                            <span class="badge badge-pro">✔️ אידיאלי להתנתקות מוחלטת</span>
+                            <span class="badge badge-pro">✔️ מטבחון לבישול עצמי לחסכון</span>
+                            <span class="badge badge-con">❌ רחוק מאוד מכל מוקדי העניין (כשעה מהעיר)</span>
+                        </div>
+                        
+                        <p class="text-sm text-slate-600 bg-slate-50 p-3 rounded-lg mb-4 border border-slate-200"><strong>טיפ מקומי:</strong> צפון קורפו מבודד יותר. אם בחרתם ללון כאן, כדאי לרכז את הטיולים לצפון-מערב (קאנאל ד'אמור, פורטו טימוני) ולצפון-מזרח (קסיופי).</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- ========================================== -->
+        <!-- TAB 4: BEACHES (Deep Dive Analysis)        -->
+        <!-- ========================================== -->
+        <section id="beaches" class="tab-content space-y-8">
+             <div class="mb-8 border-b pb-6">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">מגדיר החופים המלא</h2>
+                <p class="text-lg text-slate-600">הגיאוגרפיה של קורפו קובעת את החופים: <strong>המערב</strong> (חולי, מים חמים, שקיעות, גלים, מסחרי), <strong>המזרח</strong> (אבנים קטנות, ים שקט מאוד, זריחות), ו<strong>הצפון-מזרח</strong> (חלוקי נחל בוהקים, מים קפואים צלולים כקריסטל, מבודדים).</p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Beach 1 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/3">
+                        <img src="https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Rovinia Beach" class="w-full h-48 md:h-full object-cover rounded-xl">
+                    </div>
+                    <div class="md:w-2/3">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-2xl font-bold text-slate-800">חוף רוביניה (Rovinia Beach) <span class="text-sm bg-yellow-100 text-yellow-800 px-2 py-1 rounded ml-2">המועדף לשנורקל</span></h3>
+                            <a href="https://maps.google.com/?q=39.6705,19.7225" target="_blank" class="text-teal-600 hover:underline font-bold text-sm">📍 נווט ב-Maps</a>
+                        </div>
+                        <p class="text-slate-600 mt-2 mb-4">חוף פראי, מנותק, ללא שום התערבות מסחרית (מלבד קנטינה צפה שמגיעה לעיתים). יושב במפרץ ירוק מהמם (Liapades). גן עדן לשנורקלינג.</p>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-slate-700 mb-4">
+                            <div class="bg-slate-50 p-2 rounded"><strong>סוג:</strong> חלוקי נחל בוהקים (רצוי נעלי מים)</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>מים:</strong> צלולים מאוד, קרירים מתמיד</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>גלים:</strong> שקט לרוב כמו בריכה</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>שנורקל:</strong> מושלם! הראות פנטסטית</div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 text-sm text-slate-600">
+                            <span class="border border-slate-300 rounded px-2 py-1">⛱️ אין השכרת שמשיות</span>
+                            <span class="border border-slate-300 rounded px-2 py-1">🌳 צל טבעי מהמצוק (תלוי בשעה)</span>
+                            <span class="border border-slate-300 rounded px-2 py-1">🚿 אין מקלחות או שירותים כלל</span>
+                            <span class="border border-slate-300 rounded px-2 py-1">🚗 חניה (5€) + הליכה של 10 דקות בטבע</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beach 2 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/3">
+                         <img src="https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Glyfada Beach" class="w-full h-48 md:h-full object-cover rounded-xl">
+                    </div>
+                    <div class="md:w-2/3">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-2xl font-bold text-slate-800">חוף גליפאדה (Glyfada Beach) <span class="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded ml-2">הכי פופולרי</span></h3>
+                            <a href="https://maps.google.com/?q=39.5937,19.8055" target="_blank" class="text-teal-600 hover:underline font-bold text-sm">📍 נווט ב-Maps</a>
+                        </div>
+                        <p class="text-slate-600 mt-2 mb-4">החוף החולי והמוכר ביותר בקורפו. ארוך מאוד, עמוס בביץ'-קלאבים ותיירים מכל אירופה. הגישה נוחה, אך המקום עשוי להיות הומה.</p>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-slate-700 mb-4">
+                            <div class="bg-slate-50 p-2 rounded"><strong>סוג:</strong> חול זהוב דק ורך (נדיר באי)</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>מים:</strong> רדודים לזמן ארוך, חמימים</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>גלים:</strong> לעיתים קרובות, במיוחד אחה"צ</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>מחיר:</strong> 25€-40€ לשמשייה בקו ראשון</div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 text-sm text-slate-600">
+                            <span class="border border-slate-300 rounded px-2 py-1">⛱️ מרושת שמשיות מקצה לקצה</span>
+                            <span class="border border-slate-300 rounded px-2 py-1">🍹 מסעדות וברים יוקרתיים צמודים</span>
+                            <span class="border border-slate-300 rounded px-2 py-1">🚿 מקלחות מסודרות</span>
+                            <span class="border border-slate-300 rounded px-2 py-1">🚗 פקקים בכביש הגישה אחר הצהריים</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beach 3 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/3">
+                         <img src="https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Porto Timoni" class="w-full h-48 md:h-full object-cover rounded-xl filter sepia-0">
+                    </div>
+                    <div class="md:w-2/3">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-2xl font-bold text-slate-800">פורטו טימוני (Porto Timoni) <span class="text-sm bg-red-100 text-red-800 px-2 py-1 rounded ml-2">הכי מפורסם לאינסטגרם</span></h3>
+                            <a href="https://maps.google.com/?q=39.7153,19.6548" target="_blank" class="text-teal-600 hover:underline font-bold text-sm">📍 נווט ב-Maps</a>
+                        </div>
+                        <p class="text-slate-600 mt-2 mb-4">המפרץ הכפול שמופיע בכל הגלויות. דורש טרק של 20-30 דקות במורד צוק חשוף לשמש. שווה את המאמץ לתמונות, פחות נוח לרביצה ממושכת.</p>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-slate-700 mb-4">
+                            <div class="bg-slate-50 p-2 rounded"><strong>סוג:</strong> חצץ / חלוקים</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>מים:</strong> צד אחד קר, צד אחד חמים</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>גלים:</strong> אין גלים (מפרץ סגור)</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>עומס:</strong> עמוס מאוד מ-10:00!</div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 text-sm text-slate-600">
+                            <span class="border border-slate-300 rounded px-2 py-1">⚠️ ירידה מסוכנת בכפכפים (נעלי הרים חובה)</span>
+                            <span class="border border-slate-300 rounded px-2 py-1">💧 להביא מים! אין קיוסק למטה</span>
+                            <span class="border border-slate-300 rounded px-2 py-1">📸 התצפית בדרך לים טובה יותר מהחוף עצמו</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beach 4 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/3">
+                         <img src="https://images.pexels.com/photos/2088210/pexels-photo-2088210.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bataria Kassiopi" class="w-full h-48 md:h-full object-cover rounded-xl">
+                    </div>
+                    <div class="md:w-2/3">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-2xl font-bold text-slate-800">באטריה קסיופי (Bataria Kassiopi) <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded ml-2">הכי מרענן</span></h3>
+                            <a href="https://maps.google.com/?q=39.7946,19.9213" target="_blank" class="text-teal-600 hover:underline font-bold text-sm">📍 נווט ב-Maps</a>
+                        </div>
+                        <p class="text-slate-600 mt-2 mb-4">חוף עוצר נשימה בצפון מזרח האי, ממש ליד הכפר קסיופי. חלוקי הנחל כאן בוהקים כל כך שהמים נראים כאילו הונח עליהם פילטר קיטוב טבעי. רואים את הרי אלבניה ממול.</p>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-slate-700 mb-4">
+                            <div class="bg-slate-50 p-2 rounded"><strong>סוג:</strong> חלוקים לבנים נקיים</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>מים:</strong> קרים צלולים (Crystal clear)</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>גלים:</strong> אין. מוגן מהרוח</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>מחיר:</strong> ~20€ לזוג מיטות</div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 text-sm text-slate-600">
+                            <span class="border border-slate-300 rounded px-2 py-1">⛱️ מסודר בחלקו המרכזי</span>
+                            <span class="border border-slate-300 rounded px-2 py-1">🐟 דגים קטנים שוחים בין הרגליים</span>
+                            <span class="border border-slate-300 rounded px-2 py-1">🚗 חניה בקסיופי + הליכה 5 דקות</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beach 5 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/3">
+                         <img src="https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Halikounas Beach" class="w-full h-48 md:h-full object-cover rounded-xl filter grayscale-0">
+                    </div>
+                    <div class="md:w-2/3">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-2xl font-bold text-slate-800">חליקונאס (Halikounas Beach) <span class="text-sm bg-green-100 text-green-800 px-2 py-1 rounded ml-2">הכי פראי</span></h3>
+                            <a href="https://maps.google.com/?q=39.4293,19.8778" target="_blank" class="text-teal-600 hover:underline font-bold text-sm">📍 נווט ב-Maps</a>
+                        </div>
+                        <p class="text-slate-600 mt-2 mb-4">רצועת חול באורך 3 קילומטרים המפרידה בין הים היוני הפתוח לאגם קוריסיון בדרום-מערב האי. אין כאן בטון, רק דיונות חול טבעיות, רוח וגולשי עפיפונים.</p>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-slate-700 mb-4">
+                            <div class="bg-slate-50 p-2 rounded"><strong>סוג:</strong> חול חום ודיונות</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>מים:</strong> גליים, מתחממים מהר</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>גלים:</strong> גבוהים, רוח חזקה קבועה</div>
+                            <div class="bg-slate-50 p-2 rounded"><strong>רומנטיקה:</strong> הליכות ארוכות בשקיעה</div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 text-sm text-slate-600">
+                            <span class="border border-slate-300 rounded px-2 py-1">🚫 אסור להקים מבני קבע (שמורת טבע)</span>
+                            <span class="border border-slate-300 rounded px-2 py-1">🪁 מושלם לקייט-סרפינג</span>
+                            <span class="border border-slate-300 rounded px-2 py-1">🚙 כביש עפר לאורך כל החוף - חניה חופשית לחלוטין</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ========================================== -->
+        <!-- TAB 5: FOOD (Culinary Guide)               -->
+        <!-- ========================================== -->
+        <section id="food" class="tab-content space-y-8">
+            <div class="mb-8 border-b pb-6">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">המדריך הקולינרי: קורפו למביני עניין</h2>
+                <p class="text-lg text-slate-600">האוכל בקורפו שונה משאר יוון. בגלל 400 שנות שלטון ונציאני, לא תמצאו כאן רק סופלאקי, אלא מנות דגל כמו <em>Pastitsada</em> (פסטה ובקר ברוטב עגבניות ותבלינים חמים) ו-<em>Sofrito</em> (עגל דק בשום ויין לבן). הנה הרשימה המדויקת לזוגות.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <!-- Category: Local / Traditional -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover-card">
+                    <h3 class="text-xl font-bold text-teal-800 mb-4 border-b pb-2 flex items-center">
+                        <span class="text-2xl ml-2">🏺</span> אוכל קורפיאני מקומי
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="border-b border-slate-100 pb-3">
+                            <div class="flex justify-between items-start">
+                                <span class="font-bold text-slate-800 text-lg">Marina's Tavern</span>
+                                <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs font-bold">€€</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mb-1">📍 העיר העתיקה, קרקירה</p>
+                            <p class="text-sm text-slate-700 leading-relaxed">מוסד מקומי בעיר העתיקה. ממוקמת בסמטה שקטה. <strong>מנות מומלצות:</strong> סופריטו (Sofrito) נמס בפה ופטריות בר ביין. חובה להזמין מראש בקיץ.</p>
+                        </li>
+                        <li class="border-b border-slate-100 pb-3">
+                            <div class="flex justify-between items-start">
+                                <span class="font-bold text-slate-800 text-lg">Taverna Spiros Karidis</span>
+                                <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs font-bold">€€</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mb-1">📍 הכפר Boukari (דרום-מזרח)</p>
+                            <p class="text-sm text-slate-700 leading-relaxed">טברנה משפחתית הממוקמת פשוטו כמשמעו על שפת המים (המזרח השקט). דגים שנתפסו באותו בוקר ופשטידות מדהימות.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Category: Fine Dining / Romantic -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover-card">
+                    <h3 class="text-xl font-bold text-teal-800 mb-4 border-b pb-2 flex items-center">
+                        <span class="text-2xl ml-2">🍷</span> איטלקי, יוקרה ורומנטיקה קלאסית
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="border-b border-slate-100 pb-3">
+                            <div class="flex justify-between items-start">
+                                <span class="font-bold text-slate-800 text-lg">The Venetian Well</span>
+                                <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs font-bold">€€€€</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mb-1">📍 כיכר קרמסטי, העיר העתיקה</p>
+                            <p class="text-sm text-slate-700 leading-relaxed">המסעדה הכי רומנטית באי. ממוקמת בכיכר קטנטנה סביב באר ונציאנית אמיתית מוארת. <strong>מנות מומלצות:</strong> תפריט טעימות משתנה (Fine Dining). נדרשת הזמנה של חודש מראש!</p>
+                        </li>
+                        <li class="border-b border-slate-100 pb-3">
+                            <div class="flex justify-between items-start">
+                                <span class="font-bold text-slate-800 text-lg">Pomo D'Oro</span>
+                                <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs font-bold">€€€</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mb-1">📍 העיר קורפו</p>
+                            <p class="text-sm text-slate-700 leading-relaxed">שף מקומי המשלב טכניקות איטלקיות ומרכיבים יווניים טריים. פסטות עבודת יד וריזוטו פירות ים שחור (בדיו תמנונים).</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Category: Seafood -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover-card">
+                    <h3 class="text-xl font-bold text-teal-800 mb-4 border-b pb-2 flex items-center">
+                        <span class="text-2xl ml-2">🦞</span> פירות ים ודגים
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="border-b border-slate-100 pb-3">
+                            <div class="flex justify-between items-start">
+                                <span class="font-bold text-slate-800 text-lg">Toula's Gastronomy</span>
+                                <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs font-bold">€€€€</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mb-1">📍 חוף Agni (צפון מזרח)</p>
+                            <p class="text-sm text-slate-700 leading-relaxed">מוסד קולינרי מפורסם ברחבי יוון. יושב על קו המים במפרץ שמגיעות אליו יאכטות של עשירים. <strong>מנות מומלצות:</strong> ספגטי לובסטר ושרימפס ברוטב אוזו. יקר אבל חוויה של פעם בחיים.</p>
+                        </li>
+                        <li class="border-b border-slate-100 pb-3">
+                            <div class="flex justify-between items-start">
+                                <span class="font-bold text-slate-800 text-lg">Roumeli Tavern</span>
+                                <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs font-bold">€€</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mb-1">📍 Pelekas (מערב)</p>
+                            <p class="text-sm text-slate-700 leading-relaxed">טברנה עממית ומעולה המגישה את קלמארי המטוגן (Kalamarakia) אולי הפריך והטוב באי, לצד סרדינים טריים בגריל.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Category: Views / Sunsets / Meat -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover-card">
+                    <h3 class="text-xl font-bold text-teal-800 mb-4 border-b pb-2 flex items-center">
+                        <span class="text-2xl ml-2">🌅</span> סטייקים ושקיעות (מערב)
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="border-b border-slate-100 pb-3">
+                            <div class="flex justify-between items-start">
+                                <span class="font-bold text-slate-800 text-lg">75 Steps</span>
+                                <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs font-bold">€€</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mb-1">📍 צפון-מערב (קרוב ל-Peroulades)</p>
+                            <p class="text-sm text-slate-700 leading-relaxed">המסעדה עם נוף השקיעה אולי הטוב ביוון. ממוקמת על צוק מעל הים. בשרים על הגריל (Souvla) ברמה גבוהה. תזמינו מראש לשעה 19:15-19:30 בדיוק.</p>
+                        </li>
+                        <li class="border-b border-slate-100 pb-3">
+                            <div class="flex justify-between items-start">
+                                <span class="font-bold text-slate-800 text-lg">La Grotta Lounge</span>
+                                <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs font-bold">€€</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mb-1">📍 פלאוקסטריצה</p>
+                            <p class="text-sm text-slate-700 leading-relaxed">בר-קוקטיילים הבנוי <strong>בתוך נקיק של סלע</strong>. יורדים המון מדרגות כדי להגיע אליו. אפשר לקפוץ למים עם דרינק ביד. מושלם לזוגות צעירים בשעות אחה"צ.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Category: Street Food & Sweets -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover-card md:col-span-2">
+                    <h3 class="text-xl font-bold text-teal-800 mb-4 border-b pb-2 flex items-center">
+                        <span class="text-2xl ml-2">🥙</span> אוכל רחוב, בתי קפה וקינוחים
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-bold text-slate-800">גירוס (Gyros) 🌯</p>
+                            <p class="text-sm text-slate-700 mb-2"><strong>Pita Pappas</strong> בעיר העתיקה מגיש גירוס חזיר/עוף עטוף בפיתה שמנונית וצלויה עם צ'יפס בפנים ב-3.5€ בלבד. פתרון צהריים זול ומעולה.</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-800">גלידה (Gelato) 🍦</p>
+                            <p class="text-sm text-slate-700 mb-2"><strong>Papagiorgis</strong>: משפחה שמייצרת גלידה מ-1924 בעיר קורפו. טעם פיסטוק מטורף, וגלידת <em>Kumquat</em> (הפרי המקומי) שאסור לפספס.</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-800">לוקומדס (Loukoumades) 🍩</p>
+                            <p class="text-sm text-slate-700 mb-2"><strong>Stazei Meli</strong> במרכז העיר. כדורי בצק מטוגנים חמים, טבועים בדבש או בשוקולד אגוזי לוז מותך. חובה לשעות הערב בטיילת.</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-800">קפה מיוחד (Specialty Coffee) ☕</p>
+                            <p class="text-sm text-slate-700 mb-2"><strong>Microcafé</strong>. בתי הקפה המסורתיים מגישים קפה בוץ (Elliniko), אבל אם אתם חייבים אספרסו מודרני מחפולי קפה קלויים מקומיים, חפשו את המקומות הקטנים סביב כיכר סן רוקו.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- ========================================== -->
+        <!-- TAB 6: ATTRACTIONS & GEMS                  -->
+        <!-- ========================================== -->
+        <section id="attractions" class="tab-content space-y-8">
+            <div class="mb-8 border-b pb-6">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">אטרקציות מרכזיות</h2>
+                <p class="text-lg text-slate-600">אתרי החובה של קורפו (מלבד החופים).</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Attraction 1 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 hover-card">
+                    <img src="https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Old Fortress" class="w-full h-40 object-cover rounded-xl mb-4 filter contrast-125">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">המצודה הישנה (Palaio Frourio)</h3>
+                    <p class="text-sm text-slate-600 mb-4">מצודה ונציאנית אדירה היושבת על חצי אי ליד העיר העתיקה, מוקפת חפיר. מציעה את התצפית הטובה ביותר על העיר והים.</p>
+                    <ul class="text-sm text-slate-700 space-y-1 mb-4 icon-list">
+                        <li><strong>שעות:</strong> 08:00 - 20:00 (מומלץ לקראת שקיעה)</li>
+                        <li><strong>מחיר:</strong> 6€ לאדם (ללא הדרכה)</li>
+                        <li><strong>טיפ:</strong> יש בפנים בית קפה נחמד, שתו פרפה קר אחרי הטיפוס עד למגדלור למעלה.</li>
+                    </ul>
+                </div>
+
+                <!-- Attraction 2 -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 hover-card">
+                    <img src="https://images.pexels.com/photos/164041/pexels-photo-164041.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Achilleion" class="w-full h-40 object-cover rounded-xl mb-4">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">ארמון אכיליון (Achilleion Palace)</h3>
+                    <p class="text-sm text-slate-600 mb-4">ארמון הקיץ של הנסיכה 'סיסי' מאוסטריה. גנים מרהיבים מלאים בפסלי ענק של המיתולוגיה היוונית. מבנה היסטורי מרשים.</p>
+                    <ul class="text-sm text-slate-700 space-y-1 mb-4 icon-list">
+                        <li><strong>שעות:</strong> 08:00 - 20:00</li>
+                        <li><strong>סטטוס 2026:</strong> הארמון הפנימי לעיתים סגור לשיפוצים, אך הגנים הפנורמיים פתוחים במחיר מוזל.</li>
+                        <li><strong>למי מתאים:</strong> חובבי צילום וארכיטקטורה.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 7: HIDDEN GEMS                         -->
+        <!-- ========================================== -->
+        <section id="gems" class="tab-content space-y-8">
+            <div class="mb-8 border-b pb-6">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">💎 30 פנינים נסתרות בקורפו</h2>
+                <p class="text-lg text-slate-600">מקומות שמרבית התיירים מפספסים לחלוטין. מיועד למי ששוכר רכב ואוהב לחקור.</p>
+            </div>
+
+            <!-- Categories Accordion -->
+            <details open>
+                <summary>🏖️ חופים סודיים ולגונות</summary>
+                <div class="faq-content">
+                    <div class="gem-grid">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">1. Chomi Beach (Paradise Beach)</h4>
+                            <p class="text-sm text-slate-600 mt-1">גישה בסירה בלבד מפלאוקסטריצה. צוק לבן וים כחול ניאון. שכרו סירה והגיעו מוקדם כדי להיות לבד.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">2. Stellari Beach</h4>
+                            <p class="text-sm text-slate-600 mt-1">האח הקטן והשקט יותר של Chomi. המים כאן נקיים ברמה שלא דורשת משקפת. גישה בסירה.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">3. Giali Beach</h4>
+                            <p class="text-sm text-slate-600 mt-1">חוף מתחת לכפר Giannades. גישה דרך סולמות בחבלים למטיבי לכת, או בסירה. מבודד לחלוטין!</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">4. Mirtiotissa Beach</h4>
+                            <p class="text-sm text-slate-600 mt-1">מוגדר לעיתים כחוף נודיסטים. טבע פראי, ירידה תלולה מאוד מאוד. "אחד החופים היפים בעולם" לפי לורנס דארל.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">5. Kerasia Beach</h4>
+                            <p class="text-sm text-slate-600 mt-1">צפון מזרח. עצי זית שמגיעים עד קו המים. הרבה פעמים ריק לגמרי בספטמבר.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">6. Erimitis Beach</h4>
+                            <p class="text-sm text-slate-600 mt-1">אזור ארימיטיס הוא אזור פראי במזרח שמגיעים אליו בשבילי עפר. מבודד, שקט טבעי.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>🏰 כפרים ותצפיות שלא הכרתם</summary>
+                <div class="faq-content">
+                    <div class="gem-grid">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">7. Chlomos (כפר דרומי)</h4>
+                            <p class="text-sm text-slate-600 mt-1">כפר הררי צבעוני. ה"מרפסת של קורפו". שקט, סמטאות צרות בלי רכבים, וקפה יווני טעים.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">8. Old Perithia</h4>
+                            <p class="text-sm text-slate-600 mt-1">"הכפר הנטוש" למרגלות הר פנטוקראטור. סמטאות אבן, כנסיות עתיקות, ומספר טברנות מצוינות שניזונות מהתיירים.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">9. Lakones (המרפסת של האלים)</h4>
+                            <p class="text-sm text-slate-600 mt-1">כפר מעל פלאוקסטריצה. עשו עצירה ב-Bella Vista Cafe כדי להבין למה קוראים לזה המרפסת של האלים.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">10. Sokraki</h4>
+                            <p class="text-sm text-slate-600 mt-1">כפר הררי במרכז האי, ידוע בכיכר המרכזית (פלאטיה) היפהפייה שלו ובבתי הקפה מתחת לעצים.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">11. Angelokastro</h4>
+                            <p class="text-sm text-slate-600 mt-1">טירת המלאכים. מבצר ביזנטי על קצה צוק תלול במערב. טיפוס לא קל, נוף שמיימי.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">12. הר פנטוקראטור (Pantokrator)</h4>
+                            <p class="text-sm text-slate-600 mt-1">הנקודה הגבוהה באי (906 מ'). סעו עד למעלה (פסגה מלאה אנטנות). בימים נקיים אפשר לראות את איטליה.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>🍷 קולינריה סודית ויקבים</summary>
+                <div class="faq-content">
+                    <div class="gem-grid">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">13. יקב Ambelonas</h4>
+                            <p class="text-sm text-slate-600 mt-1">חווה אורגנית, כרמים ואוכל בתוך טבע פסטורלי במרכז האי. דורש הזמנה מראש.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">14. Taverna Agni (הגעה בסירה)</h4>
+                            <p class="text-sm text-slate-600 mt-1">אפשר להגיע גם ברכב אבל הירידה תלולה (אגני). להגיע בסירה פרטית לצהריים זה השיא של החופשה.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">15. Bioporos Organic Farm</h4>
+                            <p class="text-sm text-slate-600 mt-1">בדרום ליד אגם קוריסיון. אוכל שמבוסס רק על מה שגדל בחווה. נוף לאגם, תרנגולות חופש.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">16. Theotoky Estate</h4>
+                            <p class="text-sm text-slate-600 mt-1">אחוזת יין מפורסמת של המשפחה העתיקה מקורפו. שמן זית, יין לבן (Robola), וסיורים בכרמים.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">17. O Foros (Paleo Perithia)</h4>
+                            <p class="text-sm text-slate-600 mt-1">טברנה ותיקה בכפר הנטוש. מפורסמת בעוגת האגוזים והדבש שלה ובפאי בשר עתיק.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">18. Klimataria (Benitses)</h4>
+                            <p class="text-sm text-slate-600 mt-1">המסעדה של "בלוס" בבניטס. מקום פצפון עם 5 שולחנות. חובה לאכול כאן בורדטו (דג ברוטב אדום חריף).</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+            
+            <details>
+                <summary>📷 חוויות וצילום</summary>
+                <div class="faq-content">
+                    <div class="gem-grid">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">19. Cape Drastis Sunset</h4>
+                            <p class="text-sm text-slate-600 mt-1">התצפית עצמה פופולרית, אבל אם תלכו קצת ימינה בשביל הלא מסומן, תקבלו פינה בלי תיירים לקראת השקיעה.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">20. Vlacherna Monastery (מוקדם בבוקר)</h4>
+                            <p class="text-sm text-slate-600 mt-1">כדי לקבל את התמונה המפורסמת בלי עשרות תיירים, תגיעו ב-07:30 בבוקר. התאורה מהמזרח מושלמת.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">21. מצפה מטוסים ליד קנוני</h4>
+                            <p class="text-sm text-slate-600 mt-1">יש גשר הולכי רגל (Pedestrian bridge) בתוך המים. המטוסים נוחתים מטרים ספורים מעל הראש. תחושה של סנט מארטן ביוון.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">22. מפרץ Kalami (בית דארל)</h4>
+                            <p class="text-sm text-slate-600 mt-1">הבית הלבן שבו גר לורנס דארל. היום זו מסעדה ובית מלון, מפרץ ירקרק ויפהפה להליכת בוקר.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">23. מפל Nymfes (Waterfalls)</h4>
+                            <p class="text-sm text-slate-600 mt-1">בספטמבר אולי יהיו פחות מים, אבל ההליכה ביערות שמסביב לכפר Nymfes יפהפיה.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">24. Agni Bay בערב</h4>
+                            <p class="text-sm text-slate-600 mt-1">במקום בצהריים, להגיע בערב לארוחה רומנטית לאור נרות וסירות שמתנדנדות במים השקטים.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>✨ ועוד כמה ייחודיים...</summary>
+                <div class="faq-content">
+                    <div class="gem-grid">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">25. תעלת האהבה (מוקדם)</h4>
+                            <p class="text-sm text-slate-600 mt-1">המסורת אומרת שזוג ששוחה שם ביחד יישאר לנצח. הגעה לפני 08:30 מבטיחה שתהיו שם לבד לחלוטין.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">26. Agia Paraskevi (חוף פצפון)</h4>
+                            <p class="text-sm text-slate-600 mt-1">החוף הכי קטן ויפה באזור הצפון. עץ תאנה ענק עושה צל על רובו בבוקר.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">27. אופניים ב-Antinioti Lagoon</h4>
+                            <p class="text-sm text-slate-600 mt-1">לגונה צפונית שטוחה לחלוטין. שכרו אופניים בקסיופי ורכבו בשבילי הלגונה מלאי הסחלבים.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">28. מגדלור Lefkimmi</h4>
+                            <p class="text-sm text-slate-600 mt-1">בדרום הרחוק. הגעה בדרך עפר. מגדלור ישן ובודד במקום שבו יוון ואיטליה נפגשות.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">29. סיור פריחת הזיתים</h4>
+                            <p class="text-sm text-slate-600 mt-1">הצטרפו לסיור מודרך באזור אגיוס מטיוס עם דוקטור לשמן זית מקומי, לטעימות מקצועיות וקניית מזכרות.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <h4 class="font-bold text-teal-800">30. כנסיית הקדוש ספירידון (הנסתרת)</h4>
+                            <p class="text-sm text-slate-600 mt-1">לא זו שבעיר העתיקה (שמושכת אלפים), אלא הקיפלות הקטנות הפזורות בהרים המוקדשות לו, שלרוב פתוחות ואפשר להדליק בהן נר לבד לחלוטין.</p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </section>
+        <!-- ========================================== -->
+        <!-- TAB 8: SHOPPING & BUDGET                   -->
+        <!-- ========================================== -->
+        <section id="shopping" class="tab-content space-y-8">
+            <div class="mb-8 border-b pb-6">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">קניות, מזכרות ותקציב (Budgeting)</h2>
+                <p class="text-lg text-slate-600">מדריך הקניות המלא לקורפו, בתוספת פירוט עלויות שקוף וריאלי לזוג ב-3 רמות.</p>
+            </div>
+
+            <!-- Shopping Guide -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+                <div class="p-6 bg-slate-50 border-b border-slate-200">
+                    <h3 class="text-2xl font-bold text-teal-800 flex items-center">
+                        <span class="mr-2">🛍️</span> מה קונים ואיפה?
+                    </h3>
+                </div>
+                <div class="p-6 grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-slate-800 mb-3 text-lg border-b pb-2">קניות קלאסיות ומותגים</h4>
+                        <ul class="text-sm text-slate-700 space-y-3">
+                            <li><strong>רחובות ראשיים בעיר:</strong> <em>Evgeniou Voulgareos</em> ו-<em>Georgiou Theotoki</em>. שם תמצאו Marks & Spencer, Sephora, Zara וחנויות בוטיק יווניות מעולות לבגדי קיץ מבד פשתן (Linen).</li>
+                            <li><strong>מוצרי עור:</strong> קורפו ידועה בסנדלי עור עבודת יד ותיקים. אפשר למצוא אותם בסמטאות העיר העתיקה (סביב כנסיית ספירידון). עדיף להימנע מהחנויות הממש פונות לטיילת ליסטון, כנסו סמטה אחת פנימה למחירים זולים ב-30%.</li>
+                            <li><strong>סופרמרקטים להצטיידות:</strong> אל תקנו מיני-מרקט מקומי (יקר פי 2). חפשו <em>Diellas</em>, <em>AB Vassilopoulos</em>, או <em>Sklavenitis</em> (הכי גדול וזול באי, נמצא באזור שדה התעופה) ביום הראשון להשכרת הרכב.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 mb-3 text-lg border-b pb-2">מזכרות ומוצרים מקומיים</h4>
+                        <ul class="text-sm text-slate-700 space-y-3">
+                            <li><strong>ליקר קומקוואט (Kumquat):</strong> קורפו היא המקום היחיד באירופה שמגדל את פרי ההדר הסיני הזה. המזכרת מס' 1. תקנו את הליקר הכתום (מתוק, לקוקטיילים) ואת הצהוב (מר יותר, לדיג'סטיף).</li>
+                            <li><strong>שמן זית מקומי:</strong> לקורפו יש זן זיתים ייחודי (Lianolia). שמן מעט מתוק וסמיך יותר. קנו באחת החוות (למשל *Theotoky Estate*) ולא בחנויות תיירים בעיר שם לפעמים מוהלים אותו.</li>
+                            <li><strong>סבונים ומוצרי קוסמטיקה:</strong> מבוססי שמן זית ואלוורה. סבוני "Patounis" בעיר מיוצרים באותה שיטה מ-1850!</li>
+                            <li><strong>תכשיטים:</strong> תכשיטי כסף בסגנון ביזנטי מקומי נמכרים במחירים יחסית הוגנים בסמטאות העיר.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budgeting Tables -->
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                <span class="mr-2">💶</span> תכנון תקציב (לזוג, ל-7 ימים)
+            </h3>
+            
+            <div class="overflow-x-auto bg-white rounded-2xl shadow-sm border border-slate-200">
+                <table class="w-full text-right text-sm">
+                    <thead class="bg-slate-800 text-white">
+                        <tr>
+                            <th class="p-4 font-semibold">קטגוריה</th>
+                            <th class="p-4 font-semibold text-green-300">Budget (חסכוני)</th>
+                            <th class="p-4 font-semibold text-yellow-300">Mid-Range (נוח ומפנק)</th>
+                            <th class="p-4 font-semibold text-purple-300">Luxury (יוקרה ללא גבול)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-4 font-bold">לינה (6 לילות)</td>
+                            <td class="p-4">420€ - 550€ (דירות AirBnb או בוטיק בסיסי)</td>
+                            <td class="p-4">800€ - 1,200€ (מלונות 4 כוכבים, נוף לים)</td>
+                            <td class="p-4">2,500€+ (ריזורט 5 כוכבים, סוויטה עם בריכה)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-4 font-bold">אוכל (לזוג ליום)</td>
+                            <td class="p-4">50€-60€ (גירוס, מאפיות, טברנה אחת בערב)</td>
+                            <td class="p-4">120€-140€ (מסעדות מסודרות פעמיים ביום, יין)</td>
+                            <td class="p-4">250€+ (מסעדות שף, ביץ' קלאבס יוקרתיים)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-4 font-bold">רכב (השכרה 7 ימים)</td>
+                            <td class="p-4">180€ - 220€ (מיני ידני, ביטוח בסיסי)</td>
+                            <td class="p-4">350€ - 450€ (אוטומטי קומפקטי, ביטוח מקיף מלא)</td>
+                            <td class="p-4">800€+ (ג'יפון פרימיום / פתוח)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-4 font-bold">דלק וחניה</td>
+                            <td class="p-4">80€ (נסיעות קצרות, חניה בחינם בכפרים)</td>
+                            <td class="p-4">120€ (חציית האי, חניונים בתשלום בעיר)</td>
+                            <td class="p-4">150€+ (שירותי Valet במסעדות ומלונות)</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-4 font-bold">אטרקציות</td>
+                            <td class="p-4">50€ (מוזיאונים בסיסיים וכניסה למבצרים)</td>
+                            <td class="p-4">200€ (שכירת סירה פרטית ליום, שמשיות, תצפיות)</td>
+                            <td class="p-4">600€+ (סירה גדולה עם סקיפר, ספא זוגי)</td>
+                        </tr>
+                        <tr class="bg-slate-100 font-extrabold text-lg">
+                            <td class="p-4">סה"כ מוערך לזוג (ללא טיסות)</td>
+                            <td class="p-4 text-green-700">~1,100€ (₪4,400)</td>
+                            <td class="p-4 text-yellow-700">~2,200€ (₪8,800)</td>
+                            <td class="p-4 text-purple-700">~4,800€+ (₪19,200+)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="bg-yellow-50 p-6 rounded-2xl border border-yellow-200 mt-4">
+                 <h4 class="font-bold text-yellow-900 mb-2">💡 טיפים פיננסיים חשובים:</h4>
+                 <ul class="text-sm text-yellow-800 space-y-2 list-disc pl-5 pr-5">
+                    <li><strong>כסף מזומן:</strong> חובה בקורפו! טברנות רבות בכפרים, מיטות שיזוף, ושירותי סירות מסרבים (או "לא מצליחים") לגבות באשראי. דאגו ל-50€ מזומן עליכם בכל יום.</li>
+                    <li><strong>טיפים (Tipping):</strong> בקורפו מקובל להשאיר כ-10% במסעדות (אם השירות היה טוב, הוא לא כלול בחשבון לרוב). למנקי החדרים מקובל להשאיר 2-3 יורו ליום.</li>
+                    <li><strong>כבישי אגרה:</strong> אין כבישי אגרה בתוך האי קורפו. כל הכבישים חינמיים.</li>
+                 </ul>
+            </div>
+        </section>
+        <!-- ========================================== -->
+        <!-- TAB 9: FAQ (50 Questions)                  -->
+        <!-- ========================================== -->
+        <section id="faq" class="tab-content space-y-8">
+            <div class="mb-8 border-b pb-6">
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-2">שאלות נפוצות (50 התשובות שאתם חייבים לדעת)</h2>
+                <p class="text-lg text-slate-600">חילקנו את השאלות לנושאים. פתחו כל קטגוריה כדי לקרוא.</p>
+            </div>
+
+            <!-- נהיגה ותחבורה (1-10) -->
+            <details>
+                <summary>🚗 נהיגה, כבישים והשכרת רכב (1-10)</summary>
+                <div class="faq-content space-y-4">
+                    <div><strong class="text-teal-800">1. האם קשה לנהוג בקורפו?</strong><p>כן, הכבישים צרים מאוד, תלולים, מפותלים, ובכפרים לעיתים עובר רק רכב אחד וצריך לתמרן (או לעשות רוורס).</p></div>
+                    <div><strong class="text-teal-800">2. האם כדאי לשכור ג'יפ?</strong><p>לא בהכרח, עדיף רכב קטן (כמו יאריס או קליאו) אבל עם מנוע חזק יחסית (לא 1000 סמ"ק חלש), כדי שתוכלו לעבור בסמטאות בקלות.</p></div>
+                    <div><strong class="text-teal-800">3. איפה הכי זול לתדלק?</strong><p>לאורך כביש 25 הראשי (מצפון לדרום) התחנות בד"כ זולות יותר בכ-5 סנט מהתחנות בתוך הכפרים או במערב.</p></div>
+                    <div><strong class="text-teal-800">4. האם כדאי לשכור קטנוע?</strong><p>ממש לא מומלץ למי שאינו רוכב מיומן. הכבישים משובשים, יש חול על הכביש בפניות, ותאונות אופנוע שכיחות מאוד באי.</p></div>
+                    <div><strong class="text-teal-800">5. איפה הכי קשה למצוא חניה?</strong><p>בעיר קורפו (קחו את חניון Old Fortress) ובאזור פלאוקסטריצה בצהריים (תגיעו לפני 10 בבוקר).</p></div>
+                    <div><strong class="text-teal-800">6. האם צריך רישיון בינלאומי?</strong><p>על פי החוק היווני, רישיון פלסטיק ישראלי בתוקף מספיק לנהיגה ברכב, אך ליתר ביטחון (למקרה של תאונה) הוציאו בארץ ממס"י ב-16₪.</p></div>
+                    <div><strong class="text-teal-800">7. מה המהירות המותרת?</strong><p>לרוב 50-60 קמ"ש. כמעט ואין כבישים שלירים המאפשרים לנסוע 90 קמ"ש, וגם אם יש תמרור כזה, הכביש מפותל מדי.</p></div>
+                    <div><strong class="text-teal-800">8. האם נהגים מקומיים מסוכנים?</strong><p>הם נוהגים מהר ולעיתים עוקפים בפס לבן. תנו להם לעקוף (זוזו קצת ימינה כשאפשר).</p></div>
+                    <div><strong class="text-teal-800">9. האם צריך ביטוח החזר השתתפות עצמית?</strong><p>חובה! שריטות לרכב השכור הן דבר שבשגרה בגלל הצמחייה וכבישי האבן בכפרים.</p></div>
+                    <div><strong class="text-teal-800">10. האם Waze עובד טוב?</strong><p>Google Maps עובד טוב יותר מ-Waze בקורפו, אך הורידו מפה למכשיר (Offline) כי יש אזורים בלי קליטה סלולרית.</p></div>
+                </div>
+            </details>
+
+            <!-- כסף, תקציב וקניות (11-20) -->
+            <details>
+                <summary>💶 כסף, קניות וטיפים (11-20)</summary>
+                <div class="faq-content space-y-4">
+                    <div><strong class="text-teal-800">11. האם צריך מזומן?</strong><p>בהחלט. הרבה מיטות שיזוף, טברנות קטנות בכפרים וסירות מקבלות רק מזומן (או שהמסוף ה"פתאום לא עובד").</p></div>
+                    <div><strong class="text-teal-800">12. כמה טיפ נהוג להשאיר במסעדות?</strong><p>לרוב 10% אם השירות לא כלול בחשבון, בד"כ משאירים במזומן על השולחן גם אם שילמתם באשראי.</p></div>
+                    <div><strong class="text-teal-800">13. איפה הכי משתלם להמיר יורו?</strong><p>המירות עדיף לעשות בישראל או למשוך מכספומטים של בנקים (כמו Piraeus או Alpha Bank) ולהימנע ממכשירי Euronet הצהובים שיש להם עמלה כבדה.</p></div>
+                    <div><strong class="text-teal-800">14. האם יקר בקורפו?</strong><p>ביחס ליוון, קורפו במרכז-יקר. הלינה במערב יקרה, אך האוכל בטברנות נשאר במחירים סבירים מאוד (25-30 אירו לזוג).</p></div>
+                    <div><strong class="text-teal-800">15. מתי חנויות פתוחות?</strong><p>בעיר: שני, רביעי, שבת 09:00-14:00. שלישי, חמישי, שישי 09:00-14:00 ואז 17:30-21:00 (סייסטה!). חנויות תיירים פתוחות רצוף.</p></div>
+                    <div><strong class="text-teal-800">16. האם אפשר להתמקח?</strong><p>בחנויות מזכרות אפשר לבקש "Best price" על קנייה גדולה, אבל זה לא בזאר טורקי.</p></div>
+                    <div><strong class="text-teal-800">17. מהי המזכרת המקומית?</strong><p>מוצרי קומקוואט (ליקר, ריבה), עבודות עץ זית, שמן זית מריר קורפיאני, וסבונים.</p></div>
+                    <div><strong class="text-teal-800">18. האם המים בברזים ראויים לשתייה?</strong><p>עדיף לשתות מים מינרלים שקונים בסופר, אם כי המים בברז בטוחים לצחצוח שיניים או קפה מורתח.</p></div>
+                    <div><strong class="text-teal-800">19. כמה עולה סט שמשיות בחוף?</strong><p>נע בין 15€ בחופים הקטנים ועד 40€ בגליפאדה בשורות הראשונות. לרוב מקבלים שני בקבוקי מים במחיר.</p></div>
+                    <div><strong class="text-teal-800">20. האם המחירים צונחים בספטמבר?</strong><p>לקראת אמצע-סוף ספטמבר תראו ירידת מחירים קלה בלינה ובהשכרת רכב לעומת אוגוסט.</p></div>
+                </div>
+            </details>
+
+            <!-- חופים ואטרקציות (21-30) -->
+            <details>
+                <summary>🏖️ חופים, סירות וים (21-30)</summary>
+                <div class="faq-content space-y-4">
+                    <div><strong class="text-teal-800">21. איפה הכי יפה לראות שקיעה?</strong><p>Pelekas (Kaiser's Throne), מסעדת 75 Steps, Logas Beach ו-Afionas.</p></div>
+                    <div><strong class="text-teal-800">22. האם כדאי לשכור סירה לבד?</strong><p>חווית חובה! לא צריך רישיון למנוע עד 30 כוח סוס. העלות היא סביב 100 אירו ליום + דלק. הכי טוב במזרח או בצפון מזרח (ים שקט).</p></div>
+                    <div><strong class="text-teal-800">23. מתי הים גלי?</strong><p>בחוף המערבי לרוב גלי משעות הצהריים ואילך. החוף המזרחי רגוע כמו אגם כמעט תמיד.</p></div>
+                    <div><strong class="text-teal-800">24. האם יש מדוזות?</strong><p>לרוב הים היוני נקי ממדוזות, בניגוד לים התיכון של הארץ, אך לעיתים רחוקות יש זרמים שמושכים מעט.</p></div>
+                    <div><strong class="text-teal-800">25. אילו חופים חוליים?</strong><p>Glyfada, Agios Gordios, Kontogialos, Issos, Halikounas, Sidari.</p></div>
+                    <div><strong class="text-teal-800">26. היכן יש חלוקי נחל בוהקים (מים כחולים)?</strong><p>Bataria, Rovinia, Chomi, Barbati.</p></div>
+                    <div><strong class="text-teal-800">27. האם צריך נעלי ים?</strong><p>כן! רוב החופים היפים באמת הם חלוקי נחל. קשה ללכת יחפים על האבנים הלוהטות.</p></div>
+                    <div><strong class="text-teal-800">28. מתי הזמן הטוב ביותר להגיע לפורטו טימוני?</strong><p>לפני 09:00 בבוקר, לפני שהשמש קופחת על המסלול ולפני שהחוף הקטן מתמלא בסירות.</p></div>
+                    <div><strong class="text-teal-800">29. האם אפשר לקחת רחפן (Drone)?</strong><p>כן, חוקי האיחוד האירופי תקפים. אל תטיסו מעל אנשים או מעל שדה התעופה במרכז האי.</p></div>
+                    <div><strong class="text-teal-800">30. האם החופים נסגרים בלילה?</strong><p>לא, אך ברובם אין תאורה כלל (סכנה בנהיגה ובהליכה).</p></div>
+                </div>
+            </details>
+
+            <!-- זוגיות ומסעדות (31-40) -->
+            <details>
+                <summary>🍽️ מסעדות, רומנטיקה ואוכל (31-40)</summary>
+                <div class="faq-content space-y-4">
+                    <div><strong class="text-teal-800">31. מהי המנה הלאומית?</strong><p>פסטיצדה (Pastitsada) - בשר עגל ברוטב עגבניות, קינמון ויין אדום על מצע מקרוני.</p></div>
+                    <div><strong class="text-teal-800">32. האם מסעדות מחייבות הזמנה מראש?</strong><p>מסעדות יוקרה (The Venetian Well) או תצפיות שקיעה (75 Steps) דורשות הזמנה של ימים עד שבועות מראש בקיץ.</p></div>
+                    <div><strong class="text-teal-800">33. מתי אוכלים ערב ביוון?</strong><p>המקומיים אוכלים מאוחר (21:30 ואילך). אם תגיעו ב-19:30 הטברנה תהיה כמעט ריקה מתיירים.</p></div>
+                    <div><strong class="text-teal-800">34. מה זה 'קופר' (Coperto)?</strong><p>בקורפו מחייבים לעיתים "דמי עריכת שולחן" / לחם שזה כ-1.5 עד 2 אירו לאדם בחשבון הסופי.</p></div>
+                    <div><strong class="text-teal-800">35. האם יש אלכוהול מקומי מיוחד?</strong><p>בירה מקומית מעולה (Corfu Beer, הבקבוק האדום מומלץ) ויין לבן משובח של יקב Theotoky.</p></div>
+                    <div><strong class="text-teal-800">36. איך האוכל הצמחוני/טבעוני באי?</strong><p>מצוין. המטבח היווני עמוס במאזטים נטולי בשר (צדזיקי, פאבה, עלי גפן, שעועית ענק).</p></div>
+                    <div><strong class="text-teal-800">37. היכן הכי רומנטי לאכול?</strong><p>The Venetian Well בעיר, Toula's במזרח, ו-Akron בפלאוקסטריצה.</p></div>
+                    <div><strong class="text-teal-800">38. מה המעדן המקומי?</strong><p>נוגט (Mantolato) ותאנים יבשות אפויות עם פלפל שחור (Sikomaida).</p></div>
+                    <div><strong class="text-teal-800">39. האם כדאי להזמין "בופה" במלון לערב?</strong><p>לא. חצי פנסיון הורס את חוויית הטברנות המעולות שיש לקורפו להציע מחוץ למלון.</p></div>
+                    <div><strong class="text-teal-800">40. מתי שותים את פרפה/פרדו?</strong><p>קפה קר (Freddo Espresso) הוא סם החיים ביוון. שותים אותו לאורך כל היום, המקומיים לרוב יושבים שעות עם כוס אחת.</p></div>
+                </div>
+            </details>
+
+            <!-- מידע כללי, ביטחון ועוד (41-50) -->
+            <details>
+                <summary>💡 ביטחון, תשתיות ומידע כללי (41-50)</summary>
+                <div class="faq-content space-y-4">
+                    <div><strong class="text-teal-800">41. האם קורפו בטוחה בלילה?</strong><p>האי בטוח מאוד. פשיעה אלימה נדירה עד לא קיימת. הבעיה היחידה בלילה היא חוסר תאורה בכבישים.</p></div>
+                    <div><strong class="text-teal-800">42. האם כדאי להגיע עם ילדים?</strong><p>המדריך הזה מיועד לזוגות. עם ילדים מומלץ להישאר בריזורטים ולשכור רכב גדול יותר, ולהימנע מחופים תלולים.</p></div>
+                    <div><strong class="text-teal-800">43. מה מצב האינטרנט?</strong><p>לרוב טוב. 5G קיים בעיר ובחופים המרכזיים. בכפרים הנידחים לעיתים אין קליטה בכלל.</p></div>
+                    <div><strong class="text-teal-800">44. איזה שקע חשמלי יש בקורפו?</strong><p>אירופאי סטנדרטי (2 פינים עגולים כמו בישראל ללא ההארקה).</p></div>
+                    <div><strong class="text-teal-800">45. האם יש יתושים?</strong><p>כן! קורפו היא אי ירוק עם לחות גבוהה ומקורות מים (אגמים). חובה להביא אלתוש לערב.</p></div>
+                    <div><strong class="text-teal-800">46. האם צריך ויזה?</strong><p>לישראלים לא נדרשת ויזה (יוון באזור שנגן), אך מ-2025/2026 יש לעקוב אחרי מערכת ETIAS האירופאית.</p></div>
+                    <div><strong class="text-teal-800">47. איך מסתדרים עם השפה?</strong><p>כמעט כולם באי מדברים אנגלית ברמה טובה מאוד, במיוחד צעירים.</p></div>
+                    <div><strong class="text-teal-800">48. מה לגבי קניות פטורות ממכס בשדה?</strong><p>הדיוטי פרי בקורפו קטן ודי מאכזב, עדיף לקנות מזכרות ומוצרים מקומיים בעיר או בכפרים.</p></div>
+                    <div><strong class="text-teal-800">49. האם כדאי לבקר באלבניה?</strong><p>מעבורת לקסאמיל (אלבניה) אורכת חצי שעה, זו חוויה נחמדה אם יש לכם יום ספייר (יום 4 למשל), אבל האי מספק מספיק עניין לשבוע שלם ללא חציות גבול.</p></div>
+                    <div><strong class="text-teal-800">50. אזורי מלכודות תיירים שכדאי להימנע מהם?</strong><p>העיירה קאבוס (Kavos) בדרום - מיועדת לצעירים בריטים שיכורים. סידארי (Sidari) עמוסה מאוד במסעדות תיירים עם אוכל בינוני.</p></div>
+                </div>
+            </details>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 mt-16 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-lg font-semibold text-white mb-2">קורפו האולטימטיבי 2026 🇬🇷</p>
+            <p class="text-sm">מדריך זה נוצר עם ❤️ עבור זוגות ישראליים המטיילים בקורפו. כל המידע נבדק ונכתב בהתבסס על מחקר מעמיק, מסלולים מוכחים ואהבה לתרבות היוונית.</p>
+            <p class="text-xs mt-4 text-slate-500">© 2026 | המדריך נועד לספק מידע מפורט ככל האפשר. מחירים ושעות עשויים להשתנות, מומלץ לוודא עצמאית לפני נסיעות מיוחדות.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            // Scroll to the content slightly below the header
+            window.scrollTo({ top: 150, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
