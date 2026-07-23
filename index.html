@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>קורפו 2026: מגה-מדריך הטיולים השלם | המקיף ביותר ברשת</title>
-    <meta name="description" content="המדריך האולטימטיבי לקורפו 2026. 26 חופים, 63 מסעדות, מסלולי טיול שעתיים מפורטים, ו-33 פנינים נסתרות.">
+    <title>קורפו 2026: מדריך הטיולים השלם</title>
+    <meta name="description" content="מדריך קורפו 2026: 26 חופים, 63 מסעדות, מסלולי טיול שעתיים מפורטים, ו-33 פנינים נסתרות.">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0d3355">
 
@@ -14,21 +14,21 @@
          has a real domain, or search engines/social previews may point to
          the wrong place. -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="קורפו 2026: מגה-מדריך הטיולים השלם">
-    <meta property="og:description" content="המדריך האולטימטיבי לקורפו 2026. 26 חופים, 63 מסעדות, מסלולי טיול שעתיים מפורטים, ו-33 פנינים נסתרות.">
+    <meta property="og:title" content="קורפו 2026: מדריך הטיולים השלם">
+    <meta property="og:description" content="מדריך קורפו 2026: 26 חופים, 63 מסעדות, מסלולי טיול שעתיים מפורטים, ו-33 פנינים נסתרות.">
     <meta property="og:image" content="https://images.pexels.com/photos/1010657/pexels-photo-1010657.jpeg?auto=compress&cs=tinysrgb&w=1200">
     <meta property="og:locale" content="he_IL">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="קורפו 2026: מגה-מדריך הטיולים השלם">
-    <meta name="twitter:description" content="המדריך האולטימטיבי לקורפו 2026. 26 חופים, 63 מסעדות, מסלולי טיול שעתיים מפורטים, ו-33 פנינים נסתרות.">
+    <meta name="twitter:title" content="קורפו 2026: מדריך הטיולים השלם">
+    <meta name="twitter:description" content="מדריך קורפו 2026: 26 חופים, 63 מסעדות, מסלולי טיול שעתיים מפורטים, ו-33 פנינים נסתרות.">
     <meta name="twitter:image" content="https://images.pexels.com/photos/1010657/pexels-photo-1010657.jpeg?auto=compress&cs=tinysrgb&w=1200">
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "קורפו 2026: מגה-מדריך הטיולים השלם",
-      "description": "המדריך האולטימטיבי לקורפו 2026. 26 חופים, 63 מסעדות, מסלולי טיול שעתיים מפורטים, ו-33 פנינים נסתרות.",
+      "name": "קורפו 2026: מדריך הטיולים השלם",
+      "description": "מדריך קורפו 2026: 26 חופים, 63 מסעדות, מסלולי טיול שעתיים מפורטים, ו-33 פנינים נסתרות.",
       "inLanguage": "he",
       "about": {
         "@type": "Place",
@@ -45,12 +45,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Frank+Ruhl+Libre:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
-    
+    <!-- Leaflet + marker-cluster (map library) are NOT loaded here anymore.
+         The map is an opt-in feature behind the "הצג מפה" button on the
+         beaches tab — most visits never open it, so ~150KB of JS/CSS used
+         to load on every page view for nothing. loadLeafletThen() (in the
+         main script) now fetches these the first time the button is
+         clicked; see toggleBeachMap(). -->
+
     <style>
         /* ==========================================================================
            CORFU — LUXURY MEDITERRANEAN DESIGN SYSTEM
@@ -116,8 +117,12 @@
             /* --- Warm-tinted elevation (replaces cold gray Tailwind shadows) --- */
             --sh-sm: 0 1px 2px rgba(36, 31, 26, 0.06), 0 1px 3px rgba(36, 31, 26, 0.08);
             --sh-md: 0 3px 10px rgba(13, 59, 77, 0.08), 0 1px 4px rgba(36, 31, 26, 0.08);
-            --sh-lg: 0 14px 34px rgba(13, 59, 77, 0.14), 0 4px 14px rgba(36, 31, 26, 0.08);
-            --sh-xl: 0 26px 60px rgba(13, 59, 77, 0.18), 0 8px 22px rgba(36, 31, 26, 0.10);
+            /* sh-lg/sh-xl (behind shadow-xl/shadow-2xl, used on most cards and
+               panels sitewide) were tuned down one notch: same soft, warm-tinted
+               direction, less blur/spread and opacity, so a page full of them
+               reads as calm elevation rather than a stack of floating cards. */
+            --sh-lg: 0 10px 22px rgba(13, 59, 77, 0.10), 0 2px 8px rgba(36, 31, 26, 0.06);
+            --sh-xl: 0 16px 34px rgba(13, 59, 77, 0.12), 0 4px 12px rgba(36, 31, 26, 0.07);
         }
 
         /* ---------- Base ---------- */
@@ -338,6 +343,80 @@
         .qnav-icon .icon-line { width: 1.05em; height: 1.05em; }
         .mnav-icon .icon-line { width: 1.35rem; height: 1.35rem; }
         .hero-stat-badge .icon-line { width: 1.4rem; height: 1.4rem; }
+
+        /* Mobile bottom-nav active indicator: the top sticky nav already
+           highlights the open tab, but the bottom nav's 5 buttons stayed
+           visually identical no matter which tab was open. A small dot
+           mirrors the same "you are here" cue at thumb height. */
+        .mobile-nav-btn { position: relative; transition: color 0.2s ease; }
+        .mobile-nav-btn.active { color: var(--ion-700) !important; }
+        .mobile-nav-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 1px;
+            width: 4px; height: 4px;
+            border-radius: 999px;
+            background: currentColor;
+        }
+
+        /* Personal tracking widget (visited / rating / note) - injected by
+           storage.js as a footer strip on every item card, regardless of
+           that card's own internal markup, so it works identically across
+           beaches/food/attractions/gems/activities without touching any of
+           their existing HTML. */
+        .personal-tracking-widget {
+            display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+            padding: 0.75rem 1.25rem;
+            border-top: 1px solid var(--sand-200, #e7ddc7);
+            background: var(--sand-50, #faf9f6);
+        }
+        .pt-visited-btn {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            padding: 0.3rem 0.65rem; border-radius: 999px;
+            border: 1px solid var(--sand-200, #e7ddc7);
+            background: #fff; color: var(--ink-500, #6b6154);
+            font-size: 0.75rem; font-weight: 600;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .pt-visited-btn .icon-line { width: 0.95rem; height: 0.95rem; }
+        .pt-visited-btn--active {
+            background: var(--olive-600, #6d7a4f); border-color: var(--olive-600, #6d7a4f); color: #fff;
+        }
+        .pt-rating { display: inline-flex; gap: 0.15rem; margin-inline-start: auto; }
+        .pt-star { color: var(--sand-200, #e7ddc7); line-height: 0; padding: 0.15rem; }
+        .pt-star .icon-line { width: 1.05rem; height: 1.05rem; }
+        .pt-star--active { color: var(--gold-600, #b8934a); }
+        .pt-star--active .icon-line { fill: currentColor; }
+        .pt-note-toggle {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 1.9rem; height: 1.9rem; border-radius: 999px; flex-shrink: 0;
+            border: 1px solid var(--sand-200, #e7ddc7); background: #fff; color: var(--ink-500, #6b6154);
+        }
+        .pt-note-toggle .icon-line { width: 0.95rem; height: 0.95rem; }
+        .pt-note-toggle--has-note {
+            background: var(--terracotta-100, #f7ecd9); border-color: var(--terracotta-600, #b8934a); color: var(--terracotta-700, #8f6e2e);
+        }
+        .pt-note-textarea {
+            width: 100%; margin-top: 0.1rem; padding: 0.6rem 0.75rem;
+            border: 1px solid var(--sand-200, #e7ddc7); border-radius: var(--r-md, 10px);
+            font-size: 0.85rem; font-family: inherit; resize: vertical;
+            background: #fff; color: var(--ink-700, #423a30);
+        }
+        .pt-note-textarea:focus { outline: 2px solid var(--terracotta-600, #b8934a); outline-offset: 1px; }
+
+        /* Empty-state illustration: the last few spots still using a giant
+           raw emoji (🏖️/🍽️/📸/💎/❓) as their "nothing found" icon, out of
+           step with the line-icon system used everywhere else. Same soft
+           circular badge treatment as the practical-info feature icons. */
+        .empty-state-icon {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 4rem; height: 4rem; margin: 0 auto 0.85rem;
+            background: linear-gradient(135deg, var(--sand-100, #f2ecdf), var(--gold-100, #f7ecd9));
+            border: 1px solid var(--sand-200, #e7ddc7);
+            border-radius: 999px;
+            color: var(--terracotta-600, #a9762e);
+        }
+        .empty-state-icon .icon-line { width: 1.75rem; height: 1.75rem; stroke-width: 1.5; }
         .hero-stat-badge--ion .icon-line { color: var(--ion-600, #1a6494); }
         .hero-stat-badge--terracotta .icon-line { color: var(--terracotta-600, #b8934a); }
         .hero-stat-badge--gold .icon-line { color: var(--gold-600, #b8934a); }
@@ -379,7 +458,7 @@
         }
 
         /* ---------- Elements ---------- */
-        details { background: #fffefb; border-radius: var(--r-md); border: 1px solid var(--sand-200); margin-bottom: 0.75rem; overflow: hidden; box-shadow: var(--sh-sm); }
+        details { background: #fffefb; border-radius: var(--r-md); border: 1px solid rgba(36, 31, 26, 0.08); margin-bottom: 0.75rem; overflow: hidden; box-shadow: var(--sh-sm); }
         details > summary { list-style: none; cursor: pointer; padding: 1.25rem; font-weight: 700; font-size: 1.125rem; background: var(--sand-50); display: flex; justify-content: space-between; align-items: center; color: var(--ink-900); transition: background-color 0.2s ease; }
         details > summary:hover { background: var(--sand-100, #f3ecdf); }
         details > summary::-webkit-details-marker { display: none; }
@@ -407,7 +486,7 @@
         .bg-teal-600 { background-color: var(--ion-700) !important; }
         .hover\:bg-teal-700:hover, .hover\:bg-teal-600:hover { background-color: var(--ion-900) !important; }
         .text-teal-600, .text-teal-700, .text-teal-800, .text-teal-900 { color: var(--ion-700) !important; }
-        .hover\:text-teal-700:hover, .hover\:text-teal-600:hover, .hover\:text-teal-900:hover { color: var(--ion-900) !important; }
+        .hover\:text-teal-700:hover, .hover\:text-teal-900:hover { color: var(--ion-900) !important; }
         .focus\:ring-teal-300:focus { --tw-ring-color: var(--ion-500) !important; }
         .border-teal-500, .border-teal-200 { border-color: var(--ion-500) !important; }
         .bg-teal-50, .bg-teal-100 { background-color: var(--ion-50) !important; }
@@ -418,7 +497,7 @@
         .bg-blue-600 { background-color: var(--ion-700) !important; }
         .hover\:bg-blue-700:hover, .hover\:bg-blue-100:hover { background-color: var(--ion-100) !important; }
         .text-blue-600, .text-blue-700, .text-blue-800, .text-blue-900 { color: var(--ion-700) !important; }
-        .hover\:text-blue-800:hover, .hover\:text-blue-700:hover, .hover\:text-blue-900:hover { color: var(--ion-900) !important; }
+        .hover\:text-blue-800:hover { color: var(--ion-900) !important; }
         .bg-blue-50 { background-color: var(--ion-50) !important; }
 
         /* Indigo was left over from the original template as the default heading/
@@ -447,7 +526,7 @@
         .text-emerald-700, .text-emerald-800, .text-emerald-900 { color: var(--olive-600) !important; }
         .border-green-200, .border-emerald-200, .border-green-500 { border-color: var(--olive-600) !important; }
         .bg-emerald-600 { background-color: var(--olive-600) !important; }
-        .hover\:bg-green-100:hover, .hover\:bg-emerald-100:hover { background-color: #e6ecd8 !important; }
+        .hover\:bg-green-100:hover { background-color: #e6ecd8 !important; }
         .accent-emerald-400 { accent-color: var(--olive-600) !important; }
 
         .bg-amber-50, .bg-orange-50, .bg-yellow-50 { background-color: var(--gold-100) !important; }
@@ -487,8 +566,7 @@
         .text-gray-400, .text-slate-400 { color: #756e63 !important; }
         .bg-slate-100, .bg-gray-100 { background-color: var(--sand-100) !important; }
         .hover\:bg-gray-100:hover, .hover\:bg-slate-100:hover { background-color: var(--sand-100) !important; }
-        .hover\:bg-gray-200:hover, .hover\:bg-slate-200:hover { background-color: var(--sand-200) !important; }
-        .hover\:text-gray-700:hover, .hover\:text-gray-900:hover { color: var(--ink-900) !important; }
+        .hover\:bg-gray-200:hover { background-color: var(--sand-200) !important; }
 
         /* text-blue-500 recurs ~190 times as the small recommendation/tip icon
            accent inside cards — was outside the earlier blue-600/700 remap. */
@@ -516,7 +594,11 @@
             font-size: 1.6rem;
             box-shadow: var(--sh-sm);
         }
-        .border-slate-100, .border-slate-200, .border-gray-100, .border-gray-200 { border-color: var(--sand-200) !important; }
+        /* A translucent hairline instead of a solid tan line: with hundreds of
+           cards already carrying a shadow, a second solid-colored outline was
+           a redundant depth cue that added visual noise without adding
+           information - a soft edge is enough to define the same shape. */
+        .border-slate-100, .border-slate-200, .border-gray-100, .border-gray-200 { border-color: rgba(36, 31, 26, 0.08) !important; }
 
         .bg-white { background-color: #fffefb; }
 
@@ -849,7 +931,7 @@
         /* Small "🗺️ מפה / 🌐 אתר" utility link buttons (plain `rounded`, not
            rounded-lg/xl) recur on nearly every card — give their hover state the
            same warm tone as the rest of the palette instead of raw Tailwind gray. */
-        .hover\:bg-gray-50:hover, .hover\:bg-slate-50:hover { background-color: var(--sand-50) !important; }
+        .hover\:bg-gray-50:hover { background-color: var(--sand-50) !important; }
 
         /* --- Image zoom: hero banners get a slow, barely-perceptible idle
                "Ken Burns" drift instead of a hover-only zoom — reads as premium,
@@ -1118,6 +1200,12 @@
             #gems-container-grid > article:nth-child(9n+5) .premium-card-image {
                 aspect-ratio: 16 / 10 !important;
             }
+
+            /* The "near your accommodation" cards use text-sm (14px) - a size
+               smaller than every other card's body copy on the page
+               (16.5px). Barely noticeable on a large screen, but a real
+               readability dip on a phone, so it's corrected mobile-only. */
+            #shop-accommodation p.text-sm { font-size: 16.5px; line-height: 1.6; }
         }
 
         /* --- Section personality: each hero banner gets its own silhouette, not
@@ -1502,6 +1590,21 @@
         }
         .dashboard-quicknav-btn:hover { background: var(--gold-100, #f7ecd9); transform: translateY(-1px); }
 
+        /* End-of-section "what's next" card: every tab used to end abruptly
+           right into the footer with no cue where to go next. Reuses the
+           dashboard's own quicknav button style (just on a white pill instead
+           of sand) so it reads as part of the same navigation language. */
+        .section-next-steps {
+            background: var(--sand-50, #faf9f6);
+            border: 1px solid rgba(36, 31, 26, 0.08);
+            border-radius: var(--r-xl, 16px);
+            padding: 1.75rem 2rem;
+            text-align: center;
+            box-shadow: var(--sh-sm);
+        }
+        .section-next-steps p { color: var(--ink-700, #423a30); font-weight: 600; margin-bottom: 1.1rem; }
+        .section-next-steps .dashboard-quicknav-btn { background: #fff; }
+
         @media (max-width: 767px) {
             .dashboard-panel { padding: 1rem; border-radius: var(--r-lg, 14px); }
             .dashboard-card-value { font-size: 1.15rem; }
@@ -1539,6 +1642,25 @@
 
             // Note: removed automatic image randomization - cards already have curated real photos.
         });
+
+        // Graceful fallback for the ~150 hotlinked photos (pexels/unsplash/loremflickr):
+        // if one ever fails to load (dead link, ad-blocker, offline, CDN hiccup), swap
+        // in a soft on-brand placeholder instead of the browser's broken-image icon and
+        // raw (often English) alt text leaking through the Hebrew layout. Capture phase
+        // is required because the img "error" event does not bubble.
+        document.addEventListener('error', function(e) {
+            const img = e.target;
+            if (img.tagName !== 'IMG' || img.dataset.fallbackApplied) return;
+            img.dataset.fallbackApplied = 'true';
+            img.removeAttribute('srcset');
+            img.src = 'data:image/svg+xml,' + encodeURIComponent(
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">' +
+                '<rect width="400" height="300" fill="#f2ecdf"/>' +
+                '<g transform="translate(200,150)" stroke="#a9762e" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5">' +
+                '<rect x="-45" y="-32" width="90" height="64" rx="8"/><circle r="14" cy="2"/>' +
+                '</g></svg>'
+            );
+        }, true);
     </script>
 </head>
 <body class="antialiased text-slate-800 leading-relaxed">
@@ -1571,10 +1693,10 @@
             </span>
 
             <h1 class="hero-fade-in hero-delay-2 font-display text-5xl md:text-7xl font-black text-white tracking-tight leading-[1.05] mb-5" style="font-family:'Frank Ruhl Libre', serif;">
-                קורפו האולטימטיבי <span class="text-amber-300">2026</span>
+                קורפו <span class="text-amber-300">2026</span>
             </h1>
             <p class="hero-fade-in hero-delay-3 text-white/90 text-lg md:text-2xl font-medium max-w-2xl mx-auto mb-8 leading-relaxed">
-                המגה-מדריך: עשרות חופים, מסעדות ואטרקציות במקום אחד — מתוכנן, מאומת ומוכן לטיסה שלכם.
+                מדריך הטיול המלא: עשרות חופים, מסעדות ואטרקציות במקום אחד — מתוכנן, מאומת ומוכן לטיסה שלכם.
             </p>
 
             <!-- Quick travel info strip: the traveler's own already-confirmed flight facts -->
@@ -1729,6 +1851,7 @@
 
             <!-- Quick navigation -->
             <div class="dashboard-quicknav">
+                <span class="text-xs font-bold text-gray-500" style="flex-basis:100%;">קיצורי דרך מהדשבורד:</span>
                 <button onclick="switchTab('beaches')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 18 0Z"/><path d="M12 12v7a2 2 0 0 1-2 2"/><path d="M12 3v2"/></svg></span> חופים</button>
                 <button onclick="switchTab('food')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M7 3v6a1.5 1.5 0 0 0 3 0V3M8.5 9V21"/><path d="M16.5 3c-1.4 0-2.5 1.8-2.5 4.5S15.1 12 16.5 12V21"/></svg></span> קולינריה</button>
                 <button onclick="switchTab('attractions')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.3-2.5h5.4L16 7"/><circle cx="12" cy="13.5" r="3.3"/></svg></span> אטרקציות</button>
@@ -1795,11 +1918,11 @@
 
 
     <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 md:pb-8">
-<section id="itinerary" class="tab-content space-y-12" dir="rtl">
+<section id="itinerary" class="tab-content space-y-8" dir="rtl">
     <div class="text-center space-y-6 mb-12">
         <span class="inline-block bg-blue-100 text-blue-800 text-sm font-bold px-4 py-2 rounded-full tracking-wide shadow-sm">מסלול הדגל 🌟</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">🗺️ המסלול המושלם ל-7 ימים בקורפו</h2>
-        <p class="text-lg text-slate-600 max-w-4xl mx-auto leading-relaxed">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">🗺️ מסלול ל-7 ימים בקורפו</h2>
+        <p class="text-lg md:text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
             תכנון מקיף, מדוקדק וחוויתי, מותאם לטיסה שלכם: <strong>ת"א (TLV) 15:40 ← קורפו (CFU) 18:15, ב-02.09</strong>. כל יום במסלול זה נבנה כדי למקסם את הזמן שלכם, למנוע פקקים ולהבטיח שילוב מנצח של תרבות, חופים, קולינריה וטבע. כללנו שעות מדויקות, זמני נסיעה, חניונים, נקודות צילום, והכי חשוב - <strong>תוכנית גיבוי מפורטת לכל יום למקרה של גשם או מזג אוויר סוער</strong>.
         </p>
     </div>
@@ -2037,7 +2160,7 @@
         </div>
         
         <div class="p-6 md:p-8 space-y-8">
-            <img src="https://images.pexels.com/photos/1480807/pexels-photo-1480807.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Northeast Coast" class="w-full h-72 object-cover rounded-xl shadow-md" loading="lazy" decoding="async">
+            <img src="https://images.pexels.com/photos/1480807/pexels-photo-1480807.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="החוף הצפון-מזרחי" class="w-full h-72 object-cover rounded-xl shadow-md" loading="lazy" decoding="async">
             
             <div class="relative border-r-4 border-emerald-200 pr-8 space-y-12 mt-8">
                 
@@ -2062,7 +2185,7 @@
                         </div>
                         <div class="md:w-3/4 space-y-3 premium-content-col">
                             <h4 class="premium-event-title">🏡 מפרץ קאלאמי (Kalami) והבית הלבן של משפחת דארל</h4>
-                            <p class="premium-event-desc">המשך נסיעה (כ-20 דקות) אל קאלאמי. רדו אל המפרץ הציורי, בו נמצא "הבית הלבן" (The White House) שבו התגורר הסופר לורנס דארל בשנות ה-30. המקום פועל כיום כמסעדה ובית הארחה, ומושלם לקפה מול סירות המפרש.</p>
+                            <p class="premium-event-desc">המשך נסיעה (כ-20 דקות) אל קאלאמי. רדו אל המפרץ הציורי, בו נמצא "הבית הלבן" (The White House) שבו התגורר הסופר לורנס דארל בשנות ה-30. המקום פועל כיום כמסעדה ובית הארחה, ונעים לקפה מול סירות המפרש.</p>
                             <div class="premium-tip-box">
                                 <p class="flex items-start gap-2"><span class="text-lg">🚗</span> <span><strong>חניה:</strong> לאורך הכביש היורד לחוף קאלאמי, היזהרו בסיבובים החדים.</span></p>
                             </div>
@@ -2107,7 +2230,7 @@
                     </span>
                 </summary>
                 <div class="text-slate-600 p-6 border-t border-slate-200 bg-white leading-relaxed space-y-4">
-                    <p>כבישי החוף הצפון-מזרחי הופכים לחלקלקים בגשם - סעו לאט! ביום גשום מומלץ לאתגר את בלוטות הטעם בארוחת צהריים ארוכה ומפנקת במסעדת <em>Toula's</em> (שיש לה אזור מקורה ויבש המשקיף על הים הגועש). בנוסף, זה הזמן המושלם לבקר ב<strong>מוזיאון שמן הזית</strong> שבצפון, או להתפנק ביום ספא באחד ממלונות היוקרה (כמו Angsana או Kontokali Bay).</p>
+                    <p>כבישי החוף הצפון-מזרחי הופכים לחלקלקים בגשם - סעו לאט! ביום גשום מומלץ לאתגר את בלוטות הטעם בארוחת צהריים ארוכה ומפנקת במסעדת <em>Toula's</em> (שיש לה אזור מקורה ויבש המשקיף על הים הגועש). בנוסף, זה זמן טוב לבקר ב<strong>מוזיאון שמן הזית</strong> שבצפון, או להתפנק ביום ספא באחד ממלונות היוקרה (כמו Angsana או Kontokali Bay).</p>
                 </div>
             </details>
         </div>
@@ -2128,8 +2251,8 @@
             
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
                 <img src="https://images.pexels.com/photos/1109000/pexels-photo-1109000.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Paleokastritsa" class="rounded-xl object-cover h-40 w-full shadow-sm hover:opacity-90 transition" loading="lazy" decoding="async">
-                <img src="https://images.pexels.com/photos/1231343/pexels-photo-1231343.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Boat" class="rounded-xl object-cover h-40 w-full shadow-sm hover:opacity-90 transition" loading="lazy" decoding="async">
-                <img src="https://images.pexels.com/photos/3305096/pexels-photo-3305096.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Views" class="rounded-xl object-cover h-40 w-full shadow-sm hover:opacity-90 transition hidden md:block" loading="lazy" decoding="async">
+                <img src="https://images.pexels.com/photos/1231343/pexels-photo-1231343.jpeg?auto=compress&cs=tinysrgb&w=600" alt="סירה" class="rounded-xl object-cover h-40 w-full shadow-sm hover:opacity-90 transition" loading="lazy" decoding="async">
+                <img src="https://images.pexels.com/photos/3305096/pexels-photo-3305096.jpeg?auto=compress&cs=tinysrgb&w=600" alt="נוף" class="rounded-xl object-cover h-40 w-full shadow-sm hover:opacity-90 transition hidden md:block" loading="lazy" decoding="async">
             </div>
             
             <div class="relative border-r-4 border-teal-200 pr-8 space-y-12 mt-8">
@@ -2184,7 +2307,7 @@
                         </div>
                         <div class="md:w-3/4 space-y-3 premium-content-col">
                             <h4 class="premium-event-title">🌅 שקיעה בחוף רוביניה (Rovinia Beach)</h4>
-                            <p class="premium-event-desc">סיימו את היום בחוף רוביניה הבתולי. מדובר בהליכה קצרה דרך מטע זיתים עתיק, עד שמגיעים למפרץ מהמם המוקף צוקים. אין כאן שמשיות או קיוסקים, רק טבע מושלם ושקיעות מרהיבות.</p>
+                            <p class="premium-event-desc">סיימו את היום בחוף רוביניה הבתולי. מדובר בהליכה קצרה דרך מטע זיתים עתיק, עד שמגיעים למפרץ מהמם המוקף צוקים. אין כאן שמשיות או קיוסקים, רק טבע ושקיעות מרהיבות.</p>
                         </div>
                     </div>
                 </div>
@@ -2272,7 +2395,7 @@
                     </span>
                 </summary>
                 <div class="text-slate-600 p-6 border-t border-slate-200 bg-white leading-relaxed space-y-4">
-                    <p>ארמון אכיליאון מושלם ליום גשום מכיוון שהסיור ברובו המכריע מתבצע בחללים הפנימיים המפוארים של הארמון. לאחר מכן, במקום לנסוע לדיונות, בקרו ב<strong>מוזיאון שמן הזית של Mavroudis</strong> - משפחה המייצרת שמן זית מזה דורות. הסיור מתבצע בפנים, כולל הסברים מרתקים, טעימות סוגי שמנים שונים לצד לחם טרי וגבינות - חוויה קולינרית חמימה ונהדרת.</p>
+                    <p>ארמון אכיליאון מתאים ליום גשום מכיוון שהסיור ברובו המכריע מתבצע בחללים הפנימיים המפוארים של הארמון. לאחר מכן, במקום לנסוע לדיונות, בקרו ב<strong>מוזיאון שמן הזית של Mavroudis</strong> - משפחה המייצרת שמן זית מזה דורות. הסיור מתבצע בפנים, כולל הסברים מרתקים, טעימות סוגי שמנים שונים לצד לחם טרי וגבינות - חוויה קולינרית חמימה ונהדרת.</p>
                 </div>
             </details>
         </div>
@@ -2290,7 +2413,7 @@
         </div>
         
         <div class="p-6 md:p-8 space-y-8">
-            <img src="https://images.pexels.com/photos/409605/pexels-photo-409605.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="North Coast" class="w-full h-72 object-cover rounded-xl shadow-md" loading="lazy" decoding="async">
+            <img src="https://images.pexels.com/photos/409605/pexels-photo-409605.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="החוף הצפוני" class="w-full h-72 object-cover rounded-xl shadow-md" loading="lazy" decoding="async">
             
             <div class="relative border-r-4 border-orange-200 pr-8 space-y-12 mt-8">
                 
@@ -2302,7 +2425,7 @@
                         </div>
                         <div class="md:w-3/4 space-y-3 premium-content-col">
                             <h4 class="premium-event-title">❤️ תעלת האהבה (Canal d'Amour) בסידארי</h4>
-                            <p class="premium-event-desc">הגיעו לסידארי התוססת ולכו לעבר תעלת האהבה המפורסמת. האגדה המקומית מספרת שזוג שישחה יחד לאורך התעלה יישאר יחד לנצח. גם אם המים קרים, זהו מקום מדהים לצילומים עם סלעי אבן החול השכבתית הפיסוליים.</p>
+                            <p class="premium-event-desc">הגיעו לסידארי התוססת ולכו לעבר תעלת האהבה המפורסמת. האגדה המקומית מספרת שזוג שישחה יחד לאורך התעלה יישאר יחד לנצח. גם אם המים קרים, זהו מקום טוב לצילומים עם סלעי אבן החול השכבתית הפיסוליים.</p>
                         </div>
                     </div>
                 </div>
@@ -2498,7 +2621,7 @@
                     </span>
                 </summary>
                 <div class="text-slate-600 p-6 border-t border-slate-200 bg-white leading-relaxed space-y-4">
-                    <p>אזהרה חשובה: אם יורד גשם או שיש ערפל כבד, <strong>אל תטפסו להר פנטוקרטור ברכב</strong>! הראות בפסגה תהיה אפסית והכביש מסוכן. לעומת זאת, הכפר הנטוש פלאיה פריתיה הוא המקום היפה והדרמטי ביותר בקורפו ביום גשום וערפילי! סעו לאט רק עד לכפר (הכביש לשם בטוח יותר). הצטיידו במטריה, טיילו בין החורבות האפופות ערפל קסום ולאחר מכן היכנסו לטברנה המקומית, שבו ליד קמין העצים והזמינו נזיד חם וכוס יין אדום מקומי לסיום מושלם של החופשה.</p>
+                    <p>אזהרה חשובה: אם יורד גשם או שיש ערפל כבד, <strong>אל תטפסו להר פנטוקרטור ברכב</strong>! הראות בפסגה תהיה אפסית והכביש מסוכן. לעומת זאת, הכפר הנטוש פלאיה פריתיה הוא המקום היפה והדרמטי ביותר בקורפו ביום גשום וערפילי! סעו לאט רק עד לכפר (הכביש לשם בטוח יותר). הצטיידו במטריה, טיילו בין החורבות האפופות ערפל קסום ולאחר מכן היכנסו לטברנה המקומית, שבו ליד קמין העצים והזמינו נזיד חם וכוס יין אדום מקומי לסיום נעים של החופשה.</p>
                 </div>
             </details>
         </div>
@@ -2584,6 +2707,14 @@
         </div>
     </div>
 
+    <div class="section-next-steps">
+        <p>זהו המסלול המלא ל-7 הימים. עכשיו אפשר לבדוק את החופים והמסעדות שמוזכרים לאורך הדרך:</p>
+        <div class="flex flex-wrap justify-center gap-3">
+            <button onclick="switchTab('beaches')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 18 0Z"/><path d="M12 12v7a2 2 0 0 1-2 2"/><path d="M12 3v2"/></svg></span> חופים</button>
+            <button onclick="switchTab('food')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M7 3v6a1.5 1.5 0 0 0 3 0V3M8.5 9V21"/><path d="M16.5 3c-1.4 0-2.5 1.8-2.5 4.5S15.1 12 16.5 12V21"/></svg></span> קולינריה</button>
+        </div>
+    </div>
+
 </section>
 <section id="beaches" class="tab-content space-y-8" dir="rtl">
   <div class="section-hero-banner">
@@ -2624,7 +2755,7 @@
       </div>
     </div>
     <div class="text-xs text-gray-500 bg-blue-50/50 rounded-lg p-3 border-r-2 border-blue-200">
-      <strong class="text-gray-700">טמפרטורת המים:</strong> החוף המזרחי חמים ורגועים יותר (מוגנים מרוחות) ומתאימים למשפחות עם ילדים קטנים. החוף המערבי צלול וקר יותר עם מים בצבע טורקיז מדהים, אך לעתים גלי וסוער. עונת הרחצה: יוני–ספטמבר (שיא: יולי–אוגוסט, 26°C).
+      <strong class="text-gray-700">טמפרטורת המים:</strong> החוף המזרחי חמים ורגועים יותר (מוגנים מרוחות) ומתאימים למשפחות עם ילדים קטנים. החוף המערבי צלול וקר יותר עם מים בצבע טורקיז עז, אך לעתים גלי וסוער. עונת הרחצה: יוני–ספטמבר (שיא: יולי–אוגוסט, 26°C).
     </div>
   </div>
 
@@ -2646,7 +2777,7 @@
     </div>
     <p id="beach-filter-count" class="text-xs text-gray-400 mt-3" aria-live="polite">מציג את כל 26 החופים</p>
     <div id="beaches-empty-state" class="hidden text-center py-10">
-        <p class="text-4xl mb-3">🏖️</p>
+        <div class="empty-state-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 18 0Z"/><path d="M12 12v7a2 2 0 0 1-2 2"/><path d="M12 3v2"/></svg></div>
         <p class="text-gray-600 font-semibold mb-3">לא נמצאו חופים התואמים את הסינון</p>
         <button onclick="filterBeaches('all')" class="beach-filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">נקו את הסינון</button>
     </div>
@@ -2728,7 +2859,7 @@
       <div class="p-6 flex-grow flex flex-col bg-gradient-to-b from-white to-gray-50/50">
         <div class="flex justify-between items-start mb-4 gap-2"><h3 class="text-2xl font-bold text-gray-900 leading-tight min-w-0">רוביניה (Rovinia)</h3><div class="flex gap-2 flex-shrink-0"><button onclick="toggleFavorite(this)" class="favorite-btn text-gray-400 hover:text-red-500 bg-gray-50 hover:bg-red-50 p-2.5 rounded-full transition duration-300 shadow-sm mr-2" title="שמור למועדפים">🤍</button><button onclick="showOnMap('beaches', this.closest('[data-name]').dataset.name)" class="text-teal-600 hover:text-white bg-teal-50 hover:bg-teal-600 p-2.5 rounded-full transition duration-300 shadow-sm" title="הצג במפה">🗺️</button><a href="https://maps.google.com/?q=39.6644,19.7214" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-white bg-blue-50 hover:bg-blue-600 p-2.5 rounded-full transition duration-300 shadow-sm" title="נווט במפות גוגל">📍</a></div>
         </div>
-        <p class="text-gray-600 mb-6 text-sm leading-relaxed text-justify">פנינה אמיתית במערב קורפו עם מי קריסטל צלולים בצבע תכלת שקוף וחלוקי נחל לבנים. החוף פראי, ללא מתקנים, מלבד "סירת גלידה" קסומה שמגיעה מדי פעם. שווה את ההליכה הרגלית למטה בשביל החוויה המבודדת והמים המושלמים.</p>
+        <p class="text-gray-600 mb-6 text-sm leading-relaxed text-justify">פנינה אמיתית במערב קורפו עם מי קריסטל צלולים בצבע תכלת שקוף וחלוקי נחל לבנים. החוף פראי, ללא מתקנים, מלבד "סירת גלידה" קסומה שמגיעה מדי פעם. שווה את ההליכה הרגלית למטה בשביל החוויה המבודדת והמים הצלולים.</p>
         
         <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2 py-1 bg-green-50 text-green-800 rounded-md text-xs font-bold flex items-center gap-1">🟢 עומס נמוך</span><span class="px-2 py-1 bg-red-50 text-red-800 rounded-md text-xs font-bold flex items-center gap-1">🧗 הליכה קשה</span><span class="px-2 py-1 bg-slate-100 text-slate-600 rounded-md text-xs font-bold flex items-center gap-1">🚫👶 פחות מתאים לילדים</span></div>
         <div class="grid grid-cols-2 gap-2 mb-5 mt-auto">
@@ -2760,7 +2891,7 @@
     <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden flex flex-col border border-gray-100 premium-card" data-tags="adventure" data-name="פורטו טימוני (Porto Timoni)" data-id="beach-פורטו-טימוני-Porto-Timoni">
       <div class="relative h-64 group overflow-hidden premium-card-image">
         <img src="https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?auto=format&fit=crop&q=80&w=800" alt="פורטו טימוני" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out" loading="lazy" decoding="async">
-        <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md">גלויה מדהימה 📸</div>
+        <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md">נקודת צילום 📸</div>
       </div>
       <div class="p-6 flex-grow flex flex-col bg-gradient-to-b from-white to-gray-50/50">
         <div class="flex justify-between items-start mb-4 gap-2"><h3 class="text-2xl font-bold text-gray-900 leading-tight min-w-0">פורטו טימוני (Porto Timoni)</h3><div class="flex gap-2 flex-shrink-0"><button onclick="toggleFavorite(this)" class="favorite-btn text-gray-400 hover:text-red-500 bg-gray-50 hover:bg-red-50 p-2.5 rounded-full transition duration-300 shadow-sm mr-2" title="שמור למועדפים">🤍</button><button onclick="showOnMap('beaches', this.closest('[data-name]').dataset.name)" class="text-teal-600 hover:text-white bg-teal-50 hover:bg-teal-600 p-2.5 rounded-full transition duration-300 shadow-sm" title="הצג במפה">🗺️</button><a href="https://maps.google.com/?q=39.7208,19.6586" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-white bg-blue-50 hover:bg-blue-600 p-2.5 rounded-full transition duration-300 shadow-sm" title="נווט במפות גוגל">📍</a></div>
@@ -2770,7 +2901,7 @@
         <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2 py-1 bg-green-50 text-green-800 rounded-md text-xs font-bold flex items-center gap-1">🟢 עומס נמוך</span><span class="px-2 py-1 bg-red-50 text-red-800 rounded-md text-xs font-bold flex items-center gap-1">🧗 הליכה קשה</span><span class="px-2 py-1 bg-slate-100 text-slate-600 rounded-md text-xs font-bold flex items-center gap-1">🚫👶 פחות מתאים לילדים</span><span class="px-2 py-1 bg-pink-50 text-pink-800 rounded-md text-xs font-bold flex items-center gap-1">📸 ספוט צילום מומלץ</span></div>
         <div class="grid grid-cols-2 gap-2 mb-5 mt-auto">
           <span class="px-2.5 py-1.5 bg-yellow-50 text-yellow-800 rounded-lg text-xs font-semibold flex items-center gap-1.5">🏖️ חלוקי נחל דקים</span>
-          <span class="px-2.5 py-1.5 bg-blue-50 text-blue-800 rounded-lg text-xs font-semibold flex items-center gap-1.5">💧 טורקיז עמוק ומושלם</span>
+          <span class="px-2.5 py-1.5 bg-blue-50 text-blue-800 rounded-lg text-xs font-semibold flex items-center gap-1.5">💧 טורקיז עמוק וצלול</span>
           <span class="px-2.5 py-1.5 bg-cyan-50 text-cyan-800 rounded-lg text-xs font-semibold flex items-center gap-1.5">🤿 שנירקול ברמה גבוהה</span>
           <span class="px-2.5 py-1.5 bg-green-50 text-green-800 rounded-lg text-xs font-semibold flex items-center gap-1.5">⛱️ פראי לחלוטין</span>
           <span class="px-2.5 py-1.5 bg-red-50 text-red-800 rounded-lg text-xs font-semibold flex items-center gap-1.5">👥 עמוס בקיץ</span>
@@ -3541,7 +3672,7 @@
       <div class="p-6 flex-grow flex flex-col bg-gradient-to-b from-white to-gray-50/50">
         <div class="flex justify-between items-start mb-4 gap-2"><h3 class="text-2xl font-bold text-gray-900 leading-tight min-w-0">קלאמי (Kalami)</h3><div class="flex gap-2 flex-shrink-0"><button onclick="toggleFavorite(this)" class="favorite-btn text-gray-400 hover:text-red-500 bg-gray-50 hover:bg-red-50 p-2.5 rounded-full transition duration-300 shadow-sm mr-2" title="שמור למועדפים">🤍</button><button onclick="showOnMap('beaches', this.closest('[data-name]').dataset.name)" class="text-teal-600 hover:text-white bg-teal-50 hover:bg-teal-600 p-2.5 rounded-full transition duration-300 shadow-sm" title="הצג במפה">🗺️</button><a href="https://maps.google.com/?q=39.7431,19.9351" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-white bg-blue-50 hover:bg-blue-600 p-2.5 rounded-full transition duration-300 shadow-sm" title="נווט במפות גוגל">📍</a></div>
         </div>
-        <p class="text-gray-600 mb-6 text-sm leading-relaxed text-justify">מפרץ ירוק בצורת פרסה מושלמת, הידוע כביתה ההיסטורי של משפחת דארל ("משפחתי וחיות אחרות"). המים תמיד שקטים כמו אגם - אידיאלי לסאפ (SUP). "הבית הלבן" ההיסטורי מתפקד כיום כטברנה נהדרת המשקיפה על המים החלקים.</p>
+        <p class="text-gray-600 mb-6 text-sm leading-relaxed text-justify">מפרץ ירוק בצורת פרסה, הידוע כביתה ההיסטורי של משפחת דארל ("משפחתי וחיות אחרות"). המים תמיד שקטים כמו אגם - אידיאלי לסאפ (SUP). "הבית הלבן" ההיסטורי מתפקד כיום כטברנה נהדרת המשקיפה על המים החלקים.</p>
         
         <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2 py-1 bg-green-50 text-green-800 rounded-md text-xs font-bold flex items-center gap-1">🟢 עומס נמוך</span><span class="px-2 py-1 bg-teal-50 text-teal-800 rounded-md text-xs font-bold flex items-center gap-1">🚶 גישה קלה</span><span class="px-2 py-1 bg-blue-50 text-blue-800 rounded-md text-xs font-bold flex items-center gap-1">👨‍👩‍👧 ידידותי למשפחות</span><span class="px-2 py-1 bg-pink-50 text-pink-800 rounded-md text-xs font-bold flex items-center gap-1">📸 ספוט צילום מומלץ</span></div>
         <div class="grid grid-cols-2 gap-2 mb-5 mt-auto">
@@ -3615,7 +3746,7 @@
       <div class="p-6 flex-grow flex flex-col bg-gradient-to-b from-white to-gray-50/50">
         <div class="flex justify-between items-start mb-4 gap-2"><h3 class="text-2xl font-bold text-gray-900 leading-tight min-w-0">קסיופי - בטאריה וקנוני</h3><div class="flex gap-2 flex-shrink-0"><button onclick="toggleFavorite(this)" class="favorite-btn text-gray-400 hover:text-red-500 bg-gray-50 hover:bg-red-50 p-2.5 rounded-full transition duration-300 shadow-sm mr-2" title="שמור למועדפים">🤍</button><button onclick="showOnMap('beaches', this.closest('[data-name]').dataset.name)" class="text-teal-600 hover:text-white bg-teal-50 hover:bg-teal-600 p-2.5 rounded-full transition duration-300 shadow-sm" title="הצג במפה">🗺️</button><a href="https://maps.google.com/?q=39.7946,19.9213" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-white bg-blue-50 hover:bg-blue-600 p-2.5 rounded-full transition duration-300 shadow-sm" title="נווט במפות גוגל">📍</a></div>
         </div>
-        <p class="text-gray-600 mb-6 text-sm leading-relaxed text-justify">מוחבאים היטב מעבר לנמל קסיופי, אלו הם שני מפרצונים צמודים עוצרי נשימה המרופדים בחלוקי נחל לבנים בוהקים כשלג. השילוב מול צבעי כחול-טורקיז העמוקים, ונוף הרי אלבניה באופק, הופך אותם לחוויה צילומית (וימית) מדהימה.</p>
+        <p class="text-gray-600 mb-6 text-sm leading-relaxed text-justify">מוחבאים היטב מעבר לנמל קסיופי, אלו הם שני מפרצונים צמודים עוצרי נשימה המרופדים בחלוקי נחל לבנים בוהקים כשלג. השילוב מול צבעי כחול-טורקיז העמוקים, ונוף הרי אלבניה באופק, הופך אותם לחוויה צילומית (וימית) מיוחדת.</p>
         
         <div class="flex flex-wrap gap-1.5 mb-3"><span class="px-2 py-1 bg-amber-50 text-amber-800 rounded-md text-xs font-bold flex items-center gap-1">🟡 עומס בינוני</span><span class="px-2 py-1 bg-teal-50 text-teal-800 rounded-md text-xs font-bold flex items-center gap-1">🚶 גישה קלה</span><span class="px-2 py-1 bg-blue-50 text-blue-800 rounded-md text-xs font-bold flex items-center gap-1">👨‍👩‍👧 ידידותי למשפחות</span></div>
         <div class="grid grid-cols-2 gap-2 mb-5 mt-auto">
@@ -3644,15 +3775,24 @@
     </div>
 
   </div>
+
+  <div class="section-next-steps">
+    <p>אלו כל 26 החופים. רוצים לדעת איפה לאכול לידם, או לשבץ אותם במסלול?</p>
+    <div class="flex flex-wrap justify-center gap-3">
+      <button onclick="switchTab('food')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M7 3v6a1.5 1.5 0 0 0 3 0V3M8.5 9V21"/><path d="M16.5 3c-1.4 0-2.5 1.8-2.5 4.5S15.1 12 16.5 12V21"/></svg></span> קולינריה</button>
+      <button onclick="switchTab('itinerary')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M9 4 4 6.5v13L9 17l6 2 5-2.5v-13L15 6 9 4Z"/><path d="M9 4v13M15 6v13"/></svg></span> מסלול</button>
+    </div>
+  </div>
+
 </section>
-<section id="food" class="tab-content space-y-12">
+<section id="food" class="tab-content space-y-8">
     <div class="section-hero-banner">
         <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="קולינריה קורפו" class="section-hero-banner-img" loading="lazy" decoding="async">
         <div class="section-hero-banner-overlay"></div>
         <span class="journey-chapter">03 — קולינריה</span>
         <div class="section-hero-banner-content">
             <h2 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight">המדריך הקולינרי המלא לקורפו 🍽️</h2>
-            <p class="text-lg text-white/90 max-w-3xl mx-auto">מטברנות מסורתיות שמתחבאות בין סמטאות ועד למסעדות יוקרה על קו המים – ריכזנו עבורכם 63 המלצות רותחות. בחרו את הקטגוריה האהובה עליכם וצאו למסע טעמים בלתי נשכח.</p>
+            <p class="text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto">מטברנות מסורתיות שמתחבאות בין סמטאות ועד למסעדות יוקרה על קו המים – ריכזנו עבורכם 63 המלצות רותחות. בחרו את הקטגוריה האהובה עליכם וצאו למסע טעמים בלתי נשכח.</p>
         </div>
     </div>
 
@@ -3743,7 +3883,7 @@
         </div>
         <p id="food-filter-count" class="text-xs text-gray-400 mt-3" aria-live="polite">מציג את כל 63 המסעדות</p>
         <div id="food-empty-state" class="hidden text-center py-10">
-            <p class="text-4xl mb-3">🍽️</p>
+            <div class="empty-state-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M7 3v6a1.5 1.5 0 0 0 3 0V3M8.5 9V21"/><path d="M16.5 3c-1.4 0-2.5 1.8-2.5 4.5S15.1 12 16.5 12V21"/></svg></div>
             <p class="text-gray-600 font-semibold mb-3">לא נמצאו מסעדות התואמות את הסינון</p>
             <button onclick="filterFood('all')" class="food-filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200">נקו את הסינון</button>
         </div>
@@ -3753,7 +3893,7 @@
     <div class="space-y-6">
         <div class="bg-gradient-to-r from-blue-50 to-white border-r-4 border-blue-500 p-5 rounded-2xl shadow-sm" id="cat-greek">
             <h3 class="text-2xl font-bold text-gray-800">🇬🇷 טברנות ומסעדות יווניות</h3>
-            <p class="text-gray-600 mt-2">הטעם האותנטי של קורפו עם מנות מסורתיות, אוזו מושלם ואווירה חמה.</p>
+            <p class="text-gray-600 mt-2">הטעם האותנטי של קורפו עם מנות מסורתיות, אוזו איכותי ואווירה חמה.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             <!-- 1 -->
@@ -5088,9 +5228,9 @@
                             <span class="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">הגיעו שעה לפני השקיעה</span>
                         </div>
                         <div class="bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs">
-                            <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> הנוף הכי מדהים באי, מרפסת זכוכית ייחודית, אווירה מעולה</p>
+                            <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> נוף מרשים במיוחד, מרפסת זכוכית ייחודית, אווירה מעולה</p>
                             <p><span class="text-red-500 font-bold">❌</span> <strong>חסרונות:</strong> מחירים גבוהים ליחס לאוכל, שירות לעתים איטי, עמוס מאוד</p>
-                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מושלם ל:</strong> זוגות, הצעות נישואין, אינסטגרם, חוויית שקיעה</p>
+                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מתאים ל:</strong> זוגות, הצעות נישואין, אינסטגרם, חוויית שקיעה</p>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -5123,9 +5263,9 @@
                             <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">ללא הזמנה (מומלץ בקיץ)</span>
                         </div>
                         <div class="bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs">
-                            <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> מחירים עממיים, אוכל ביתי מעולה, שקיעה מדהימה, אווירה אותנטית</p>
+                            <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> מחירים עממיים, אוכל ביתי מעולה, שקיעה יפה, אווירה אותנטית</p>
                             <p><span class="text-red-500 font-bold">❌</span> <strong>חסרונות:</strong> הכביש לכפר צר ומפותל, מרוחקת מהחוף</p>
-                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מושלם ל:</strong> משפחות, זוגות שמעדיפים אותנטיות על יוקרה</p>
+                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מתאים ל:</strong> משפחות, זוגות שמעדיפים אותנטיות על יוקרה</p>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -5159,9 +5299,9 @@
                             <span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded-full">🌿 ידידותי לצמחונים</span>
                         </div>
                         <div class="bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs">
-                            <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> חוויה ייחודית (farm-to-table), יין מקומי מדהים, שקט ורומנטי</p>
+                            <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> חוויה ייחודית (farm-to-table), יין מקומי איכותי, שקט ורומנטי</p>
                             <p><span class="text-red-500 font-bold">❌</span> <strong>חסרונות:</strong> חובה רכב, לא תמיד פתוח - בדקו מראש</p>
-                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מושלם ל:</strong> זוגות רומנטיים, חובבי יין, ארוחת יום נישואין</p>
+                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מתאים ל:</strong> זוגות רומנטיים, חובבי יין, ארוחת יום נישואין</p>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -5197,7 +5337,7 @@
                         <div class="bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs">
                             <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> הכי אותנטי שיש, מחירים מגוחכים, אוכל ביתי ברמה גבוהה, שקיעה פנומנלית</p>
                             <p><span class="text-red-500 font-bold">❌</span> <strong>חסרונות:</strong> כביש הגעה תלול, תפריט מצומצם (מה שסופיה בישלה היום), מבודד</p>
-                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מושלם ל:</strong> מטיילים שמחפשים חוויה יוונית אמיתית, זוגות הרפתקניים</p>
+                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מתאים ל:</strong> מטיילים שמחפשים חוויה יוונית אמיתית, זוגות הרפתקניים</p>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -5212,7 +5352,7 @@
     <div class="space-y-6">
         <div class="bg-gradient-to-r from-cyan-50 to-white border-r-4 border-cyan-500 p-5 rounded-2xl shadow-sm" id="cat-beachbars">
             <h3 class="text-2xl font-bold text-gray-800">🏖️ ביץ' בארים</h3>
-            <p class="text-gray-600 mt-2">הכי טוב שיש: קוקטייל ביד, רגליים בחול, מוזיקה ברקע וים יווני מול העיניים. חלק מציעים גם אוכל מעולה.</p>
+            <p class="text-gray-600 mt-2">אווירת חוף קלילה: קוקטייל ביד, רגליים בחול, מוזיקה ברקע וים יווני מול העיניים. חלק מציעים גם אוכל מעולה.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             <!-- BB1 -->
@@ -5240,9 +5380,9 @@
                             <span class="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">מוזיקה חיה בקיץ</span>
                         </div>
                         <div class="bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs">
-                            <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> עיצוב מדהים, נוף לים, אווירה מושלמת לאחר הצהריים</p>
+                            <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> עיצוב מרשים, נוף לים, אווירה נעימה אחר הצהריים</p>
                             <p><span class="text-red-500 font-bold">❌</span> <strong>חסרונות:</strong> מיטות שיזוף בתשלום (€15+), מחירי קוקטיילים גבוהים</p>
-                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מושלם ל:</strong> זוגות צעירים, יום חוף + שתייה, אינסטגרם</p>
+                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מתאים ל:</strong> זוגות צעירים, יום חוף + שתייה, אינסטגרם</p>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -5274,9 +5414,9 @@
                             <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">ללא הזמנה</span>
                         </div>
                         <div class="bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs">
-                            <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> חוף חולי מדהים, אווירת מסיבה, מחירים סבירים</p>
+                            <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> חוף חולי יפה, אווירת מסיבה, מחירים סבירים</p>
                             <p><span class="text-red-500 font-bold">❌</span> <strong>חסרונות:</strong> רועש (לא מתאים למחפשי שקט), ירידה תלולה לחוף</p>
-                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מושלם ל:</strong> צעירים, חברות, מסיבת חוף ביום</p>
+                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מתאים ל:</strong> צעירים, חברות, מסיבת חוף ביום</p>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -5298,7 +5438,7 @@
                     <h4 class="text-xl font-bold text-gray-900 mb-1">סיירנס לאונג' (Sirens)</h4>
                     <p class="text-sm text-gray-500 mb-2 font-mono">Sirens Lounge, Marathias Beach</p>
                     <span class="inline-flex items-center gap-1 px-2 py-1 bg-purple-50 text-purple-800 rounded-md text-xs font-bold mb-3">🌙 חוויה למבוגרים</span>
-                    <p class="text-sm text-gray-600 mb-3">ביץ' בר רגוע עם ערסלים על חוף מרתיאס בדרום. אווירה שקטה ונינוחה, מושלם לזוגות שרוצים יום חוף בלי המולה.</p>
+                    <p class="text-sm text-gray-600 mb-3">ביץ' בר רגוע עם ערסלים על חוף מרתיאס בדרום. אווירה שקטה ונינוחה, מתאים לזוגות שרוצים יום חוף בלי המולה.</p>
                     <div class="space-y-2.5 flex-1 text-sm text-gray-700">
                         <p class="flex items-start gap-2 bg-gray-50 p-2 rounded-lg"><span class="text-blue-500 mt-0.5">🍳</span><span><strong class="font-semibold text-gray-900">מומלץ:</strong> סלטים טריים, פיתות, סמוזי פירות, מרגריטה</span></p>
                         <p class="flex items-center gap-2"><span class="text-blue-500">🕒</span><span dir="ltr">10:00 - שקיעה</span></p>
@@ -5310,7 +5450,7 @@
                         <div class="bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs">
                             <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> חוף שקט ויפהפה, ערסלים חינם, אווירה בוהמיינית רגועה</p>
                             <p><span class="text-red-500 font-bold">❌</span> <strong>חסרונות:</strong> רחוק מהעיר (30 דק' נסיעה), סוגר מוקדם, תפריט מצומצם</p>
-                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מושלם ל:</strong> זוגות, מחפשי שלווה, יום ניתוק מהעולם</p>
+                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מתאים ל:</strong> זוגות, מחפשי שלווה, יום ניתוק מהעולם</p>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -5355,7 +5495,7 @@
                         <div class="bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs">
                             <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> אוכל ביתי מצוין, מנות גדולות, מחירים זולים, אווירה מקומית</p>
                             <p><span class="text-red-500 font-bold">❌</span> <strong>חסרונות:</strong> מקום קטן - ייתכן המתנה, ללא חניה בסביבה</p>
-                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מושלם ל:</strong> משפחות, תיירים שרוצים לאכול כמו מקומיים, תקציב נמוך</p>
+                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מתאים ל:</strong> משפחות, תיירים שרוצים לאכול כמו מקומיים, תקציב נמוך</p>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -5391,7 +5531,7 @@
                         <div class="bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs">
                             <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> מהיר, טעים, זול, מיקום מרכזי, מנות גדולות</p>
                             <p><span class="text-red-500 font-bold">❌</span> <strong>חסרונות:</strong> עמוס מאוד בשעות שיא, ישיבה מצומצמת</p>
-                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מושלם ל:</strong> משפחות עם ילדים, ארוחה מהירה בין סיורים, תקציב נמוך</p>
+                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מתאים ל:</strong> משפחות עם ילדים, ארוחה מהירה בין סיורים, תקציב נמוך</p>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -5424,9 +5564,9 @@
                             <span class="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">💎 האהוב על המקומיים</span>
                         </div>
                         <div class="bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs">
-                            <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> הבשר הכי טוב באי, מחירים עממיים, תוספות חינם, אווירה כפרית</p>
+                            <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> בשר איכותי, מחירים עממיים, תוספות חינם, אווירה כפרית</p>
                             <p><span class="text-red-500 font-bold">❌</span> <strong>חסרונות:</strong> לא על הים (באמצע האי), עיצוב פשוט, חובה רכב</p>
-                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מושלם ל:</strong> אוהבי בשר, משפחות, מי שמחפש את ה"אמיתי"</p>
+                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מתאים ל:</strong> אוהבי בשר, משפחות, מי שמחפש את ה"אמיתי"</p>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -5472,7 +5612,7 @@
                         <div class="bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs">
                             <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> מגוון טבעוני עצום, אווירה מקסימה, מוזיקה חיה, מחירים הוגנים</p>
                             <p><span class="text-red-500 font-bold">❌</span> <strong>חסרונות:</strong> סוגר ב-15:00 (ללא ארוחת ערב), מקום קטן</p>
-                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מושלם ל:</strong> טבעונים, צמחונים, ברנצ' בוקר יוצא דופן</p>
+                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מתאים ל:</strong> טבעונים, צמחונים, ברנצ' בוקר יוצא דופן</p>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -5508,7 +5648,7 @@
                         <div class="bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs">
                             <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> פתוח גם לארוחת ערב (בניגוד לביזו), מיקום מרכזי, תפריט מגוון</p>
                             <p><span class="text-red-500 font-bold">❌</span> <strong>חסרונות:</strong> מנות קטנות יחסית למחיר, ישיבה בכיכר עמוסה</p>
-                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מושלם ל:</strong> ארוחת ערב צמחונית/טבעונית, קבוצות מעורבות (יש גם לא-טבעוני)</p>
+                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מתאים ל:</strong> ארוחת ערב צמחונית/טבעונית, קבוצות מעורבות (יש גם לא-טבעוני)</p>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -5544,7 +5684,7 @@
                         <div class="bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs">
                             <p><span class="text-green-600 font-bold">✅</span> <strong>יתרונות:</strong> מנות גדולות, מחירים זולים, טעמים מוכרים לישראלים</p>
                             <p><span class="text-red-500 font-bold">❌</span> <strong>חסרונות:</strong> מקום קטן וצפוף, סגנון "מהיר" יותר מ"מסעדה"</p>
-                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מושלם ל:</strong> טבעונים, ישראלים שמתגעגעים לפאלאפל, ארוחה מהירה וזולה</p>
+                            <p><span class="text-blue-500 font-bold">🎯</span> <strong>מתאים ל:</strong> טבעונים, ישראלים שמתגעגעים לפאלאפל, ארוחה מהירה וזולה</p>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
@@ -5556,6 +5696,15 @@
     </div>
 
     </div>
+
+    <div class="section-next-steps">
+        <p>אלו כל 63 ההמלצות הקולינריות. יש גם 33 פנינים נסתרות פחות מוכרות, או חזרה למסלול לשבץ ארוחות בימים:</p>
+        <div class="flex flex-wrap justify-center gap-3">
+            <button onclick="switchTab('gems')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M6.5 8 9 3.5h6l2.5 4.5L12 20.5Z"/><path d="M6.5 8h11"/></svg></span> פנינים נסתרות</button>
+            <button onclick="switchTab('itinerary')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M9 4 4 6.5v13L9 17l6 2 5-2.5v-13L15 6 9 4Z"/><path d="M9 4v13M15 6v13"/></svg></span> מסלול</button>
+        </div>
+    </div>
+
 </section>
 <section id="attractions" class="tab-content space-y-8">
   <div class="section-hero-banner">
@@ -5563,8 +5712,8 @@
     <div class="section-hero-banner-overlay"></div>
     <span class="journey-chapter">04 — אטרקציות</span>
     <div class="section-hero-banner-content">
-      <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">האטרקציות המרכזיות של קורפו 🗺️</h2>
-      <p class="text-lg text-white/90 max-w-3xl mx-auto">ממבצרים ונציאניים ועד חופים נסתרים, קורפו מציעה מגוון אינסופי. הנה 40 האטרקציות שחובה להכיר.</p>
+      <h2 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight">האטרקציות המרכזיות של קורפו 🗺️</h2>
+      <p class="text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto">ממבצרים ונציאניים ועד חופים נסתרים, קורפו מציעה מגוון אינסופי. הנה 40 האטרקציות שחובה להכיר.</p>
     </div>
   </div>
 
@@ -5587,7 +5736,7 @@
     </div>
     <p id="attr-filter-count" class="text-xs text-gray-400 mt-3" aria-live="polite">מציג את כל 40 האטרקציות</p>
     <div id="attractions-empty-state" class="hidden text-center py-10">
-        <p class="text-4xl mb-3">📸</p>
+        <div class="empty-state-icon"><svg class="icon-line" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.3-2.5h5.4L16 7"/><circle cx="12" cy="13.5" r="3.3"/></svg></div>
         <p class="text-gray-600 font-semibold mb-3">לא נמצאו אטרקציות התואמות את הסינון</p>
         <button onclick="filterAttractions('all')" class="attr-filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">נקו את הסינון</button>
     </div>
@@ -5763,7 +5912,7 @@
         <details class="group bg-blue-50/50 rounded border border-blue-100">
           <summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע נוסף וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary>
           <div class="p-2 pt-0 text-xs text-gray-700 space-y-2">
-            <p><b class="text-blue-800">ייחוד:</b> שילוב מושלם של אווירה יוונית אותנטית ותיירות יוקרה שקטה.</p>
+            <p><b class="text-blue-800">ייחוד:</b> שילוב של אווירה יוונית אותנטית ותיירות יוקרה שקטה.</p>
             <p><b class="text-orange-800">טיפ:</b> שלבו ארוחת ערב בנמל עם טיול רגלי קצר למבצר קסיופי לתצפית נהדרת.</p>
             <p><b class="text-green-800">ציוד:</b> ביגוד נינוח לערב.</p>
             <p><b class="text-purple-800">שווה?</b> מומלץ מאוד כבסיס טיול בצפון האי או לארוחת ערב רומנטית.</p>
@@ -5786,7 +5935,7 @@
           <summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע נוסף וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary>
           <div class="p-2 pt-0 text-xs text-gray-700 space-y-2">
             <p><b class="text-blue-800">ייחוד:</b> האתר המזוהה ביותר עם קורפו. נמצא ממש בקצה מסלול הנחיתה של שדה התעופה!</p>
-            <p><b class="text-orange-800">טיפ:</b> שבו בבית הקפה Kanoni למעלה לתצפית מושלמת, וצפו במטוסים הנוחתים ממש מעל הראש שלכם.</p>
+            <p><b class="text-orange-800">טיפ:</b> שבו בבית הקפה Kanoni למעלה לתצפית נוחה, וצפו במטוסים הנוחתים ממש מעל הראש שלכם.</p>
             <p><b class="text-green-800">ציוד:</b> מצלמה חובה.</p>
             <p><b class="text-purple-800">שווה?</b> אי אפשר לפספס את תמונת החובה של האי.</p>
             <div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Vlacherna+Monastery" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div>
@@ -5873,7 +6022,7 @@
         <details class="group bg-blue-50/50 rounded border border-blue-100">
           <summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע נוסף וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary>
           <div class="p-2 pt-0 text-xs text-gray-700 space-y-2">
-            <p><b class="text-blue-800">ייחוד:</b> מקום מושלם ומוסדר לצפות בשקיעה שוקעת ישירות לתוך הים תוך לגימת קוקטייל.</p>
+            <p><b class="text-blue-800">ייחוד:</b> מקום נוח ומסודר לצפות בשקיעה שוקעת ישירות לתוך הים תוך לגימת קוקטייל.</p>
             <p><b class="text-orange-800">טיפ:</b> שבו ב-7th Heaven Bar שיש לו פלטפורמת זכוכית תלויה באוויר לתמונות אינסטגרם משוגעות.</p>
             <p><b class="text-purple-800">שווה?</b> אם אתם באזור הצפון-מערבי לקראת ערב, אל תפספסו.</p>
             <div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Loggas+Beach" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div>
@@ -5908,7 +6057,7 @@
       <div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/beach,mountains?lock=15" alt="Agios Gordios" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 8.7</span></div>
       <div class="p-4 flex-grow space-y-3">
         <h3 class="text-lg font-bold text-gray-900">15. חוף אגיוס גורדיוס 🏖️</h3>
-        <p class="text-gray-600 text-sm">מפרץ מדהים עם חוף חולי ארוך המוקף בהרים ירוקים עטורי עצי זית, וסלע ייחודי ענק (Ortholithi) המזדקר מהים.</p>
+        <p class="text-gray-600 text-sm">מפרץ עם חוף חולי ארוך המוקף בהרים ירוקים עטורי עצי זית, וסלע ייחודי ענק (Ortholithi) המזדקר מהים.</p>
         <div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded">
           <p>⏱️ <b>משך:</b> חצי יום-יום שלם</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> משפחות, זוגות</p><p>🌡️ <b>עומס:</b> גבוה בקיץ</p><p>🌅 <b>זמן:</b> בוקר או צהריים</p>
         </div>
@@ -5972,10 +6121,10 @@
     <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col premium-card" data-id="attr-18" data-tags="history"><div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/villa,garden?lock=18" alt="Durrells House" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 8.5</span></div><div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">18. הבית של משפחת דארל (קלאמי) 🏠</h3><p class="text-gray-600 text-sm">הבית המפורסם מהסדרה והספרים "משפחתי וחיות אחרות", שוכן במפרץ קלאמי הקסום.</p><div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded"><p>⏱️ <b>משך:</b> שעה-שעתיים</p><p>💰 <b>מחיר:</b> חינם (מבחוץ)</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> מעריצי הסדרה</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> בוקר</p></div><details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700 space-y-2"><p><b class="text-blue-800">ייחוד:</b> היסטוריה תרבותית מרתקת. הבית משמש כיום כוילה להשכרה וטברנה.</p><p><b class="text-orange-800">טיפ:</b> שבו לארוחה בטברנה של הבית הלבן על קו המים.</p><p><b class="text-purple-800">שווה?</b> כן, גם בזכות חוף קלאמי היפהפה.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=The+White+House+Kalami" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div></div></details></div></article>
 
     <!-- 19 -->
-    <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col premium-card" data-id="attr-19" data-tags="history"><div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/palace,royal-garden?lock=19" alt="Mon Repos" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 8.2</span></div><div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">19. ארמון מון רפוס (Mon Repos) 🏛️</h3><p class="text-gray-600 text-sm">וילה ניאוקלאסית בפאתי העיר קורפו, מקום הולדתו של הנסיך פיליפ (בעלה של מלכת אנגליה).</p><div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded"><p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> 4 אירו</p><p>🕒 <b>שעות:</b> 08:00-20:00</p><p>👥 <b>למי:</b> חובבי היסטוריה</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> בוקר או אחה"צ</p></div><details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700 space-y-2"><p><b class="text-blue-800">ייחוד:</b> האחוזה מוקפת בפארק ירוק ועתיק, ויש בה מוזיאון ארכיאולוגי קטן.</p><p><b class="text-orange-800">טיפ:</b> הגנים גדולים ומוצלים, מושלם למפלט ביום חם.</p><p><b class="text-purple-800">שווה?</b> נחמד, אך אל תצפו לפאר של ארמון אכיליון.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Mon+Repos+Palace" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div></div></details></div></article>
+    <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col premium-card" data-id="attr-19" data-tags="history"><div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/palace,royal-garden?lock=19" alt="Mon Repos" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 8.2</span></div><div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">19. ארמון מון רפוס (Mon Repos) 🏛️</h3><p class="text-gray-600 text-sm">וילה ניאוקלאסית בפאתי העיר קורפו, מקום הולדתו של הנסיך פיליפ (בעלה של מלכת אנגליה).</p><div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded"><p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> 4 אירו</p><p>🕒 <b>שעות:</b> 08:00-20:00</p><p>👥 <b>למי:</b> חובבי היסטוריה</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> בוקר או אחה"צ</p></div><details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700 space-y-2"><p><b class="text-blue-800">ייחוד:</b> האחוזה מוקפת בפארק ירוק ועתיק, ויש בה מוזיאון ארכיאולוגי קטן.</p><p><b class="text-orange-800">טיפ:</b> הגנים גדולים ומוצלים - נעים במיוחד ביום חם.</p><p><b class="text-purple-800">שווה?</b> נחמד, אך אל תצפו לפאר של ארמון אכיליון.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Mon+Repos+Palace" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div></div></details></div></article>
 
     <!-- 20 -->
-    <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col premium-card" data-id="attr-20" data-tags="nature"><div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/viewpoint,sunset?lock=20" alt="Kaisers Throne" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 8.8</span></div><div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">20. תצפית הקייזר (Pelekas) 🌅</h3><p class="text-gray-600 text-sm">מצפה בראש הכפר פלקאס, שם נהג הקיסר וילהלם השני לצפות בשקיעות המפורסמות.</p><div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded"><p>⏱️ <b>משך:</b> חצי שעה</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> רומנטיקנים, זוגות</p><p>🌡️ <b>עומס:</b> גבוה בשקיעה</p><p>🌅 <b>זמן:</b> שקיעה</p></div><details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700 space-y-2"><p><b class="text-blue-800">ייחוד:</b> תצפית של 360 מעלות על כל האי קורפו.</p><p><b class="text-orange-800">טיפ:</b> אחרי השקיעה, שוטטו בסמטאות של הכפר פלקאס (Pelekas) הסמוך.</p><p><b class="text-purple-800">שווה?</b> מדהים. התצפית הטובה באי בקלות הנגישות שלה.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Kaiser+Throne+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div></div></details></div></article>
+    <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col premium-card" data-id="attr-20" data-tags="nature"><div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/viewpoint,sunset?lock=20" alt="Kaisers Throne" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 8.8</span></div><div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">20. תצפית הקייזר (Pelekas) 🌅</h3><p class="text-gray-600 text-sm">מצפה בראש הכפר פלקאס, שם נהג הקיסר וילהלם השני לצפות בשקיעות המפורסמות.</p><div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded"><p>⏱️ <b>משך:</b> חצי שעה</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> רומנטיקנים, זוגות</p><p>🌡️ <b>עומס:</b> גבוה בשקיעה</p><p>🌅 <b>זמן:</b> שקיעה</p></div><details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700 space-y-2"><p><b class="text-blue-800">ייחוד:</b> תצפית של 360 מעלות על כל האי קורפו.</p><p><b class="text-orange-800">טיפ:</b> אחרי השקיעה, שוטטו בסמטאות של הכפר פלקאס (Pelekas) הסמוך.</p><p><b class="text-purple-800">שווה?</b> כן. מהתצפיות הטובות באי, וקלה לגישה.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Kaiser+Throne+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div></div></details></div></article>
 
     <!-- 21 -->
     <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col premium-card" data-id="attr-21" data-tags="nature"><div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/lagoon,flamingo?lock=21" alt="Korission Lake" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 8.4</span></div><div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">21. אגם קוריסיון 🦩</h3><p class="text-gray-600 text-sm">לגונה גדולה ומוגנת בדרום האי, מופרדת מהים על ידי דיונות חול. גן עדן לצפרים, כולל להקות פלמינגו בעונות המעבר.</p><div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded"><p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> חובבי טבע</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> בוקר מוקדם או ערב</p></div><details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700 space-y-2"><p><b class="text-blue-800">ייחוד:</b> מערכת אקולוגית שונה לגמרי משאר האי.</p><p><b class="text-orange-800">טיפ:</b> שלבו עם ביקור בחוף איסוס הצמוד (Issos Beach) הידוע כדיונות חול עצומות.</p><p><b class="text-purple-800">שווה?</b> לחובבי הליכות בטבע ולצפרים.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Lake+Korission" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div></div></details></div></article>
@@ -5987,13 +6136,13 @@
     <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col premium-card" data-id="attr-23" data-tags="history"><div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/museum,artifacts?lock=23" alt="Asian Art Museum" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 8.6</span></div><div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">23. המוזיאון לאמנות אסייתית 🏺</h3><p class="text-gray-600 text-sm">המוזיאון היחיד ביוון שמוקדש לאמנות אסייתית, ממוקם בתוך ארמון סנט מייקל וסנט ג'ורג' המרהיב בעיר העתיקה.</p><div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded"><p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> 6 אירו</p><p>🕒 <b>שעות:</b> 08:30-15:30</p><p>👥 <b>למי:</b> חובבי תרבות ואמנות</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> צהריים (ממוזג!)</p></div><details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700 space-y-2"><p><b class="text-blue-800">ייחוד:</b> אוסף נדיר של כ-15,000 פריטים מסין, יפן והודו.</p><p><b class="text-orange-800">טיפ:</b> מבנה הארמון עצמו מרהיב לא פחות מהתערוכות. אל תפספסו את הגנים האחוריים המשקיפים לים.</p><p><b class="text-purple-800">שווה?</b> מפלט תרבותי (וקריר) מצוין בעיר.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Museum+of+Asian+Art+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div></div></details></div></article>
 
     <!-- 24 -->
-    <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col premium-card" data-id="attr-24" data-tags="history"><div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/orthodox-church,bells?lock=24" alt="Agios Spyridon" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 9.1</span></div><div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">24. כנסיית ספירידון הקדוש ⛪</h3><p class="text-gray-600 text-sm">הכנסייה החשובה באי, בה נשמרים שרידי הקדוש המגן של קורפו. מגדל הפעמונים שלה הוא הגבוה באי וסמל העיר.</p><div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded"><p>⏱️ <b>משך:</b> חצי שעה</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 08:00-20:00</p><p>👥 <b>למי:</b> כולם</p><p>🌡️ <b>עומס:</b> גבוה</p><p>🌅 <b>זמן:</b> בוקר</p></div><details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700 space-y-2"><p><b class="text-blue-800">ייחוד:</b> הלב הרוחני של קורפו; תקרת הכנסייה מצוירת בסגנון רנסנס מדהים.</p><p><b class="text-orange-800">טיפ:</b> כבדו את המקומיים ואת קוד הלבוש. לעיתים ניתן לגשת ולנשק את ארון הכסף של הקדוש.</p><p><b class="text-purple-800">שווה?</b> נקודת ציון מרכזית, אי אפשר לפספס כשמטיילים בעיר העתיקה.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Saint+Spyridon+Church+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div></div></details></div></article>
+    <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col premium-card" data-id="attr-24" data-tags="history"><div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/orthodox-church,bells?lock=24" alt="Agios Spyridon" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 9.1</span></div><div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">24. כנסיית ספירידון הקדוש ⛪</h3><p class="text-gray-600 text-sm">הכנסייה החשובה באי, בה נשמרים שרידי הקדוש המגן של קורפו. מגדל הפעמונים שלה הוא הגבוה באי וסמל העיר.</p><div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded"><p>⏱️ <b>משך:</b> חצי שעה</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 08:00-20:00</p><p>👥 <b>למי:</b> כולם</p><p>🌡️ <b>עומס:</b> גבוה</p><p>🌅 <b>זמן:</b> בוקר</p></div><details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700 space-y-2"><p><b class="text-blue-800">ייחוד:</b> הלב הרוחני של קורפו; תקרת הכנסייה מצוירת בסגנון רנסנס מרשים.</p><p><b class="text-orange-800">טיפ:</b> כבדו את המקומיים ואת קוד הלבוש. לעיתים ניתן לגשת ולנשק את ארון הכסף של הקדוש.</p><p><b class="text-purple-800">שווה?</b> נקודת ציון מרכזית, אי אפשר לפספס כשמטיילים בעיר העתיקה.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Saint+Spyridon+Church+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div></div></details></div></article>
 
     <!-- 25 -->
     <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col premium-card" data-id="attr-25" data-tags="food"><div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/town-square,cafe?lock=25" alt="Spianada Square" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 9.3</span></div><div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">25. כיכר ספיאנאדה וליסטון ☕</h3><p class="text-gray-600 text-sm">הכיכר הגדולה ביותר ביוון! מצדה האחד טיילת ליסטון האלגנטית בהשראת פריז, ומצדה השני מגרש קריקט ירוק.</p><div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded"><p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> חינם (בתי קפה יקרים)</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> כולם</p><p>🌡️ <b>עומס:</b> גבוה בערב</p><p>🌅 <b>זמן:</b> ערב</p></div><details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700 space-y-2"><p><b class="text-blue-800">ייחוד:</b> המקום לראות ולהיראות בקורפו. ארכיטקטורה צרפתית ייחודית.</p><p><b class="text-orange-800">טיפ:</b> בתי הקפה בליסטון יקרים, אבל לשבת שם על פרפה (קפה יווני קר) בערב זו חוויה חובה.</p><p><b class="text-purple-800">שווה?</b> המרכז התוסס של העיר, חובה.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Spianada+Square+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div></div></details></div></article>
 
     <!-- 26 -->
-    <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col premium-card" data-id="attr-26" data-tags="beach"><div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/turquoise-cove,pebbles?lock=26" alt="Rovinia Beach" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 9.0</span></div><div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">26. חוף רוביניה (Rovinia) 🏖️</h3><p class="text-gray-600 text-sm">פנינה נסתרת באזור פלאוקסטריצה, חוף חלוקי נחל בוהק המוקף צוקים ירוקים, נגיש רק בהליכה קצרה או בסירה.</p><div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded"><p>⏱️ <b>משך:</b> חצי יום</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> אוהבי שקט וטבע</p><p>🌡️ <b>עומס:</b> נמוך-בינוני</p><p>🌅 <b>זמן:</b> בוקר מוקדם</p></div><details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700 space-y-2"><p><b class="text-blue-800">ייחוד:</b> טבעי לחלוטין ללא מיטות שיזוף או טברנות מסחריות (לפעמים סירת גלידה קטנה עוברת).</p><p><b class="text-orange-800">טיפ:</b> ההליכה מהחניה לוקחת כ-10 דקות במורד השביל. המים קפואים ועמוקים ומושלמים לשנורקלינג.</p><p><b class="text-purple-800">שווה?</b> מדהים למי שרוצה לברוח מההמונים של החופים המאורגנים.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Rovinia+Beach+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div></div></details></div></article>
+    <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col premium-card" data-id="attr-26" data-tags="beach"><div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/turquoise-cove,pebbles?lock=26" alt="Rovinia Beach" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 9.0</span></div><div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">26. חוף רוביניה (Rovinia) 🏖️</h3><p class="text-gray-600 text-sm">פנינה נסתרת באזור פלאוקסטריצה, חוף חלוקי נחל בוהק המוקף צוקים ירוקים, נגיש רק בהליכה קצרה או בסירה.</p><div class="grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded"><p>⏱️ <b>משך:</b> חצי יום</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> אוהבי שקט וטבע</p><p>🌡️ <b>עומס:</b> נמוך-בינוני</p><p>🌅 <b>זמן:</b> בוקר מוקדם</p></div><details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע וטיפים 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700 space-y-2"><p><b class="text-blue-800">ייחוד:</b> טבעי לחלוטין ללא מיטות שיזוף או טברנות מסחריות (לפעמים סירת גלידה קטנה עוברת).</p><p><b class="text-orange-800">טיפ:</b> ההליכה מהחניה לוקחת כ-10 דקות במורד השביל. המים קרים ועמוקים, טובים לשנורקלינג.</p><p><b class="text-purple-800">שווה?</b> כן, למי שרוצה לברוח מההמונים של החופים המאורגנים.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Rovinia+Beach+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50">🗺️ מפה</a></div></div></details></div></article>
 
     <!-- Add the rest similarly with fast tracking ... -->
     <!-- 27 to 40 logic to complete exactly 40 as requested -->
@@ -6041,7 +6190,7 @@
     <!-- 31-40 with condensed output to ensure complete file -->
     <article class="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition duration-300 premium-card" data-id="attr-31" data-tags="beach">
       <div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/sand-dunes,beach?lock=31" alt="חוף איסוס, קורפו" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 8.7</span></div>
-      <div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">31. חוף איסוס (Issos Beach) 🏜️</h3><p class="text-gray-600 text-sm">"הסהרה של קורפו". דיונות חול עצומות וזהובות המשתרעות עד קו מים רדוד ונעים, מושלם לגלישת עפיפונים (קייטסרפינג).</p>
+      <div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">31. חוף איסוס (Issos Beach) 🏜️</h3><p class="text-gray-600 text-sm">"הסהרה של קורפו". דיונות חול עצומות וזהובות המשתרעות עד קו מים רדוד ונעים, מתאים לגלישת עפיפונים (קייטסרפינג).</p>
       <details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע נוסף 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700"><p><b class="text-orange-800">טיפ:</b> אידיאלי לצפייה בשקיעה ישירות על החול. יש הרבה יתושים ליד אגם קוריסיון הסמוך בערב.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Issos+Beach+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50 text-xs">🗺️ מפה</a></div></div></details></div>
     </article>
 
@@ -6053,14 +6202,14 @@
 
     <article class="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition duration-300 premium-card" data-id="attr-33" data-tags="village">
       <div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/cove,fishing-boats?lock=33" alt="כפר הדייגים קולורה, קורפו" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 8.4</span></div>
-      <div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">33. כפר הדייגים קולורה 🛥️</h3><p class="text-gray-600 text-sm">המפרץ העגול והציורי ביותר בקורפו. מקום מפלט פסטורלי ומושלם לשחייה שקטה במים צלולים כבדולח.</p>
-      <details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע נוסף 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700"><p><b class="text-orange-800">טיפ:</b> התצפית הכי טובה על המפרץ היא מהכביש הראשי למעלה לפני הירידה אליו.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Kouloura+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50 text-xs">🗺️ מפה</a></div></div></details></div>
+      <div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">33. כפר הדייגים קולורה 🛥️</h3><p class="text-gray-600 text-sm">המפרץ העגול והציורי ביותר בקורפו. מקום מפלט פסטורלי, טוב לשחייה שקטה במים צלולים כבדולח.</p>
+      <details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע נוסף 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700"><p><b class="text-orange-800">טיפ:</b> יש תצפית נוחה על המפרץ מהכביש הראשי למעלה, לפני הירידה אליו.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Kouloura+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50 text-xs">🗺️ מפה</a></div></div></details></div>
     </article>
 
     <article class="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition duration-300 premium-card" data-id="attr-34" data-tags="beach">
       <div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/pebble-beach,olive-trees?lock=34" alt="חוף קרסיה, קורפו" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 8.6</span></div>
       <div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">34. חוף קרסיה (Kerasia) 🌲</h3><p class="text-gray-600 text-sm">חוף חלוקים ארוך ואלגנטי מוקף עצי זית שמגיעים עד למים. נחשב לאחד החופים היוקרתיים והשקטים במזרח.</p>
-      <details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע נוסף 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700"><p><b class="text-orange-800">טיפ:</b> הביאו נעלי מים (חלוקים גדולים), מושלם לקריאת ספר בשקט מוחלט.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Kerasia+Beach+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50 text-xs">🗺️ מפה</a></div></div></details></div>
+      <details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע נוסף 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700"><p><b class="text-orange-800">טיפ:</b> הביאו נעלי מים (חלוקים גדולים) - נעים לקריאת ספר בשקט מוחלט.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Kerasia+Beach+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50 text-xs">🗺️ מפה</a></div></div></details></div>
     </article>
 
     <article class="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition duration-300 premium-card" data-id="attr-35" data-tags="nature">
@@ -6090,7 +6239,7 @@
     <article class="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition duration-300 premium-card" data-id="attr-39" data-tags="beach">
       <div class="h-48 relative premium-card-image"><img src="https://loremflickr.com/600/400/pebble-beach,mountains?lock=39" alt="חוף ברבאטי, קורפו" class="w-full h-full object-cover" loading="lazy" decoding="async"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-3 left-3 text-white bg-black/30 hover:bg-red-500 w-8 h-8 rounded-full transition duration-300 flex items-center justify-center text-base" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button><span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow">ציון: 8.8</span></div>
       <div class="p-4 flex-grow space-y-3"><h3 class="text-lg font-bold text-gray-900">39. חוף ברבאטי (Barbati) 🏖️</h3><p class="text-gray-600 text-sm">חוף חלוקים יפהפה למרגלות הר פנטוקראטור, מציע מים צלולים וברים תוססים על קו החוף עם מיטות מפנקות.</p>
-      <details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע נוסף 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700"><p><b class="text-orange-800">טיפ:</b> אחד החופים המאורגנים הטובים ביותר, מתאים מאוד למי שאוהב שירות למזרן וקוקטיילים טובים.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Barbati+Beach+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50 text-xs">🗺️ מפה</a></div></div></details></div>
+      <details class="group bg-blue-50/50 rounded border border-blue-100"><summary class="font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between">מידע נוסף 💡 <span class="group-open:rotate-180 transition">▼</span></summary><div class="p-2 pt-0 text-xs text-gray-700"><p><b class="text-orange-800">טיפ:</b> חוף מאורגן ונוח, מתאים מאוד למי שאוהב שירות למזרן וקוקטיילים טובים.</p><div class="flex gap-2 mt-2"><a href="https://maps.google.com/?q=Barbati+Beach+Corfu" target="_blank" class="bg-white border px-2 py-1 rounded hover:bg-gray-50 text-xs">🗺️ מפה</a></div></div></details></div>
     </article>
 
     <article class="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition duration-300 premium-card" data-id="attr-40" data-tags="family">
@@ -6100,6 +6249,15 @@
     </article>
 
   </div>
+
+  <div class="section-next-steps">
+    <p>אלו 40 האטרקציות המרכזיות. מי שמחפש משהו פחות מוכר יכול לעבור לפנינים הנסתרות:</p>
+    <div class="flex flex-wrap justify-center gap-3">
+      <button onclick="switchTab('gems')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M6.5 8 9 3.5h6l2.5 4.5L12 20.5Z"/><path d="M6.5 8h11"/></svg></span> פנינים נסתרות</button>
+      <button onclick="switchTab('itinerary')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M9 4 4 6.5v13L9 17l6 2 5-2.5v-13L15 6 9 4Z"/><path d="M9 4v13M15 6v13"/></svg></span> מסלול</button>
+    </div>
+  </div>
+
 </section>
 <section id="gems" class="tab-content space-y-8">
   <div dir="rtl" class="space-y-12 px-4 py-8 max-w-7xl mx-auto font-sans">
@@ -6110,10 +6268,10 @@
       <div class="section-hero-banner-overlay"></div>
       <span class="journey-chapter">05 — פנינים נסתרות</span>
       <div class="section-hero-banner-content">
-        <h2 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-[#e8c887] drop-shadow-sm">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-[#e8c887] drop-shadow-sm tracking-tight">
           הפנינים הנסתרות של קורפו
         </h2>
-        <p class="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+        <p class="text-lg md:text-xl text-white/90 max-w-4xl mx-auto leading-relaxed">
           מעבר לחופים המוכרים ולמוקדי התיירות ההומים, קורפו שומרת בסוד עשרות אוצרות מרתקים. חופים נסתרים, כפרים שנשכחו בזמן, מערות דרמטיות וטברנות מקומיות שרק מעטים זוכים להכיר. הנה 33 פנינים שיהפכו את הטיול שלכם לבלתי נשכח.
         </p>
       </div>
@@ -6139,7 +6297,7 @@
       </div>
       <p id="gem-filter-count" class="text-xs text-gray-400 mt-3" aria-live="polite">מציג את כל 33 הפנינים</p>
       <div id="gems-empty-state" class="hidden text-center py-10">
-          <p class="text-4xl mb-3">💎</p>
+          <div class="empty-state-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M6.5 8 9 3.5h6l2.5 4.5L12 20.5Z"/><path d="M6.5 8h11"/></svg></div>
           <p class="text-gray-600 font-semibold mb-3">לא נמצאו פנינים התואמות את הסינון</p>
           <button onclick="filterGems('all')" class="gem-filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">נקו את הסינון</button>
       </div>
@@ -6363,7 +6521,7 @@
               <span class="transition-transform group-open/accordion:rotate-180">▼</span>
             </summary>
             <div class="pt-2 text-sm text-slate-600 leading-relaxed mt-1">
-              💡 מהכפר יוצא השביל היורד ל"פורטו טימוני" (Porto Timoni), אך הכפר עצמו מהווה מוקד מושלם לשתות פרפה קר מול הנוף.
+              💡 מהכפר יוצא השביל היורד ל"פורטו טימוני" (Porto Timoni), אך הכפר עצמו מקום נעים לשתות פרפה קר מול הנוף.
             </div>
           </details>
           <a href="https://maps.google.com/?q=Afionas+Corfu" target="_blank" class="mt-auto flex items-center justify-center gap-2 bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
@@ -6383,7 +6541,7 @@
         <div class="p-6 flex flex-col flex-grow">
           <h3 class="text-2xl font-bold text-slate-800 mb-2">אמבלונאס קורפו (Ambelonas)</h3>
           <p class="text-slate-600 text-sm leading-relaxed mb-4 flex-grow">
-            חווה אקולוגית ויקב פסטורלי, שם תוכלו ליהנות מארוחות קורפיריות מהחווה-לשולחן המוכנות מחומרי גלם מקומיים ומסורתיים באווירת גן מושלמת.
+            חווה אקולוגית ויקב פסטורלי, שם תוכלו ליהנות מארוחות קורפיריות מהחווה-לשולחן המוכנות מחומרי גלם מקומיים ומסורתיים באווירת גן נעימה.
           </p>
           <details class="mb-5 group/accordion bg-slate-50 rounded-xl p-3 border border-slate-100">
             <summary class="cursor-pointer font-semibold text-teal-700 hover:text-teal-900 flex items-center justify-between outline-none text-sm">
@@ -6475,7 +6633,7 @@
               <span class="transition-transform group-open/accordion:rotate-180">▼</span>
             </summary>
             <div class="pt-2 text-sm text-slate-600 leading-relaxed mt-1">
-              💡 אפשר לרדת ברגל מהמנזר אל חוף ארקודילאס. זה חוף פראי, לעיתים סוער, וריק לחלוטין מאדם – מושלם לאלו המחפשים ניתוק מוחלט.
+              💡 אפשר לרדת ברגל מהמנזר אל חוף ארקודילאס. זה חוף פראי, לעיתים סוער, וריק לחלוטין מאדם – מתאים לאלו המחפשים ניתוק מוחלט.
             </div>
           </details>
           <a href="https://maps.google.com/?q=Arkoudilas+Corfu" target="_blank" class="mt-auto flex items-center justify-center gap-2 bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
@@ -6559,7 +6717,7 @@
               <span class="transition-transform group-open/accordion:rotate-180">▼</span>
             </summary>
             <div class="pt-2 text-sm text-slate-600 leading-relaxed mt-1">
-              💡 חובה להזמין שולחן מראש. בקשו לטעום את ה-"בורדטו" (תבשיל דגים פיקנטי קורפירי) – הטוב ביותר בעיר.
+              💡 חובה להזמין שולחן מראש. בקשו לטעום את ה-"בורדטו" (תבשיל דגים פיקנטי קורפירי) – מהמומלצים בעיר.
             </div>
           </details>
           <a href="https://maps.google.com/?q=Marina's+Tavern+Corfu" target="_blank" class="mt-auto flex items-center justify-center gap-2 bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
@@ -6635,7 +6793,7 @@
         <div class="p-6 flex flex-col flex-grow">
           <h3 class="text-2xl font-bold text-slate-800 mb-2">חוף אקולי (Akoli Beach)</h3>
           <p class="text-slate-600 text-sm leading-relaxed mb-4 flex-grow">
-            ממוקם באזור שמורת ארימיטיס. הים שם מתעמק מהר יחסית, מה שהופך את המים לצלולים להדהים ומושלמים לשנורקלינג בבדידות מוחלטת.
+            ממוקם באזור שמורת ארימיטיס. הים שם מתעמק מהר יחסית, מה שהופך את המים לצלולים במיוחד, וטובים לשנורקלינג בבדידות מוחלטת.
           </p>
           <details class="mb-5 group/accordion bg-slate-50 rounded-xl p-3 border border-slate-100">
             <summary class="cursor-pointer font-semibold text-teal-700 hover:text-teal-900 flex items-center justify-between outline-none text-sm">
@@ -6719,7 +6877,7 @@
         <div class="p-6 flex flex-col flex-grow">
           <h3 class="text-2xl font-bold text-slate-800 mb-2">חוף לימני, גליקו (Limni Beach)</h3>
           <p class="text-slate-600 text-sm leading-relaxed mb-4 flex-grow">
-            חוף מדהים בתצורת טומבולו (Tombolo) - רצועת יבשה המחברת בין אי זעיר אל החוף המרכזי ויוצרת למעשה שני חופים קטנים גב-אל-גב עם מים שטוחים לחלוטין.
+            חוף בתצורת טומבולו (Tombolo) - רצועת יבשה המחברת בין אי זעיר אל החוף המרכזי ויוצרת למעשה שני חופים קטנים גב-אל-גב עם מים שטוחים לחלוטין.
           </p>
           <details class="mb-5 group/accordion bg-slate-50 rounded-xl p-3 border border-slate-100">
             <summary class="cursor-pointer font-semibold text-teal-700 hover:text-teal-900 flex items-center justify-between outline-none text-sm">
@@ -6783,7 +6941,7 @@
               <span class="transition-transform group-open/accordion:rotate-180">▼</span>
             </summary>
             <div class="pt-2 text-sm text-slate-600 leading-relaxed mt-1">
-              💡 נסו את העוגות הביתיות הנאפות במקום מדי בוקר. זה מקום מושלם לעצור בו למנוחה בדרך אל אזור פנטוקרטור.
+              💡 נסו את העוגות הביתיות הנאפות במקום מדי בוקר. זה מקום נעים לעצור בו למנוחה בדרך אל אזור פנטוקרטור.
             </div>
           </details>
           <a href="https://maps.google.com/?q=Klimatia+Corfu" target="_blank" class="mt-auto flex items-center justify-center gap-2 bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
@@ -6923,7 +7081,7 @@
               <span class="transition-transform group-open/accordion:rotate-180">▼</span>
             </summary>
             <div class="pt-2 text-sm text-slate-600 leading-relaxed mt-1">
-              💡 מושלם לבילוי של אחר הצהריים שגולש לתוך הלילה. המוזיקה כאן מצוינת והמחירים זולים משמעותית ממועדוני החוף שבצפון האי.
+              💡 טוב לבילוי של אחר הצהריים שגולש לתוך הלילה. המוזיקה כאן מצוינת והמחירים זולים משמעותית ממועדוני החוף שבצפון האי.
             </div>
           </details>
           <a href="https://maps.google.com/?q=Micro+Nisi+Corfu" target="_blank" class="mt-auto flex items-center justify-center gap-2 bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
@@ -7035,7 +7193,7 @@
               <span class="transition-transform group-open/accordion:rotate-180">▼</span>
             </summary>
             <div class="pt-2 text-sm text-slate-600 leading-relaxed mt-1">
-              💡 חפשו פיצול קטן ימינה (כשעומדים עם הפנים למפרץ הכפול) המטפס למעלה לתוך הסבך. לאחר כ-10 דקות תגיעו לעמדת הצילום המושלמת והריקה מאדם.
+              💡 חפשו פיצול קטן ימינה (כשעומדים עם הפנים למפרץ הכפול) המטפס למעלה לתוך הסבך. לאחר כ-10 דקות תגיעו לעמדת צילום שקטה וריקה מאדם.
             </div>
           </details>
           <a href="https://maps.google.com/?q=Porto+Timoni+Corfu" target="_blank" class="mt-auto flex items-center justify-center gap-2 bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold py-2.5 px-4 rounded-xl transition-colors text-sm">
@@ -7074,15 +7232,24 @@
 
     </div>
   </div>
+
+  <div class="section-next-steps">
+    <p>אלו 33 הפנינים הנסתרות. לחזרה לרשימה המרכזית - האטרקציות או החופים:</p>
+    <div class="flex flex-wrap justify-center gap-3">
+      <button onclick="switchTab('attractions')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.3-2.5h5.4L16 7"/><circle cx="12" cy="13.5" r="3.3"/></svg></span> אטרקציות</button>
+      <button onclick="switchTab('beaches')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 18 0Z"/><path d="M12 12v7a2 2 0 0 1-2 2"/><path d="M12 3v2"/></svg></span> חופים</button>
+    </div>
+  </div>
+
 </section>
 <section id="activities" class="tab-content space-y-8">
   <div class="bg-gradient-to-br from-[#0a2f3d] to-[#1a7288] rounded-3xl p-8 lg:p-12 text-white shadow-2xl relative overflow-hidden">
     <div class="absolute top-0 right-0 w-full h-full bg-[url('https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=1200')] opacity-10 bg-cover bg-center"></div>
     <div class="relative z-10">
-      <h2 class="text-4xl lg:text-6xl font-black mb-6 flex items-center gap-4">
+      <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 flex items-center gap-4">
         <span>🎢</span> אטרקציות ופעילויות
       </h2>
-      <p class="text-lg lg:text-xl font-medium leading-relaxed max-w-4xl opacity-90">
+      <p class="text-lg md:text-xl font-medium leading-relaxed max-w-4xl opacity-90">
         האי קורפו מציע מגוון עצום של פעילויות שיהפכו את החופשה שלכם לבלתי נשכחת. 
         בין אם אתם חובבי אדרנלין שמחפשים לקרוע את השטח על טרקטורון, זוג רומנטי שרוצה להפליג לעבר השקיעה, 
         או משפחה שמעוניינת ביום כיף בפארק מים – יש כאן הכל. 
@@ -7096,8 +7263,8 @@
     <!-- 1. Boat Rentals -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-1"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/163872/italy-como-lake-como-boat-163872.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Boat rental" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/1482193/pexels-photo-1482193.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Sea waves" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/163872/italy-como-lake-como-boat-163872.jpeg?auto=compress&cs=tinysrgb&w=600" alt="השכרת סירה" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/1482193/pexels-photo-1482193.jpeg?auto=compress&cs=tinysrgb&w=600" alt="גלי הים" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <div class="flex justify-between items-start mb-4">
@@ -7105,7 +7272,7 @@
           <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide">Must Do</span>
         </div>
         <p class="text-gray-600 mb-6 leading-relaxed flex-1">
-          החוויה האולטימטיבית בקורפו! ביוון ניתן לשכור סירת מנוע (עד 30 כ"ס) ללא צורך ברישיון משיט. זו ההזדמנות שלכם להפוך לקפטנים ליום אחד, לחקור חופים נסתרים, מפרצונים שקטים ומערות שניתן להגיע אליהן רק מהים. השכירויות נפוצות מאוד באזור פלאוקסטריצה, קאסיאופי וניסאקי.
+          ביוון ניתן לשכור סירת מנוע (עד 30 כ"ס) ללא צורך ברישיון משיט. זו הזדמנות לנווט בעצמכם ליום אחד, לחקור חופים נסתרים, מפרצונים שקטים ומערות שניתן להגיע אליהן רק מהים. השכירויות נפוצות מאוד באזור פלאוקסטריצה, קאסיאופי וניסאקי.
         </p>
         
         <div class="flex flex-wrap gap-2 mb-6">
@@ -7138,8 +7305,8 @@
     <!-- 2. Cruises -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-2"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/872831/pexels-photo-872831.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Cruise ship" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/240526/pexels-photo-240526.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Sailing" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/872831/pexels-photo-872831.jpeg?auto=compress&cs=tinysrgb&w=600" alt="ספינת שיט" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/240526/pexels-photo-240526.jpeg?auto=compress&cs=tinysrgb&w=600" alt="שייט מפרשית" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">🚢 קרוזים והפלגות מאורגנות</h3>
@@ -7177,13 +7344,13 @@
     <!-- 3. Diving -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-3"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/879824/pexels-photo-879824.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Scuba Diving" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/3046637/pexels-photo-3046637.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Underwater" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/879824/pexels-photo-879824.jpeg?auto=compress&cs=tinysrgb&w=600" alt="צלילה" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/3046637/pexels-photo-3046637.jpeg?auto=compress&cs=tinysrgb&w=600" alt="מתחת למים" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">🤿 צלילת מיכלים (Scuba Diving)</h3>
         <p class="text-gray-600 mb-6 leading-relaxed flex-1">
-          המים הצלולים של הים היוני מציעים ראות נדירה מתחת למים. למרות שאין כאן שוניות אלמוגים כמו בים האדום, קורפו מתהדרת במערות תת-ימיות מרתקות, שרידי ספינות טרופות ותצורות סלע מדהימות. מושלם גם לצוללים מוסמכים וגם לאלו שרוצים לעשות "צלילת היכרות" ראשונה.
+          המים הצלולים של הים היוני מציעים ראות נדירה מתחת למים. למרות שאין כאן שוניות אלמוגים כמו בים האדום, קורפו מתהדרת במערות תת-ימיות מרתקות, שרידי ספינות טרופות ותצורות סלע מרשימות. מתאים גם לצוללים מוסמכים וגם לאלו שרוצים לעשות "צלילת היכרות" ראשונה.
         </p>
         
         <div class="flex flex-wrap gap-2 mb-6">
@@ -7216,8 +7383,8 @@
     <!-- 4. Snorkeling -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-4"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/273886/pexels-photo-273886.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Snorkeling" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/1320686/pexels-photo-1320686.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Snorkeling mask" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/273886/pexels-photo-273886.jpeg?auto=compress&cs=tinysrgb&w=600" alt="שנירקול" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/1320686/pexels-photo-1320686.jpeg?auto=compress&cs=tinysrgb&w=600" alt="מסכת שנירקול" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">🐠 שנורקלינג עצמאי ומודרך</h3>
@@ -7246,7 +7413,7 @@
             <span class="group-open/accordion:rotate-180 transition-transform duration-300">🔽</span>
           </summary>
           <div class="p-4 pt-0 text-gray-700 text-sm leading-relaxed border-t border-blue-100 mt-2">
-            החופים החוליים (כמו גליפאדה) גרועים לשנורקלינג בגלל שהחול מעכיר את המים ואין סלעים לדגים. חפשו חופים סלעיים כמו קאסיאופי, ניסאקי או פלאוקסטריצה לקבלת החוויה הטובה ביותר. היזהרו לא לדרוך על קיפודי ים!
+            החופים החוליים (כמו גליפאדה) גרועים לשנורקלינג בגלל שהחול מעכיר את המים ואין סלעים לדגים. חפשו חופים סלעיים כמו קאסיאופי, ניסאקי או פלאוקסטריצה לחוויית שנירקול טובה יותר. היזהרו לא לדרוך על קיפודי ים!
           </div>
         </details>
       </div>
@@ -7255,8 +7422,8 @@
     <!-- 5. Kayaks -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-5"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/270724/pexels-photo-270724.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kayaking" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/416676/pexels-photo-416676.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Sea kayak" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/270724/pexels-photo-270724.jpeg?auto=compress&cs=tinysrgb&w=600" alt="קיאקים" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/416676/pexels-photo-416676.jpeg?auto=compress&cs=tinysrgb&w=600" alt="קיאק ים" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">🛶 קיאקים ימיים וסאפ (SUP)</h3>
@@ -7294,8 +7461,8 @@
     <!-- 6. ATVs -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-6"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/11634885/pexels-photo-11634885.jpeg?auto=compress&cs=tinysrgb&w=600" alt="ATV riding" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/2307223/pexels-photo-2307223.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Buggy" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/11634885/pexels-photo-11634885.jpeg?auto=compress&cs=tinysrgb&w=600" alt="רכיבה על שטח" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/2307223/pexels-photo-2307223.jpeg?auto=compress&cs=tinysrgb&w=600" alt="באגי" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <div class="flex justify-between items-start mb-4">
@@ -7303,7 +7470,7 @@
           <span class="bg-orange-100 text-orange-700 text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide">אקסטרים</span>
         </div>
         <p class="text-gray-600 mb-6 leading-relaxed flex-1">
-          קורפו מלאה בשבילי עפר, כרמי זיתים וכפרים עתיקים שהדרך הכי טובה לחוות אותם היא על ארבעה גלגלים. השכרת טרקטורון (Quad) או באגי מאפשרת לכם חופש מוחלט לטפס לתצפיות הרריות ולהרגיש את הרוח. ניתן לשכור עצמאית או לצאת לספארי מודרך בשיירה.
+          קורפו מלאה בשבילי עפר, כרמי זיתים וכפרים עתיקים, ודרך נוחה לחוות אותם היא על ארבעה גלגלים. השכרת טרקטורון (Quad) או באגי מאפשרת לכם חופש מוחלט לטפס לתצפיות הרריות ולהרגיש את הרוח. ניתן לשכור עצמאית או לצאת לספארי מודרך בשיירה.
         </p>
         
         <div class="flex flex-wrap gap-2 mb-6">
@@ -7336,8 +7503,8 @@
     <!-- 7. Jeep Safari -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-7"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/3262534/pexels-photo-3262534.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Jeep safari" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/4616292/pexels-photo-4616292.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Offroad mountain" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/3262534/pexels-photo-3262534.jpeg?auto=compress&cs=tinysrgb&w=600" alt="ספארי ג'יפים" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/4616292/pexels-photo-4616292.jpeg?auto=compress&cs=tinysrgb&w=600" alt="שטח הררי" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">🚙 ספארי ג'יפים להר הפנטוקרטור</h3>
@@ -7375,13 +7542,13 @@
     <!-- 8. Horse Riding -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-8"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/2026131/pexels-photo-2026131.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Horse riding" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/1996332/pexels-photo-1996332.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Horses in nature" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/2026131/pexels-photo-2026131.jpeg?auto=compress&cs=tinysrgb&w=600" alt="רכיבה על סוסים" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/1996332/pexels-photo-1996332.jpeg?auto=compress&cs=tinysrgb&w=600" alt="סוסים בטבע" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">🐎 רכיבה על סוסים בטבע</h3>
         <p class="text-gray-600 mb-6 leading-relaxed flex-1">
-          חוויה פסטורלית ומרגיעה. חוות הסוסים בקורפו נמצאות ברובן בפנים האי, מוקפות בכרמי זיתים עתיקים וחורשות ירוקות. הסיורים מתנהלים בקצב הליכה איטי, מה שהופך אותם למושלמים גם לרוכבים חסרי ניסיון, לזוגות רומנטיים ולילדים קטנים.
+          חוויה פסטורלית ומרגיעה. חוות הסוסים בקורפו נמצאות ברובן בפנים האי, מוקפות בכרמי זיתים עתיקים וחורשות ירוקות. הסיורים מתנהלים בקצב הליכה איטי, מה שמתאים גם לרוכבים חסרי ניסיון, לזוגות רומנטיים ולילדים קטנים.
         </p>
         
         <div class="flex flex-wrap gap-2 mb-6">
@@ -7414,8 +7581,8 @@
     <!-- 9. Water Parks -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-9"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/1285060/pexels-photo-1285060.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Water park slides" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/1144687/pexels-photo-1144687.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Swimming pool" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/1285060/pexels-photo-1285060.jpeg?auto=compress&cs=tinysrgb&w=600" alt="מגלשות פארק מים" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/1144687/pexels-photo-1144687.jpeg?auto=compress&cs=tinysrgb&w=600" alt="בריכת שחייה" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <div class="flex justify-between items-start mb-4">
@@ -7456,8 +7623,8 @@
     <!-- 10. Water Sports -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-10"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/67826/parasailing-water-sports-florida-sunny-67826.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Parasailing" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/1559107/pexels-photo-1559107.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Jetski" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/67826/parasailing-water-sports-florida-sunny-67826.jpeg?auto=compress&cs=tinysrgb&w=600" alt="גלישה מונעת מטוס רוח" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/1559107/pexels-photo-1559107.jpeg?auto=compress&cs=tinysrgb&w=600" alt="אופנוע ים" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">🏄‍♂️ ספורט ימי ואקסטרים בחוף</h3>
@@ -7495,8 +7662,8 @@
     <!-- 11. Cooking Classes -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-11"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/3298641/pexels-photo-3298641.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Cooking Greek food" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Greek salad" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/3298641/pexels-photo-3298641.jpeg?auto=compress&cs=tinysrgb&w=600" alt="בישול אוכל יווני" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600" alt="סלט יווני" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">👨‍🍳 סדנאות בישול קורפיוטי ויווני</h3>
@@ -7534,8 +7701,8 @@
     <!-- 12. Wine Tasting -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-12"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/2903123/pexels-photo-2903123.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vineyard" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/2903125/pexels-photo-2903125.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Wine tasting" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/2903123/pexels-photo-2903123.jpeg?auto=compress&cs=tinysrgb&w=600" alt="כרם" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/2903125/pexels-photo-2903125.jpeg?auto=compress&cs=tinysrgb&w=600" alt="טעימת יין" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">🍷 טעימות יין ויקבים מקומיים</h3>
@@ -7573,8 +7740,8 @@
     <!-- 13. Olive Oil Tasting -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-13"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/4180860/pexels-photo-4180860.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Olive branch" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/4181048/pexels-photo-4181048.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Olive oil" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/4180860/pexels-photo-4180860.jpeg?auto=compress&cs=tinysrgb&w=600" alt="ענף זית" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/4181048/pexels-photo-4181048.jpeg?auto=compress&cs=tinysrgb&w=600" alt="שמן זית" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">🫒 סיור בתי בד וטעימות שמן זית</h3>
@@ -7603,7 +7770,7 @@
             <span class="group-open/accordion:rotate-180 transition-transform duration-300">🔽</span>
           </summary>
           <div class="p-4 pt-0 text-gray-700 text-sm leading-relaxed border-t border-blue-100 mt-2">
-            שמן זית מקורפו נחשב לבעל טעם פיקנטי-מריר חזק המעיד על איכותו הרפואית הגבוהה. אל תפספסו הזדמנות לקנות פחית או בקבוק איכותי ישירות מבית הבד למזכרת קולינרית מושלמת הביתה.
+            שמן זית מקורפו נחשב לבעל טעם פיקנטי-מריר חזק המעיד על איכותו הרפואית הגבוהה. אל תפספסו הזדמנות לקנות פחית או בקבוק איכותי ישירות מבית הבד כמזכרת קולינרית לבית.
           </div>
         </details>
       </div>
@@ -7612,8 +7779,8 @@
     <!-- 14. Hiking - The Corfu Trail -->
     <article class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card" data-id="activity-14"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 hover:bg-red-500 w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <img src="https://images.pexels.com/photos/934063/pexels-photo-934063.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pantokrator Mountain hiking view" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <img src="https://images.pexels.com/photos/3305096/pexels-photo-3305096.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Corfu countryside views" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/934063/pexels-photo-934063.jpeg?auto=compress&cs=tinysrgb&w=600" alt="נוף מטיילים בהר פנטוקרטור" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
+        <img src="https://images.pexels.com/photos/3305096/pexels-photo-3305096.jpeg?auto=compress&cs=tinysrgb&w=600" alt="נופי הכפר של קורפו" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
         <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">🥾 הליכה ומסלולי טרק - Corfu Trail</h3>
@@ -7656,12 +7823,20 @@
     </p>
   </div>
 
+  <div class="section-next-steps">
+    <p>לשילוב הפעילויות האלו במסלול, או לבדיקת מזג האוויר וטיפי נהיגה - עברו למידע המעשי:</p>
+    <div class="flex flex-wrap justify-center gap-3">
+      <button onclick="switchTab('itinerary')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M9 4 4 6.5v13L9 17l6 2 5-2.5v-13L15 6 9 4Z"/><path d="M9 4v13M15 6v13"/></svg></span> מסלול</button>
+      <button onclick="switchTab('shopping')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="m15 9-1.8 5.2L9 16l1.8-5.2Z"/></svg></span> מידע מעשי</button>
+    </div>
+  </div>
+
 </section>
 <section id="shopping" class="tab-content space-y-8" dir="rtl">
     <!-- Header -->
     <div class="text-center">
-        <h2 class="text-4xl font-extrabold text-gray-900 mb-4">מידע מעשי לתכנון הטיול 🧭</h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto">מזג אוויר ותקציב, תחבורה ונהיגה, קניות ושירותים יומיומיים, בריאות וחירום, שפה - וכל מה שצריך כדי להתנהל באי בביטחה ובנוחות כמו מקומי. השתמשו בתפריט הקפיצה למטה כדי לדלג ישר לנושא שמעניין אתכם.</p>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">מידע מעשי לתכנון הטיול 🧭</h2>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">מזג אוויר ותקציב, תחבורה ונהיגה, קניות ושירותים יומיומיים, בריאות וחירום, שפה - וכל מה שצריך כדי להתנהל באי בביטחה ובנוחות כמו מקומי. השתמשו בתפריט הקפיצה למטה כדי לדלג ישר לנושא שמעניין אתכם.</p>
     </div>
 
 
@@ -7762,7 +7937,7 @@
                      <tr class="border-b hover:bg-gray-50 transition-colors"><td class="p-4 font-semibold text-gray-900">אפריל</td><td class="p-4 text-center">19°</td><td class="p-4 text-center">16°</td><td class="p-4 text-center">7</td><td class="p-4">מזג אוויר אידיאלי לטיולי טבע ורגליים. חג הפסחא נחגג בחודש זה והעיר מלאה.</td></tr>
                      <tr class="border-b bg-green-50 hover:bg-green-100 transition-colors"><td class="p-4 font-semibold text-green-900">מאי</td><td class="p-4 text-center font-bold">24°</td><td class="p-4 text-center">19°</td><td class="p-4 text-center">4</td><td class="p-4 font-medium">פתיחת העונה הרשמית! חמים ונעים במהלך היום, ערבים קרירים. הים עדיין קריר יחסית.</td></tr>
                      <tr class="border-b bg-yellow-50 hover:bg-yellow-100 transition-colors"><td class="p-4 font-semibold text-yellow-900">יוני</td><td class="p-4 text-center font-bold">28°</td><td class="p-4 text-center font-bold">23°</td><td class="p-4 text-center">2</td><td class="p-4 font-bold text-yellow-800">אחד החודשים המומלצים! חם מספיק לבטן-גב, המים נעימים, ואין עומס תיירים מוגזם.</td></tr>
-                     <tr class="border-b bg-orange-50 hover:bg-orange-100 transition-colors"><td class="p-4 font-semibold text-orange-900">יולי - אוגוסט</td><td class="p-4 text-center font-bold text-red-600">32°+</td><td class="p-4 text-center font-bold text-red-600">26°</td><td class="p-4 text-center">0-1</td><td class="p-4 font-medium text-orange-900">שיא הקיץ. חם מאוד, לח ועמוס במיליוני מבקרים. המים בטמפרטורה מושלמת ומזמינה.</td></tr>
+                     <tr class="border-b bg-orange-50 hover:bg-orange-100 transition-colors"><td class="p-4 font-semibold text-orange-900">יולי - אוגוסט</td><td class="p-4 text-center font-bold text-red-600">32°+</td><td class="p-4 text-center font-bold text-red-600">26°</td><td class="p-4 text-center">0-1</td><td class="p-4 font-medium text-orange-900">שיא הקיץ. חם מאוד, לח ועמוס במיליוני מבקרים. המים בטמפרטורה נעימה ומזמינה.</td></tr>
                      <tr class="border-b bg-green-50 hover:bg-green-100 transition-colors"><td class="p-4 font-semibold text-green-900">ספטמבר</td><td class="p-4 text-center font-bold">28°</td><td class="p-4 text-center font-bold text-green-700">25°</td><td class="p-4 text-center">5</td><td class="p-4 font-bold text-green-800">החודש המנצח של קורפו. הים אגר חום כל הקיץ, עומס המבקרים יורד ומזג האוויר נעים.</td></tr>
                      <tr class="border-b hover:bg-gray-50 transition-colors"><td class="p-4 font-semibold text-gray-900">אוקטובר</td><td class="p-4 text-center">23°</td><td class="p-4 text-center">22°</td><td class="p-4 text-center">9</td><td class="p-4">סוף העונה. ימים חמים לסירוגין עם סופות וגשמים פתאומיים. מחירים אטרקטיביים.</td></tr>
                      <tr class="hover:bg-gray-50 transition-colors"><td class="p-4 font-semibold text-gray-900">נובמבר - דצמבר</td><td class="p-4 text-center">16°</td><td class="p-4 text-center">18°</td><td class="p-4 text-center">15</td><td class="p-4">חזרה לעונת החורף. רטוב, קר ושקט מאוד ברחבי האי.</td></tr>
@@ -8394,14 +8569,22 @@
         </div>
         <p class="text-xs text-gray-400 mt-5">⚠️ הרשימה מבוססת על מידע כללי ומוכר על האי; פרטים ספציפיים (שעות, מחירים, זמינות) עשויים להשתנות - ראו את שאר המדריך ואת קטע השאלות הנפוצות לפרטים מלאים.</p>
     </div>
+
+    <div class="section-next-steps">
+        <p>זה סיכום המידע המעשי לתכנון הטיול. לתכנון היום-יומי המפורט חזרו למסלול, או בדקו את השאלות הנפוצות:</p>
+        <div class="flex flex-wrap justify-center gap-3">
+            <button onclick="switchTab('itinerary')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M9 4 4 6.5v13L9 17l6 2 5-2.5v-13L15 6 9 4Z"/><path d="M9 4v13M15 6v13"/></svg></span> מסלול</button>
+            <button onclick="switchTab('faq')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9.7 9.3a2.3 2.3 0 0 1 4.4.9c0 1.5-2.1 1.8-2.1 3.3"/><circle cx="12" cy="16.2" r="0.15" fill="currentColor" stroke-width="1.4"/></svg></span> שאלות נפוצות</button>
+        </div>
+    </div>
 </section>
 
 <!-- FAQ SECTION -->
-<section id="faq" class="tab-content space-y-8 mt-12" dir="rtl">
+<section id="faq" class="tab-content space-y-8" dir="rtl">
     <div class="text-center">
-        <div class="inline-block bg-indigo-100 text-indigo-800 px-4 py-1.5 rounded-full text-sm font-bold tracking-wide mb-4">שאלות ותשובות</div>
-        <h2 class="text-4xl font-extrabold text-gray-900 mb-4">כל מה שרציתם לדעת על קורפו ❓</h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">ריכזנו עבורכם 50 שאלות נפוצות שכל מטייל שואל לפני הנסיעה לאי, עם תשובות מפורטות, מעשיות וברורות שיעזרו לכם לתכנן את החופשה המושלמת.</p>
+        <div class="inline-block bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm font-bold tracking-wide shadow-sm mb-4">שאלות ותשובות</div>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">כל מה שרציתם לדעת על קורפו ❓</h2>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">ריכזנו עבורכם 50 שאלות נפוצות שכל מטייל שואל לפני הנסיעה לאי, עם תשובות מפורטות, מעשיות וברורות שיעזרו לכם לתכנן את החופשה שלכם.</p>
     </div>
 
     <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10 border border-gray-100">
@@ -8432,7 +8615,7 @@
         </div>
 
         <div id="faq-empty-state" class="hidden text-center py-10">
-            <p class="text-4xl mb-3">❓</p>
+            <div class="empty-state-icon"><svg class="icon-line" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9.7 9.3a2.3 2.3 0 0 1 4.4.9c0 1.5-2.1 1.8-2.1 3.3"/><circle cx="12" cy="16.2" r="0.15" fill="currentColor" stroke-width="1.4"/></svg></div>
             <p class="text-gray-600 font-semibold mb-3">לא נמצאו שאלות התואמות את החיפוש</p>
             <button onclick="document.getElementById('faq-search-input').value=''; filterFAQCategory('all');" class="faq-filter-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">נקו את הסינון</button>
         </div>
@@ -8442,11 +8625,11 @@
             <!-- 1 to 50 FAQ items -->
             <details data-cat="planning" class="group bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition duration-300">
                 <summary class="cursor-pointer font-bold p-5 bg-gray-50 text-gray-800 text-lg group-open:bg-indigo-50 group-open:text-indigo-900 transition-colors flex justify-between items-center select-none">
-                    <span class="pl-4">1. מהי התקופה הטובה ביותר לטוס לקורפו?</span>
+                    <span class="pl-4">1. מתי כדאי לטוס לקורפו?</span>
                     <span class="text-2xl group-open:rotate-180 transition-transform text-indigo-500">▾</span>
                 </summary>
                 <div class="p-6 text-gray-700 bg-white border-t border-gray-100 leading-relaxed text-base">
-                    התקופה האידיאלית היא מחודש מאי ועד תחילת אוקטובר. חודשי השיא (יולי-אוגוסט) חמים מאוד ומתאימים לרחצה אך עמוסים. אם אתם מעדיפים מזג אוויר נוח ופחות צפיפות, יוני וספטמבר הם החודשים המומלצים ביותר.
+                    העונה הנוחה לטיסה היא מחודש מאי ועד תחילת אוקטובר. חודשי השיא (יולי-אוגוסט) חמים מאוד ומתאימים לרחצה אך עמוסים. אם אתם מעדיפים מזג אוויר נוח ופחות צפיפות, יוני וספטמבר מומלצים במיוחד.
                 </div>
             </details>
 
@@ -8456,7 +8639,7 @@
                     <span class="text-2xl group-open:rotate-180 transition-transform text-indigo-500">▾</span>
                 </summary>
                 <div class="p-6 text-gray-700 bg-white border-t border-gray-100 leading-relaxed text-base">
-                    כדי לטעום ממה שיש לאי להציע בצורה רגועה, מומלץ להקדיש 5 עד 7 ימים מינימום. אם ברצונכם לשלב גם מנוחה בבטן-גב וגם טיולים ברחבי האי וגיחות לאיים שכנים, 10 ימים יספקו לכם חופשה מושלמת ונינוחה.
+                    כדי לטעום ממה שיש לאי להציע בצורה רגועה, מומלץ להקדיש 5 עד 7 ימים מינימום. אם ברצונכם לשלב גם מנוחה בבטן-גב וגם טיולים ברחבי האי וגיחות לאיים שכנים, 10 ימים יספקו לכם חופשה נינוחה וללא לחץ.
                 </div>
             </details>
 
@@ -8466,7 +8649,7 @@
                     <span class="text-2xl group-open:rotate-180 transition-transform text-indigo-500">▾</span>
                 </summary>
                 <div class="p-6 text-gray-700 bg-white border-t border-gray-100 leading-relaxed text-base">
-                    בהחלט! האי מושלם למשפחות ומציע מגוון עצום של מלונות "הכל כלול", חופים חוליים ורדודים, ופארקי מים אדירים (כמו Aqualand). היוונים אוהבים ילדים והאווירה מאוד משפחתית ובטוחה.
+                    בהחלט! האי מתאים מאוד למשפחות ומציע מגוון עצום של מלונות "הכל כלול", חופים חוליים ורדודים, ופארקי מים אדירים (כמו Aqualand). היוונים אוהבים ילדים והאווירה מאוד משפחתית ובטוחה.
                 </div>
             </details>
 
@@ -8726,7 +8909,7 @@
                     <span class="text-2xl group-open:rotate-180 transition-transform text-indigo-500">▾</span>
                 </summary>
                 <div class="p-6 text-gray-700 bg-white border-t border-gray-100 leading-relaxed text-base">
-                    פלאוקסטריצה נמצאת בחוף המערבי. זהו אזור של חמישה מפרצי טורקיז מרהיבים עם מים קרים במיוחד. ניתן לשכור שם סירות קטנות למערות כחולות, לעלות למנזר העתיק שבראש ההר, וליהנות מהנוף המדהים.
+                    פלאוקסטריצה נמצאת בחוף המערבי. זהו אזור של חמישה מפרצי טורקיז מרהיבים עם מים קרים במיוחד. ניתן לשכור שם סירות קטנות למערות כחולות, לעלות למנזר העתיק שבראש ההר, וליהנות מהנוף.
                 </div>
             </details>
 
@@ -8941,13 +9124,21 @@
             </details>
 
         </div>
+
+        <div class="section-next-steps">
+            <p>זו השאלה האחרונה ברשימה. לחזרה לתכנון הטיול או לגילוי האי:</p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <button onclick="switchTab('itinerary')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M9 4 4 6.5v13L9 17l6 2 5-2.5v-13L15 6 9 4Z"/><path d="M9 4v13M15 6v13"/></svg></span> מסלול</button>
+                <button onclick="switchTab('beaches')" class="dashboard-quicknav-btn"><span class="qnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 18 0Z"/><path d="M12 12v7a2 2 0 0 1-2 2"/><path d="M12 3v2"/></svg></span> חופים</button>
+            </div>
+        </div>
     </div>
 </section>
     </main>
 
     <footer class="bg-slate-800 text-slate-400 mt-16 py-12">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-lg font-semibold text-white mb-2">קורפו האולטימטיבי 2026 🇬🇷 | מגה-מדריך</p>
+            <p class="text-lg font-semibold text-white mb-2">קורפו 2026 🇬🇷 | מדריך הטיולים המלא</p>
             <p class="text-sm">מעל 30,000 מילים של מחקר מעמיק, מסלולים מוכחים ואהבה לתרבות היוונית.</p>
             <p class="text-xs mt-4 text-slate-500">© 2026 | המדריך נועד לספק מידע מפורט ככל האפשר. מחירים ושעות עשויים להשתנות, מומלץ לוודא עצמאית לפני נסיעות מיוחדות.</p>
 
@@ -8993,8 +9184,29 @@
             }
 
             if (!skipScroll) {
-                window.scrollTo({ top: 100, behavior: 'smooth' });
+                // Scroll to the sticky nav's actual position rather than a fixed
+                // offset: the trip dashboard above it can be ~1400px tall, so a
+                // hardcoded value used to land back near the hero/dashboard
+                // instead of showing the tab content that was just requested.
+                const stickyNav = document.getElementById('sticky-nav-bar');
+                const targetY = stickyNav ? stickyNav.getBoundingClientRect().top + window.scrollY : 100;
+                window.scrollTo({ top: targetY, behavior: 'smooth' });
             }
+
+            syncMobileBottomNav(tabId);
+        }
+
+        // Keeps the mobile bottom nav's "you are here" dot in sync with the
+        // open tab. Beaches has two shortcuts (the plain beaches button and
+        // the favorites button), so it also checks which beach filter is
+        // currently active rather than just the tab id.
+        function syncMobileBottomNav(tabId) {
+            const isFavoritesActive = tabId === 'beaches' &&
+                document.querySelector('.beach-filter-btn[data-filter="favorites"].active') !== null;
+            const activeKey = isFavoritesActive ? 'beaches-favorites' : tabId;
+            document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-tab') === activeKey);
+            });
         }
 
         // Keyboard support for the main tablist, per the standard ARIA tabs
@@ -9168,6 +9380,7 @@
                 btn.classList.toggle('bg-gray-100', !isActive);
                 btn.classList.toggle('text-gray-700', !isActive);
             });
+            syncMobileBottomNav('beaches');
 
             // Update count message
             const countEl = document.getElementById('beach-filter-count');
@@ -9418,6 +9631,9 @@
             }
             saveFavorites(favorites);
             updateDashFavCount();
+            // Push this change to Supabase in the background (Step 7) - never
+            // blocks or reverts the local toggle above, even if it fails.
+            if (typeof queueItemStateSync === 'function') queueItemStateSync(id);
 
             // Small tactile confirmation that the tap registered
             btnEl.classList.remove('heart-pop');
@@ -9511,6 +9727,9 @@
             }
             saveCompletedDays(completed);
             updateTripProgressUI(completed);
+            // Push this change to Supabase in the background (Step 7) - never
+            // blocks or reverts the local toggle above, even if it fails.
+            if (typeof queueItineraryDaySync === 'function') queueItineraryDaySync(Number(day), checkboxEl.checked);
 
             // Auto-collapse a day shortly after marking it complete, to reduce
             // clutter as the trip progresses. Only ever collapses — unchecking
@@ -9723,6 +9942,41 @@
         let beachMapInstance = null;
         let mapLayerGroups = { beaches: null, food: null, attractions: null, gems: null };
 
+        // Loads Leaflet + the marker-cluster plugin on first use only (they
+        // used to load unconditionally from head tags on every page view).
+        // Safe to call every time toggleBeachMap() runs - after the first
+        // successful load it just calls back immediately.
+        let leafletLoadPromise = null;
+        function loadLeafletThen(callback) {
+            if (typeof L !== 'undefined') { callback(); return; }
+            if (!leafletLoadPromise) {
+                leafletLoadPromise = new Promise((resolve, reject) => {
+                    const addCss = href => {
+                        const link = document.createElement('link');
+                        link.rel = 'stylesheet';
+                        link.href = href;
+                        document.head.appendChild(link);
+                    };
+                    addCss('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css');
+                    addCss('https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css');
+                    addCss('https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css');
+
+                    const leafletScript = document.createElement('script');
+                    leafletScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+                    leafletScript.onload = () => {
+                        const clusterScript = document.createElement('script');
+                        clusterScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js';
+                        clusterScript.onload = resolve;
+                        clusterScript.onerror = reject;
+                        document.head.appendChild(clusterScript);
+                    };
+                    leafletScript.onerror = reject;
+                    document.head.appendChild(leafletScript);
+                });
+            }
+            leafletLoadPromise.then(callback).catch(() => callback()); // initBeachMap already shows a friendly fallback if L is still undefined
+        }
+
         function toggleBeachMap() {
             const container = document.getElementById('beach-map-container');
             const btn = document.getElementById('map-toggle-btn');
@@ -9732,7 +9986,7 @@
             btn.textContent = isHidden ? '🗺️ הסתר את המפה' : '🗺️ הצג מפה מאוחדת של כל האי (חופים, מסעדות, אטרקציות)';
 
             if (isHidden && !beachMapInstance) {
-                setTimeout(initBeachMap, 50);
+                loadLeafletThen(() => setTimeout(initBeachMap, 50));
             } else if (isHidden && beachMapInstance) {
                 setTimeout(() => beachMapInstance.invalidateSize(), 50);
             }
@@ -10299,21 +10553,25 @@
         // Scroll progress bar + back-to-top button visibility + sticky-nav
         // auto-hide. Uses requestAnimationFrame throttling to avoid excessive
         // DOM writes on scroll — all three share this one listener rather than
-        // adding separate ones.
+        // adding separate ones. The three elements are looked up once (cached
+        // below, once the DOM is ready) instead of on every scroll frame.
         let scrollTicking = false;
         let lastScrollY = window.scrollY;
+        let scrollProgressBarEl = null;
+        let backToTopBtnEl = null;
+        let stickyNavBarEl = null;
         function updateScrollUI() {
             const scrollTop = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
 
-            const bar = document.getElementById('scroll-progress-bar');
+            const bar = scrollProgressBarEl;
             if (bar) {
                 bar.style.width = progress + '%';
                 bar.setAttribute('aria-valuenow', Math.round(progress));
             }
 
-            const btn = document.getElementById('back-to-top-btn');
+            const btn = backToTopBtnEl;
             if (btn) {
                 const show = scrollTop > 400;
                 btn.classList.toggle('opacity-0', !show);
@@ -10328,7 +10586,7 @@
             // tab bar only covers 5 of the 8 sections (itinerary/beaches/
             // search/food/favorites) — this nav is the only route to
             // attractions/gems/activities/shopping/FAQ, so it stays put there.
-            const navBar = document.getElementById('sticky-nav-bar');
+            const navBar = stickyNavBarEl;
             if (navBar && window.innerWidth >= 768) {
                 const scrollingDown = scrollTop > lastScrollY;
                 const focusInsideNav = navBar.contains(document.activeElement);
@@ -10353,6 +10611,13 @@
 
         // Setup initial tab on load
         document.addEventListener("DOMContentLoaded", function() {
+            // Cache the scroll-handler's static elements once, now that the
+            // whole document (including things defined further down, like
+            // #back-to-top-btn) actually exists.
+            scrollProgressBarEl = document.getElementById('scroll-progress-bar');
+            backToTopBtnEl = document.getElementById('back-to-top-btn');
+            stickyNavBarEl = document.getElementById('sticky-nav-bar');
+
             // activate itinerary initially
             const firstTab = document.getElementById('itinerary');
             if(firstTab) {
@@ -10368,25 +10633,37 @@
             populateDistanceSelects();
             convertCurrency();
             initDashboard();
+
+            // Personal tracking widget (visited/rating/note): inject into every
+            // item card and populate from whatever's cached locally from a
+            // previous visit - instant, no network wait. Cloud sync then runs
+            // in the background (Step 6) and re-renders only if it found
+            // something new, so first paint never blocks on a request.
+            if (typeof injectPersonalTrackingWidgets === 'function') {
+                injectPersonalTrackingWidgets();
+            }
+            if (typeof initCloudSync === 'function') {
+                initCloudSync();
+            }
         });
     </script>
 
     <!-- Back to Top floating button -->
     <!-- Mobile bottom navigation bar (hidden on desktop) -->
     <nav class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t border-slate-200 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] flex justify-around items-center py-2" aria-label="ניווט תחתון בנייד">
-        <button onclick="switchTab('itinerary')" class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-teal-700 px-2 py-1 min-w-[56px]" aria-label="מסלול">
+        <button onclick="switchTab('itinerary')" data-tab="itinerary" class="mobile-nav-btn active flex flex-col items-center gap-0.5 text-slate-600 hover:text-teal-700 px-2 py-1 min-w-[56px]" aria-label="מסלול">
             <span class="mnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M9 4 4 6.5v13L9 17l6 2 5-2.5v-13L15 6 9 4Z"/><path d="M9 4v13M15 6v13"/></svg></span><span class="text-[10px] font-semibold">מסלול</span>
         </button>
-        <button onclick="switchTab('beaches')" class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-teal-700 px-2 py-1 min-w-[56px]" aria-label="חופים">
+        <button onclick="switchTab('beaches')" data-tab="beaches" class="mobile-nav-btn flex flex-col items-center gap-0.5 text-slate-600 hover:text-teal-700 px-2 py-1 min-w-[56px]" aria-label="חופים">
             <span class="mnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 18 0Z"/><path d="M12 12v7a2 2 0 0 1-2 2"/><path d="M12 3v2"/></svg></span><span class="text-[10px] font-semibold">חופים</span>
         </button>
         <button onclick="document.getElementById('global-search-input').focus(); document.getElementById('global-search-input').scrollIntoView({behavior:'smooth', block:'center'});" class="flex flex-col items-center gap-0.5 text-white bg-teal-600 rounded-full w-14 h-14 -mt-4 shadow-lg" aria-label="חיפוש">
             <span class="mnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.3-4.3"/></svg></span>
         </button>
-        <button onclick="switchTab('food')" class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-teal-700 px-2 py-1 min-w-[56px]" aria-label="קולינריה">
+        <button onclick="switchTab('food')" data-tab="food" class="mobile-nav-btn flex flex-col items-center gap-0.5 text-slate-600 hover:text-teal-700 px-2 py-1 min-w-[56px]" aria-label="קולינריה">
             <span class="mnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M7 3v6a1.5 1.5 0 0 0 3 0V3M8.5 9V21"/><path d="M16.5 3c-1.4 0-2.5 1.8-2.5 4.5S15.1 12 16.5 12V21"/></svg></span><span class="text-[10px] font-semibold">אוכל</span>
         </button>
-        <button onclick="switchTab('beaches'); setTimeout(() => filterBeaches('favorites'), 100);" class="flex flex-col items-center gap-0.5 text-slate-600 hover:text-red-500 px-2 py-1 min-w-[56px]" aria-label="מועדפים">
+        <button onclick="switchTab('beaches'); setTimeout(() => filterBeaches('favorites'), 100);" data-tab="beaches-favorites" class="mobile-nav-btn flex flex-col items-center gap-0.5 text-slate-600 hover:text-red-500 px-2 py-1 min-w-[56px]" aria-label="מועדפים">
             <span class="mnav-icon"><svg class="icon-line" viewBox="0 0 24 24"><path d="M12 20.2s-7.2-4.4-9.5-9C1 8 2.3 4.3 6.2 4.3c2.1 0 3.6 1.2 4.4 2.3.8-1.1 2.3-2.3 4.4-2.3 3.9 0 5.2 3.7 3.7 6.9-2.3 4.6-9.5 9-9.5 9Z"/></svg></span><span class="text-[10px] font-semibold">מועדפים</span>
         </button>
     </nav>
@@ -10394,5 +10671,13 @@
     <button id="back-to-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="חזרה לראש העמוד" class="fixed bottom-20 md:bottom-6 left-6 z-50 w-12 h-12 rounded-full bg-teal-600 text-white shadow-lg hover:bg-teal-700 focus:outline-none focus:ring-4 focus:ring-teal-300 transition duration-300 opacity-0 pointer-events-none translate-y-4 flex items-center justify-center text-xl">
         ↑
     </button>
+
+    <!-- Cloud sync (Supabase): SDK, then config, then this app's own
+         database.js — order matters, each one depends on the previous. -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/sync.js"></script>
 </body>
 </html>
