@@ -105,7 +105,7 @@ async function initCloudSync() {
 
 function buildPersonalTrackingWidgetHTML() {
     const stars = [1, 2, 3, 4, 5].map(v => `
-        <button type="button" class="pt-star" data-value="${v}" role="radio" aria-checked="false" aria-label="דרגו ${v} מתוך 5 כוכבים">
+        <button type="button" class="pt-star" data-value="${v}" aria-label="דרגו ${v} מתוך 5 כוכבים">
             <svg class="icon-line" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.5Z"/></svg>
         </button>`).join('');
 
@@ -135,10 +135,7 @@ function renderPersonalTrackingWidget(itemId) {
 
     widget.querySelectorAll('.pt-star').forEach(star => {
         const value = Number(star.dataset.value);
-        const isActive = state.rating != null && value <= state.rating;
-        star.classList.toggle('pt-star--active', isActive);
-        // A11y: mark the selected star as checked, others as unchecked
-        star.setAttribute('aria-checked', String(state.rating != null && value === state.rating));
+        star.classList.toggle('pt-star--active', state.rating != null && value <= state.rating);
     });
 
     widget.querySelector('.pt-note-toggle')
