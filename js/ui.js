@@ -45,6 +45,55 @@ function switchTab(tabId, skipScroll) {
     if (mapFabBtn) mapFabBtn.classList.toggle('map-fab-visible', tabId === 'beaches');
 }
 
+// Three different button families used to each carry their own
+// onclick="switchTab('x')": the desktop tablist (.nav-btn, already had
+// aria-controls="x" for its own aria-selected bookkeeping - the exact same
+// value the onclick was passing), the dashboard's quick-nav shortcuts
+// (.dashboard-quicknav-btn, given a matching data-tab here since it had no
+// attribute to reuse), and 3 of the 4 mobile bottom-nav buttons (already
+// had data-tab="x" for syncMobileBottomNav() above). One delegated listener
+// covers all three. The 4th mobile button (data-tab="beaches-favorites")
+// is handled in its own branch just below instead - "beaches-favorites"
+// isn't a real tab id, it also needs to open the favorites filter.
+document.addEventListener('click', (e) => {
+    const navBtn = e.target.closest('.nav-btn[aria-controls]');
+    if (navBtn) { switchTab(navBtn.getAttribute('aria-controls')); return; }
+
+    const quickBtn = e.target.closest('.dashboard-quicknav-btn[data-tab]');
+    if (quickBtn) { switchTab(quickBtn.dataset.tab); return; }
+
+    const mobileBtn = e.target.closest('.mobile-nav-btn[data-tab]');
+    if (mobileBtn && mobileBtn.dataset.tab !== 'beaches-favorites') {
+        switchTab(mobileBtn.dataset.tab);
+    }
+});
+
+// The FAQ's shopping-section deep links (5 of them, across ferries/
+// transport/shopping topics) each used to carry their own
+// onclick="event.preventDefault(); switchTab('shopping', true);
+// setTimeout(() => document.getElementById('x').scrollIntoView(...), 150);" -
+// identical apart from which sub-section id they jump to, now read from
+// data-shop-anchor instead.
+document.addEventListener('click', (e) => {
+    const anchor = e.target.closest('[data-shop-anchor]');
+    if (!anchor) return;
+    e.preventDefault();
+    switchTab('shopping', true);
+    setTimeout(() => {
+        const target = document.getElementById(anchor.dataset.shopAnchor);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    }, 150);
+});
+
+// The mobile bottom nav's favorites shortcut used to carry its own
+// onclick="switchTab('beaches'); setTimeout(() => filterBeaches('favorites'), 100);"
+document.addEventListener('click', (e) => {
+    const favBtn = e.target.closest('.mobile-nav-btn[data-tab="beaches-favorites"]');
+    if (!favBtn) return;
+    switchTab('beaches');
+    setTimeout(() => filterBeaches('favorites'), 100);
+});
+
 // Keeps the mobile bottom nav's "you are here" dot in sync with the
 // open tab. Beaches has two shortcuts (the plain beaches button and
 // the favorites button), so it also checks which beach filter is
@@ -54,7 +103,13 @@ function syncMobileBottomNav(tabId) {
         document.querySelector('.beach-filter-btn[data-filter="favorites"].active') !== null;
     const activeKey = isFavoritesActive ? 'beaches-favorites' : tabId;
     document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-tab') === activeKey);
+        const isActive = btn.getAttribute('data-tab') === activeKey;
+        btn.classList.toggle('active', isActive);
+        if (isActive) {
+            btn.setAttribute('aria-current', 'page');
+        } else {
+            btn.removeAttribute('aria-current');
+        }
     });
 }
 
@@ -79,6 +134,14 @@ function handleTablistKeydown(event) {
     tabs[nextIndex].focus();
     tabs[nextIndex].click();
 }
+
+// The tablist <nav> used to carry onkeydown="handleTablistKeydown(event)"
+// directly. Bound here instead of via document-level delegation since the
+// function relies on event.currentTarget being the tablist itself (to
+// scope its [role="tab"] query to just this nav) - only one such tablist
+// exists on the page.
+const tablistNavEl = document.querySelector('[role="tablist"]');
+if (tablistNavEl) tablistNavEl.addEventListener('keydown', handleTablistKeydown);
 
 // Premium card entrance animation. Uses ONE shared IntersectionObserver for the whole
 // page (not one per card) to keep this cheap performance-wise. Applied progressively:
@@ -212,6 +275,44 @@ window.addEventListener('scroll', () => {
         scrollTicking = true;
     }
 }, { passive: true });
+
+// A handful of one-off buttons each used to carry their own single-purpose
+// onclick directly. Each is a unique element (now with its own id), so
+// each gets a direct addEventListener rather than delegation.
+const heroCtaBeachesBtn = document.getElementById('hero-cta-beaches-btn');
+if (heroCtaBeachesBtn) {
+    heroCtaBeachesBtn.addEventListener('click', () => {
+        document.getElementById('sticky-nav-bar').querySelector('[aria-controls=beaches]').click();
+    });
+}
+
+const heroCtaItineraryBtn = document.getElementById('hero-cta-itinerary-btn');
+if (heroCtaItineraryBtn) {
+    heroCtaItineraryBtn.addEventListener('click', () => {
+        document.getElementById('sticky-nav-bar').querySelector('[aria-controls=itinerary]').click();
+    });
+}
+
+const heroScrollIndicatorBtn = document.getElementById('hero-scroll-indicator-btn');
+if (heroScrollIndicatorBtn) {
+    heroScrollIndicatorBtn.addEventListener('click', () => {
+        document.getElementById('sticky-nav-bar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+}
+
+const mobileSearchFabBtn = document.getElementById('mobile-search-fab-btn');
+if (mobileSearchFabBtn) {
+    mobileSearchFabBtn.addEventListener('click', () => {
+        const input = document.getElementById('global-search-input');
+        input.focus();
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+}
+
+const backToTopBtn = document.getElementById('back-to-top-btn');
+if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
 
 window.switchTab = switchTab;
 window.handleTablistKeydown = handleTablistKeydown;

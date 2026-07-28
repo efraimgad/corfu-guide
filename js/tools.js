@@ -94,11 +94,22 @@ const CURRENCY_RATES = { ILS: 3.60, USD: 1.14, GBP: 0.85 };
 function convertCurrency() {
     const input = document.getElementById('currency-eur-input');
     if (!input) return;
-    const eur = parseFloat(input.value) || 0;
+    // min="0" on the <input> only stops the stepper arrows, not typed or
+    // pasted values (e.g. "-50") - clamp here so a negative amount never
+    // produces a nonsensical negative currency result.
+    const eur = Math.max(0, parseFloat(input.value) || 0);
     document.getElementById('currency-result-ils').textContent = `₪${(eur * CURRENCY_RATES.ILS).toFixed(2)}`;
     document.getElementById('currency-result-usd').textContent = `$${(eur * CURRENCY_RATES.USD).toFixed(2)}`;
     document.getElementById('currency-result-gbp').textContent = `£${(eur * CURRENCY_RATES.GBP).toFixed(2)}`;
 }
+
+// #currency-eur-input used to carry oninput="convertCurrency()" directly.
+const currencyInputEl = document.getElementById('currency-eur-input');
+if (currencyInputEl) currencyInputEl.addEventListener('input', convertCurrency);
+
+// The distance calculator's button used to carry onclick="calculateDistance()" directly.
+const distCalculateBtn = document.getElementById('dist-calculate-btn');
+if (distCalculateBtn) distCalculateBtn.addEventListener('click', calculateDistance);
 
 window.calculateDistance = calculateDistance;
 window.convertCurrency = convertCurrency;

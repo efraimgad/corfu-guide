@@ -23,17 +23,21 @@ function toggleFavorite(btnEl) {
     const id = card.getAttribute('data-id');
     let favorites = getFavorites();
 
+    let isFavorite;
     if (favorites.includes(id)) {
         favorites = favorites.filter(f => f !== id);
         btnEl.textContent = '🤍';
         btnEl.classList.remove('text-red-500', 'bg-red-50');
         btnEl.classList.add('text-gray-400', 'bg-gray-50');
+        isFavorite = false;
     } else {
         favorites.push(id);
         btnEl.textContent = '❤️';
         btnEl.classList.remove('text-gray-400', 'bg-gray-50');
         btnEl.classList.add('text-red-500', 'bg-red-50');
+        isFavorite = true;
     }
+    btnEl.setAttribute('aria-pressed', String(isFavorite));
     saveFavorites(favorites);
     updateDashFavCount();
     if (window.CorfuStorage) window.CorfuStorage.markItemDirty(id);
@@ -67,7 +71,10 @@ function initFavoriteButtons() {
     document.querySelectorAll('[data-id]').forEach(card => {
         const id = card.getAttribute('data-id');
         const btn = card.querySelector('.favorite-btn');
-        if (btn && favorites.includes(id)) {
+        if (!btn) return;
+        const isFavorite = favorites.includes(id);
+        btn.setAttribute('aria-pressed', String(isFavorite));
+        if (isFavorite) {
             btn.textContent = '❤️';
             btn.classList.remove('text-gray-400', 'bg-gray-50');
             btn.classList.add('text-red-500', 'bg-red-50');
@@ -75,4 +82,11 @@ function initFavoriteButtons() {
     });
 }
 
-window.toggleFavorite = toggleFavorite;
+// One delegated listener for all 176 favorite buttons instead of an inline
+// onclick="toggleFavorite(this)" on each - keeps the buttons runnable under
+// a script-src CSP with no 'unsafe-inline', and means a card added later
+// (e.g. dynamically) gets the same behavior for free, with nothing to wire up.
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.favorite-btn');
+    if (btn) toggleFavorite(btn);
+});

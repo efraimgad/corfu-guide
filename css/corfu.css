@@ -512,6 +512,18 @@ details[open] > summary::after { content: '-'; transform: rotate(180deg); }
 .text-gray-400, .text-slate-400 { color: #756e63; }
 .bg-slate-100, .bg-gray-100 { background-color: var(--sand-100); }
 .hover\:bg-gray-100:hover, .hover\:bg-slate-100:hover { background-color: var(--sand-100); }
+
+/* The footer is the one dark-background (bg-slate-800/--ink-900) section on
+   the page, so it can't use the same .text-slate-400/-500/-600 rules above -
+   those are tuned for light backgrounds (see the comment on
+   .text-gray-400/.text-slate-400 restating why) and measure only 2.7-3.2:1
+   here, well under WCAG AA's 4.5:1. --ink-300 is exactly what that comment
+   says NOT to use globally for that reason, but it's the right fit
+   specifically here: 5.4:1 against --ink-900. */
+footer.bg-slate-800.text-slate-400,
+footer.bg-slate-800 .text-slate-400,
+footer.bg-slate-800 .text-slate-500,
+footer.bg-slate-800 .text-slate-600 { color: var(--ink-300); }
 .hover\:bg-gray-200:hover { background-color: var(--sand-200); }
 
 /* text-blue-500 recurs ~190 times as the small recommendation/tip icon
@@ -1003,6 +1015,11 @@ a[class*="rounded-2xl"]:not(.premium-card) {
     }
     .dashboard-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.6rem; }
     .dashboard-card { padding: 0.85rem 0.9rem; }
+    /* 7 cards in a 2-column grid leaves the last one (favorites) alone in
+       its row with an empty gap beside it - span it full-width on mobile
+       only, so nothing looks like a layout mistake. Desktop's 4-column
+       grid isn't affected. */
+    .dashboard-card--fav { grid-column: 1 / -1; }
     .dashboard-quicknav { gap: 0.4rem; }
     .dashboard-quicknav-btn {
         min-height: 44px;
@@ -1272,14 +1289,25 @@ a[class*="rounded-2xl"]:not(.premium-card) {
 
 /* Slow, continuous Ken Burns drift on the hero photo itself (the earlier
    Ken Burns rule only covered section banners further down the page —
-   the main hero image never had it). */
+   the main hero image never had it).
+   A soft blur + dim is applied to the photo itself (not just a color
+   overlay on top of it): the source photo has "Welcome to Corfu / Time
+   for a Unique Vacation" text baked directly into it, which no overlay
+   opacity alone can fully hide at every viewport width without either
+   looking flat-black or leaving the text legible somewhere in frame.
+   Blurring turns it into a soft abstract backdrop - a common premium-hero
+   pattern anyway - while keeping the photo's color and motion. */
 .hero-kb-img {
     animation: hero-kb 26s ease-in-out infinite alternate;
     will-change: transform;
+    filter: blur(18px) brightness(0.5) saturate(1.15);
 }
 @keyframes hero-kb {
-    from { transform: scale(1.04) translate(0, 0); }
-    to   { transform: scale(1.12) translate(-1.5%, -1%); }
+    /* Scaled up further than before (was 1.04 -> 1.12) so the blur's
+       soft edge fringe never peeks past the frame at any point in the
+       animation. */
+    from { transform: scale(1.1) translate(0, 0); }
+    to   { transform: scale(1.18) translate(-1.5%, -1%); }
 }
 
 /* Choreographed entrance: each hero element fades/rises in on its own
@@ -1516,18 +1544,48 @@ a[class*="rounded-2xl"]:not(.premium-card) {
     border-inline-start: 3px solid var(--accent, var(--sand-300, #d8cba8));
 }
 .dashboard-card:not(.dashboard-card-highlight) .dashboard-card-label { color: var(--accent, var(--ink-500)); }
-.dashboard-card--trip      { --accent: var(--ion-500, #237fae); }
-.dashboard-card--weather   { --accent: var(--gold-600, #b8934a); }
-.dashboard-card--today     { --accent: var(--terracotta-700, #8f6e2e); }
-.dashboard-card--hotel     { --accent: var(--olive-600, #6d7a4f); }
+/* trip/weather/today/hotel use a darkened one-off shade rather than the
+   root token directly: --ion-500/--gold-600/--terracotta-700/--olive-600
+   measure 2.7-4.5:1 against this card's --sand-50 background (used as
+   both the label's text color and the left border here) - all fail or
+   barely clear WCAG AA's 4.5:1 for the label text. Each hex below is the
+   same root token, darkened just enough to clear 4.5:1, without touching
+   the shared variable itself (used in 10-12 other places on different
+   backgrounds where the original shade already reads fine). */
+.dashboard-card--trip      { --accent: #2177a3; }
+.dashboard-card--weather   { --accent: #886c35; }
+.dashboard-card--today     { --accent: #8b6b2d; }
+.dashboard-card--hotel     { --accent: #69754c; }
 .dashboard-card--car       { --accent: var(--ion-700, #14507a); }
 .dashboard-card--fav       { --accent: #a8455a; }
-.dashboard-card--reminders { --accent: var(--gold-600, #b8934a); }
+.dashboard-card--reminders { --accent: #886c35; }
 
 .dashboard-card-label { font-size: 0.72rem; font-weight: 700; color: var(--ink-500); margin-bottom: 0.35rem; letter-spacing: 0.01em; }
 .dashboard-card-value { font-size: 1.5rem; font-weight: 800; font-family: var(--font-display, serif); color: var(--ink-900); line-height: 1.15; }
 .dashboard-card-value-sm { font-size: 1rem; font-weight: 700; color: var(--ink-900); margin-bottom: 0.3rem; }
 .dashboard-card-sub { font-size: 0.72rem; color: var(--ink-500); margin-top: 0.2rem; }
+
+/* Weather widget loading skeleton: shown as the initial content of
+   #dash-weather/#dash-weather-sub, replaced automatically the moment JS
+   sets their .textContent (success or the offline-fallback message) -
+   no extra JS needed to remove it. */
+.skeleton-bar {
+    display: inline-block;
+    height: 0.9em;
+    width: 4.5em;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--sand-100, #ece3d1) 25%, var(--sand-50, #faf7f1) 50%, var(--sand-100, #ece3d1) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+.skeleton-bar--sub { width: 6em; height: 0.72em; }
+@keyframes skeleton-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .skeleton-bar { animation: none; opacity: 0.6; }
+}
 .dashboard-card-link {
     font-size: 0.75rem; font-weight: 700; color: var(--ion-700);
     margin-top: 0.4rem; display: inline-block;

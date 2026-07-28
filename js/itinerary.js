@@ -30,10 +30,80 @@ function toggleDayCard(headerEl) {
     const chevron = headerEl.querySelector('.day-card-chevron');
     if (!body) return;
     const isCollapsed = body.classList.toggle('day-card-collapsed');
+    headerEl.setAttribute('aria-expanded', String(!isCollapsed));
     if (chevron) {
         chevron.style.transform = isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)';
     }
 }
+
+// The day headers are only clickable <div>s, so without this they're
+// invisible to keyboard users and screen readers don't know they
+// expand/collapse anything. Script runs with `defer`, so the DOM is
+// already parsed - no need to wait for DOMContentLoaded.
+document.querySelectorAll('.premium-day-header').forEach((header, index) => {
+    header.setAttribute('role', 'button');
+    header.setAttribute('tabindex', '0');
+    header.setAttribute('aria-expanded', 'true');
+
+    // aria-controls needs an id on the collapsible body to point to - it
+    // has none in the markup, so one is assigned here rather than adding
+    // 9 near-identical ids by hand in index.html.
+    const body = header.nextElementSibling;
+    if (body) {
+        const bodyId = `day-card-body-${index + 1}`;
+        body.id = bodyId;
+        header.setAttribute('aria-controls', bodyId);
+    }
+});
+
+// Mouse path: used to be an onclick="toggleDayCard(this)" on each of the 9
+// headers. The nested checkbox label and map-pin button both stop this
+// event from reaching them (see below), so clicking either one doesn't
+// also toggle the card.
+document.addEventListener('click', (e) => {
+    const header = e.target.closest('.premium-day-header');
+    if (header) toggleDayCard(header);
+});
+
+// The checkbox's wrapping label and the map-pin button both used to carry
+// their own onclick="event.stopPropagation()" (the map-pin button's inline
+// handler did more after that - see below). That call has to happen in a
+// listener attached directly to the element itself, not via document-level
+// delegation like the toggle listener above: by the time a delegated
+// listener on document runs, the event has already finished bubbling, so
+// calling stopPropagation() there would be too late to stop the header's
+// own delegated listener above from also firing.
+document.querySelectorAll('.day-complete-label').forEach(label => {
+    label.addEventListener('click', (e) => e.stopPropagation());
+});
+
+// Each of the 7 day-card "show this area on the map" buttons used to carry
+// an identical onclick="event.stopPropagation(); switchTab('beaches');
+// setTimeout(...)". The 8th day-map-jump-btn (the dashboard's "מפה מאוחדת"
+// quicknav shortcut) isn't nested inside a day header, so stopPropagation()
+// there is a harmless no-op rather than something it depends on.
+document.querySelectorAll('.day-map-jump-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        switchTab('beaches');
+        setTimeout(() => {
+            const mapContainer = document.getElementById('beach-map-container');
+            if (mapContainer && mapContainer.style.display === 'none') toggleBeachMap();
+            mapContainer.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+    });
+});
+
+// Keyboard path: only react when the header itself is focused - not when
+// Enter/Space bubbles up from the checkbox or map button nested inside it,
+// both of which already have their own native Enter/Space behavior.
+document.addEventListener('keydown', (e) => {
+    if (!e.target.classList.contains('premium-day-header')) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleDayCard(e.target);
+    }
+});
 
 // Quick action: open or fold every day at once, for scanning the whole
 // week or focusing on a single day without seven clicks.
@@ -43,9 +113,24 @@ function setAllDayCards(expand) {
         const chevron = header.querySelector('.day-card-chevron');
         if (!body) return;
         body.classList.toggle('day-card-collapsed', !expand);
+        header.setAttribute('aria-expanded', String(expand));
         if (chevron) chevron.style.transform = expand ? 'rotate(0deg)' : 'rotate(-90deg)';
     });
 }
+
+// The expand-all/collapse-all buttons used to carry their own
+// onclick="setAllDayCards(true|false)" directly.
+const itineraryExpandAllBtn = document.getElementById('itinerary-expand-all-btn');
+if (itineraryExpandAllBtn) itineraryExpandAllBtn.addEventListener('click', () => setAllDayCards(true));
+
+const itineraryCollapseAllBtn = document.getElementById('itinerary-collapse-all-btn');
+if (itineraryCollapseAllBtn) itineraryCollapseAllBtn.addEventListener('click', () => setAllDayCards(false));
+
+// Each of the 7 day-completion checkboxes used to carry its own
+// onchange="toggleDayComplete(this)" - identical in every instance.
+document.addEventListener('change', (e) => {
+    if (e.target.classList.contains('day-complete-checkbox')) toggleDayComplete(e.target);
+});
 
 function toggleDayComplete(checkboxEl) {
     const day = checkboxEl.getAttribute('data-day');
@@ -124,6 +209,11 @@ function viewTodayInItinerary() {
         setTimeout(() => card.classList.remove('search-highlight'), 2000);
     }, 150);
 }
+
+// The dashboard's "view full itinerary" link used to carry its own
+// onclick="viewTodayInItinerary()" directly.
+const dashViewItineraryBtn = document.getElementById('dash-view-itinerary-btn');
+if (dashViewItineraryBtn) dashViewItineraryBtn.addEventListener('click', viewTodayInItinerary);
 
 window.setAllDayCards = setAllDayCards;
 window.toggleDayCard = toggleDayCard;

@@ -218,6 +218,7 @@ function toggleBeachMap() {
 
     container.style.display = isHidden ? 'block' : 'none';
     btn.textContent = isHidden ? '🗺️ הסתר את המפה' : '🗺️ הצג מפה מאוחדת של כל האי (חופים, מסעדות, אטרקציות)';
+    btn.setAttribute('aria-expanded', String(isHidden));
 
     if (isHidden && !beachMapInstance) {
         loadLeafletThen(() => setTimeout(initBeachMap, 50));
@@ -228,6 +229,13 @@ function toggleBeachMap() {
 
 // Lookup index so cards can find their marker (and vice versa) by name + layer type
 const mapMarkerIndex = {};
+
+// Popup HTML is built via string concatenation (Leaflet's API, not innerHTML
+// we control the source of) - escape any value going into an HTML attribute
+// so it can never break out of the quotes it's placed in.
+function escapeHtmlAttr(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 
 function buildLayerGroup(locations, color, layerKey) {
     // Use marker clustering when the plugin is available; fall back to a plain layer group otherwise
@@ -250,7 +258,7 @@ function buildLayerGroup(locations, color, layerKey) {
         marker.bindPopup(
             `<strong>${loc.name}</strong><br>` +
             `<a href="${mapsUrl}" target="_blank" style="color:#2563eb;">📍 נווט לשם</a>` +
-            (layerKey === 'beaches' ? `<br><a href="#" onclick="openCardFromMap('${layerKey}','${loc.name.replace(/'/g, "\\'")}'); return false;" style="color:#0d9488;">📇 פתח כרטיס</a>` : '')
+            (layerKey === 'beaches' ? `<br><a href="#" class="map-popup-open-card" data-layer-key="${layerKey}" data-loc-name="${escapeHtmlAttr(loc.name)}" style="color:#0d9488;">📇 פתח כרטיס</a>` : '')
         );
         group.addLayer(marker);
         mapMarkerIndex[layerKey + '::' + loc.name] = marker;
@@ -319,6 +327,29 @@ function openCardFromMap(layerKey, name) {
     }, 60);
 }
 
+// The "open card" link inside a marker popup used to call openCardFromMap()
+// via an inline onclick - popups are added/removed from the DOM by Leaflet
+// as they open and close, so a plain addEventListener on the link itself
+// isn't an option; delegating from document (same pattern already used
+// elsewhere for dynamically-injected UI, e.g. storage.js's tracking widget)
+// covers every popup without needing to re-bind anything.
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('.map-popup-open-card');
+    if (!link) return;
+    e.preventDefault();
+    openCardFromMap(link.dataset.layerKey, link.dataset.locName);
+});
+
+// Each beach card's "show on map" button used to carry its own
+// onclick="showOnMap('beaches', this.closest('[data-name]').dataset.name)" -
+// identical in all 26 cases. One delegated listener replaces all of them.
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.map-show-btn');
+    if (!btn) return;
+    const card = btn.closest('[data-name]');
+    if (card) showOnMap('beaches', card.dataset.name);
+});
+
 // Card -> highlight its marker on the map (opens map if needed, pans, opens popup)
 function showOnMap(layerKey, name) {
     const container = document.getElementById('beach-map-container');
@@ -355,6 +386,12 @@ function showOnMap(layerKey, name) {
     container.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+// Each of the 5 layer-toggle checkboxes (#layer-beaches/food/attractions/
+// gems/hotel) used to carry its own onchange="updateMapLayers()".
+document.addEventListener('change', (e) => {
+    if (e.target.matches('#beach-map-container input[type="checkbox"]')) updateMapLayers();
+});
+
 function updateMapLayers() {
     if (!beachMapInstance) return;
     const layerConfig = [
@@ -375,6 +412,13 @@ function updateMapLayers() {
         }
     });
 }
+
+// Both the main "show map" button and the floating mobile FAB used to
+// carry their own onclick="toggleBeachMap()" directly.
+['map-toggle-btn', 'map-fab-btn'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) btn.addEventListener('click', toggleBeachMap);
+});
 
 window.toggleBeachMap = toggleBeachMap;
 window.openCardFromMap = openCardFromMap;

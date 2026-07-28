@@ -125,6 +125,37 @@ function updateDashFavCount() {
     const el = document.getElementById('dash-fav-count');
     if (!el) return;
     el.textContent = getFavorites().length;
+    updateDashFavBudget();
+}
+
+// Rough per-person dining estimate (EUR) per $ price tier, read straight
+// off each favorited restaurant's own price badge - the only place in the
+// guide with real structured price data. Beaches/attractions/gems/
+// activities only have costs as prose text, so this deliberately stays
+// scoped to restaurants rather than guessing a whole-trip budget.
+const PRICE_TIER_ESTIMATE = { '$': 12, '$$': 25, '$$$': 45, '$$$$': 75 };
+
+function updateDashFavBudget() {
+    const el = document.getElementById('dash-fav-budget');
+    if (!el) return;
+    const foodFavIds = getFavorites().filter(id => id.startsWith('food-'));
+    if (foodFavIds.length === 0) {
+        el.textContent = '';
+        return;
+    }
+    let total = 0;
+    let priced = 0;
+    foodFavIds.forEach(id => {
+        const card = document.querySelector(`[data-id="${CSS.escape(id)}"] .bg-blue-600\\/90`);
+        const tier = card && card.textContent.trim();
+        if (tier && PRICE_TIER_ESTIMATE[tier] !== undefined) {
+            total += PRICE_TIER_ESTIMATE[tier];
+            priced++;
+        }
+    });
+    el.textContent = priced > 0
+        ? `🍽️ תקציב משוער ל-${priced} מסעדות שמורות: כ-${total}€ לאדם`
+        : '';
 }
 
 // Favorites span four different tabs (beach-/food-/attr-/gem-), so a
@@ -292,6 +323,35 @@ function loadDashEditorState() {
     const saved = getDashSavedData();
     renderDashEntry('hotel', saved.hotel || DEFAULT_HOTEL);
     renderDashEntry('car', saved.car);
+}
+
+// The dashboard's "view favorites" link used to carry its own
+// onclick="viewFavorites()" directly.
+const dashViewFavoritesBtn = document.getElementById('dash-view-favorites-btn');
+if (dashViewFavoritesBtn) dashViewFavoritesBtn.addEventListener('click', viewFavorites);
+
+// The 4 hotel/car "add"/"edit" links used to each carry their own
+// onclick="openDashEditor('hotel'|'car')" - one delegated listener
+// reading data-open-editor covers all 4.
+document.addEventListener('click', (e) => {
+    const openBtn = e.target.closest('[data-open-editor]');
+    if (openBtn) openDashEditor(openBtn.dataset.openEditor);
+});
+
+const dashEditorSaveBtn = document.getElementById('dash-editor-save-btn');
+if (dashEditorSaveBtn) dashEditorSaveBtn.addEventListener('click', saveDashEditor);
+
+const dashEditorCancelBtn = document.getElementById('dash-editor-cancel-btn');
+if (dashEditorCancelBtn) dashEditorCancelBtn.addEventListener('click', closeDashEditor);
+
+// The backdrop used to carry onclick="if(event.target===this) closeDashEditor()"
+// directly - clicking the backdrop itself (not the modal card inside it)
+// closes the dialog, same "click outside to dismiss" behavior.
+const dashEditorBackdropEl = document.getElementById('dash-editor-backdrop');
+if (dashEditorBackdropEl) {
+    dashEditorBackdropEl.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeDashEditor();
+    });
 }
 
 window.viewFavorites = viewFavorites;

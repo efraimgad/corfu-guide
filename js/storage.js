@@ -152,11 +152,12 @@ async function initCloudSync() {
 // across beaches/food/attractions/gems/activities) rather than hand-added
 // to each card's HTML, so there's exactly one place that defines this UI.
 
-function buildPersonalTrackingWidgetHTML() {
+function buildPersonalTrackingWidgetHTML(itemId) {
     const stars = [1, 2, 3, 4, 5].map(v => `
-        <button type="button" class="pt-star" data-value="${v}" aria-label="דרגו ${v} מתוך 5 כוכבים">
+        <button type="button" class="pt-star" data-value="${v}" role="radio" aria-checked="false" aria-label="דרגו ${v} מתוך 5 כוכבים">
             <svg class="icon-line" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.5Z"/></svg>
         </button>`).join('');
+    const noteId = `pt-note-${itemId}`;
 
     return `
     <div class="personal-tracking-widget">
@@ -165,10 +166,10 @@ function buildPersonalTrackingWidgetHTML() {
             <span class="pt-visited-label">ביקרתי</span>
         </button>
         <div class="pt-rating" role="radiogroup" aria-label="דירוג אישי">${stars}</div>
-        <button type="button" class="pt-note-toggle" aria-expanded="false" title="הוסיפו הערה אישית">
+        <button type="button" class="pt-note-toggle" aria-expanded="false" aria-controls="${noteId}" title="הוסיפו הערה אישית">
             <svg class="icon-line" viewBox="0 0 24 24"><path d="M4 20l1-4.2L16.8 4a1.5 1.5 0 0 1 2.1 0l1.1 1.1a1.5 1.5 0 0 1 0 2.1L8.2 19 4 20Z"/></svg>
         </button>
-        <textarea class="pt-note-textarea hidden" rows="2" placeholder="הערה אישית..." aria-label="הערה אישית"></textarea>
+        <textarea id="${noteId}" class="pt-note-textarea hidden" rows="2" placeholder="הערה אישית..." aria-label="הערה אישית"></textarea>
     </div>`;
 }
 
@@ -185,6 +186,9 @@ function renderPersonalTrackingWidget(itemId) {
     widget.querySelectorAll('.pt-star').forEach(star => {
         const value = Number(star.dataset.value);
         star.classList.toggle('pt-star--active', state.rating != null && value <= state.rating);
+        // aria-checked reflects the actual selected rating value (one radio),
+        // not the cumulative visual fill up to it (pt-star--active above).
+        star.setAttribute('aria-checked', String(state.rating === value));
     });
 
     widget.querySelector('.pt-note-toggle')
@@ -200,7 +204,7 @@ function renderPersonalTrackingWidget(itemId) {
 function injectPersonalTrackingWidgets() {
     document.querySelectorAll('[data-id]').forEach(card => {
         if (card.querySelector('.personal-tracking-widget')) return; // don't double-inject
-        card.insertAdjacentHTML('beforeend', buildPersonalTrackingWidgetHTML());
+        card.insertAdjacentHTML('beforeend', buildPersonalTrackingWidgetHTML(card.dataset.id));
         renderPersonalTrackingWidget(card.dataset.id);
     });
 }
