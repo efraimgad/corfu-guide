@@ -152,6 +152,14 @@ document.addEventListener('click', (e) => {
 
 const debouncedGlobalSearch = debounce(performGlobalSearch, 150);
 
+// #global-search-input used to carry both of these as inline
+// oninput/onkeydown attributes.
+const globalSearchInputEl = document.getElementById('global-search-input');
+if (globalSearchInputEl) {
+    globalSearchInputEl.addEventListener('input', (e) => debouncedGlobalSearch(e.target.value));
+    globalSearchInputEl.addEventListener('keydown', handleSearchKeydown);
+}
+
 window.performGlobalSearch = performGlobalSearch;
 window.debouncedGlobalSearch = debouncedGlobalSearch;
 window.handleSearchKeydown = handleSearchKeydown;

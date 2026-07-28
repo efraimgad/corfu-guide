@@ -1,26 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Remove Luxury Hotels
-    const badges = document.querySelectorAll('span.bg-purple-100.text-purple-800');
-    badges.forEach(badge => {
-        if (badge.textContent.includes('יוקרה')) {
-            // Find the closest parent that is a hotel card container
-            const card = badge.closest('.bg-white.rounded-2xl');
-            if (card) {
-                card.remove();
-            } else if (badge.classList.contains('cursor-pointer')) {
-                badge.remove(); // Remove the quick filter badge
-            }
-        }
-    });
-
-    // Note: removed automatic image randomization - cards already have curated real photos.
-    //
-    // target="_blank"/rel="noopener noreferrer" for external reference links,
-    // and the deliberate absence of target="_blank" on maps.google.com links
-    // (so mobile OSes open them in the native Maps app), are now set directly
-    // in the markup instead of being applied blanket here.
-});
-
 // Graceful fallback for the ~150 hotlinked photos (pexels/unsplash/loremflickr):
 // if one ever fails to load (dead link, ad-blocker, offline, CDN hiccup), swap
 // in a soft on-brand placeholder instead of the browser's broken-image icon and
