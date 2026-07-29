@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-
-# No Sitemap directive yet - this project has no production domain
-# assigned so far (see the canonical/og:url comment in index.html's
-# <head>). Add "Sitemap: https://<real-domain>/sitemap.xml" here, and
-# create sitemap.xml, once the site has a real deployed URL - a sitemap
-# needs absolute URLs, so one generated against a guessed domain would
-# be actively wrong rather than just incomplete.
