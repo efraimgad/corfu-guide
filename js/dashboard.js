@@ -123,6 +123,14 @@ function initDashboard() {
     updateDashFavCount();
     loadDashEditorState();
     fetchDashWeather();
+
+    // Personal trip tools (reservations / notes & favorites / packing) each
+    // own their localStorage key and rendering in their own js/*.js file;
+    // this just wires their dashboard preview tiles + full sections into
+    // the same load sequence as everything else above.
+    if (window.CorfuReservations) window.CorfuReservations.init();
+    if (window.CorfuNotesFavorites) window.CorfuNotesFavorites.init();
+    if (window.CorfuPacking) window.CorfuPacking.init();
 }
 
 function updateDashCountdown() {

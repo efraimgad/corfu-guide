@@ -1603,6 +1603,9 @@ a[class*="rounded-2xl"]:not(.premium-card) {
 .dashboard-card--hotel     { --accent: var(--olive-600, #6d7a4f); }
 .dashboard-card--car       { --accent: var(--ion-700, #14507a); }
 .dashboard-card--fav       { --accent: #a8455a; }
+.dashboard-card--reservations { --accent: var(--terracotta-500, #c96e4f); }
+.dashboard-card--notes     { --accent: var(--ion-500, #237fae); }
+.dashboard-card--packing   { --accent: var(--olive-600, #6d7a4f); }
 .dashboard-card--reminders { --accent: var(--gold-600, #b8934a); }
 
 .dashboard-card-label { font-size: 0.72rem; font-weight: 700; color: var(--ink-500); margin-bottom: 0.35rem; letter-spacing: 0.01em; }
@@ -1743,6 +1746,7 @@ a[class*="rounded-2xl"]:not(.premium-card) {
     nav[aria-label="ניווט תחתון בנייד"],
     #back-to-top-btn,
     #map-fab-btn,
+    #emergency-fab-btn,
     #scroll-progress-bar,
     #sync-status-indicator,
     #offline-toast,

@@ -27,6 +27,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1598583424075-87515152a5c5?auto=format&fit=crop&q=80&w=800",
         "alt": "פלאוקסטריצה"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "פופולרי במיוחד 🌟",
       "description": "החוף המרכזי והמפורסם ביותר באזור פלאוקסטריצה. מוקף בהרים מוריקים שגולשים אל תוך מי טורקיז קפואים וצלולים להפליא. מציע אפשרויות להשכרת סירות כדי לגלות מערות כחולות נסתרות, מנזר עתיק על הגבעה, ואווירה תוססת.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🔴 עומס גבוה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">📸 ספוט צילום מומלץ</span>",
@@ -53,11 +54,12 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1628131336423-455b8dcfa7d7?auto=format&fit=crop&q=80&w=800",
         "alt": "רוביניה"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "פנינה טבעית 🌿",
       "description": "פנינה אמיתית במערב קורפו עם מי קריסטל צלולים בצבע תכלת שקוף וחלוקי נחל לבנים. החוף פראי, ללא מתקנים, מלבד \"סירת גלידה\" קסומה שמגיעה מדי פעם. שווה את ההליכה הרגלית למטה בשביל החוויה המבודדת והמים הצלולים.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🧗 הליכה קשה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-sand-bg badge-sand-text\">🚫👶 פחות מתאים לילדים</span>",
       "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חלוקי נחל לבנים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 שקוף כקריסטל</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 שנירקול חווייתי</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ ללא מתקנים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 בינוני-עמוס</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 הרפתקנים וזוגות</span>",
-      "infoPanelHtml": "<div>🍽️ מסעדות: סירת גלידה בלבד</div>\n            <div>🚻 שירותים: אין</div>\n            <div>🚿 מקלחות: אין</div>\n            <div>🌳 צל טבעי: אחה\"צ מהצוקים</div>\n            <div>🚗 גישה: הליכה בשביל (15 דק')</div>\n            <div>🅿️ חניה: מגרש בתשלום למעלה</div>",
+      "infoPanelHtml": "<div>🍽️ מסעדות: סירת גלידה בלבד (מגיעה בצהריים)</div>\n            <div>🚻 שירותים: אין</div>\n            <div>🚿 מקלחות: אין</div>\n            <div>🌳 צל טבעי: אחה\"צ מהצוקים</div>\n            <div>🚗 גישה: הליכה בשביל (15 דק')</div>\n            <div>🅿️ חניה: מגרש בתשלום למעלה</div>\n            <div>🕗 מומלץ להגיע בבוקר מוקדם - המים קרים ועמוקים, מצוינים לשנורקלינג</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6644%2C19.7214",
       "lat": 39.6644,
       "lon": 19.7214,
@@ -77,6 +79,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?auto=format&fit=crop&q=80&w=800",
         "alt": "פורטו טימוני"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "נקודת צילום 📸",
       "description": "שני מפרצונים מהממים הניצבים גב אל גב, מופרדים על ידי רצועת יבשה ירוקה. זהו אחד המקומות המצולמים באי. הגישה אליו דורשת ירידה רגלית של חצי שעה מהכפר אפיונס (חובה נעליים סגורות), אך המראה מלמעלה והמים השקטים שווים את המאמץ.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🧗 הליכה קשה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-sand-bg badge-sand-text\">🚫👶 פחות מתאים לילדים</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">📸 ספוט צילום מומלץ</span>",
@@ -100,6 +103,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1606788874623-e18e030e2270?auto=format&fit=crop&q=80&w=800",
         "alt": "אגיוס גאורגיוס פגון"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "רחב ידיים ⛰️",
       "description": "רצועת חוף ארוכה, רחבה ומרהיבה בצורת פרסה, מוקפת בגבעות ירוקות. המים כאן נקיים בצורה יוצאת דופן וקרירים, אידיאליים לרחצה ביום חם. החוף מרווח מאד כך שתמיד תמצאו פינה שקטה, גם בשיא הקיץ.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -125,6 +129,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=800",
         "alt": "לוגאס - חוף השקיעה"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "השקיעות היפות באי 🌅",
       "description": "חוף דרמטי למרגלות צוקי חרסית תלולים. מבקרים נוהגים למרוח את הבוץ הטיפולי על גופם. המקום מפורסם במיוחד בזכות נופי השקיעה עוצרי הנשימה, אותם מומלץ לראות ממסעדת 7th Heaven הממוקמת למעלה, על מרפסת התלויה מעל התהום.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -149,6 +154,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1544473244-f6895e69da8a?auto=format&fit=crop&q=80&w=800",
         "alt": "תעלת האהבה"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "אגדת אהבה מקומית 💖",
       "description": "פלא טבע של סלעי אבן-חול בצורות ייחודיות היוצרים תעלות מי-ים. אגדה מקומית מספרת שזוגות שישחו יחד לאורך התעלה יישארו מאוהבים לנצח. אזור קטן, מתוייר מאוד ועמוס, אך מהווה חוויית צילום וביקור מרתקת.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🔴 עומס גבוה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">📸 ספוט צילום מומלץ</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\" title=\"עמוס מאוד בשיא הקיץ, עם דוכני מזכרות ומחירים מנופחים ליד החוף\">⚠️ עמוס/מסחרי</span>",
@@ -174,6 +180,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80&w=800",
         "alt": "סידארי"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "עיירת נופש תוססת 🎉",
       "description": "חוף הדגל של אחת מעיירות הנופש הגדולות באי. רצועת חוף רחבה מאוד עם מים רדודים וחמימים למרחק רב, אידיאלית ובטוחה במיוחד לילדים קטנים. מציעה שפע של פעילויות ספורט ימי ואווירה משפחתית-צעירה ורועשת.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🔴 עומס גבוה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -200,6 +207,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?auto=format&fit=crop&q=80&w=800",
         "alt": "ארילאס"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "רוגע וחול רך 🧘‍♂️",
       "description": "חוף הידוע באווירה שלוותית ומרגיעה. עם קהילת יוגה מתפתחת סביבו, מדובר במקום קסום לשקיעות נפלאות. המים הרדודים המשתרעים למרחק אל תוך הים, הופכים את החוף הזה לנוח ובטוח לכל המשפחה.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -224,6 +232,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800",
         "alt": "אגיוס סטפנוס"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "רצועה חולית אינסופית 🏖️",
       "description": "חוף חולי רחב ועצום, אידיאלי למשחקי חוף, ארמונות חול והליכות ארוכות במים הרדודים. לעיתים תכופות נושבת כאן בריזה נעימה המושכת גולשי רוח מתחילים. לא להתבלבל עם החוף בעל השם הזהה במזרח האי!",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -248,6 +257,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1506477331477-33d5d8b3dc85?auto=format&fit=crop&q=80&w=800",
         "alt": "גליפאדה"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "מלכת החופים התוססים 👑",
       "description": "חוף אהוב ופופולרי מאד, המציע חול זהוב עמוק ומועדוני חוף אקסקלוסיביים. מוקף בגבעות מיוערות, כאן תמצאו מוזיקה טובה, קוקטיילים ואווירה צעירה שוקקת. הים יפהפה ולעתים קרובות מאופיין בגלים כיפיים לקפיצה.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🔴 עומס גבוה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -274,6 +284,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&q=80&w=800",
         "alt": "פלקאס"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "שכיית חמדה קסומה 🌅",
       "description": "רצועת חול מוזהבת וקסומה. בעבר מעוז של קהילת ההיפים באי, והיום יעד מבוקש למשפחות וצעירים. החוף מספק שקיעות מהפנטות ובתי קפה משוחררים שמציעים חופשה רגועה אבל מלאת אווירה.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🔴 עומס גבוה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -299,6 +310,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1538097304804-2a1b932466a9?auto=format&fit=crop&q=80&w=800",
         "alt": "מירטיוטיסה"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "החוף המשוחרר 🍃",
       "description": "חוף פראי וזעיר שמוקף בצוקים ענקיים. לורנס דארל כינה אותו \"היפה בעולם\". כיום מתפקד כחוף נודיסטים לא-רשמי. למרות שרצועת החול שלו הצטמצמה עם השנים, הוא נותר מקום אינטימי בעל מים צלולים וקרים באופן קיצוני.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🧗 הליכה קשה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-sand-bg badge-sand-text\">🚫👶 פחות מתאים לילדים</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">📸 ספוט צילום מומלץ</span>",
@@ -323,6 +335,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=800",
         "alt": "ארמונס"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "היסטוריה ומיתולוגיה 🏛️",
       "description": "מפרצון עמוק במערב קורפו בו לפי המיתולוגיה אודיסאוס נשטף לחוף ונמצא על ידי הנסיכה נאוסקאה. החוף יושב בעמק ירוק ויפהפה בו נחל מתוק נשפך אל הים. מים מעולים לשחיינים.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -349,6 +362,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80&w=800",
         "alt": "ליאפדס"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "פלאוקסטריצה - בשקט 🤫",
       "description": "חוף חלוקים לבנים קטן שמזכיר ביופיו את השכן המפורסם פלאוקסטריצה, אך פחות ממוסחר. המים ידועים בטמפרטורה הקרירה שלהם. מפה ניתן לשכור סירות ולשוט לחופים נסתרים לחלוטין ולמערות באזור.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🥾 הליכה בינונית</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -373,6 +387,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800",
         "alt": "איסוס"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "הסהרה של קורפו 🐪",
       "description": "תופעת טבע מרתקת - דיונות חול ענקיות המפרידות בין הים לאגם קוריסיון. רצועה עצומה, פראית לחלוטין ורחבת ידיים. המקום פופולרי במיוחד בקרב גולשי קייטסרפינג בזכות הרוחות המתונות, והופיע בסרט של ג'יימס בונד.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -397,6 +412,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1540155945626-66eacf57ddcf?auto=format&fit=crop&q=80&w=800",
         "alt": "הליקונאס"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "שלווה על שפת האגם 🦩",
       "description": "המשכו הצפוני של איסוס, ואחד החופים הפראיים ביותר בקורפו. הוא מציע שקט טהור וניתוק ממלונות ההמונים, עם בר קטן ונינוח, ואפשרות לתצפת על להקות פלמינגו באגם קוריסיון הסמוך (בעיקר באביב ובסתיו).",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -421,6 +437,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1629807403378-0130db52d5bf?auto=format&fit=crop&q=80&w=800",
         "alt": "מרתיאס"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "מוזהב ומפנק 🌟",
       "description": "חוף נהדר בדרום המערב עם חול עמוק וזהוב שמתעמק בצורה נוחה. האזור משלב יופי טבעי יחד עם מתחמי מועדוני חוף שמציעים אוכל מוקפד, קוקטיילים ואווירת צ'יל אאוט כיפית המתאימה גם למשפחות בסטייל.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -447,6 +464,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80&w=800",
         "alt": "גרדנוס"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "סוד המקומיים 🤫",
       "description": "פנינה לא מתוירת ומוסתרת למחצה בדרום האי. על שם נהר קטן שנשפך ממש באמצע החוף. כאן תמצאו בעיקר טברנות משפחתיות אותנטיות, חול רך והמון שלווה – מקלט בטוח מאוטובוסים של תיירים גם בשיא חודש אוגוסט.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -472,6 +490,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?auto=format&fit=crop&q=80&w=800",
         "alt": "ארקודילאס"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "פראות קצה הדרום 🧭",
       "description": "הנקודה הדרומית ביותר בקורפו. חוף פראי בצורה קיצונית שמוקף בצוקים לבנים ועצומים המזדקרים ישירות מעל חול בתולי. הגישה המשובשת מבטיחה בידוד מוחלט. מומלץ מאד למיטיבי לכת ולאלו שמוכנים להרפתקה.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🧗 הליכה קשה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-sand-bg badge-sand-text\">🚫👶 פחות מתאים לילדים</span>",
@@ -497,6 +516,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1544473244-f6895e69da8a?auto=format&fit=crop&q=80&w=800",
         "alt": "קאבוס"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "מסיבות ללא הפסקה 🍻",
       "description": "בירת המסיבות הבלתי מעורערת של האי, אליה נוהרים המוני צעירים (בעיקר בריטים) בכל קיץ. החוף ארוך וחולי, מפוצץ בפעילויות אקסטרים ימיות, מסיבות קצף, עשרות פאבים ווייב שלא עוצר לעולם. לא למחפשי השקט.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🔴 עומס גבוה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-sand-bg badge-sand-text\">🚫👶 פחות מתאים לילדים</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\" title=\"ידוע כמרכז מסיבות תיירותי רועש, פחות משקף את קורפו האותנטית\">⚠️ עמוס/מסחרי</span>",
@@ -522,6 +542,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1498092651296-641e88c3b057?auto=format&fit=crop&q=80&w=800",
         "alt": "ברבטי"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "כחול יוקרתי 💎",
       "description": "אחד החופים המרשימים בחוף הצפון-מזרחי היוקרתי. רצועה לבנה וארוכה של חלוקי נחל בוהקים היושבת למרגלות הר פנטוקראטור העצום. מתגאה במי קריסטל צלולים במיוחד בעלי 'דגל כחול' ומשופעת במועדוני חוף אופנתיים ואיכותיים.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -546,6 +567,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1628131336423-455b8dcfa7d7?auto=format&fit=crop&q=80&w=800",
         "alt": "ניסאקי"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "מפרץ ציורי קטנטן ⛵",
       "description": "מפרצון זעיר ורומנטי בעל צורת פרסה. שחייה כאן מרגישה כמו שחייה באקווריום טבעי בזכות מי זכוכית צלולים בצורה מרהיבה. ניתן לשכור מפה סירת מנוע (ללא צורך ברישיון) לשיט מהנה לאורך חופי המזרח היפהפיים.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🥾 הליכה בינונית</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -565,16 +587,17 @@ window.CORFU_LOCATIONS = {
     {
       "id": "beach-מפרץ-אגני-Agni",
       "name": "מפרץ אגני (Agni)",
-      "tags": "quiet",
+      "tags": "quiet,luxury",
       "image": {
         "src": "https://images.unsplash.com/photo-1544473244-f6895e69da8a?auto=format&fit=crop&q=80&w=800",
         "alt": "מפרץ אגני"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "הריביירה היוונית 🍽️",
       "description": "ידוע יותר בטברנות הפנומנליות שלו מאשר בחוף עצמו. מפרצון עם מזחי עץ ארוכים אליהם מגיעות יאכטות של תיירים עשירים העוצרים לארוחת צהריים יוקרתית. המים נהדרים ומוקפים בעצי זית שמספקים ארומה מיוחדת.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
       "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חלוקי נחל</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 נקי ושקט לחלוטין</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 טוב מסביב לריפים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ שמשיות ספורות על הצרורות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 עמוס בשעות הארוחה</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 אנשי יאכטות ופודיז</span>",
-      "infoPanelHtml": "<div>🍽️ מסעדות: 3 מהידועות ביוון</div>\n            <div>🚻 שירותים: מעולים במסעדות</div>\n            <div>🚿 מקלחות: בסיסיות</div>\n            <div>🌳 צל טבעי: עצי זית נשפכים למים</div>\n            <div>🚗 גישה: ירידה תלולה במיוחד או בסירה</div>\n            <div>🅿️ חניה: קטנה מאוד למטה</div>",
+      "infoPanelHtml": "<div>🍽️ מסעדות: 3 מהידועות ביוון</div>\n            <div>🚻 שירותים: מעולים במסעדות</div>\n            <div>🚿 מקלחות: בסיסיות</div>\n            <div>🌳 צל טבעי: עצי זית נשפכים למים</div>\n            <div>🚗 גישה: ירידה תלולה במיוחד או בסירה</div>\n            <div>🅿️ חניה: קטנה מאוד למטה</div>\n            <div>📅 הזמינו מקום בטברנת Agni או Toula's לפחות שבוע מראש בקיץ</div>\n            <div>🚤 לכל טברנה מזח קטן משלה - אפשר לשכור סירה ולעגון ישירות</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7356%2C19.9272",
       "lat": 39.7356,
       "lon": 19.9272,
@@ -593,6 +616,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=800",
         "alt": "קלאמי"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "השראה ספרותית 📖",
       "description": "מפרץ ירוק בצורת פרסה, הידוע כביתה ההיסטורי של משפחת דארל (\"משפחתי וחיות אחרות\"). המים תמיד שקטים כמו אגם - אידיאלי לסאפ (SUP). \"הבית הלבן\" ההיסטורי מתפקד כיום כטברנה נהדרת המשקיפה על המים החלקים.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">📸 ספוט צילום מומלץ</span>",
@@ -618,6 +642,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1506477331477-33d5d8b3dc85?auto=format&fit=crop&q=80&w=800",
         "alt": "קרסיה"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "פסטורליה טהורה 🌿",
       "description": "פינה סודית ואקסקלוסיבית המוקפת אחוזות פאר. רצועה ארוכה של חלוקים נקיים, עצי זית שנושקים לים ומים בצבע טורקיז זוהר שקוף במיוחד. השלווה כאן מוחלטת הודות לטברנה בודדת ומעולה המשרתת את החוף ללא רעש מסיבות.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🥾 הליכה בינונית</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -642,6 +667,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.unsplash.com/photo-1598583424075-87515152a5c5?auto=format&fit=crop&q=80&w=800",
         "alt": "קסיופי - בטאריה"
       },
+      "hasRealPhoto": false,
       "popularityBadge": "אבנים כשלג ❄️",
       "description": "מוחבאים היטב מעבר לנמל קסיופי, אלו הם שני מפרצונים צמודים עוצרי נשימה המרופדים בחלוקי נחל לבנים בוהקים כשלג. השילוב מול צבעי כחול-טורקיז העמוקים, ונוף הרי אלבניה באופק, הופך אותם לחוויה צילומית (וימית) מיוחדת.",
       "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
@@ -667,13 +693,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Rex Restaurant"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
-      "rating": "4.7",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
+      "rating": "4.5",
       "price": "$$",
       "name": "מסעדת רקס (Rex)",
       "subtitle": "Rex Restaurant",
       "region": "📍 קורפו טאון",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Rex Restaurant</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\">\n                            <span class=\"text-blue-500 mt-0.5\">🍳</span> \n                            <span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> סופריטו, מוסקה, פסטיצדה</span>\n                        </p>\n                        <p class=\"flex items-center gap-2\">\n                            <span class=\"text-blue-500\">🕒</span> \n                            <span dir=\"ltr\">12:00 - 23:30</span>\n                        </p>\n                        <div class=\"flex items-center gap-2 mt-2\">\n                            <span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span>\n                        </div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6244051%2C19.9235181&query_place_id=ChIJT6jKOt1dWxMRsmc_2ery6II\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Rex Restaurant</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\">\n                            <span class=\"text-blue-500 mt-0.5\">🍳</span> \n                            <span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> סופריטו, מוסקה, פסטיצדה</span>\n                        </p>\n                        <p class=\"flex items-center gap-2\">\n                            <span class=\"text-blue-500\">🕒</span> \n                            <span dir=\"ltr\">11:30-23:00 (א' 17:00-23:00)</span>\n                        </p>\n                        <div class=\"flex items-center gap-2 mt-2\">\n                            <span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span>\n                        </div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6244051%2C19.9235181&query_place_id=ChIJT6jKOt1dWxMRsmc_2ery6II\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6244051%2C19.9235181&query_place_id=ChIJT6jKOt1dWxMRsmc_2ery6II",
       "lat": 39.6244051,
       "lon": 19.9235181,
@@ -700,13 +727,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Toula's Gastronomy"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
-      "rating": "4.8",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
+      "rating": "4.5",
       "price": "$$$",
       "name": "טולה גסטרונומיה",
       "subtitle": "Toula's Gastronomy",
       "region": "📍 צפון קורפו",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Toula's Gastronomy</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 צפון קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> שרימפס סגנאקי, סלט יווני, דג טרי</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">13:00 - 23:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.7361811%2C19.9292943&query_place_id=ChIJ5SS-BGFCWxMRaurnkC_oFaE\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Toula's Gastronomy</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 צפון קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> שרימפס סגנאקי, סלט יווני, דג טרי</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">13:00-22:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.7361811%2C19.9292943&query_place_id=ChIJ5SS-BGFCWxMRaurnkC_oFaE\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7361811%2C19.9292943&query_place_id=ChIJ5SS-BGFCWxMRaurnkC_oFaE",
       "lat": 39.7361811,
       "lon": 19.9292943,
@@ -733,6 +761,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Marina's Tavern"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.6",
       "price": "$",
@@ -760,6 +789,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1058277/pexels-photo-1058277.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Roula Tavern"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
@@ -787,13 +817,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Klimataria Taverna"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.9</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
-      "rating": "4.9",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
+      "rating": "4.7",
       "price": "$$",
       "name": "קלימטריה",
       "subtitle": "Klimataria Taverna",
       "region": "📍 דרום קורפו",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Klimataria Taverna</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 דרום קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> דגים מטוגנים, תמנון על הגריל, סלטים טריים</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">19:00 - 23:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.5462032%2C19.9131785&query_place_id=ChIJsRnHQYVfWxMR5qaW5XFq4rg\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Klimataria Taverna</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 דרום קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> דגים מטוגנים, תמנון על הגריל, סלטים טריים</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">17:30-22:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.5462032%2C19.9131785&query_place_id=ChIJsRnHQYVfWxMR5qaW5XFq4rg\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.5462032%2C19.9131785&query_place_id=ChIJsRnHQYVfWxMR5qaW5XFq4rg",
       "lat": 39.5462032,
       "lon": 19.9131785,
@@ -823,13 +854,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/842519/pexels-photo-842519.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Fishalida"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
-      "rating": "4.8",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.3</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
+      "rating": "4.3",
       "price": "$$$",
       "name": "אבלי (Avli)",
       "subtitle": "Avli Restaurant",
       "region": "📍 קורפו טאון",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Avli Restaurant</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> פסטיצדה, פילה בקר, ריזוטו שמן זית</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">13:00 - 00:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6108758%2C19.9225247&query_place_id=ChIJ2TAUh3ReWxMRDz-vUO3kziQ\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Avli Restaurant</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> פסטיצדה, פילה בקר, ריזוטו שמן זית</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">12:00-23:15</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6108758%2C19.9225247&query_place_id=ChIJ2TAUh3ReWxMRDz-vUO3kziQ\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6108758%2C19.9225247&query_place_id=ChIJ2TAUh3ReWxMRDz-vUO3kziQ",
       "lat": 39.6108758,
       "lon": 19.9225247,
@@ -856,6 +888,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/329868/pexels-photo-329868.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Roumeli Fish Tavern"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
@@ -879,17 +912,19 @@ window.CORFU_LOCATIONS = {
       "id": "food-הבית-הלבן",
       "category": "cat-fish",
       "tags": "fish,luxury",
+      // TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Gulf of Mexico sunset, reused across About + 3 gem records + this restaurant)
       "image": {
-        "src": "https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "src": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=800",
         "alt": "The White House Restaurant"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
-      "rating": "4.7",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.3</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
+      "rating": "4.3",
       "price": "$$$$",
       "name": "הבית הלבן",
       "subtitle": "The White House Restaurant",
       "region": "📍 צפון קורפו",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">The White House Restaurant</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 צפון קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> לוקוס, קרפצ'יו דג ים, קוויאר</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">09:00 - 23:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.7424729%2C19.9331583&query_place_id=ChIJsdqPX29CWxMR40NPONQIOMU\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">The White House Restaurant</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 צפון קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> לוקוס, קרפצ'יו דג ים, קוויאר</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">12:00-23:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.7424729%2C19.9331583&query_place_id=ChIJsdqPX29CWxMR40NPONQIOMU\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7424729%2C19.9331583&query_place_id=ChIJsdqPX29CWxMR40NPONQIOMU",
       "lat": 39.7424729,
       "lon": 19.9331583,
@@ -916,6 +951,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/41320/beef-cheese-cuisine-delicious-41320.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Akrogiali Seafood"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
@@ -943,13 +979,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/896924/pexels-photo-896924.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Boukari Beach Taverna"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.9</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
-      "rating": "4.9",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.3</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
+      "rating": "4.3",
       "price": "$$",
       "name": "בוקארי ביץ'",
       "subtitle": "Boukari Beach Taverna",
       "region": "📍 דרום קורפו",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Boukari Beach Taverna</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 דרום קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> ברבוניות, תמנון, סקורדליה</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">12:00 - 23:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.4597825%2C19.9712318&query_place_id=ChIJvVuXYTmfXBMR5GA0RtjghmM\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Boukari Beach Taverna</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 דרום קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> ברבוניות, תמנון, סקורדליה</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">12:00-22:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.4597825%2C19.9712318&query_place_id=ChIJvVuXYTmfXBMR5GA0RtjghmM\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.4597825%2C19.9712318&query_place_id=ChIJvVuXYTmfXBMR5GA0RtjghmM",
       "lat": 39.4597825,
       "lon": 19.9712318,
@@ -976,13 +1013,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/725997/pexels-photo-725997.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Gialos Seafood"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
-      "rating": "4.7",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
+      "rating": "4.8",
       "price": "$$$",
       "name": "גיאלוס",
       "subtitle": "Gialos Seafood",
       "region": "📍 צפון קורפו",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Gialos Seafood</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 צפון קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> ריזוטו פירות ים, מולים ברוטב יין</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">13:00 - 23:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.7935451%2C19.7401727&query_place_id=ChIJ_aZliUZPWxMRcB9STRjPzA8\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Gialos Seafood</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 צפון קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> ריזוטו פירות ים, מולים ברוטב יין</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">18:00-23:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.7935451%2C19.7401727&query_place_id=ChIJ_aZliUZPWxMRcB9STRjPzA8\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7935451%2C19.7401727&query_place_id=ChIJ_aZliUZPWxMRcB9STRjPzA8",
       "lat": 39.7935451,
       "lon": 19.7401727,
@@ -1012,6 +1050,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Thalassa"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
@@ -1038,6 +1077,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1123249/pexels-photo-1123249.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Captain Octopus"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
@@ -1065,13 +1105,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Kerasia Tavern"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
-      "rating": "4.8",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.1</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
+      "rating": "4.1",
       "price": "$$$",
       "name": "טברנת קראסיה",
       "subtitle": "Kerasia Tavern",
       "region": "📍 צפון קורפו",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Kerasia Tavern</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 צפון קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> לובסטר, פסטה ים, שרימפס ג'מבו</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">12:00 - 22:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.7549442%2C19.9429248&query_place_id=ChIJv06lGgxCWxMR1j53ua-PiTs\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Kerasia Tavern</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 צפון קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> לובסטר, פסטה ים, שרימפס ג'מבו</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">עונתי - לאמת טלפונית</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.7549442%2C19.9429248&query_place_id=ChIJv06lGgxCWxMR1j53ua-PiTs\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7549442%2C19.9429248&query_place_id=ChIJv06lGgxCWxMR1j53ua-PiTs",
       "lat": 39.7549442,
       "lon": 19.9429248,
@@ -1098,13 +1139,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/673447/pexels-photo-673447.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Trilogia Plous"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
-      "rating": "4.7",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
+      "rating": "4.5",
       "price": "$$$",
       "name": "טרילוגיה",
       "subtitle": "Trilogia Plous",
       "region": "📍 צפון קורפו",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Trilogia Plous</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 צפון קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> קוקטייל שרימפס, קלמארי סגנאקי, מולים</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">12:00 - 00:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.7926861%2C19.9199944&query_place_id=ChIJYctMrJNBWxMRrU-vyi7mt6c\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Trilogia Plous</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 צפון קורפו</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> קוקטייל שרימפס, קלמארי סגנאקי, מולים</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">12:00-23:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.7926861%2C19.9199944&query_place_id=ChIJYctMrJNBWxMRrU-vyi7mt6c\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7926861%2C19.9199944&query_place_id=ChIJYctMrJNBWxMRrU-vyi7mt6c",
       "lat": 39.7926861,
       "lon": 19.9199944,
@@ -1131,13 +1173,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/842519/pexels-photo-842519.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "La Famiglia"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
-      "rating": "4.7",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
+      "rating": "4.5",
       "price": "$$$",
       "name": "לה פמיליה",
       "subtitle": "La Famiglia",
       "region": "📍 קורפו טאון",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">La Famiglia</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> פסטה קרבונרה, פיצה דקה</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">18:00 - 00:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6251911%2C19.9216804&query_place_id=ChIJpR8BzNxdWxMRuqztBRumpkE\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">La Famiglia</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> פסטה קרבונרה, פיצה דקה</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">19:30-00:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6251911%2C19.9216804&query_place_id=ChIJpR8BzNxdWxMRuqztBRumpkE\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6251911%2C19.9216804&query_place_id=ChIJpR8BzNxdWxMRuqztBRumpkE",
       "lat": 39.6251911,
       "lon": 19.9216804,
@@ -1168,6 +1211,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Il Vesuvio"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
@@ -1195,6 +1239,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Pizza Del Sole"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.5",
       "price": "$",
@@ -1221,6 +1266,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Pasta Italiana"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.4</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.4",
       "price": "$$",
@@ -1248,6 +1294,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/361184/asparagus-steak-veal-steak-veal-361184.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Ninos Traditional"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
@@ -1275,6 +1322,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/3184183/pexels-photo-3184183.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "The Grill House"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
@@ -1302,13 +1350,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1251399/pexels-photo-1251399.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Meat Me Grill"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.7",
       "price": "$$$",
       "name": "לדוקולה (Ladokolla)",
       "subtitle": "Ladokolla Traditional Grill House",
       "region": "📍 גוביה / דאסיה",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Ladokolla Traditional Grill House</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 גוביה / דאסיה</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> צלעות חזיר, כבש על הגריל, נקניקיות מסורתיות</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">18:00 - 00:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6400163%2C19.8046568&query_place_id=ChIJ3c7bbitaWxMRtlOoPDKQYjc\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Ladokolla Traditional Grill House</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 גוביה / דאסיה</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> צלעות חזיר, כבש על הגריל, נקניקיות מסורתיות</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">18:30-00:30 (א' 19:30-00:30)</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6400163%2C19.8046568&query_place_id=ChIJ3c7bbitaWxMRtlOoPDKQYjc\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6400163%2C19.8046568&query_place_id=ChIJ3c7bbitaWxMRtlOoPDKQYjc",
       "lat": 39.6400163,
       "lon": 19.8046568,
@@ -1338,6 +1387,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1639556/pexels-photo-1639556.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Pita Pita Grill"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.4</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.4",
       "price": "$",
@@ -1365,13 +1415,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/7625063/pexels-photo-7625063.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Bratsera Meat"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
-      "rating": "4.8",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.4</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
+      "rating": "4.4",
       "price": "$$$",
       "name": "פליסבוס (Flisvos)",
       "subtitle": "Flisvos Seaside Experience",
       "region": "📍 קורפו טאון",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Flisvos Seaside Experience</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> דגים על הגריל, מנות ים תיכוניות</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">19:00 - 23:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.5904347%2C19.917521&query_place_id=ChIJGf4Lb0ReWxMRHoKSCJYirnA\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Flisvos Seaside Experience</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> דגים על הגריל, מנות ים תיכוניות</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">08:00-01:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.5904347%2C19.917521&query_place_id=ChIJGf4Lb0ReWxMRHoKSCJYirnA\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.5904347%2C19.917521&query_place_id=ChIJGf4Lb0ReWxMRHoKSCJYirnA",
       "lat": 39.5904347,
       "lon": 19.917521,
@@ -1398,6 +1449,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Liston"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
@@ -1424,6 +1476,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/374885/pexels-photo-374885.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Microcafe"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.8",
       "price": "$",
@@ -1450,6 +1503,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/103124/pexels-photo-103124.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Gabao Breakfast"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.7",
       "price": "$$",
@@ -1477,13 +1531,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1015568/pexels-photo-1015568.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Cavalieri Roof Garden"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
-      "rating": "4.6",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.0</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
+      "rating": "4.0",
       "price": "$$$",
       "name": "קבליירי גג",
       "subtitle": "Cavalieri Roof Garden",
       "region": "📍 קורפו טאון",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Cavalieri Roof Garden</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> קוקטיילים, עוגת שוקולד, נוף משגע</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">10:00 - 00:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6210476%2C19.9237712&query_place_id=ChIJC0JZpd1dWxMRakNjp9a4gD4\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Cavalieri Roof Garden</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> קוקטיילים, עוגת שוקולד, נוף משגע</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">18:30-00:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6210476%2C19.9237712&query_place_id=ChIJC0JZpd1dWxMRakNjp9a4gD4\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6210476%2C19.9237712&query_place_id=ChIJC0JZpd1dWxMRakNjp9a4gD4",
       "lat": 39.6210476,
       "lon": 19.9237712,
@@ -1513,6 +1568,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/2059/restaurant-people-alcohol-bar.jpg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Puppet Guesthouse Cafe"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.9</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.9",
       "price": "$$",
@@ -1540,6 +1596,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1332267/pexels-photo-1332267.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Papagiorgis Patisserie"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.9</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.9",
       "price": "$$",
@@ -1566,6 +1623,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/2059/restaurant-people-alcohol-bar.jpg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Stathis Bakery"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.7",
       "price": "$",
@@ -1593,6 +1651,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/3740197/pexels-photo-3740197.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Corfu Lukumades"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.8",
       "price": "$",
@@ -1620,6 +1679,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1055271/pexels-photo-1055271.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Hans & Gretel"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
@@ -1647,6 +1707,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "The Cake Boutique"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.8",
       "price": "$$$",
@@ -1674,13 +1735,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Imabari Seaside"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
-      "rating": "4.7",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.3</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
+      "rating": "4.3",
       "price": "$$$",
       "name": "אימאברי",
       "subtitle": "Imabari Seaside",
       "region": "📍 קורפו טאון",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Imabari Seaside</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🍷 בר/לאונג'</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> קוקטיילים קומקוואט, טאפאס ים</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">10:00 - 02:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6265827%2C19.9250866&query_place_id=ChIJeRUnh8JdWxMRU1BawiBERWM\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Imabari Seaside</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🍷 בר/לאונג'</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> קוקטיילים קומקוואט, טאפאס ים</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">10:00-02:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6265827%2C19.9250866&query_place_id=ChIJeRUnh8JdWxMRU1BawiBERWM\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6265827%2C19.9250866&query_place_id=ChIJeRUnh8JdWxMRU1BawiBERWM",
       "lat": 39.6265827,
       "lon": 19.9250866,
@@ -1707,13 +1769,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/3385654/pexels-photo-3385654.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Pazuzu Beach Club"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
-      "rating": "4.5",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 3.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
+      "rating": "3.6",
       "price": "$$$",
       "name": "פאזוזו",
       "subtitle": "Pazuzu Beach Club",
       "region": "📍 מרכז-מערב",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Pazuzu Beach Club</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 מרכז-מערב</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🍷 בר/לאונג'</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> קוקטיילים טרופיים, סושי, נשנושים</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">10:00 - 04:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.5925846%2C19.8080446&query_place_id=ChIJ27MUbP9YWxMRi0rMq9iobjw\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Pazuzu Beach Club</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 מרכז-מערב</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🍷 בר/לאונג'</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> קוקטיילים טרופיים, סושי, נשנושים</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">10:00-19:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.5925846%2C19.8080446&query_place_id=ChIJ27MUbP9YWxMRi0rMq9iobjw\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.5925846%2C19.8080446&query_place_id=ChIJ27MUbP9YWxMRi0rMq9iobjw",
       "lat": 39.5925846,
       "lon": 19.8080446,
@@ -1740,6 +1803,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/274192/pexels-photo-274192.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Bristol Cafe Bar"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
@@ -1767,13 +1831,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/65132/pexels-photo-65132.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "NAOK Azur"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.4</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
-      "rating": "4.4",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.2</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
+      "rating": "4.2",
       "price": "$$$",
       "name": "נאוק אזור",
       "subtitle": "NAOK Azur",
       "region": "📍 קורפו טאון",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">NAOK Azur</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🍷 בר/לאונג'</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> שמפניה, סליידרס, ג'ין וטוניק</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">10:00 - 03:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6209433%2C19.9245801&query_place_id=ChIJ4_H-5t1dWxMRaHHlQY3UmU0\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">NAOK Azur</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🍷 בר/לאונג'</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> שמפניה, סליידרס, ג'ין וטוניק</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">09:00-03:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6209433%2C19.9245801&query_place_id=ChIJ4_H-5t1dWxMRaHHlQY3UmU0\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6209433%2C19.9245801&query_place_id=ChIJ4_H-5t1dWxMRaHHlQY3UmU0",
       "lat": 39.6209433,
       "lon": 19.9245801,
@@ -1800,6 +1865,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1484516/pexels-photo-1484516.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Barbati Beach Bar"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
@@ -1827,6 +1893,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Gyros Corner"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.7",
       "price": "$",
@@ -1854,6 +1921,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Soul Souvlaki"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.8",
       "price": "$",
@@ -1881,6 +1949,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/4181933/pexels-photo-4181933.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Corfu Falafel"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.5",
       "price": "$",
@@ -1908,6 +1977,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Burger Bar"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
@@ -1935,6 +2005,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1566837/pexels-photo-1566837.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Pizzeta Street"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.4</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.4",
       "price": "$",
@@ -1962,13 +2033,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1435896/pexels-photo-1435896.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "The Venetian Well"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.9</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
-      "rating": "4.9",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
+      "rating": "4.5",
       "price": "$$$$",
       "name": "הבאר הוונציאנית",
       "subtitle": "The Venetian Well",
       "region": "📍 קורפו טאון",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">The Venetian Well</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> רביולי כמהין, קרפצ'יו בקר</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">19:00 - 23:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6264175%2C19.9218429&query_place_id=ChIJFd5zO8NdWxMRlc_nhVt9CcA\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">The Venetian Well</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> רביולי כמהין, קרפצ'יו בקר</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">18:30-23:30 (ה'-ש' 19:00-23:30)</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6264175%2C19.9218429&query_place_id=ChIJFd5zO8NdWxMRlc_nhVt9CcA\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6264175%2C19.9218429&query_place_id=ChIJFd5zO8NdWxMRlc_nhVt9CcA",
       "lat": 39.6264175,
       "lon": 19.9218429,
@@ -1998,13 +2070,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Etrusco"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.9</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
-      "rating": "4.9",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
+      "rating": "4.6",
       "price": "$$$$",
       "name": "אטרוסקו",
       "subtitle": "Etrusco",
       "region": "📍 גוביה / דאסיה",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Etrusco</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 גוביה / דאסיה</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> תפריט טעימות של השף בוטריני</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">19:30 - 23:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6891409%2C19.8349032&query_place_id=ChIJHZ8YIN1dWxMRKsU-6w6RivY\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Etrusco</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 גוביה / דאסיה</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> תפריט טעימות של השף בוטריני</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">19:30-23:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6891409%2C19.8349032&query_place_id=ChIJHZ8YIN1dWxMRKsU-6w6RivY\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6891409%2C19.8349032&query_place_id=ChIJHZ8YIN1dWxMRKsU-6w6RivY",
       "lat": 39.6891409,
       "lon": 19.8349032,
@@ -2034,13 +2107,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Botrini's Corfu"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
-      "rating": "4.8",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
+      "rating": "4.6",
       "price": "$$$$",
       "name": "ארקדיון ביסטרו (Arcadion Bistrot)",
       "subtitle": "Arcadion Bistrot",
       "region": "📍 קורפו טאון",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Arcadion Bistrot</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> דגי ים טריים, פירוט קורפיוטי מודרני</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">19:00 - 23:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.623486%2C19.9234303&query_place_id=ChIJ1-dAyLRdWxMRyBFDeuVafHo\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Arcadion Bistrot</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> דגי ים טריים, פירוט קורפיוטי מודרני</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">07:00-00:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.623486%2C19.9234303&query_place_id=ChIJ1-dAyLRdWxMRyBFDeuVafHo\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.623486%2C19.9234303&query_place_id=ChIJ1-dAyLRdWxMRyBFDeuVafHo",
       "lat": 39.623486,
       "lon": 19.9234303,
@@ -2067,13 +2141,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Pomo D'Oro"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
-      "rating": "4.8",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
+      "rating": "4.5",
       "price": "$$$",
       "name": "פומו ד'אורו",
       "subtitle": "Pomo D'Oro",
       "region": "📍 קורפו טאון",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Pomo D'Oro</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> רביולי שחור, קינוח פסיפלורה</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">18:00 - 23:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6232851%2C19.921414&query_place_id=ChIJm1sGkdxdWxMR14OXkzxRqzI\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Pomo D'Oro</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> רביולי שחור, קינוח פסיפלורה</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">18:30-23:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6232851%2C19.921414&query_place_id=ChIJm1sGkdxdWxMR14OXkzxRqzI\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6232851%2C19.921414&query_place_id=ChIJm1sGkdxdWxMR14OXkzxRqzI",
       "lat": 39.6232851,
       "lon": 19.921414,
@@ -2101,13 +2176,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1058277/pexels-photo-1058277.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Aristou Fine Dining"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
-      "rating": "4.7",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.1</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
+      "rating": "4.1",
       "price": "$$$$",
       "name": "אורה (Ora)",
       "subtitle": "Ora Restaurant",
       "region": "📍 קורפו טאון",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Ora Restaurant</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> קרפצ'יו לברק, צלעות בקר מבושלות לאט</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">19:00 - 23:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6219832%2C19.9251742&query_place_id=ChIJ5xGcNy5dWxMR5n1Oeq9i9lE\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Ora Restaurant</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> קרפצ'יו לברק, צלעות בקר מבושלות לאט</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">19:00-01:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6219832%2C19.9251742&query_place_id=ChIJ5xGcNy5dWxMR5n1Oeq9i9lE\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6219832%2C19.9251742&query_place_id=ChIJ5xGcNy5dWxMR5n1Oeq9i9lE",
       "lat": 39.6219832,
       "lon": 19.9251742,
@@ -2134,13 +2210,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Akrotiri Lounge"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.6",
       "price": "$$$",
       "name": "רוזמרינו (Rosmarino)",
       "subtitle": "Rosmarino Corfu",
       "region": "📍 קורפו טאון",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Rosmarino Corfu</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> פסטה קרבונרה, מנות דגים מקומיות</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">18:00 - 00:00</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6232215%2C19.922668&query_place_id=ChIJz8roCp1dWxMRRQ1bM-JzcoE\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-4 font-mono\">Rosmarino Corfu</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 קורפו טאון</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><div class=\"space-y-3 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> פסטה קרבונרה, מנות דגים מקומיות</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">12:00-23:30</span></p>\n                        <div class=\"flex items-center gap-2 mt-2\"><span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span></div>\n                    </div><div class=\"mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.6232215%2C19.922668&query_place_id=ChIJz8roCp1dWxMRRQ1bM-JzcoE\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6232215%2C19.922668&query_place_id=ChIJz8roCp1dWxMRRQ1bM-JzcoE",
       "lat": 39.6232215,
       "lon": 19.922668,
@@ -2168,13 +2245,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/2373201/pexels-photo-2373201.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "7th Heaven Cafe"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.3</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$-$$$</span>",
-      "rating": "4.3",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$-$$$</span>",
+      "rating": "4.6",
       "price": "$$-$$$",
       "name": "7th Heaven Cafe",
       "subtitle": "7th Heaven Panorama",
       "region": "📍 צפון קורפו",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-2 font-mono\">7th Heaven Panorama</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 צפון קורפו</span><p class=\"text-sm text-gray-600 mb-3\">בר-מסעדה על צוק מעל חוף לוגאס עם מרפסת זכוכית ונוף 180° לים. השקיעה המפורסמת ביותר בקורפו.</p><div class=\"space-y-2.5 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> פסטת פירות ים, כבש אפוי, קוקטייל Ionian Spritz</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">10:00 - 00:00</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">💶</span><span>ממוצע לזוג: €50–80</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🅿️</span><span>חניה חינם בכפר פרולאדס, 3 דק' הליכה</span></p>\n                        <div class=\"flex flex-wrap gap-1.5 mt-2\">\n                            <span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span>\n                            <span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">הגיעו שעה לפני השקיעה</span>\n                        </div>\n                        <div class=\"bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs\">\n                            <p><span class=\"text-green-600 font-bold\">✅</span> <strong>יתרונות:</strong> נוף מרשים במיוחד, מרפסת זכוכית ייחודית, אווירה מעולה</p>\n                            <p><span class=\"text-red-500 font-bold\">❌</span> <strong>חסרונות:</strong> מחירים גבוהים ליחס לאוכל, שירות לעתים איטי, עמוס מאוד</p>\n                            <p><span class=\"text-blue-500 font-bold\">🎯</span> <strong>מתאים ל:</strong> זוגות, הצעות נישואין, אינסטגרם, חוויית שקיעה</p>\n                        </div>\n                    </div><div class=\"mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.7875953%2C19.6672293&query_place_id=ChIJVeWe44JOWxMR9w5X4xyMDJ4\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-2 font-mono\">7th Heaven Panorama</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 צפון קורפו</span><p class=\"text-sm text-gray-600 mb-3\">בר-מסעדה על צוק מעל חוף לוגאס עם מרפסת זכוכית ונוף 180° לים. השקיעה המפורסמת ביותר בקורפו.</p><div class=\"space-y-2.5 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> פסטת פירות ים, כבש אפוי, קוקטייל Ionian Spritz</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">11:00-00:00</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">💶</span><span>ממוצע לזוג: €50–80</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🅿️</span><span>חניה חינם בכפר פרולאדס, 3 דק' הליכה</span></p>\n                        <div class=\"flex flex-wrap gap-1.5 mt-2\">\n                            <span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span>\n                            <span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">הגיעו שעה לפני השקיעה</span>\n                        </div>\n                        <div class=\"bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs\">\n                            <p><span class=\"text-green-600 font-bold\">✅</span> <strong>יתרונות:</strong> נוף מרשים במיוחד, מרפסת זכוכית ייחודית, אווירה מעולה</p>\n                            <p><span class=\"text-red-500 font-bold\">❌</span> <strong>חסרונות:</strong> מחירים גבוהים ליחס לאוכל, שירות לעתים איטי, עמוס מאוד</p>\n                            <p><span class=\"text-blue-500 font-bold\">🎯</span> <strong>מתאים ל:</strong> זוגות, הצעות נישואין, אינסטגרם, חוויית שקיעה</p>\n                        </div>\n                    </div><div class=\"mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.7875953%2C19.6672293&query_place_id=ChIJVeWe44JOWxMR9w5X4xyMDJ4\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7875953%2C19.6672293&query_place_id=ChIJVeWe44JOWxMR9w5X4xyMDJ4",
       "lat": 39.7875953,
       "lon": 19.6672293,
@@ -2201,6 +2279,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1310777/pexels-photo-1310777.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Sunset Taverna Krini"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.7",
       "price": "$",
@@ -2228,13 +2307,14 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1395964/pexels-photo-1395964.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Ambelonas Corfu"
       },
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
-      "rating": "4.8",
+      "hasRealPhoto": false,
+      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.3</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
+      "rating": "4.3",
       "price": "$$$",
       "name": "אמפלונאס (Ambelonas)",
       "subtitle": "Ambelonas Corfu",
       "region": "📍 מרכז-מערב",
-      "restHtml": "<p class=\"text-sm text-gray-500 mb-2 font-mono\">Ambelonas Corfu</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 מרכז-מערב</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><p class=\"text-sm text-gray-600 mb-3\">מסעדה משפחתית בתוך כרם יין אורגני על גבעה במרכז האי, בדרך לפלקאס. חוויה חקלאית-קולינרית יוצאת דופן עם תוצרת מהגינה ויין ביתי.</p><div class=\"space-y-2.5 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> ריזוטו עם יין מקומי, סטיפאדו, מוסקא, טעימת יינות</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">ג'-ו' 19:00-22:00 בלבד (סגור בשאר הימים, בדקו מראש)</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">💶</span><span>ממוצע לזוג: €55–85</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🅿️</span><span>חניה חינם במתחם הכרם</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-red-500\">🚗</span><span>כביש הגעה: דרך כפרית עם עיקולים באזור קומביציון, שילוט מוגבל - השתמשו בניווט</span></p>\n                        <div class=\"flex flex-wrap gap-1.5 mt-2\">\n                            <span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span>\n                            <span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">🌿 ידידותי לצמחונים</span>\n                        </div>\n                        <div class=\"bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs\">\n                            <p><span class=\"text-green-600 font-bold\">✅</span> <strong>יתרונות:</strong> חוויה ייחודית (farm-to-table), יין מקומי איכותי, שקט ורומנטי</p>\n                            <p><span class=\"text-red-500 font-bold\">❌</span> <strong>חסרונות:</strong> חובה רכב, לא תמיד פתוח - בדקו מראש</p>\n                            <p><span class=\"text-blue-500 font-bold\">🎯</span> <strong>מתאים ל:</strong> זוגות רומנטיים, חובבי יין, ארוחת יום נישואין</p>\n                        </div>\n                    </div><div class=\"mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.606339%2C19.851235&query_place_id=ChIJaXp30dxdWxMRF2qRvfGbh_I\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
+      "restHtml": "<p class=\"text-sm text-gray-500 mb-2 font-mono\">Ambelonas Corfu</p><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold mb-2 badge-sand-bg badge-sand-text\">📍 מרכז-מערב</span><span class=\"inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold mb-3 badge-gold-bg badge-gold-text\">🌙 חוויה למבוגרים</span><p class=\"text-sm text-gray-600 mb-3\">מסעדה משפחתית בתוך כרם יין אורגני על גבעה במרכז האי, בדרך לפלקאס. חוויה חקלאית-קולינרית יוצאת דופן עם תוצרת מהגינה ויין ביתי.</p><div class=\"space-y-2.5 flex-1 text-sm text-gray-700\">\n                        <p class=\"flex items-start gap-2 bg-gray-50 p-2 rounded-lg\"><span class=\"text-blue-500 mt-0.5\">🍳</span><span><strong class=\"font-semibold text-gray-900\">מומלץ:</strong> ריזוטו עם יין מקומי, סטיפאדו, מוסקא, טעימת יינות</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🕒</span><span dir=\"ltr\">19:00-22:00</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">💶</span><span>ממוצע לזוג: €55–85</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-blue-500\">🅿️</span><span>חניה חינם במתחם הכרם</span></p>\n                        <p class=\"flex items-center gap-2\"><span class=\"text-red-500\">🚗</span><span>כביש הגעה: דרך כפרית עם עיקולים באזור קומביציון, שילוט מוגבל - השתמשו בניווט</span></p>\n                        <div class=\"flex flex-wrap gap-1.5 mt-2\">\n                            <span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">חובה להזמין מקום</span>\n                            <span class=\"px-2 py-1 text-xs font-bold rounded-full badge-gold-bg badge-gold-text\">🌿 ידידותי לצמחונים</span>\n                        </div>\n                        <div class=\"bg-gray-50 rounded-lg p-2.5 mt-2 space-y-1 text-xs\">\n                            <p><span class=\"text-green-600 font-bold\">✅</span> <strong>יתרונות:</strong> חוויה ייחודית (farm-to-table), יין מקומי איכותי, שקט ורומנטי</p>\n                            <p><span class=\"text-red-500 font-bold\">❌</span> <strong>חסרונות:</strong> חובה רכב, לא תמיד פתוח - בדקו מראש</p>\n                            <p><span class=\"text-blue-500 font-bold\">🎯</span> <strong>מתאים ל:</strong> זוגות רומנטיים, חובבי יין, ארוחת יום נישואין</p>\n                        </div>\n                    </div><div class=\"mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3\">\n                        <a href=\"https://www.google.com/maps/search/?api=1&query=39.606339%2C19.851235&query_place_id=ChIJaXp30dxdWxMRF2qRvfGbh_I\" class=\"flex-1 text-center hover:bg-blue-100 py-2 rounded-xl font-semibold transition-colors text-sm flex items-center justify-center gap-2 badge-ion-bg badge-ion-text\">📍 ניווט במפה</a>\n                    </div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.606339%2C19.851235&query_place_id=ChIJaXp30dxdWxMRF2qRvfGbh_I",
       "lat": 39.606339,
       "lon": 19.851235,
@@ -2266,6 +2346,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Chris Place Sofia's"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.9</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.9",
       "price": "$",
@@ -2293,6 +2374,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1450353/pexels-photo-1450353.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Akron Beach Bar"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
@@ -2320,6 +2402,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1537635/pexels-photo-1537635.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Nagual Beach Bar"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.4</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.4",
       "price": "$$",
@@ -2347,6 +2430,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1479702/pexels-photo-1479702.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Sirens Lounge"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
@@ -2375,6 +2459,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/5920742/pexels-photo-5920742.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Elia Taverna"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.6",
       "price": "$",
@@ -2401,6 +2486,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/2233729/pexels-photo-2233729.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Pane e Souvlaki"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.5",
       "price": "$",
@@ -2427,6 +2513,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Stavros Traditional Grill"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.7",
       "price": "$",
@@ -2453,6 +2540,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Bizou Vegan Cafe"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.8",
       "price": "$",
@@ -2479,6 +2567,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Aubergine Cafe"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
@@ -2505,6 +2594,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Tabule Rasa"
       },
+      "hasRealPhoto": false,
       "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.6",
       "price": "$",
@@ -2534,6 +2624,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: חומות מבצר ונציאני מול הים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 9.8",
       "title": "1. העיר העתיקה של קורפו 🏰",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">מבוך סמטאות ונציאניות קסומות, כיכרות אלגנטיות וארכיטקטורה מרהיבה. אתר מורשת עולמית של אונסק״ו.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> 3-5 שעות</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> כולם</p><p>🌡️ <b>עומס:</b> גבוה בערב</p><p>🌅 <b>זמן:</b> שקיעה או בוקר</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> שילוב השפעות ונציאניות, צרפתיות ובריטיות.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> לכו לאיבוד בסמטאות הקמפיאלו (Campiello) הרחק מהרחובות הראשיים.</p>\n            <p><b class=\"text-green-800\">ציוד:</b> נעלי הליכה נוחות.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> חובה מוחלטת.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.6243%2C19.9217\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a><a href=\"https://corfu.gr\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-indigo-100 badge-ion-bg badge-ion-text\">🌐 אתר</a></div>",
@@ -2557,6 +2648,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: חומות מבצר ונציאני מול הים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.8",
       "title": "2. ארמון אכיליון 👑",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">ארמון הקיץ המפואר של הקיסרית סיסי מאוסטריה, מוקדש לגיבור המיתולוגי אכילס, עם גנים עוצרי נשימה. <strong>שימו לב:</strong> פנים הארמון סגור לשיפוצים מ-2021 - הכניסה כיום היא לגנים ולחזית הארמון בלבד.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> 1-1.5 שעות</p><p>💰 <b>מחיר:</b> 7 אירו (גנים בלבד)</p><p>🕒 <b>שעות:</b> 08:00-20:00</p><p>👥 <b>למי:</b> חובבי היסטוריה וזוגות</p><p>🌡️ <b>עומס:</b> גבוה בבוקר</p><p>🌅 <b>זמן:</b> אחר הצהריים</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> הפסל המפורסם של אכילס הגוסס והגנים המשקיפים לים.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> קנו כרטיסים מראש והגיעו אחה\"צ כשקבוצות התיירים עוזבות.</p>\n            <p><b class=\"text-green-800\">ציוד:</b> כובע ומים.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> הגנים יפים, אך מכיוון שפנים הארמון סגור זמנית, זו עצירה קצרה ולא אטרקציה למשך יום שלם.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.5628042%2C19.9042949&query_place_id=ChIJmw5o8qBfWxMRm4buTPgPS_k\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a><a href=\"https://achillion-corfu.gr/?lang=en\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-indigo-100 badge-ion-bg badge-ion-text\">🌐 אתר</a><a href=\"https://eachillion.etadwebtickets.gr/?lang=en\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-green-100 badge-olive-bg badge-olive-text\">🎫 כרטיסים</a></div>",
@@ -2584,6 +2676,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: חומות מבצר ונציאני מול הים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 9.0",
       "title": "3. מנזר פלאוקסטריצה ⛪",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">מנזר עתיק ופעיל הממוקם על ראש צוק מעל מפרצי הטורקיז של פלאוקסטריצה. נוף מרהיב וחצר פרחים קסומה.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> שעה</p><p>💰 <b>מחיר:</b> תרומה מומלצת</p><p>🕒 <b>שעות:</b> 07:00-13:00, 15:00-20:00</p><p>👥 <b>למי:</b> כולם</p><p>🌡️ <b>עומס:</b> בינוני</p><p>🌅 <b>זמן:</b> בוקר מוקדם</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> שילוב של קדושה ורוגע מול נוף הים היוני הדרמטי ביותר באי.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> יש קוד לבוש מחמיר - כתפיים וברכיים מכוסות. מחלקים צעיפים בכניסה.</p>\n            <p><b class=\"text-green-800\">ציוד:</b> לבוש צנוע ומצלמה.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> לגמרי, הנוף מהתצפית משגע.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.6695032%2C19.7015685&query_place_id=ChIJvyQxYiNRWxMROSB3OkWyCBA\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2611,6 +2704,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: רכסי הרים ירוקים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.5",
       "title": "4. תעלת האהבה (Canal d'Amour) ❤️",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">תצורת סלעי חול ייחודית בסידארי היוצרת תעלה בים. האגדה מספרת שמי ששוחה בה ימצא אהבה במהרה.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> זוגות, צעירים</p><p>🌡️ <b>עומס:</b> עמוס מאוד בקיץ</p><p>🌅 <b>זמן:</b> בוקר מוקדם</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> סלעים מפוסלים על ידי רוח ומים היוצרים מפרצונים צרים ורומנטיים.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> הגיעו לפני 9:00 בבוקר כדי להימנע מהמונים ולצלם תמונות נקיות.</p>\n            <p><b class=\"text-green-800\">ציוד:</b> בגד ים, מגבת, נעלי מים.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> יפה לצילום, אך האזור סביב ממוסחר מאוד.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.7963%2C19.6976\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2633,6 +2727,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: חומות מבצר ונציאני מול הים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.9",
       "title": "5. מבצר אנגלוקסטרו 🏰",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">מבצר ביזנטי מרשים הממוקם על צוק תלול בגובה 305 מטרים, שימש כמגן הראשי של האי מפני פיראטים.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> 3 אירו</p><p>🕒 <b>שעות:</b> 10:00-18:00 (סגור בשלישי)</p><p>👥 <b>למי:</b> אוהבי לכת והיסטוריה</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> אחר הצהריים</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> מציע את אחת מתצפיות השקיעה הטובות ביותר בים היוני.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> העלייה למבצר דורשת טיפוס של כ-10-15 דקות במדרגות אבן.</p>\n            <p><b class=\"text-red-800\">🚗 כביש הגישה:</b> אספלט אך צר עם עיקולים, במיוחד בקטע העולה מלאקונס (Lakones). חניון קטן למעלה - בעונת שיא כדאי להגיע מוקדם.</p>\n            <p><b class=\"text-green-800\">ציוד:</b> נעלי ספורט סגורות, מים כיוון שאין קיוסק למעלה.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> מאוד, במיוחד למי שמחפש נוף פנורמי מטורף.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.6782141%2C19.6865652&query_place_id=ChIJWUz9xmpRWxMR4f_taueTDQY\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2663,6 +2758,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: רכסי הרים ירוקים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.7",
       "title": "6. הר פנטוקראטור ⛰️",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">ההר הגבוה ביותר בקורפו (906 מ'). בפסגה שוכן מנזר עתיק וישנה תצפית פנורמית על כל האי ועד אלבניה.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> חצי יום</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> נהגים הרפתקנים, מטיילים</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> בוקר בהיר</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> ביום בהיר ניתן לראות מכאן את איטליה.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> הדרך לפסגה צרה ומפותלת מאוד. סעו בזהירות רבה ואל תעלו בימים מעוננים/גשומים.</p>\n            <p><b class=\"text-red-800\">🚗 כביש הגישה:</b> אספלט לאורך כל הדרך אך עם עיקולי הרים חדים. <b>אין תחנות דלק</b> באזור ההר - תדלקו לפני היציאה. נהגו בהילוך נמוך בירידה כדי לא לשרוף בלמים, וצפרו לפני עיקולים עיוורים (נוהג מקומי מקובל).</p>\n            <p><b class=\"text-green-800\">ציוד:</b> ג'קט דק (למעלה קריר ויש רוח).</p>\n            <p><b class=\"text-purple-800\">שווה?</b> אם אתם אוהבים נהיגה אתגרית ונופים פתוחים - בהחלט.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.7469444%2C19.8711111&query_place_id=ChIJRwxNOZxDWxMRDtfG5FsqoF8\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2689,6 +2785,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: מפרץ עם מים צלולים וחלוקי נחל",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 9.5",
       "title": "7. חוף פורטו טימוני 🏖️",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">אחד החופים המצולמים ביותר! חוף כפול (שני מפרצים גב אל גב) הנגיש רק דרך הליכה בשביל הררי או בסירה.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> 3-4 שעות</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> הרפתקנים, צעירים</p><p>🌡️ <b>עומס:</b> בינוני-גבוה</p><p>🌅 <b>זמן:</b> בוקר מוקדם</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> טבע פראי ללא פיתוח מסחרי, מים צלולים בצבעים שונים בשני המפרצים.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> ההליכה מהכפר אפיאונס לוקחת כ-30 דקות בירידה תלולה (ועלייה קשה בחזור). הגיעו לפני 9 בבוקר כדי למצוא צל.</p>\n            <p><b class=\"text-green-800\">ציוד:</b> נעלי הליכה (לא כפכפים!), המון מים, שמשיה.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> יפהפה וחובה למי שבכושר בסיסי.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.7208%2C19.6586\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2711,6 +2808,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: בתי כפר עם מגדל פעמונים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.8",
       "title": "8. כפר קסיופי ⛵",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">כפר דייגים מקסים בצפון-מזרח האי, סביב נמל ציורי עם טברנות מעולות, בוטיקים, ושרידי מבצר ביזנטי.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> 2-4 שעות</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> משפחות, זוגות</p><p>🌡️ <b>עומס:</b> בינוני בערב</p><p>🌅 <b>זמן:</b> אחר הצהריים וערב</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> שילוב של אווירה יוונית אותנטית ותיירות יוקרה שקטה.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> שלבו ארוחת ערב בנמל עם טיול רגלי קצר למבצר קסיופי לתצפית נהדרת.</p>\n            <p><b class=\"text-green-800\">ציוד:</b> ביגוד נינוח לערב.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> מומלץ מאוד כבסיס טיול בצפון האי או לארוחת ערב רומנטית.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.7946%2C19.9213\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2733,6 +2831,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: חומות מבצר ונציאני מול הים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 9.2",
       "title": "9. מנזר ולכרנה ואי העכבר ⛪",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">הסמל האייקוני של קורפו. מנזר לבן זעיר על איון המחובר בגשר צר, ומאחוריו \"אי העכבר\" (פונטיקוניסי).</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> חינם (סירה 3€)</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> כולם, צלמים</p><p>🌡️ <b>עומס:</b> גבוה לאורך היום</p><p>🌅 <b>זמן:</b> שקיעה</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> האתר המזוהה ביותר עם קורפו. נמצא ממש בקצה מסלול הנחיתה של שדה התעופה!</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> שבו בבית הקפה Kanoni למעלה לתצפית נוחה, וצפו במטוסים הנוחתים ממש מעל הראש שלכם.</p>\n            <p><b class=\"text-green-800\">ציוד:</b> מצלמה חובה.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> אי אפשר לפספס את תמונת החובה של האי.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.5899918%2C19.9171444&query_place_id=ChIJOSSxWEReWxMRbGerY3mwsw4\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2759,6 +2858,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: חומות מבצר ונציאני מול הים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.9",
       "title": "10. המבצר הישן (Palaio Frourio) 🏰",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">מבצר ונציאני עצום הממוקם על חצי אי מזרחית לעיר העתיקה, מופרד על ידי תעלת מים (קונטראפוסה).</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> 2 שעות</p><p>💰 <b>מחיר:</b> 6 אירו</p><p>🕒 <b>שעות:</b> 08:00-20:00</p><p>👥 <b>למי:</b> חובבי היסטוריה ונוף</p><p>🌡️ <b>עומס:</b> בינוני</p><p>🌅 <b>זמן:</b> בוקר או לקראת ערב</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> מספק תצפית פנורמית פנטסטית על העיר העתיקה של קורפו והים.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> טפסו עד למגדלור בראש המבצר. יש בפנים גם כנסייה דורית מעניינת (כנסיית סן ג'ורג').</p>\n            <p><b class=\"text-green-800\">ציוד:</b> נעלי הליכה נוחות ומים.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> מומלץ מאוד לסיים איתו את הביקור בעיר העתיקה.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.6234796%2C19.9274977&query_place_id=ChIJc8Bxy-ddWxMRhASx_pNTDTU\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2786,6 +2886,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: חומות מבצר ונציאני מול הים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.3",
       "title": "11. המבצר החדש (Neo Frourio) 🛡️",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">קומפלקס הגנתי מסיבי מעל הנמל החדש, נבנה על ידי הוונציאנים המאוחרים עם מערכת מחילות מרשימה.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> שעה-שעתיים</p><p>💰 <b>מחיר:</b> חינם-4€</p><p>🕒 <b>שעות:</b> משתנה (לרוב 08:30-15:00)</p><p>👥 <b>למי:</b> חובבי ארכיטקטורה</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> בוקר</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> פחות מתויר מהמבצר הישן, מציע זוויות צילום שונות לחלוטין על גגות העיר העתיקה.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> מתחתיו שוכן שוק ירקות מקומי ותוסס, שלבו ביקור בשניהם.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> אם יש לכם זמן נוסף בעיר העתיקה.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-11%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2809,6 +2910,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: רכסי הרים ירוקים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 9.3",
       "title": "12. כף דרסטיס (Cape Drastis) 🪨",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">הנקודה הצפונית ביותר באי, עם צוקי אבן גיר לבנים ודרמטיים המזדקרים מתוך מים בצבע תכלת מבריק.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> חובבי טבע, צלמים</p><p>🌡️ <b>עומס:</b> בינוני</p><p>🌅 <b>זמן:</b> לפני השקיעה או בוקר</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> נוף גיאולוגי ייחודי שאין כמוהו באי, מזכיר במעט את הצוקים באנגליה אך עם מים יווניים.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> הדרך רעועה, עדיף להחנות בחורש וללכת 15 דקות. מומלץ לקחת סירה קטנה ולשחות בין הצוקים.</p>\n            <p><b class=\"text-red-800\">🚗 כביש הגישה:</b> הגיעו דרך כפר פרולאדס (Peroulades) - הקטע האחרון אחרי הכפר הופך לדרך עפר צרה שלא כל רכב יעבור בנוחות. חלופה: שייט קצר מסידארי.</p>\n            <p><b class=\"text-green-800\">ציוד:</b> נעלי הליכה ובגד ים.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> פנינת טבע חובה בצפון קורפו.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.7986294%2C19.6738109&query_place_id=ChIJ16bUkbVPWxMRqYxyX32_PzM\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2835,6 +2937,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: מפרץ עם מים צלולים וחלוקי נחל",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.6",
       "title": "13. חוף לוגאס (Sunset Beach) 🌅",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">ידוע בכינויו \"חוף השקיעות\", רצועת חול צרה למרגלות צוקי חימר אדירים. כולל מרפסת זכוכית מעל התהום.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> שעה-שעתיים</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> רומנטיקנים</p><p>🌡️ <b>עומס:</b> גבוה מאוד בשקיעה</p><p>🌅 <b>זמן:</b> שקיעה!</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> מקום נוח ומסודר לצפות בשקיעה שוקעת ישירות לתוך הים תוך לגימת קוקטייל.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> שבו ב-7th Heaven Bar שיש לו פלטפורמת זכוכית תלויה באוויר לתמונות אינסטגרם משוגעות.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> אם אתם באזור הצפון-מערבי לקראת ערב, אל תפספסו.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.7942%2C19.6631\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2858,6 +2961,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: בתי כפר עם מגדל פעמונים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.9",
       "title": "14. כפר אפיאונס (Afionas) 🏘️",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">אחד הכפרים הציוריים ביותר באי, עם בתים מסוידים בלבן, סמטאות עמוסות פרחי בוגנוויליה ונופי ים פנורמיים.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> אוהבי אווירה וצלמים</p><p>🌡️ <b>עומס:</b> בינוני</p><p>🌅 <b>זמן:</b> אחר הצהריים</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> האווירה מזכירה את האיים הקיקלאדיים (כמו סנטוריני) יותר מאשר כפרים אחרים בקורפו.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> שלבו עם הטיול הרגלי לחוף פורטו טימוני, ואכלו בטברנה מקומית אחרי העלייה הקשה.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> מקסים לארוחת שקיעה או טיול נינוח.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.7192%2C19.6586\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2880,6 +2984,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: מפרץ עם מים צלולים וחלוקי נחל",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.7",
       "title": "15. חוף אגיוס גורדיוס 🏖️",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">מפרץ עם חוף חולי ארוך המוקף בהרים ירוקים עטורי עצי זית, וסלע ייחודי ענק (Ortholithi) המזדקר מהים.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> חצי יום-יום שלם</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> משפחות, זוגות</p><p>🌡️ <b>עומס:</b> גבוה בקיץ</p><p>🌅 <b>זמן:</b> בוקר או צהריים</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> שילוב מצוין של נוף פראי עם תשתיות תיירות נוחות מאוד.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> המים רדודים יחסית ומתאימים לילדים. שווה לשבת באחד הברים על החוף עד השקיעה.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> אחד החופים המרכזיים והטובים במערב האי.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-15%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2903,6 +3008,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: מפרץ עם מים צלולים וחלוקי נחל",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.8",
       "title": "16. חוף גליפאדה 🏄",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">חוף חולי וזהוב, נחשב לאחד הפופולריים והחיים ביותר בקורפו. מלא בברים, מוזיקה ואווירה צעירה.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> חצי יום</p><p>💰 <b>מחיר:</b> חינם (מיטות בתשלום)</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> צעירים, אוהבי מסיבות, משפחות</p><p>🌡️ <b>עומס:</b> גבוה מאוד</p><p>🌅 <b>זמן:</b> צהריים/אחה\"צ</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> חול רך שנדיר למצוא בחופי קורפו ומתקני ספורט ימי מעולים.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> Pazuzu Bar מציע מסיבות חוף מעולות עם דיג'ייז בינלאומיים בשיא העונה.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> מעולה למי שמחפש 'וייב' תוסס וחוף חולי לחלוטין.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-16%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2926,6 +3032,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: מגלשות מים ובריכה",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.4",
       "title": "17. פארק המים אקוולנד 💦",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">אחד מפארקי המים הגדולים באירופה! כולל עשרות מגלשות מים, בריכת גלים, אבובים ומתחמים לילדים.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\">\n          <p>⏱️ <b>משך:</b> יום שלם</p><p>💰 <b>מחיר:</b> כ-35€ לאדם</p><p>🕒 <b>שעות:</b> 10:00-18:00</p><p>👥 <b>למי:</b> משפחות עם ילדים ונוער</p><p>🌡️ <b>עומס:</b> גבוה באוגוסט</p><p>🌅 <b>זמן:</b> פתיחה</p>\n        </div><details class=\"group bg-blue-50/50 rounded border border-blue-100\">\n          <summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary>\n          <div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\">\n            <p><b class=\"text-blue-800\">ייחוד:</b> שובר שגרה מעולה מטיולי כנסיות וחופים עם אדרנלין וכיף מובטח לילדים.</p>\n            <p><b class=\"text-orange-800\">טיפ:</b> קנו כרטיסים אונליין כדי לחסוך המתנה ארוכה בקופות. אפשר להביא אוכל מבחוץ.</p>\n            <p><b class=\"text-purple-800\">שווה?</b> אם אתם עם ילדים - זהו יום חובה.</p>\n          </div>\n        </details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-17%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a><a href=\"https://aqualand-corfu.com/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-green-100 badge-olive-bg badge-olive-text\">🎫 כרטיסים</a></div>",
@@ -2949,6 +3056,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: חומות מבצר ונציאני מול הים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.5",
       "title": "18. הבית של משפחת דארל (קלאמי) 🏠",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">הבית המפורסם מהסדרה והספרים \"משפחתי וחיות אחרות\", שוכן במפרץ קלאמי הקסום.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\"><p>⏱️ <b>משך:</b> שעה-שעתיים</p><p>💰 <b>מחיר:</b> חינם (מבחוץ)</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> מעריצי הסדרה</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> בוקר</p></div><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\"><p><b class=\"text-blue-800\">ייחוד:</b> היסטוריה תרבותית מרתקת. הבית משמש כיום כוילה להשכרה וטברנה.</p><p><b class=\"text-orange-800\">טיפ:</b> שבו לארוחה בטברנה של הבית הלבן על קו המים.</p><p><b class=\"text-purple-800\">שווה?</b> כן, גם בזכות חוף קלאמי היפהפה.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.7431%2C19.9351\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2971,6 +3079,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: חומות מבצר ונציאני מול הים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.2",
       "title": "19. ארמון מון רפוס (Mon Repos) 🏛️",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">וילה ניאוקלאסית בפאתי העיר קורפו, מקום הולדתו של הנסיך פיליפ (בעלה של מלכת אנגליה).</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\"><p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> 4 אירו</p><p>🕒 <b>שעות:</b> 08:00-20:00</p><p>👥 <b>למי:</b> חובבי היסטוריה</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> בוקר או אחה\"צ</p></div><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\"><p><b class=\"text-blue-800\">ייחוד:</b> האחוזה מוקפת בפארק ירוק ועתיק, ויש בה מוזיאון ארכיאולוגי קטן.</p><p><b class=\"text-orange-800\">טיפ:</b> הגנים גדולים ומוצלים - נעים במיוחד ביום חם.</p><p><b class=\"text-purple-800\">שווה?</b> נחמד, אך אל תצפו לפאר של ארמון אכיליון.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-19%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -2994,6 +3103,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: רכסי הרים ירוקים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.8",
       "title": "20. תצפית הקייזר (Pelekas) 🌅",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">מצפה בראש הכפר פלקאס, שם נהג הקיסר וילהלם השני לצפות בשקיעות המפורסמות.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\"><p>⏱️ <b>משך:</b> חצי שעה</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> רומנטיקנים, זוגות</p><p>🌡️ <b>עומס:</b> גבוה בשקיעה</p><p>🌅 <b>זמן:</b> שקיעה</p></div><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\"><p><b class=\"text-blue-800\">ייחוד:</b> תצפית של 360 מעלות על כל האי קורפו.</p><p><b class=\"text-orange-800\">טיפ:</b> אחרי השקיעה, שוטטו בסמטאות של הכפר פלקאס (Pelekas) הסמוך.</p><p><b class=\"text-purple-800\">שווה?</b> כן. מהתצפיות הטובות באי, וקלה לגישה.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-20%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3018,6 +3128,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: רכסי הרים ירוקים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.4",
       "title": "21. אגם קוריסיון 🦩",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">לגונה גדולה ומוגנת בדרום האי, מופרדת מהים על ידי דיונות חול. גן עדן לצפרים, כולל להקות פלמינגו בעונות המעבר.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\"><p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> חובבי טבע</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> בוקר מוקדם או ערב</p></div><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\"><p><b class=\"text-blue-800\">ייחוד:</b> מערכת אקולוגית שונה לגמרי משאר האי.</p><p><b class=\"text-orange-800\">טיפ:</b> שלבו עם ביקור בחוף איסוס הצמוד (Issos Beach) הידוע כדיונות חול עצומות.</p><p><b class=\"text-purple-800\">שווה?</b> לחובבי הליכות בטבע ולצפרים.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-21%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3041,6 +3152,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: שולחן טברנה תחת גפן",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.9",
       "title": "22. בר לה גרוטה (La Grotta) 🍸",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">בר איקוני החצוב בתוך הצוק במפרץ פלאוקסטריצה. הגישה אליו היא דרך ירידה של 142 מדרגות.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\"><p>⏱️ <b>משך:</b> שעתיים</p><p>💰 <b>מחיר:</b> עלות משקאות (גבוהה)</p><p>🕒 <b>שעות:</b> 10:00-02:00</p><p>👥 <b>למי:</b> צעירים, אמיצים (לקפיצות)</p><p>🌡️ <b>עומס:</b> גבוה אחה\"צ</p><p>🌅 <b>זמן:</b> אחר הצהריים למוזיקה חיה</p></div><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\"><p><b class=\"text-blue-800\">ייחוד:</b> אפשר לקפוץ למים הצלולים ישירות מקרש הקפיצה ומהסלעים שסביב הבר.</p><p><b class=\"text-orange-800\">טיפ:</b> המחירים יקרים, אבל שווה להזמין משקה אחד בשביל האווירה והשחייה במפרץ הייחודי.</p><p><b class=\"text-purple-800\">שווה?</b> מגניב מאוד לאינסטגרם ולאווירה צעירה.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-22%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3064,6 +3176,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: חומות מבצר ונציאני מול הים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.6",
       "title": "23. המוזיאון לאמנות אסייתית 🏺",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">המוזיאון היחיד ביוון שמוקדש לאמנות אסייתית, ממוקם בתוך ארמון סנט מייקל וסנט ג'ורג' המרהיב בעיר העתיקה.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\"><p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> 6 אירו</p><p>🕒 <b>שעות:</b> 08:30-15:30</p><p>👥 <b>למי:</b> חובבי תרבות ואמנות</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> צהריים (ממוזג!)</p></div><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\"><p><b class=\"text-blue-800\">ייחוד:</b> אוסף נדיר של כ-15,000 פריטים מסין, יפן והודו.</p><p><b class=\"text-orange-800\">טיפ:</b> מבנה הארמון עצמו מרהיב לא פחות מהתערוכות. אל תפספסו את הגנים האחוריים המשקיפים לים.</p><p><b class=\"text-purple-800\">שווה?</b> מפלט תרבותי (וקריר) מצוין בעיר.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-23%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3087,6 +3200,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: חומות מבצר ונציאני מול הים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 9.1",
       "title": "24. כנסיית ספירידון הקדוש ⛪",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">הכנסייה החשובה באי, בה נשמרים שרידי הקדוש המגן של קורפו. מגדל הפעמונים שלה הוא הגבוה באי וסמל העיר.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\"><p>⏱️ <b>משך:</b> חצי שעה</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 08:00-20:00</p><p>👥 <b>למי:</b> כולם</p><p>🌡️ <b>עומס:</b> גבוה</p><p>🌅 <b>זמן:</b> בוקר</p></div><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\"><p><b class=\"text-blue-800\">ייחוד:</b> הלב הרוחני של קורפו; תקרת הכנסייה מצוירת בסגנון רנסנס מרשים.</p><p><b class=\"text-orange-800\">טיפ:</b> כבדו את המקומיים ואת קוד הלבוש. לעיתים ניתן לגשת ולנשק את ארון הכסף של הקדוש.</p><p><b class=\"text-purple-800\">שווה?</b> נקודת ציון מרכזית, אי אפשר לפספס כשמטיילים בעיר העתיקה.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.6245%2C19.9205\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3109,6 +3223,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: שולחן טברנה תחת גפן",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 9.3",
       "title": "25. כיכר ספיאנאדה וליסטון ☕",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">הכיכר הגדולה ביותר ביוון! מצדה האחד טיילת ליסטון האלגנטית בהשראת פריז, ומצדה השני מגרש קריקט ירוק.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\"><p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> חינם (בתי קפה יקרים)</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> כולם</p><p>🌡️ <b>עומס:</b> גבוה בערב</p><p>🌅 <b>זמן:</b> ערב</p></div><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\"><p><b class=\"text-blue-800\">ייחוד:</b> המקום לראות ולהיראות בקורפו. ארכיטקטורה צרפתית ייחודית.</p><p><b class=\"text-orange-800\">טיפ:</b> בתי הקפה בליסטון יקרים, אבל לשבת שם על פרפה (קפה יווני קר) בערב זו חוויה חובה.</p><p><b class=\"text-purple-800\">שווה?</b> המרכז התוסס של העיר, חובה.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.6242%2C19.9236\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3123,28 +3238,6 @@ window.CORFU_LOCATIONS = {
       "bestTime": "Evening"
     },
     {
-      "id": "attr-26",
-      "tags": "beach",
-      "cardClass": "bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col premium-card",
-      "image": {
-        "src": "images/cards/beach.svg",
-        "alt": "איור בסגנון המדריך: מפרץ עם מים צלולים וחלוקי נחל",
-        "isIllustration": true
-      },
-      "score": "ציון: 9.0",
-      "title": "26. חוף רוביניה (Rovinia) 🏖️",
-      "bodyHtml": "<p class=\"text-gray-600 text-sm\">פנינה נסתרת באזור פלאוקסטריצה, חוף חלוקי נחל בוהק המוקף צוקים ירוקים, נגיש רק בהליכה קצרה או בסירה.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\"><p>⏱️ <b>משך:</b> חצי יום</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> אוהבי שקט וטבע</p><p>🌡️ <b>עומס:</b> נמוך-בינוני</p><p>🌅 <b>זמן:</b> בוקר מוקדם</p></div><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\"><p><b class=\"text-blue-800\">ייחוד:</b> טבעי לחלוטין ללא מיטות שיזוף או טברנות מסחריות (לפעמים סירת גלידה קטנה עוברת).</p><p><b class=\"text-orange-800\">טיפ:</b> ההליכה מהחניה לוקחת כ-10 דקות במורד השביל. המים קרים ועמוקים, טובים לשנורקלינג.</p><p><b class=\"text-purple-800\">שווה?</b> כן, למי שרוצה לברוח מההמונים של החופים המאורגנים.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.6644%2C19.7214\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
-      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6644%2C19.7214",
-      "lat": 39.6644,
-      "lon": 19.7214,
-      "parking": "Unknown",
-      "vibe": [
-        "Beach"
-      ],
-      "beachType": null,
-      "bestTime": "Early Morning"
-    },
-    {
       "id": "attr-27",
       "tags": "nature",
       "cardClass": "bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition duration-300 premium-card",
@@ -3153,6 +3246,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: רכסי הרים ירוקים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.8",
       "title": "27. מערות הים של פלאוקסטריצה 🚤",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">סיור סירות קצר וקסום בתוך מערות עם מים זרחניים ונקרות טבעיות לאורך קו החוף המערבי.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\"><p>⏱️ <b>משך:</b> 45 דק'</p><p>💰 <b>מחיר:</b> ~15€</p><p>🕒 <b>שעות:</b> 09:00-18:00</p><p>👥 <b>למי:</b> כולם</p><p>🌡️ <b>עומס:</b> בינוני</p><p>🌅 <b>זמן:</b> בוקר/צהריים</p></div><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\"><p><b class=\"text-orange-800\">טיפ:</b> שכרו סירה קטנה בעצמכם (ללא רישיון) וחקרו את המערות בקצב שלכם.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-27%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3176,6 +3270,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: רכסי הרים ירוקים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 7.9",
       "title": "28. מפלי נימפס (Nymfes) 🌿",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">מפלים חבויים בתוך יער קסום בצפון האי, זורמים חזק במיוחד באביב. על פי האגדה, הנימפות רחצו כאן.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\"><p>⏱️ <b>משך:</b> שעה</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> חובבי הליכה</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> בוקר</p></div><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\"><p><b class=\"text-orange-800\">טיפ:</b> בקיץ (יולי-אוגוסט) המפלים לרוב יבשים לחלוטין. כדאי להגיע רק באביב.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-28%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3191,29 +3286,6 @@ window.CORFU_LOCATIONS = {
       "needsCoordCheck": true
     },
     {
-      "id": "attr-29",
-      "tags": "history",
-      "cardClass": "bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition duration-300 premium-card",
-      "image": {
-        "src": "images/cards/history.svg",
-        "alt": "איור בסגנון המדריך: חומות מבצר ונציאני מול הים",
-        "isIllustration": true
-      },
-      "score": "ציון: 8.5",
-      "title": "29. הכפר הנטוש פריטיה 👻",
-      "bodyHtml": "<p class=\"text-gray-600 text-sm\">כפר ונציאני עתיק ונטוש (Old Perithia) השוכן למרגלות הר פנטוקראטור. שרידי אבן וטברנות מסורתיות בכיכר.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\"><p>⏱️ <b>משך:</b> 1-2 שעות</p><p>💰 <b>מחיר:</b> חינם</p><p>🕒 <b>שעות:</b> 24/7</p><p>👥 <b>למי:</b> היסטוריה וטבע</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> צהריים לארוחה</p></div><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\"><p><b class=\"text-orange-800\">טיפ:</b> אכלו בטברנה Foros בכפר הנטוש ונסו את תבשיל ה'פסטיצדה' המקומי.</p><p><b class=\"text-red-800\">🚗 כביש הגישה:</b> כביש הרים צר ומפותל לכל אורך הדרך למעלה (כ-45-60 דק' נסיעה מהעיר). חובה רכב - נהיגה איטית וזהירה, במיוחד בעקומות ללא מעקות.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-29%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
-      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=attr-29%20Corfu",
-      "lat": 39.73,
-      "lon": 19.85,
-      "parking": "Unknown",
-      "vibe": [
-        "Historic"
-      ],
-      "beachType": null,
-      "bestTime": "Afternoon",
-      "needsCoordCheck": true
-    },
-    {
       "id": "attr-30",
       "tags": "family",
       "cardClass": "bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition duration-300 premium-card",
@@ -3222,6 +3294,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: מגלשות מים ובריכה",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 9.0",
       "title": "30. מקלט החמורים של קורפו 🫏",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">עמותה המצילה חמורים שעברו התעללות או הזנחה. חוויה מרגשת ומחממת לב, פתוחה למבקרים.</p><div class=\"grid grid-cols-2 gap-2 text-xs bg-gray-50 p-2 rounded\"><p>⏱️ <b>משך:</b> שעה</p><p>💰 <b>מחיר:</b> תרומה בלבד</p><p>🕒 <b>שעות:</b> 10:00-17:00</p><p>👥 <b>למי:</b> אוהבי חיות, ילדים</p><p>🌡️ <b>עומס:</b> נמוך</p><p>🌅 <b>זמן:</b> בוקר</p></div><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע וטיפים 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700 space-y-2\"><p><b class=\"text-orange-800\">טיפ:</b> קנו מזכרת בחנות הקטנה, ההכנסות הולכות כולן לטיפול בחיות.</p><p><b class=\"text-red-800\">🚗 כביש הגישה:</b> נמצא ליד הכביש הראשי לפלאוקסטריצה, סמוך לכפר דוקאדס - אך הכניסה עצמה היא שביל עפר לא סלול וקצת קשה למצוא (השלט קטן). סעו לאט וחפשו את הבניין הוורוד \"Villa Alexandra\" בתור נקודת ציון.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-30%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3245,6 +3318,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: מפרץ עם מים צלולים וחלוקי נחל",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.7",
       "title": "31. חוף איסוס (Issos Beach) 🏜️",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">\"הסהרה של קורפו\". דיונות חול עצומות וזהובות המשתרעות עד קו מים רדוד ונעים, מתאים לגלישת עפיפונים (קייטסרפינג).</p><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700\"><p><b class=\"text-orange-800\">טיפ:</b> אידיאלי לצפייה בשקיעה ישירות על החול. יש הרבה יתושים ליד אגם קוריסיון הסמוך בערב.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.4328%2C19.9366\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3260,28 +3334,6 @@ window.CORFU_LOCATIONS = {
       "bestTime": "Sunset"
     },
     {
-      "id": "attr-32",
-      "tags": "food",
-      "cardClass": "bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition duration-300 premium-card",
-      "image": {
-        "src": "images/cards/food.svg",
-        "alt": "איור בסגנון המדריך: שולחן טברנה תחת גפן",
-        "isIllustration": true
-      },
-      "score": "ציון: 9.1",
-      "title": "32. מפרץ אגני (Agni Bay) 🐟",
-      "bodyHtml": "<p class=\"text-gray-600 text-sm\">מפרץ קטנטן במזרח האי הידוע בשלוש טברנות דגים מהטובות ביוון. מגיעים אליו בסירה או בירידה תלולה.</p><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700\"><p><b class=\"text-orange-800\">טיפ:</b> הזמינו מקום בטברנת Agni או Toula's לפחות שבוע מראש בעונת הקיץ!</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.7356%2C19.9272\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
-      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7356%2C19.9272",
-      "lat": 39.7356,
-      "lon": 19.9272,
-      "parking": "Unknown",
-      "vibe": [
-        "Culinary"
-      ],
-      "beachType": null,
-      "bestTime": "Anytime"
-    },
-    {
       "id": "attr-33",
       "tags": "village",
       "cardClass": "bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition duration-300 premium-card",
@@ -3290,6 +3342,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: בתי כפר עם מגדל פעמונים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.4",
       "title": "33. כפר הדייגים קולורה 🛥️",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">המפרץ העגול והציורי ביותר בקורפו. מקום מפלט פסטורלי, טוב לשחייה שקטה במים צלולים כבדולח.</p><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700\"><p><b class=\"text-orange-800\">טיפ:</b> יש תצפית נוחה על המפרץ מהכביש הראשי למעלה, לפני הירידה אליו.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-33%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3313,6 +3366,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: מפרץ עם מים צלולים וחלוקי נחל",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.6",
       "title": "34. חוף קרסיה (Kerasia) 🌲",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">חוף חלוקים ארוך ואלגנטי מוקף עצי זית שמגיעים עד למים. נחשב לאחד החופים היוקרתיים והשקטים במזרח.</p><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700\"><p><b class=\"text-orange-800\">טיפ:</b> הביאו נעלי מים (חלוקים גדולים) - נעים לקריאת ספר בשקט מוחלט.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.7565%2C19.9408\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3335,6 +3389,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: רכסי הרים ירוקים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.3",
       "title": "35. יער ומנזר ארקודילס 🌳",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">הקצה הדרומי ביותר של האי! יער עבות המוביל למנזר נטוש על צוק ולחוף פראי בתחתיתו.</p><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700\"><p><b class=\"text-orange-800\">טיפ:</b> הדרך עפר משובשת מאוד, סעו לאט או תחנו והלכו ברגל כ-2 ק\"מ.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-35%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3358,6 +3413,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: חומות מבצר ונציאני מול הים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.5",
       "title": "36. כפר דניליה (Danilia) 🎬",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">כפר משוחזר להפליא בסגנון קורפיוטי של שנות ה-30, שימש כתפאורה לסרט ג'יימס בונד ולסדרה משפחת דארל.</p><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700\"><p><b class=\"text-orange-800\">טיפ:</b> דורש תיאום הגעה מראש או הזמנת ארוחה בטברנה שבמקום.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-36%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3381,6 +3437,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: רכסי הרים ירוקים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.2",
       "title": "37. האי וידו (Vido Island) 🏝️",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">אי קטן ומיוער במרחק 10 דקות הפלגה מהעיר העתיקה. מציע טבע פראי, שבילי הליכה נעימים וארנבים חופשיים.</p><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700\"><p><b class=\"text-orange-800\">טיפ:</b> סירה יוצאת מהנמל הישן כל חצי שעה, מעולה כמפלט מהחום של העיר.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-37%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3404,6 +3461,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: רכסי הרים ירוקים",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.0",
       "title": "38. גשר הקייזר 🌉",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">שרידים אדריכליים של גשר מרשים שנבנה עבור הקיסר וילהלם השני, במטרה לחבר את ארמון אכיליון ישירות לחוף ולסירה שלו.</p><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700\"><p><b class=\"text-orange-800\">טיפ:</b> עצירה קצרה בלבד בדרך דרומה לפוטו-אופ נחמד מעל הכביש הראשי.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-38%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3427,6 +3485,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: מפרץ עם מים צלולים וחלוקי נחל",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.8",
       "title": "39. חוף ברבאטי (Barbati) 🏖️",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">חוף חלוקים יפהפה למרגלות הר פנטוקראטור, מציע מים צלולים וברים תוססים על קו החוף עם מיטות מפנקות.</p><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700\"><p><b class=\"text-orange-800\">טיפ:</b> חוף מאורגן ונוח, מתאים מאוד למי שאוהב שירות למזרן וקוקטיילים טובים.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=39.7214%2C19.8665\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3449,6 +3508,7 @@ window.CORFU_LOCATIONS = {
         "alt": "איור בסגנון המדריך: מגלשות מים ובריכה",
         "isIllustration": true
       },
+      "hasRealPhoto": false,
       "score": "ציון: 8.1",
       "title": "40. האקווריום של קורפו 🐠",
       "bodyHtml": "<p class=\"text-gray-600 text-sm\">אטרקציה קטנה אך מסקרנת בפלאוקסטריצה, המציגה את מגוון החיים הימיים של הים היוני, כולל מחלקת זוחלים.</p><details class=\"group bg-blue-50/50 rounded border border-blue-100\"><summary class=\"font-semibold cursor-pointer p-2 text-xs text-blue-900 flex justify-between\">מידע נוסף 💡 <span class=\"group-open:rotate-180 transition\">▼</span></summary><div class=\"p-2 pt-0 text-xs text-gray-700\"><p><b class=\"text-orange-800\">טיפ:</b> מצוין לברוח מהחום בצהריים, ומתאים מאוד למשפחות עם ילדים קטנים שקצת עייפו מהחופים.</p></div></details><div class=\"flex flex-wrap gap-2 mt-3\"><a href=\"https://www.google.com/maps/search/?api=1&query=attr-40%20Corfu\" class=\"flex-1 min-w-[110px] text-center py-2.5 px-3 rounded-xl font-semibold text-sm transition-colors flex items-center justify-center gap-1.5 hover:bg-blue-100 badge-ion-bg badge-ion-text\">🗺️ מפה</a></div>",
@@ -3466,38 +3526,17 @@ window.CORFU_LOCATIONS = {
   ],
   "gems": [
     {
-      "id": "gem-1",
-      "tags": "beach",
-      "image": {
-        "src": "https://images.pexels.com/photos/1559821/pexels-photo-1559821.jpeg?auto=compress&cs=tinysrgb&w=600",
-        "alt": "חוף רוביניה"
-      },
-      "typeBadgeHtml": "<span>🏖️</span> חוף נסתר",
-      "name": "חוף רוביניה (Rovinia)",
-      "description": "חוף חלוקי נחל מבודד עם מים בצבע טורקיז עמוק וצל טבעי המגיע ממצוקים עטויים בצמחייה עבותה. הגישה דורשת הליכה קצרה דרך שביל ירוק ומוצל.",
-      "tipHtml": "💡 מומלץ להגיע בשעות הבוקר המוקדמות. ספינת גלידה קטנה נוהגת לעגון מול החוף בצהריים כדי למכור ארטיקים לרוחצים!",
-      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6644%2C19.7214",
-      "lat": 39.6644,
-      "lon": 19.7214,
-      "parking": "Unknown",
-      "vibe": [
-        "Beach",
-        "Quiet"
-      ],
-      "beachType": null,
-      "bestTime": "Early Morning"
-    },
-    {
       "id": "gem-2",
-      "tags": "village",
+      "tags": "village,history",
       "image": {
         "src": "https://images.pexels.com/photos/1659438/pexels-photo-1659438.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "פריתיה העתיקה"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏘️</span> כפר מסורתי",
       "name": "פריתיה העתיקה (Old Perithia)",
       "description": "כפר ונציאני עתיק שקפא בזמן על מורדות הר פנטוקרטור. משוטטים בין חורבות אבן, כנסיות עתיקות ומבנים מהמאה ה-14 שמספרים סיפור ארוך.",
-      "tipHtml": "💡 עצרו באחת משלוש הטברנות המקומיות בכפר כדי לטעום תבשיל \"פסטיצדה\" עשיר שהתבשל שעות על אש קטנה.",
+      "tipHtml": "💡 עצרו בטברנה Foros בכפר הנטוש ונסו את תבשיל ה\"פסטיצדה\" העשיר שמתבשל שעות על אש קטנה (או כל אחת משלוש הטברנות המקומיות בכיכר). 🚗 כביש הגישה הררי, צר ומפותל לכל האורך (כ-45-60 דק' נסיעה מהעיר) - חובה רכב, נהיגה איטית וזהירה, במיוחד בעקומות ללא מעקות.",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=%D7%A4%D7%A8%D7%99%D7%AA%D7%99%D7%94%20%D7%94%D7%A2%D7%AA%D7%99%D7%A7%D7%94%20(Old%20Perithia)%20Corfu",
       "lat": 39.73,
       "lon": 19.85,
@@ -3516,6 +3555,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/3411135/pexels-photo-3411135.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "כף דראסטיס"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>📸</span> נקודת תצפית",
       "name": "כף דראסטיס (Cape Drastis)",
       "description": "תצורות סלע גיר לבנות ומרהיבות המזדקרות מתוך הים היוני בקצה הצפון-מערבי של האי. מקום אידיאלי לצפייה בשקיעה ובנופים דרמטיים ביותר.",
@@ -3537,6 +3577,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1126935/pexels-photo-1126935.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "אחוזת תיאוטוקי"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🍷</span> יקב וטבע",
       "name": "אחוזת תיאוטוקי (Theotoky Estate)",
       "description": "אחוזה היסטורית ענקית בעמק עבות, משתרעת על פני דונמים של כרמים ועצי זית. משפחת תיאוטוקי המפורסמת מציעה סיורים מרתקים וטעימות יין מעולות.",
@@ -3560,6 +3601,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/247447/pexels-photo-247447.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "חוף חומי"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏖️</span> חוף נסתר",
       "name": "חוף חומי (Chomi Beach)",
       "description": "חוף שניתן להגיע אליו אך ורק דרך הים. מוכר כמקום עם המים הצלולים ביותר בקורפו וקירות סלע אנכיים המבודדים אותו לחלוטין מהציוויליזציה.",
@@ -3582,6 +3624,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/2087391/pexels-photo-2087391.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "מפלי נימפס"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🌿</span> טבע ומסלולים",
       "name": "מפלי נימפס (Nymphes Waterfalls)",
       "description": "בלב יער עבות נמצאים המפלים הקסומים האלו. האגדה המקומית מספרת שכאן נהגו הנימפות לרחוץ. מקום צלול וקריר לטיול רגוע.",
@@ -3600,10 +3643,12 @@ window.CORFU_LOCATIONS = {
     {
       "id": "gem-7",
       "tags": "nature",
+      // TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Gulf of Mexico sunset, reused across About + 3 gem records + a restaurant)
       "image": {
-        "src": "https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "src": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=800",
         "alt": "שמורת ארימיטיס"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🥾</span> מסלול הליכה",
       "name": "שמורת הטבע ארימיטיס (Erimitis)",
       "description": "אזור פראי ולא מפותח בצפון מזרח קורפו עם שבילי הליכה צרים החוצים צמחייה עשירה ומובילים לחופים קטנים ובתוליים ללא בנייה.",
@@ -3626,6 +3671,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1018698/pexels-photo-1018698.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "הכפר אפיאונס"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏘️</span> כפר מסורתי",
       "name": "הכפר אפיאונס (Afionas)",
       "description": "כפר המזכיר ארכיטקטורה קיקלאדית - בתים לבנים עם דלתות תכלת ושיחי בוגנוויליה ורודים, הניצב על צוק בגובה 130 מטר מעל פני הים.",
@@ -3647,6 +3693,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "אמבלונאס"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🍽️</span> יקב ומסעדה",
       "name": "אמבלונאס קורפו (Ambelonas)",
       "description": "חווה אקולוגית ויקב פסטורלי, שם תוכלו ליהנות מארוחות קורפיריות מהחווה-לשולחן המוכנות מחומרי גלם מקומיים ומסורתיים באווירת גן נעימה.",
@@ -3669,6 +3716,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1560946/pexels-photo-1560946.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "הכפר סוקראקי"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏘️</span> כפר מסורתי",
       "name": "סוקראקי (Sokraki)",
       "description": "כפר הררי שקט, נטול תיירים כמעט לחלוטין. הוא מתגאה בארכיטקטורה מקסימה של בתים בני מאות שנים, סמטאות מפותלות ונוף פנורמי משגע של הים היוני.",
@@ -3691,6 +3739,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1033082/pexels-photo-1033082.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "אגם קוריסיון"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🦩</span> טבע וחיות",
       "name": "אגם קוריסיון (Lake Korission)",
       "description": "לגונת מים מתוקים-מלוחים ייחודית בדרום קורפו, המשמשת תחנת מעבר למגוון עצום של ציפורים וביניהן פלמינגו ורודים יפהפיים.",
@@ -3712,6 +3761,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600",
         "alt": "יער ארקודילאס"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🌿</span> טבע והיסטוריה",
       "name": "יער ארקודילאס (Arkoudilas Forest)",
       "description": "טיול אל הקצה הדרומי ביותר של האי, בתוך יער קסום ועבות המוביל אל חורבות מנזר נטוש מהמאה ה-18 ואל תצפית עוצרת נשימה מקצה מצוק תלול.",
@@ -3735,6 +3785,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1559820/pexels-photo-1559820.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "חוף סטלארי"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏖️</span> חוף נסתר",
       "name": "חוף סטלארי (Stellari Beach)",
       "description": "פנינה נגישה מהים בלבד. משטח קסום של חלוקי נחל בוהקים, מי קריסטל צלולים ושקט שקשה למצוא בחופים המוכרים יותר.",
@@ -3757,6 +3808,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1004584/pexels-photo-1004584.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "כס הקיסר"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>📸</span> נקודת תצפית",
       "name": "כס הקיסר בפלקאס (Kaiser's Throne)",
       "description": "המקום האהוב על קיסר גרמניה וילהלם השני להשקיף על האי. תצפית 360 מעלות פנורמית שמהווה את אחת מנקודות השקיעה הטובות ביוון.",
@@ -3780,6 +3832,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "הטברנה של מרינה"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🍽️</span> קולינריה מקומית",
       "name": "הטברנה של מרינה (Marina's Tavern)",
       "description": "מסעדה משפחתית קטנה וקסומה ברובע היהודי של העיר העתיקה. בעוד שאר המסעדות באזור הופכות לממוסחרות, מרינה ממשיכה לבשל בדיוק כמו סבתא שלה.",
@@ -3802,6 +3855,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/2444403/pexels-photo-2444403.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "מערת גראבה"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🦇</span> הרפתקאות",
       "name": "מערת גראבה (Grava Cave)",
       "description": "מערה עמוקה ומרשימה באזור הצפוני סמוך לכפר לוטסס (Loutses). נטיפים יפהפיים ותצורות סלע ייחודיות מציעים מילוט קריר מהחום בקיץ.",
@@ -3824,6 +3878,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1032652/pexels-photo-1032652.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "הכפר חלומאס"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏘️</span> כפר מסורתי",
       "name": "הכפר חלומאס (Chlomos)",
       "description": "ידוע כ\"מרפסת של קורפו\". כפר הררי בדרום האי המאופיין בסמטאות ורודות וצהומות צרות במיוחד, מהן נשקף נוף פנורמי מרהיב לחופים המזרחיים.",
@@ -3846,6 +3901,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1033103/pexels-photo-1033103.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "חוף אקולי"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏖️</span> חוף נסתר",
       "name": "חוף אקולי (Akoli Beach)",
       "description": "ממוקם באזור שמורת ארימיטיס. הים שם מתעמק מהר יחסית, מה שהופך את המים לצלולים במיוחד, וטובים לשנורקלינג בבדידות מוחלטת.",
@@ -3868,6 +3924,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1484516/pexels-photo-1484516.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "גן לוצ'יולה"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🍽️</span> מסעדת קונספט",
       "name": "גן לוצ'יולה (Lucciola Garden)",
       "description": "נווה מדבר גסטרונומי בתוך גן פורח וקסום. המסעדה דוגלת בבישול יצירתי, ביו-דינמי ואורגני. חוויה של שלווה וטעמים שממוקמת קרוב יחסית לעיר אך מרגישה בעולם אחר.",
@@ -3890,6 +3947,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1032651/pexels-photo-1032651.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "חוף גיאילי"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏖️</span> חוף סודי",
       "name": "חוף גיאילי (Giali Beach)",
       "description": "גן עדן אמיתי על החוף המערבי ליד הכפר ארמונס. גישה מאתגרת הכוללת ירידה תלולה (לעיתים בעזרת חבלים שנקשרו למקום על ידי המקומיים), השומרת על החוף שומם ברוב ימות השנה.",
@@ -3912,6 +3970,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1482193/pexels-photo-1482193.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "חוף לימני"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏖️</span> חוף נסתר",
       "name": "חוף לימני, גליקו (Limni Beach)",
       "description": "חוף בתצורת טומבולו (Tombolo) - רצועת יבשה המחברת בין אי זעיר אל החוף המרכזי ויוצרת למעשה שני חופים קטנים גב-אל-גב עם מים שטוחים לחלוטין.",
@@ -3930,10 +3989,12 @@ window.CORFU_LOCATIONS = {
     {
       "id": "gem-22",
       "tags": "history",
+      // TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Gulf of Mexico sunset, reused across About + 3 gem records + a restaurant)
       "image": {
-        "src": "https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "src": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=800",
         "alt": "מוזיאון הפולקלור סינראדס"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏛️</span> היסטוריה",
       "name": "מוזיאון הפולקלור בסינראדס",
       "description": "הכפר סינראדס עצמו מהמם, אבל הפנינה האמיתית היא הבית המשומר המשמש כמוזיאון היסטורי המציג את סגנון החיים הקורפירי האותנטי מ-1800.",
@@ -3956,6 +4017,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1033103/pexels-photo-1033103.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "קפה קלימטיה"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>☕</span> בית קפה מיוחד",
       "name": "ארט קפה, קלימטיה",
       "description": "מקום מחבוא אמנותי ואקלקטי בכפר קלימטיה שמוחבא היטב בצפון האי. מעבר לקפה המשובח, המקום מהווה גלריה לאמנות מקומית באווירה בוהמית ומרגיעה.",
@@ -3978,6 +4040,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1659438/pexels-photo-1659438.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "כפר קוואלורי"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏘️</span> כפר מסורתי",
       "name": "כפר קוואלורי (Kavalouri)",
       "description": "כפר קטן, יפהפה ולא מוכר המציג ארכיטקטורה ונציאנית משומרת במיטבה. תמצאו בו אחוזות אבן עתיקות (Mansion Houses) עם שערים מקושתים וחצרות פנימיות פורחות.",
@@ -4000,6 +4063,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1126935/pexels-photo-1126935.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "יקב פונטיגליו"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🍷</span> יקב בוטיק",
       "name": "יקב פונטיגליו (Pontiglio)",
       "description": "יקב בוטיק משפחתי באזור הדרומי (Lefkimmi) המתמחה ביינות המיוצרים מזני ענבים נדירים המקומיים בלעדית לקורפו כגון קאקוטריגיס ופטרוקוריטנו.",
@@ -4022,6 +4086,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "טולה גסטרונומיה"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🍽️</span> קולינריה עילית",
       "name": "Toula's Gastronomy",
       "description": "ממוקמת במפרץ אגני (Agni Bay). אומנם מדובר במסעדה ידועה לפודיז, אך היא נחשבת לפנינה נסתרת שכן היא מציעה מאכלי ים מתוחכמים בטעם עילאי על קו המים עצמו.",
@@ -4039,10 +4104,12 @@ window.CORFU_LOCATIONS = {
     {
       "id": "gem-27",
       "tags": "village",
+      // TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Gulf of Mexico sunset, reused across About + 3 gem records + a restaurant)
       "image": {
-        "src": "https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "src": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=800",
         "alt": "סטרינילס"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏘️</span> כפר הררי",
       "name": "סטרינילס (Strinilas)",
       "description": "הכפר הגבוה ביותר בקורפו, הממוקם על מורדות הר פנטוקרטור. במרכזו כיכר קטנה ויפהפייה המוצלת בעצי בוקיצה עצומים ועתיקים. אוויר פסגות קריר גם באוגוסט.",
@@ -4065,6 +4132,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1484516/pexels-photo-1484516.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "מיקרו ניסי"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🍹</span> מועדון חוף סודי",
       "name": "מיקרו ניסי (Micro Nisi)",
       "description": "בר מסעדה ומועדון חוף קטן השוכן על \"אי קטן\" (מכאן שמו) בדרום קורפו. מציע קוקטיילים מעולים, מיטות שיזוף מרופדות, חוף זהוב צמוד ואווירת צ'יל אאוט ממגנטת.",
@@ -4087,6 +4155,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/2444403/pexels-photo-2444403.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "מערת פנטוקרטור"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🦇</span> הרפתקאות",
       "name": "מערת פנטוקרטור",
       "description": "מערה גדולה ומסתורית המסתתרת בדרך אל פסגת ההר. רבים נוסעים על הכביש וחולפים על פניה מבלי לדעת על קיומה. תצפית מעולה מהכניסה למערה.",
@@ -4103,34 +4172,13 @@ window.CORFU_LOCATIONS = {
       "needsCoordCheck": true
     },
     {
-      "id": "gem-30",
-      "tags": "beach,food",
-      "image": {
-        "src": "https://images.pexels.com/photos/1559821/pexels-photo-1559821.jpeg?auto=compress&cs=tinysrgb&w=600",
-        "alt": "מפרץ אגני"
-      },
-      "typeBadgeHtml": "<span>🏖️</span> חוף וקולינריה",
-      "name": "מפרץ אגני (Agni Bay)",
-      "description": "מפרץ אינטימי ומוקף עצים הנושקים לקו המים. מפורסם במימיו השקטים להפליא ובשלוש טברנות סופר-מעולות המגישות דגה טרייה מדי בוקר.",
-      "tipHtml": "💡 שכרו סירה קטנה והגיעו לטברנה דרך הים. לכל מסעדה במפרץ יש מזח קטן משלה שעליו תוכלו לקשור את הסירה בזמן שאתם אוכלים.",
-      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7356%2C19.9272",
-      "lat": 39.7356,
-      "lon": 19.9272,
-      "parking": "Unknown",
-      "vibe": [
-        "Beach",
-        "Culinary"
-      ],
-      "beachType": null,
-      "bestTime": "Anytime"
-    },
-    {
       "id": "gem-31",
       "tags": "history,nature",
       "image": {
         "src": "https://images.pexels.com/photos/1033103/pexels-photo-1033103.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "אחוזת מון רפוס"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏛️</span> היסטוריה וטבע",
       "name": "אחוזת מון רפוס (Mon Repos)",
       "description": "הארמון בו נולד הנסיך פיליפ. רוב התיירים עוזבים אחרי צילום המבנה, אך האטרקציה האמיתית היא היער הענק מסביבו, המשלב חורבות של מקדשים יוונים עתיקים ומזח פרטי.",
@@ -4154,6 +4202,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1482193/pexels-photo-1482193.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "תצפית פורטו טימוני"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>📸</span> תצפית סודית",
       "name": "התצפית הנסתרת בפורטו טימוני",
       "description": "חוף פורטו טימוני מפורסם מאוד, אבל מעטים יודעים שישנו שביל צדדי קטן שעולה למעלה מהחוף לנקודת התצפית הכי גבוהה בצוק המשקיפה עליו.",
@@ -4175,6 +4224,7 @@ window.CORFU_LOCATIONS = {
         "src": "https://images.pexels.com/photos/1114897/pexels-photo-1114897.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "כירה כריסיקו"
       },
+      "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🏘️</span> כפר שקט",
       "name": "כירה כריסיקו (Kyra Chrysikou)",
       "description": "יישוב שקט ובלתי מוכר בתוך הארץ, בנוי על גבעה ירוקה עם עצי זית וברוש, כ-8 ק\"מ מהעיר קורפו. מציע נוף פנורמי למרינת גוביה, לקונטוקאלי ולהר פנטוקרטור מרחוק, הרחק מהמולת האתרים התיירותיים.",

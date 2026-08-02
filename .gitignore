@@ -1,2 +1,4 @@
 node_modules/
 js/trip-private.js
+package-lock.json
+.claude/

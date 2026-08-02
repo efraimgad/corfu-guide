@@ -254,7 +254,61 @@ function updateMapLayers() {
     });
 }
 
+// Per-day map button (the 🗺️ button on each itinerary day card). Used to
+// just open the same whole-island map every day; now it actually filters
+// to that day's stops when js/itinerary.js's getDayLocationMatches() can
+// find any (matched by name against that day's own text - see the comment
+// there for why), and falls back to the normal full-island view otherwise
+// (e.g. Day 1/7, which are airport/hotel logistics with no mappable stops).
+function openDayMap(dayNum) {
+    const matches = (typeof getDayLocationMatches === 'function') ? getDayLocationMatches(dayNum) : [];
+    switchTab('beaches', true);
+    setTimeout(() => {
+        const container = document.getElementById('beach-map-container');
+        const focusNow = () => focusMapOnDayLocations(matches);
+        if (container.style.display === 'none') {
+            toggleBeachMap();
+            setTimeout(() => { if (!beachMapInstance) setTimeout(focusNow, 300); else focusNow(); }, 150);
+        } else if (!beachMapInstance) {
+            setTimeout(focusNow, 150);
+        } else {
+            focusNow();
+        }
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 150);
+}
+
+// Makes sure every matched location's layer is checked on, then fits the
+// map's view to just those markers (or falls back to the default
+// whole-island view when a day has no matches at all).
+function focusMapOnDayLocations(matches) {
+    if (!beachMapInstance) return;
+    if (!matches.length) {
+        beachMapInstance.setView([39.62, 19.85], 10);
+        return;
+    }
+
+    const categories = Array.from(new Set(matches.map(m => m.category)));
+    categories.forEach(category => {
+        const checkbox = document.getElementById('layer-' + category);
+        if (checkbox) checkbox.checked = true;
+    });
+    updateMapLayers();
+
+    if (matches.length === 1) {
+        beachMapInstance.setView([matches[0].lat, matches[0].lon], 14, { animate: true });
+    } else {
+        const bounds = L.latLngBounds(matches.map(m => [m.lat, m.lon]));
+        beachMapInstance.fitBounds(bounds, { padding: [40, 40], maxZoom: 14 });
+    }
+
+    const first = matches[0];
+    const marker = mapMarkerIndex[first.category + '::' + first.id];
+    if (marker) marker.openPopup();
+}
+
 window.toggleBeachMap = toggleBeachMap;
 window.openCardFromMap = openCardFromMap;
 window.showOnMap = showOnMap;
 window.updateMapLayers = updateMapLayers;
+window.openDayMap = openDayMap;

@@ -1,7 +1,7 @@
 // Tab ids this app actually has a .tab-content section for - used to
 // validate incoming hash values (URL bar edits, bookmarks, Back/Forward)
 // before ever treating one as a tab id.
-const VALID_TAB_IDS = ['about', 'itinerary', 'beaches', 'food', 'attractions', 'gems', 'activities', 'shopping', 'faq'];
+const VALID_TAB_IDS = ['about', 'shopping', 'itinerary', 'beaches', 'food', 'attractions', 'gems', 'activities', 'faq'];
 
 function getTabIdFromHash() {
     const id = location.hash.slice(1);
@@ -288,6 +288,90 @@ window.addEventListener('scroll', () => {
         scrollTicking = true;
     }
 }, { passive: true });
+
+// Persistent Emergency quick-access modal (see #emergency-fab-btn in
+// index.html, rendered outside every .tab-content section so it's reachable
+// from any tab). Mirrors the open/close/focus-trap pattern already used by
+// the dashboard editor modal (js/dashboard.js openDashEditor/closeDashEditor)
+// rather than inventing a new one.
+let emergencyModalTriggerEl = null;
+
+// The generic insurance reminder already shown in Practical Info
+// (#shop-health) - used as a fallback whenever no trip-specific insurance
+// line is available.
+const EMERGENCY_INSURANCE_FALLBACK_TEXT =
+    '💡 טיפ חשוב: זכרו תמיד ליצור קשר עם מוקד החירום של חברת ביטוח הנסיעות שלכם מיד לפני או אחרי קבלת טיפול רפואי להסדרת התשלומים!';
+
+// window.TRIP_PRIVATE is set by the untracked js/trip-private.js (see
+// .gitignore) and may not exist at all, and even when it does, an
+// `insurance` field on it is optional - this must work fully either way.
+// Supports a plain string, or an {name, phone} - style object like the
+// hotel/car entries dashboard.js already reads from the same file.
+function getEmergencyInsuranceHtml() {
+    const insurance = window.TRIP_PRIVATE && window.TRIP_PRIVATE.insurance;
+    if (!insurance) return EMERGENCY_INSURANCE_FALLBACK_TEXT;
+
+    if (typeof insurance === 'string') {
+        return `💡 חברת הביטוח שלכם: ${insurance}`;
+    }
+    const name = insurance.name || insurance.company || '';
+    const phone = insurance.phone || insurance.line || '';
+    if (!name && !phone) return EMERGENCY_INSURANCE_FALLBACK_TEXT;
+    const phoneHtml = phone ? ` — <a href="tel:${phone.replace(/[^+\d]/g, '')}" class="underline">${phone}</a>` : '';
+    return `💡 חברת הביטוח שלכם: ${name}${phoneHtml}`;
+}
+
+function openEmergencyModal() {
+    emergencyModalTriggerEl = document.activeElement;
+    const insuranceEl = document.getElementById('emergency-modal-insurance');
+    if (insuranceEl) insuranceEl.innerHTML = getEmergencyInsuranceHtml();
+
+    const modal = document.getElementById('emergency-modal-backdrop');
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+    const closeBtn = modal.querySelector('button[aria-label="סגירה"]');
+    if (closeBtn) closeBtn.focus();
+}
+
+function closeEmergencyModal() {
+    const modal = document.getElementById('emergency-modal-backdrop');
+    if (modal) modal.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+    if (emergencyModalTriggerEl) emergencyModalTriggerEl.focus();
+}
+
+// Escape closes it, and Tab/Shift+Tab are trapped inside while it's open -
+// same behavior as the dashboard editor modal in js/dashboard.js.
+document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('emergency-modal-backdrop');
+    if (!modal || modal.classList.contains('hidden')) return;
+
+    if (e.key === 'Escape') {
+        closeEmergencyModal();
+        return;
+    }
+
+    if (e.key === 'Tab') {
+        const focusable = modal.querySelectorAll(
+            'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    }
+});
+
+window.openEmergencyModal = openEmergencyModal;
+window.closeEmergencyModal = closeEmergencyModal;
 
 window.switchTab = switchTab;
 window.handleTablistKeydown = handleTablistKeydown;

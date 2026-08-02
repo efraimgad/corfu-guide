@@ -119,6 +119,67 @@ function initTripProgress() {
         }
     });
     updateTripProgressUI(completed);
+    initDayBudgetInputs();
+}
+
+// --- Per-day "actual spent" tracker ---------------------------------------
+// A lightweight companion to the day-complete checkbox above: how much was
+// actually spent that day, in euros. Kept in its own localStorage key
+// (rather than folded into TRIP_PROGRESS_KEY) because that key's existing
+// shape is a flat array of completed day numbers, not an object keyed by
+// day - reusing it here would mean changing its shape and touching the
+// cloud-merge logic in storage.js that already depends on it staying an
+// array. This is local-only, exactly like the rest of this file.
+const DAY_BUDGET_KEY = 'corfu-guide-day-budget-actual';
+// Shape: { [dayNumber]: number }
+
+function getDayBudgetActuals() {
+    try {
+        const raw = localStorage.getItem(DAY_BUDGET_KEY);
+        const parsed = raw ? JSON.parse(raw) : {};
+        return (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) ? parsed : {};
+    } catch (e) {
+        return {};
+    }
+}
+
+function saveDayBudgetActuals(map) {
+    try {
+        localStorage.setItem(DAY_BUDGET_KEY, JSON.stringify(map));
+    } catch (e) {
+        console.warn('Could not save day budget actuals', e);
+    }
+}
+
+function updateDayBudgetActual(inputEl) {
+    const day = inputEl.getAttribute('data-day');
+    const raw = inputEl.value.trim();
+    const map = getDayBudgetActuals();
+    if (raw === '') {
+        delete map[day];
+    } else {
+        const num = Number(raw);
+        if (!Number.isFinite(num) || num < 0) return; // ignore garbage input, don't save it
+        map[day] = num;
+    }
+    saveDayBudgetActuals(map);
+    updateDayBudgetSummary(map);
+}
+
+function updateDayBudgetSummary(map) {
+    const el = document.getElementById('day-budget-total');
+    if (!el) return;
+    const total = Object.values(map).reduce((sum, v) => sum + (Number(v) || 0), 0);
+    el.textContent = total > 0 ? `💶 סה"כ הוצאות בפועל עד כה: €${total}` : '';
+}
+
+function initDayBudgetInputs() {
+    const map = getDayBudgetActuals();
+    document.querySelectorAll('.day-budget-input').forEach(input => {
+        const day = input.getAttribute('data-day');
+        if (map[day] != null) input.value = map[day];
+    });
+    updateDayBudgetSummary(map);
 }
 
 // The dashboard's "view full itinerary" CTA used to just switch tabs and
@@ -151,8 +212,60 @@ function viewTodayInItinerary() {
     }, 150);
 }
 
+// Per-day map filtering (see js/map.js openDayMap): there is no explicit
+// day -> location-id field anywhere in the data, so each day's stops are
+// found by matching the place names actually written in that day's own
+// itinerary text (#day-N-body) against window.CORFU_LOCATIONS' `name`
+// field - the same source of truth the map/cards already use. This is
+// re-derived from the live DOM/data every time the button is pressed
+// (not a hand-typed id list), so it can't silently go stale if a location
+// record's id or wording changes later.
+//
+// A location name is either a plain string ("קסיופי") or "Hebrew (English)"
+// ("רוביניה (Rovinia)"); both halves are tried separately since itinerary
+// text sometimes only uses one of the two languages for a given place.
+// Anything 2 characters or shorter is skipped as too generic to trust
+// (would false-positive on unrelated day text).
+function extractLocationNameVariants(name) {
+    if (!name) return [];
+    const variants = [];
+    const bilingual = name.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+    if (bilingual) {
+        variants.push(bilingual[1].trim());
+        variants.push(bilingual[2].trim());
+    } else {
+        variants.push(name.trim());
+    }
+    return variants.filter(v => v.length > 2);
+}
+
+// Returns every location (any category with map coordinates) whose name
+// appears in day N's own itinerary text. Empty on days with no mappable
+// stops (e.g. Day 1/7, arrival/departure logistics) - callers should fall
+// back to the full-island view in that case rather than show nothing.
+function getDayLocationMatches(dayNum) {
+    const body = document.getElementById(`day-${dayNum}-body`);
+    const locations = window.CORFU_LOCATIONS;
+    if (!body || !locations) return [];
+
+    const dayText = body.textContent;
+    const matches = [];
+    Object.keys(locations).forEach(category => {
+        (locations[category] || []).forEach(loc => {
+            if (loc.lat == null || loc.lon == null) return;
+            const variants = extractLocationNameVariants(loc.name || loc.title);
+            if (variants.some(v => dayText.includes(v))) {
+                matches.push({ category, id: loc.id, lat: loc.lat, lon: loc.lon, name: loc.name || loc.title });
+            }
+        });
+    });
+    return matches;
+}
+
 window.setAllDayCards = setAllDayCards;
 window.toggleDayCard = toggleDayCard;
 window.handleDayHeaderKeydown = handleDayHeaderKeydown;
 window.toggleDayComplete = toggleDayComplete;
 window.viewTodayInItinerary = viewTodayInItinerary;
+window.updateDayBudgetActual = updateDayBudgetActual;
+window.getDayLocationMatches = getDayLocationMatches;
