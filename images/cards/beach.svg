@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e1edf5"/><stop offset="1" stop-color="#f7ecd9"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#sky)"/>
+  <circle cx="452" cy="88" r="36" fill="#c9a55f" opacity=".9"/>
+  <path d="M0 214 q80 -46 168 -16 t150 26 V400 H0 Z" fill="#6d7a4f" opacity=".65"/>
+  <path d="M600 206 q-70 -40 -152 -12 t-128 30 V400 H600 Z" fill="#6d7a4f" opacity=".5"/>
+  <path d="M0 252 H600 V400 H0 Z" fill="#1a6494"/>
+  <path d="M0 270 q60 -10 120 0 t120 0 t120 0 t120 0 t120 0 V400 H0 Z" fill="#e1edf5" opacity=".55"/>
+  <path d="M0 298 q75 -12 150 0 t150 0 t150 0 t150 0 V400 H0 Z" fill="#e1edf5" opacity=".4"/>
+  <path d="M0 356 q150 -26 300 -4 t300 -8 V400 H0 Z" fill="#e7ddc7"/>
+  <g fill="#f2ecdf" opacity=".85">
+    <ellipse cx="96" cy="378" rx="17" ry="9"/><ellipse cx="168" cy="386" rx="13" ry="7"/>
+    <ellipse cx="416" cy="380" rx="15" ry="8"/><ellipse cx="496" cy="388" rx="12" ry="6"/>
+  </g>
+</svg>
