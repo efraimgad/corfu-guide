@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e1edf5"/><stop offset="1" stop-color="#f7ecd9"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#sky)"/>
+  <circle cx="468" cy="96" r="40" fill="#c9a55f" opacity=".9"/>
+  <path d="M0 268 H600 V400 H0 Z" fill="#14507a"/>
+  <path d="M0 286 q60 -10 120 0 t120 0 t120 0 t120 0 t120 0 V400 H0 Z" fill="#237fae" opacity=".55"/>
+  <path d="M0 314 q75 -12 150 0 t150 0 t150 0 t150 0 V400 H0 Z" fill="#237fae" opacity=".4"/>
+  <path d="M0 300 q90 -34 190 -18 t180 22 V400 H0 Z" fill="#0a2540" opacity=".35"/>
+  <g fill="#0a2540">
+    <path d="M96 300 V196 h150 v104 Z"/>
+    <path d="M96 196 h16 v-16 h18 v16 h20 v-16 h18 v16 h20 v-16 h18 v16 h20 v-16 h16 v16 Z"/>
+    <path d="M246 300 V150 h72 v150 Z"/>
+    <path d="M246 150 h14 v-15 h16 v15 h14 v-15 h16 v15 h12 v-15 h14 v15 Z"/>
+    <path d="M318 300 V214 h122 v86 Z"/>
+    <path d="M318 214 h15 v-15 h17 v15 h18 v-15 h17 v15 h18 v-15 h17 v15 h20 v-15 Z"/>
+  </g>
+  <g fill="#f7ecd9" opacity=".8">
+    <rect x="140" y="228" width="16" height="26" rx="8"/>
+    <rect x="190" y="228" width="16" height="26" rx="8"/>
+    <rect x="268" y="182" width="15" height="24" rx="7.5"/>
+    <rect x="360" y="244" width="15" height="24" rx="7.5"/>
+    <rect x="398" y="244" width="15" height="24" rx="7.5"/>
+  </g>
+</svg>
