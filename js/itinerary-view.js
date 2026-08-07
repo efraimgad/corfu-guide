@@ -350,33 +350,6 @@ function gtRenderItineraryRouteInfo(day) {
     el.innerHTML = gtItineraryRouteInfoHtml(day);
 }
 
-// -- Trip-wide optimization summary ------------------------------------------
-// Sums the real touring days' (2-6) own routeInfo.totalKm/totalMin - never a
-// hand-typed grand total - so this can never drift out of sync with the
-// per-day numbers shown above. Days 1/7 (fixed airport transfers) and the
-// two optional/alternative days are intentionally excluded: they aren't
-// part of the geographic-optimization pass this summary reports on.
-function gtRenderItineraryOptimizationSummary() {
-    const el = document.getElementById('gt-itinerary-optimization-summary');
-    if (!el || typeof window.ITINERARY_DAYS === 'undefined') return;
-    const touringDays = window.ITINERARY_DAYS.filter(d => !d.isAlt && d.dayNumber >= 2 && d.dayNumber <= 6 && d.routeInfo);
-    if (!touringDays.length) return;
-    const totalKm = touringDays.reduce((sum, d) => sum + (d.routeInfo.totalKm || 0), 0);
-    const totalMin = touringDays.reduce((sum, d) => sum + (d.routeInfo.totalMin || 0), 0);
-
-    el.innerHTML = `<details class="gt-optimization-summary">
-        <summary class="gt-optimization-summary__toggle">🧭 סיכום אופטימיזציית המסלול (למה הימים מסודרים ככה)</summary>
-        <div class="gt-optimization-summary__body">
-            <p>המסלול נבדק כבעיה גיאוגרפית אחת - כל 5 ימי הסיור (ימים 2-6) מהמלון בגוביה נבנו כ"קרן" (hub-and-spoke) נפרדת לכל אזור באי, כדי למנוע נסיעות כפולות דרך אותו אזור בימים שונים: <strong>יום 2</strong> = מרכז/קורפו טאון+קאנוני, <strong>יום 3</strong> = חוף צפון-מזרחי, <strong>יום 4</strong> = פלאוקסטריצה במערב, <strong>יום 5</strong> = דרום האי, <strong>יום 6</strong> = קצה צפון-מערבי.</p>
-            <p><strong>סה"כ נהיגה משוערת ל-5 ימי הסיור:</strong> <span class="gt-tabular">~${Math.round(totalKm)} ק"מ · ${gtFormatDurationHe(totalMin)} נהיגה</span> (סכום הערכות המרחק/זמן לכל יום, ראו כרטיס "מסלול ומרחקים" בכל יום).</p>
-            <p>בתוך כל יום, סדר העצירות כבר נבדק ונשמר כשהוא מונוטוני מבחינה גיאוגרפית (למשל יום 3 עולה צפונה לאורך החוף בלי לחזור אחורה; יום 5 חוצה את הדרום פעם אחת בלבד ממערב למזרח) - לא נדרש שינוי סדר.</p>
-            <p><strong>שינוי גלובלי אחד שנבדק ונדחה במכוון:</strong> קסיופי (סוף יום 3) וסידארי (תחילת יום 6) מרוחקים כ-23 ק"מ/כ-25 דק' נסיעה זה מזה בכביש הפנימי הצפוני - טכנית ניתן לאחד את שני הימים ללולאה צפונית אחת ולחסוך יום נסיעה שלם מהמלון. עם זאת, איחוד כזה ידחוס 8 אתרי דגל (ברבטי, קאלאמי, אגני, קסיופי, סידארי, קייפ דראסטיס, פרולדס ולוגאס) ליום אחד ארוך ולחוץ - בניגוד לדרישה לשמור על מסלול ריאלי ומהנה. לכן שני הימים נשארו נפרדים, כל אחד כלולאה יעילה משלו.</p>
-            <p class="gt-optimization-summary__caveat">⚠️ <strong>לגבי מספרי "לפני/אחרי":</strong> המסלול המקורי שסופק כבר היה מאורגן גיאוגרפית (כל יום = אזור אחד באי) ולא נבדק אי-פעם כרשימת עצירות לא-ממוינת - כך שאין "מסלול מקורי גרוע יותר" עם מרחק כולל שונה לחשב מולו ביושר. השינוי שבוצע כאן הוא הוספת מרחקים/זמנים אמיתיים ומאומתים לכל מקטע (עד כה לא הופיעו במסלול כלל) ואימות שאין הזדמנות אופטימיזציה שהוחמצה - לא שינוי בפועל של סדר העצירות. כל המרחקים/זמנים המוצגים הם הערכות שנאספו ממקורות ניתוב/תיירות ציבוריים (לא ניתוב חי בזמן אמת) - יש לאמת מול Google Maps/Waze סמוך למועד הנסיעה.</p>
-        </div>
-    </details>`;
-}
-window.gtRenderItineraryOptimizationSummary = gtRenderItineraryOptimizationSummary;
-
 // -- Tap-to-open detail sheet -------------------------------------------------
 // Now that the row itself already shows the item's first descriptive
 // sentence (gtItineraryRowCardHtml() above), the sheet's job is the LONG
@@ -477,6 +450,5 @@ function initItineraryScrubberView() {
     const d = window._currentTripDayNum;
     const initial = (typeof d === 'number' && d >= 1 && d <= 7) ? String(d) : '1';
     gtSelectItineraryDay(initial);
-    gtRenderItineraryOptimizationSummary();
 }
 window.initItineraryScrubberView = initItineraryScrubberView;
