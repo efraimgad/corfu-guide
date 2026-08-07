@@ -17,17 +17,30 @@ function loadLeafletThen(callback) {
     if (typeof L !== 'undefined') { callback(); return; }
     if (!leafletLoadPromise) {
         leafletLoadPromise = new Promise((resolve, reject) => {
-            const addCss = (href, integrity) => {
+            // No `integrity`/`crossOrigin` here (unlike the two <script>
+            // tags below, deliberately): a stylesheet is not executable, so
+            // pinning it to an exact byte hash trades a small supply-chain
+            // guarantee for a much worse failure mode - if cdnjs ever
+            // reserves/re-serves these bytes any differently (a legitimate
+            // repack, a different compression pass, anything), the browser
+            // silently refuses to apply the file with no error event to
+            // hook into, no console warning by default, nothing - just a
+            // map that renders its marker layer (self-styled, doesn't need
+            // this CSS) over completely unstyled/invisible tile images.
+            // That exact silent-failure shape is what motivated this
+            // rewrite. onerror below at least surfaces it if it ever
+            // recurs for an unrelated reason (CDN outage, ad/tracker
+            // blocker, etc).
+            const addCss = (href) => {
                 const link = document.createElement('link');
                 link.rel = 'stylesheet';
                 link.href = href;
-                link.integrity = integrity;
-                link.crossOrigin = 'anonymous';
+                link.onerror = () => console.warn('[map] stylesheet failed to load, map tiles may render unstyled:', href);
                 document.head.appendChild(link);
             };
-            addCss('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css', 'sha384-c6Rcwz4e4CITMbu/NBmnNS8yN2sC3cUElMEMfP3vqqKFp7GOYaaBBCqmaWBjmkjb');
-            addCss('https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css', 'sha384-pmjIAcz2bAn0xukfxADbZIb3t8oRT9Sv0rvO+BR5Csr6Dhqq+nZs59P0pPKQJkEV');
-            addCss('https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css', 'sha384-wgw+aLYNQ7dlhK47ZPK7FRACiq7ROZwgFNg0m04avm4CaXS+Z9Y7nMu8yNjBKYC+');
+            addCss('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css');
+            addCss('https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css');
+            addCss('https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css');
 
             const leafletScript = document.createElement('script');
             leafletScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
@@ -39,10 +52,10 @@ function loadLeafletThen(callback) {
                 clusterScript.integrity = 'sha384-eXVCORTRlv4FUUgS/xmOyr66XBVraen8ATNLMESp92FKXLAMiKkerixTiBvXriZr';
                 clusterScript.crossOrigin = 'anonymous';
                 clusterScript.onload = resolve;
-                clusterScript.onerror = reject;
+                clusterScript.onerror = () => { console.error('[map] leaflet.markercluster.js failed to load'); reject(); };
                 document.head.appendChild(clusterScript);
             };
-            leafletScript.onerror = reject;
+            leafletScript.onerror = () => { console.error('[map] leaflet.min.js failed to load'); reject(); };
             document.head.appendChild(leafletScript);
         });
     }
