@@ -153,6 +153,78 @@ const GT_CORFU_CENTER = [39.62, 19.85];
 // parsed on page load but Leaflet is lazy-loaded on first map use, so any
 // top-level reference to `L` throws "L is not defined" on every page view.
 const GT_CORFU_BOUNDS_LATLNG = [[39.20, 19.30], [39.95, 20.40]];
+
+// Tile providers, in preference order, with automatic failover.
+//
+// Why a list and not one hardcoded URL: the map rendered its markers
+// correctly (so Leaflet's JS AND CSS were both fine - unstyled panes would
+// have stacked every marker at the top-left instead of positioning them
+// geographically) while every tile image came back blank, identically on
+// wifi and cellular. That combination points at the tile host refusing the
+// requests rather than anything device- or network-side, which is a real
+// operational risk with openstreetmap.org's tile service: its usage policy
+// explicitly reserves the right to block origins it considers heavy users,
+// and a public GitHub Pages site is exactly the shape of origin that gets
+// caught by that.
+//
+// Carto's basemaps are first because they're explicitly provisioned for
+// this kind of embedded web use; OSM stays as the fallback. Both are
+// keyless and both ultimately render OpenStreetMap data, so the map looks
+// materially the same either way. Nothing else in this file (markers,
+// clustering, popups, bounds, the day-route lines) touches the tile layer,
+// so swapping providers is inert with respect to the rest of the map.
+const GT_TILE_PROVIDERS = [
+    {
+        name: 'carto-voyager',
+        url: 'https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        maxZoom: 20
+    },
+    {
+        name: 'osm',
+        url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19
+    }
+];
+
+// Adds providers[index], watching for tileerror. Leaflet fires tileerror
+// per failed tile, so a provider that's being refused outright produces a
+// burst of them - a handful (not one, which can just be a transient miss)
+// is the signal to give up on it and try the next one. maxBounds already
+// keeps the viewport over Corfu, so there are no legitimately-missing
+// out-of-coverage tiles to confuse this count.
+const GT_TILE_ERROR_THRESHOLD = 4;
+function gtAddTileLayerWithFallback(map, index) {
+    index = index || 0;
+    const provider = GT_TILE_PROVIDERS[index];
+    // Out of providers: leave the last layer attached rather than stripping
+    // the map bare, so markers still sit on *something* and the failure
+    // reads as "tiles didn't load" instead of "the map is broken".
+    if (!provider) return;
+
+    const layer = L.tileLayer(provider.url, {
+        attribution: provider.attribution,
+        maxZoom: provider.maxZoom
+    });
+
+    let errorCount = 0;
+    let switched = false;
+    layer.on('tileerror', () => {
+        errorCount++;
+        if (switched || errorCount < GT_TILE_ERROR_THRESHOLD) return;
+        switched = true;
+        const next = GT_TILE_PROVIDERS[index + 1];
+        console.warn(`[map] tile provider "${provider.name}" failed (${errorCount} tile errors)` +
+            (next ? `, falling back to "${next.name}"` : ' - no fallback provider left'));
+        if (!next) return;
+        map.removeLayer(layer);
+        gtAddTileLayerWithFallback(map, index + 1);
+    });
+
+    layer.addTo(map);
+}
+
 function gtCreateMap(elId, opts) {
     const map = L.map(elId, Object.assign({
         scrollWheelZoom: false,
@@ -161,17 +233,7 @@ function gtCreateMap(elId, opts) {
         minZoom: 9
     }, opts || {})).setView(GT_CORFU_CENTER, 10);
 
-    // Single hostname, not the classic {s} (a/b/c) subdomain-sharded
-    // pattern: OSM's tile operators have been discouraging and increasingly
-    // rate-limiting/blocking the lettered subdomains for a while now (it
-    // was an HTTP/1.1-era trick to open more parallel connections, which
-    // HTTP/2 - what every browser uses to *.tile.openstreetmap.org today -
-    // makes unnecessary) in favor of a single tile.openstreetmap.org host.
-    // Sites still requesting a./b./c. can see tiles fail to load entirely.
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors',
-        maxZoom: 18
-    }).addTo(map);
+    gtAddTileLayerWithFallback(map);
 
     // Click-to-activate wheel zoom (see note 1 above).
     map.on('click focus', () => map.scrollWheelZoom.enable());
