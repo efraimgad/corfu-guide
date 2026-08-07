@@ -1142,6 +1142,31 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 .gt-route-info-card__tip{ font-size:var(--gt-text-sm); color:var(--gt-ink-700); margin:0 0 6px; line-height:1.6; }
 .gt-route-info-card__estimate{ font-size:var(--gt-text-xs); color:var(--gt-ink-500); margin:var(--gt-space-2) 0 0; line-height:1.6; }
 
+/* Between-cards route connector ("what's next, how do I get there") - a
+   sibling of .gt-row-card inside #gt-itinerary-row-list (a flex column, see
+   .gt-explore-list), NOT another card: no border/shadow/background box, just
+   a couple of centered lines so it reads as a thin joint between two real
+   cards rather than a third thing to stop and read. Deliberately reuses
+   -space-1 (not -space-2, the list's own inter-card gap) on its own
+   top/bottom margin so it sits closer to its two neighboring cards than
+   they'd otherwise sit from each other - visually "attached" to the flow
+   instead of floating as an equally-weighted list item. */
+.gt-route-connector{
+  display:flex; flex-direction:column; align-items:center; gap:2px;
+  margin:calc(var(--gt-space-1) * -1) 0; padding:2px 0;
+}
+.gt-route-connector__arrow{ font-size:11px; line-height:1; color:var(--gt-ink-500); opacity:.6; }
+.gt-route-connector__metric{
+  font-size:var(--gt-text-xs); font-weight:700; color:var(--gt-ink-700);
+  background:var(--gt-paper-sunken); border-radius:var(--gt-r-full);
+  padding:3px 12px; white-space:nowrap;
+}
+.gt-route-connector__parking{ font-size:10px; font-weight:600; color:var(--gt-status-soon-text); }
+.gt-route-connector__hotel{
+  text-align:center; font-size:var(--gt-text-xs); font-weight:700; color:var(--gt-ink-500);
+  padding:2px 0;
+}
+
 /* ============================================================
    PHASE 4, BATCH 4 — map marker selection (replaces the old Leaflet
    popup-on-tap behavior in js/map.js). Tapping a pin no longer opens a
