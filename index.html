@@ -198,6 +198,7 @@
 
 
     <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 md:pb-8">
+        <h1 class="sr-only">קורפו 2026: מדריך הטיולים השלם</h1>
 <!-- ============================================================
      Phase D, sub-step 1: Home tab ("מפה" in the bottom nav) becomes a
      real, full-bleed live map instead of the old stat-row + summary
@@ -2083,7 +2084,6 @@
     <!-- 1. Boat Rentals -->
     <article class="bg-white rounded-3xl shadow-lg border gt-border-hair overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card scroll-mt-24" data-id="activity-1" id="act-boats"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 favorite-btn-hover w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <!-- TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Lake Como, Italy) -->
         <img src="https://images.pexels.com/photos/1231343/pexels-photo-1231343.jpeg?auto=compress&cs=tinysrgb&w=600" alt="השכרת סירה" width="300" height="400" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
         <img src="https://images.pexels.com/photos/1482193/pexels-photo-1482193.jpeg?auto=compress&cs=tinysrgb&w=600" alt="גלי הים" width="300" height="400" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
@@ -2128,7 +2128,6 @@
     <article class="bg-white rounded-3xl shadow-lg border gt-border-hair overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card scroll-mt-24" data-id="activity-2" id="act-cruises"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 favorite-btn-hover w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
         <img src="https://images.pexels.com/photos/872831/pexels-photo-872831.jpeg?auto=compress&cs=tinysrgb&w=600" alt="ספינת שיט" width="300" height="400" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
-        <!-- TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Maldives-style overwater bungalow / turquoise flat water) -->
         <img src="images/cards/beach.svg" alt="איור בסגנון המדריך: מפרץ עם מים צלולים וחלוקי נחל" width="300" height="400" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
       <div class="p-6 flex-1 flex flex-col">
@@ -2446,7 +2445,6 @@
     <!-- 10. Water Sports -->
     <article class="bg-white rounded-3xl shadow-lg border gt-border-hair overflow-hidden hover:shadow-2xl transition duration-300 flex flex-col group premium-card scroll-mt-24" data-id="activity-10" id="act-watersports"><div class="relative">
       <div class="grid grid-cols-2 gap-1 p-2 premium-card-image-dual"><button onclick="toggleFavorite(this)" class="favorite-btn absolute top-2 left-2 z-10 text-white bg-black/30 favorite-btn-hover w-9 h-9 rounded-full transition duration-300 flex items-center justify-center text-lg" title="שמור למועדפים" aria-label="שמור למועדפים">🤍</button></div>
-        <!-- TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Florida, USA) -->
         <img src="https://images.pexels.com/photos/270724/pexels-photo-270724.jpeg?auto=compress&cs=tinysrgb&w=600" alt="גלישה מונעת מטוס רוח" width="300" height="400" class="w-full h-56 object-cover rounded-tl-2xl" loading="lazy" decoding="async">
         <img src="https://images.pexels.com/photos/1559107/pexels-photo-1559107.jpeg?auto=compress&cs=tinysrgb&w=600" alt="אופנוע ים" width="300" height="400" class="w-full h-56 object-cover rounded-tr-2xl" loading="lazy" decoding="async">
       </div>
@@ -2757,6 +2755,26 @@
                 </summary>
                 <div class="p-6 gt-text-700 bg-white border-t gt-border-hair leading-relaxed text-base">
                     כן, זו חובה - גם אם חברת ההשכרה בפועל לא דורשת זאת, כי היעדרו עלול לבטל את הביטוח במקרה תאונה. <a href="#" onclick="event.preventDefault(); switchTab('trip-planning', true); setTimeout(() => document.getElementById('plan-transport').scrollIntoView({behavior:'smooth'}), 150);" class="gt-text-accent font-semibold hover:underline">פרטים מלאים בפרק תחבורה ונהיגה ←</a>
+                </div>
+            </details>
+
+            <details data-cat="transport" class="group bg-white rounded-xl shadow-sm border gt-border-hair overflow-hidden hover:shadow-md transition duration-300">
+                <summary class="cursor-pointer font-bold p-5 gt-bg-sunken gt-text-900 text-lg gt-bg-accent-soft gt-text-accent transition-colors flex justify-between items-center select-none">
+                    <span class="pl-4">איך עובד החניה בקורפו?</span>
+                    <span class="text-2xl group-open:rotate-180 transition-transform gt-text-accent">▾</span>
+                </summary>
+                <div class="p-6 gt-text-700 bg-white border-t gt-border-hair leading-relaxed text-base">
+                    בעיר קורפו העתיקה יש אזורי חניה מוסדרים בתשלום (כמו ברוב הערים היווניות) בעלות שעתית מתונה - חפשו שילוט או סימון על הכביש. מחוץ לעיר, ליד חופים, כפרים וטברנות, החניה בדרך כלל חופשית וזמינה. <a href="#" onclick="event.preventDefault(); switchTab('trip-planning', true); setTimeout(() => document.getElementById('plan-transport').scrollIntoView({behavior:'smooth'}), 150);" class="gt-text-accent font-semibold hover:underline">פרטים מלאים בפרק תחבורה ונהיגה ←</a>
+                </div>
+            </details>
+
+            <details data-cat="transport" class="group bg-white rounded-xl shadow-sm border gt-border-hair overflow-hidden hover:shadow-md transition duration-300">
+                <summary class="cursor-pointer font-bold p-5 gt-bg-sunken gt-text-900 text-lg gt-bg-accent-soft gt-text-accent transition-colors flex justify-between items-center select-none">
+                    <span class="pl-4">איך מתדלקים את הרכב השכור?</span>
+                    <span class="text-2xl group-open:rotate-180 transition-transform gt-text-accent">▾</span>
+                </summary>
+                <div class="p-6 gt-text-700 bg-white border-t gt-border-hair leading-relaxed text-base">
+                    ביוון תדלוק הוא לרוב בשירות עצמי, אך בתחנות רבות (ובעיקר מחוץ לערים) עדיין נהוג שהמתדלק עצמו יבצע את התדלוק - פשוט בקשו את סוג הדלק ("Diesel" או "Unleaded/Petrol") ושלמו בקופה. תחנות דלק נפוצות לאורך הכבישים הראשיים אך מתפזרות יותר בצפון ובמערב האי, אז מומלץ לא להוריד את המכל מתחת לחצי במסלולים המרוחקים. תדלקו מיכל מלא ממש לפני החזרת הרכב בשדה כדי להימנע מקנס תדלוק של חברת ההשכרה.
                 </div>
             </details>
 
@@ -3254,7 +3272,14 @@
     <script src="js/packing.js" defer></script>
     <!-- Untracked (see .gitignore): sets window.TRIP_PRIVATE with real
          booking details, read by js/dashboard.js. Safe to be missing —
-         a 404 here just means dashboard.js falls back to placeholders. -->
+         dashboard.js falls back to placeholders. A missing file here does
+         log a "Failed to load resource: 404" line - that's the browser
+         itself logging any failed request (fetch/XHR/<script src> alike),
+         not something page JS can suppress, so a plain <script src> stays
+         the simplest correct approach: no client-side substitute (fetch,
+         XHR, dynamic injection) removes that log line, and several either
+         change dashboard.js's load-order guarantee or add needless
+         complexity for zero behavioral difference. -->
     <script src="js/trip-private.js" defer></script>
     <script src="js/dashboard.js" defer></script>
     <script src="js/map.js" defer></script>
