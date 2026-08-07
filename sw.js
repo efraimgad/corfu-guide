@@ -1,7 +1,7 @@
 // Basic offline support: stale-while-revalidate for the app shell (this
 // file's own assets) and everything else same-origin; cache-first (capped,
-// own cache each) for third-party Pexels/Unsplash photos AND OpenStreetMap
-// map tiles; and a deliberate pass-through (no caching at all) for Supabase
+// own cache each) for third-party Pexels/Unsplash photos AND map tiles
+// (see TILE_HOSTS); and a deliberate pass-through (no caching at all) for Supabase
 // API calls — the app already has its own offline queue for those writes
 // (see js/sync.js). The broken-image SVG fallback in js/init.js still
 // covers any fetch that fails even after a cache-first attempt.
@@ -9,7 +9,7 @@
 // Bump this on every deploy that changes any APP_SHELL file — the SW
 // cache is otherwise not invalidated, and returning visitors would stay
 // pinned to the old cached JS/CSS indefinitely.
-const CACHE_NAME = 'corfu-guide-v9';
+const CACHE_NAME = 'corfu-guide-v10';
 
 // Photos live in their own cache so they can be evicted (and capped)
 // independently of the app shell, and so bumping CACHE_NAME for a code
@@ -93,12 +93,14 @@ function isThirdPartyImage(url) {
     return /(^|\.)images\.pexels\.com$|(^|\.)pexels\.com$|(^|\.)unsplash\.com$/.test(url.hostname);
 }
 
-// js/map.js's own tile layer always requests this exact host (no {s}
-// subdomain sharding - see that file's own comment on why) - matching it
-// directly, rather than a broader *.openstreetmap.org pattern, keeps this
-// from accidentally intercepting an unrelated OSM API call in the future.
+// The exact tile hosts js/map.js's GT_TILE_PROVIDERS can request (it
+// fails over between them, so both need caching). Matched by exact
+// hostname rather than a broad *.openstreetmap.org / *.cartocdn.com
+// pattern, so this can't accidentally intercept an unrelated API call on
+// a sibling subdomain later.
+const TILE_HOSTS = ['basemaps.cartocdn.com', 'tile.openstreetmap.org'];
 function isMapTile(url) {
-    return url.hostname === 'tile.openstreetmap.org';
+    return TILE_HOSTS.includes(url.hostname);
 }
 
 // Keeps a capped cache from growing without bound: FIFO eviction, oldest
