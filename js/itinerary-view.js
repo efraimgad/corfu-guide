@@ -171,9 +171,9 @@ function gtItineraryRowCardHtml(item, index) {
 // consecutive row-cards (and, when the day's transitions data says so,
 // before the first/after the last card as a trip-to/from-the-hotel leg).
 // Deliberately NOT a card: a couple of centered lines of icon+time+distance,
-// reusing the exact km/min already researched into each day's
-// routeInfo.legs (js/itinerary-data.js's `transitions` field) - never a
-// separately-invented number. `null` in a day's `transitions.between` array
+// reusing the exact km/min already researched into each day's own
+// `transitions` field (js/itinerary-data.js) - never a separately-invented
+// number. `null` in a day's `transitions.between` array
 // means "same spot, not worth a connector" (e.g. two items at the same
 // hotel/venue) and renders nothing, same as the gap already looked before
 // this feature existed.
@@ -313,7 +313,7 @@ function gtSelectItineraryDay(key) {
 
         actions.innerHTML = `<label class="flex items-center gap-2 shrink-0 bg-white/15 hover:bg-white/25 transition-colors rounded-xl px-3 py-2 cursor-pointer text-sm font-semibold select-none" onclick="event.stopPropagation()"><input type="checkbox" class="day-complete-checkbox w-5 h-5 accent-emerald-400 rounded" data-day="${dayNum}" onchange="toggleDayComplete(this)"${isChecked ? ' checked' : ''}> הושלם</label><label class="flex items-center gap-1.5 shrink-0 bg-white/15 hover:bg-white/25 transition-colors rounded-xl px-3 py-2 text-sm font-semibold select-none" onclick="event.stopPropagation()">${GT_ICON_EURO}<input type="number" min="0" step="1" inputmode="numeric" class="day-budget-input w-20 bg-white/20 text-white placeholder-white/60 rounded-lg px-1.5 py-1 text-sm font-semibold text-center focus:outline-none focus:ring-2 focus:ring-white/60" data-day="${dayNum}" placeholder="בפועל" aria-label="הוצאה בפועל ביום ${dayNum} (יורו)" oninput="updateDayBudgetActual(this)" onclick="event.stopPropagation()" value="${escapeAttr(String(budgetVal))}"></label><button onclick="event.stopPropagation(); openDayMap(${dayNum});" class="shrink-0 bg-white/15 hover:bg-white/25 transition-colors rounded-xl px-3 py-2 text-sm font-semibold" style="display:inline-flex;align-items:center;justify-content:center;" title="הצג את תחנות היום הזה על המפה (אם לא נמצאו תחנות ממופות, תוצג מפת האי המלאה)" aria-label="הצג את תחנות היום הזה על המפה">${GT_ICON_MAP}</button>`;
 
-        gtRenderItineraryRouteInfo(day);
+        gtRenderItineraryAreaLabel(day);
         gtRenderItineraryRowList(day.items, day.transitions);
     } else {
         const swaps = (typeof getDaySwaps === 'function') ? getDaySwaps() : {};
@@ -344,7 +344,7 @@ function gtSelectItineraryDay(key) {
           </label>
           <span class="day-swap-status text-xs font-bold bg-white/15 px-2 py-1 rounded-full" data-swap-status="${key}">${escapeHtml(statusText)}</span>`;
 
-        gtRenderItineraryRouteInfo(day);
+        gtRenderItineraryAreaLabel(day);
         gtRenderItineraryRowList(day.items, day.transitions);
     }
 
@@ -357,56 +357,19 @@ function gtSelectItineraryDay(key) {
 }
 window.gtSelectItineraryDay = gtSelectItineraryDay;
 
-// -- Route/driving-distance info card (per day) ------------------------------
-// Renders js/itinerary-data.js's per-day routeInfo (hotel -> stop -> ... ->
-// hotel chain, real-world-researched km/min per leg, parking/walking
-// guidance) into #gt-itinerary-route-info. All distances/times were looked
-// up from public routing/travel sources (not live turn-by-turn routing, and
-// not invented) - see each leg's own `note` and the day's `estimateNote`,
-// both surfaced here so the estimate caveat is never separated from the
-// numbers it qualifies.
-function gtRouteLegHtml(leg) {
-    if (leg.walk) {
-        return `<div class="gt-route-leg gt-route-leg--walk"><span class="gt-route-leg__stops">${escapeHtml(leg.from)} → ${escapeHtml(leg.to)}</span><span class="gt-route-leg__metric">🚶 הליכה - ללא נסיעה</span>${leg.note ? `<span class="gt-route-leg__note">${escapeHtml(leg.note)}</span>` : ''}</div>`;
-    }
-    if (leg.boat) {
-        return `<div class="gt-route-leg gt-route-leg--boat"><span class="gt-route-leg__stops">${escapeHtml(leg.from)} → ${escapeHtml(leg.to)}</span><span class="gt-route-leg__metric">⛴️ שייט ים</span>${leg.note ? `<span class="gt-route-leg__note">${escapeHtml(leg.note)}</span>` : ''}</div>`;
-    }
-    return `<div class="gt-route-leg"><span class="gt-route-leg__stops">${escapeHtml(leg.from)} → ${escapeHtml(leg.to)}</span><span class="gt-route-leg__metric gt-tabular">🚗 ${leg.km} ק"מ · ${leg.min} דק'</span>${leg.note ? `<span class="gt-route-leg__note">${escapeHtml(leg.note)}</span>` : ''}</div>`;
-}
-
-function gtFormatDurationHe(totalMin) {
-    const hours = Math.floor(totalMin / 60);
-    const mins = Math.round(totalMin % 60);
-    const hoursPart = hours === 0 ? '' : (hours === 1 ? 'שעה ' : `${hours} שעות `);
-    return `${hoursPart}${mins} דק'`;
-}
-
-function gtItineraryRouteInfoHtml(day) {
-    const info = day && day.routeInfo;
-    if (!info) return '';
-    const legsHtml = (info.legs || []).map(gtRouteLegHtml).join('');
-    const routeChain = (info.route || []).join(' ← ');
-    return `<div class="gt-route-info-card" role="region" aria-label="מידע מסלול ומרחקי נהיגה ליום זה">
-        <div class="gt-route-info-card__header">
-            <span class="gt-route-info-card__area">📍 ${escapeHtml(info.area || '')}</span>
-            ${info.fixed ? '<span class="gt-route-info-card__fixed">קבוע - לא חלק מהאופטימיזציה</span>' : ''}
-        </div>
-        <p class="gt-route-info-card__chain">${escapeHtml(routeChain)}</p>
-        <div class="gt-route-info-card__legs">${legsHtml}</div>
-        <div class="gt-route-info-card__totals">
-            <span class="gt-tabular"><strong>סה"כ נהיגה משוערת:</strong> ${info.totalKm} ק"מ · ${gtFormatDurationHe(info.totalMin)}</span>
-        </div>
-        ${info.parking ? `<p class="gt-route-info-card__tip"><strong>🅿️ חניה:</strong> ${escapeHtml(info.parking)}</p>` : ''}
-        ${info.walking ? `<p class="gt-route-info-card__tip"><strong>🚶 הליכה:</strong> ${escapeHtml(info.walking)}</p>` : ''}
-        ${info.estimateNote ? `<p class="gt-route-info-card__estimate">⚠️ ${escapeHtml(info.estimateNote)}</p>` : ''}
-    </div>`;
-}
-
-function gtRenderItineraryRouteInfo(day) {
+// -- Day area label -----------------------------------------------------------
+// A single small "📍 אזור היום: X" line from js/itinerary-data.js's per-day
+// `dayArea` string - replaces the old full route-info card (hotel->stop
+// chain, per-leg list, totals, parking/walking paragraphs, estimate note).
+// That card became redundant once the same km/min/parking facts started
+// showing inline as compact connectors between the row-cards themselves
+// (gtTransitionConnectorHtml() below) - this is deliberately just a label,
+// not a revival of that card in smaller type.
+function gtRenderItineraryAreaLabel(day) {
     const el = document.getElementById('gt-itinerary-route-info');
     if (!el) return;
-    el.innerHTML = gtItineraryRouteInfoHtml(day);
+    const area = day && day.dayArea;
+    el.innerHTML = area ? `<p class="gt-itinerary-area-label">📍 אזור היום: ${escapeHtml(area)}</p>` : '';
 }
 
 // -- Tap-to-open detail sheet -------------------------------------------------
