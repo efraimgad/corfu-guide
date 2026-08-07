@@ -1,21 +1,29 @@
 // Basic offline support: stale-while-revalidate for the app shell (this
 // file's own assets) and everything else same-origin; cache-first (capped,
-// own cache) for third-party Pexels/Unsplash photos; and a deliberate
-// pass-through (no caching at all) for Supabase API calls — the app already
-// has its own offline queue for those writes (see js/sync.js). The
-// broken-image SVG fallback in js/init.js still covers any fetch that fails
-// even after a cache-first attempt.
+// own cache each) for third-party Pexels/Unsplash photos AND OpenStreetMap
+// map tiles; and a deliberate pass-through (no caching at all) for Supabase
+// API calls — the app already has its own offline queue for those writes
+// (see js/sync.js). The broken-image SVG fallback in js/init.js still
+// covers any fetch that fails even after a cache-first attempt.
 
 // Bump this on every deploy that changes any APP_SHELL file — the SW
 // cache is otherwise not invalidated, and returning visitors would stay
 // pinned to the old cached JS/CSS indefinitely.
-const CACHE_NAME = 'corfu-guide-v7';
+const CACHE_NAME = 'corfu-guide-v8';
 
 // Photos live in their own cache so they can be evicted (and capped)
 // independently of the app shell, and so bumping CACHE_NAME for a code
 // change does not throw away a trip's worth of already-downloaded images.
 const IMAGE_CACHE_NAME = 'corfu-guide-images-v1';
 const IMAGE_CACHE_MAX = 200;
+
+// Map tiles get their own capped cache too, same reasoning as photos - and
+// a higher cap, since a tile is a few KB (not a few hundred KB like a
+// photo) and panning/zooming around Corfu across three separate map
+// instances (home/beaches/explore) touches far more distinct tile URLs
+// than the handful of photos on any one screen.
+const TILE_CACHE_NAME = 'corfu-guide-tiles-v1';
+const TILE_CACHE_MAX = 600;
 
 const APP_SHELL = [
     'index.html',
@@ -70,7 +78,7 @@ self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys()
             .then((names) => Promise.all(
-                names.filter((name) => name !== CACHE_NAME && name !== IMAGE_CACHE_NAME)
+                names.filter((name) => name !== CACHE_NAME && name !== IMAGE_CACHE_NAME && name !== TILE_CACHE_NAME)
                      .map((name) => caches.delete(name))
             ))
             .then(() => self.clients.claim())
@@ -85,12 +93,21 @@ function isThirdPartyImage(url) {
     return /(^|\.)images\.pexels\.com$|(^|\.)pexels\.com$|(^|\.)unsplash\.com$/.test(url.hostname);
 }
 
-// Keeps the photo cache from growing without bound: FIFO eviction, oldest
-// entries first (cache.keys() preserves insertion order).
-async function trimImageCache(cache) {
+// js/map.js's own tile layer always requests this exact host (no {s}
+// subdomain sharding - see that file's own comment on why) - matching it
+// directly, rather than a broader *.openstreetmap.org pattern, keeps this
+// from accidentally intercepting an unrelated OSM API call in the future.
+function isMapTile(url) {
+    return url.hostname === 'tile.openstreetmap.org';
+}
+
+// Keeps a capped cache from growing without bound: FIFO eviction, oldest
+// entries first (cache.keys() preserves insertion order). Shared by the
+// photo and tile caches - same policy, different cap/cache per media type.
+async function trimCappedCache(cache, max) {
     const keys = await cache.keys();
-    if (keys.length <= IMAGE_CACHE_MAX) return;
-    await Promise.all(keys.slice(0, keys.length - IMAGE_CACHE_MAX).map((k) => cache.delete(k)));
+    if (keys.length <= max) return;
+    await Promise.all(keys.slice(0, keys.length - max).map((k) => cache.delete(k)));
 }
 
 self.addEventListener('fetch', (event) => {
@@ -122,7 +139,33 @@ self.addEventListener('fetch', (event) => {
                             // worth storing: the browser can replay them into an
                             // <img> even though we cannot inspect them.
                             if (response && (response.ok || response.type === 'opaque')) {
-                                cache.put(request, response.clone()).then(() => trimImageCache(cache));
+                                cache.put(request, response.clone()).then(() => trimCappedCache(cache, IMAGE_CACHE_MAX));
+                            }
+                            return response;
+                        })
+                        .catch(() => cached);
+                })
+            )
+        );
+        return;
+    }
+
+    // Map tiles: same cache-first/capped treatment as third-party photos,
+    // in their own cache. Without this they fell into the generic
+    // "everything else" stale-while-revalidate branch below, sharing
+    // CACHE_NAME with the app shell - functionally similar, but a flaky
+    // mobile connection got no benefit from a tile already seen (no
+    // cache-first short-circuit) and a full trip's worth of tiles isn't
+    // something a shared, uncapped cache should be soaking up.
+    if (isMapTile(url)) {
+        event.respondWith(
+            caches.open(TILE_CACHE_NAME).then((cache) =>
+                cache.match(request).then((cached) => {
+                    if (cached) return cached;
+                    return fetch(request)
+                        .then((response) => {
+                            if (response && (response.ok || response.type === 'opaque')) {
+                                cache.put(request, response.clone()).then(() => trimCappedCache(cache, TILE_CACHE_MAX));
                             }
                             return response;
                         })

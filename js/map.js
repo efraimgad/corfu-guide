@@ -148,7 +148,14 @@ function gtCreateMap(elId, opts) {
         minZoom: 9
     }, opts || {})).setView(GT_CORFU_CENTER, 10);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // Single hostname, not the classic {s} (a/b/c) subdomain-sharded
+    // pattern: OSM's tile operators have been discouraging and increasingly
+    // rate-limiting/blocking the lettered subdomains for a while now (it
+    // was an HTTP/1.1-era trick to open more parallel connections, which
+    // HTTP/2 - what every browser uses to *.tile.openstreetmap.org today -
+    // makes unnecessary) in favor of a single tile.openstreetmap.org host.
+    // Sites still requesting a./b./c. can see tiles fail to load entirely.
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors',
         maxZoom: 18
     }).addTo(map);
