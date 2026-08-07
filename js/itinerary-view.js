@@ -254,6 +254,7 @@ function gtSelectItineraryDay(key) {
 
         actions.innerHTML = `<label class="flex items-center gap-2 shrink-0 bg-white/15 hover:bg-white/25 transition-colors rounded-xl px-3 py-2 cursor-pointer text-sm font-semibold select-none" onclick="event.stopPropagation()"><input type="checkbox" class="day-complete-checkbox w-5 h-5 accent-emerald-400 rounded" data-day="${dayNum}" onchange="toggleDayComplete(this)"${isChecked ? ' checked' : ''}> הושלם</label><label class="flex items-center gap-1.5 shrink-0 bg-white/15 hover:bg-white/25 transition-colors rounded-xl px-3 py-2 text-sm font-semibold select-none" onclick="event.stopPropagation()">${GT_ICON_EURO}<input type="number" min="0" step="1" inputmode="numeric" class="day-budget-input w-20 bg-white/20 text-white placeholder-white/60 rounded-lg px-1.5 py-1 text-sm font-semibold text-center focus:outline-none focus:ring-2 focus:ring-white/60" data-day="${dayNum}" placeholder="בפועל" aria-label="הוצאה בפועל ביום ${dayNum} (יורו)" oninput="updateDayBudgetActual(this)" onclick="event.stopPropagation()" value="${escapeAttr(String(budgetVal))}"></label><button onclick="event.stopPropagation(); openDayMap(${dayNum});" class="shrink-0 bg-white/15 hover:bg-white/25 transition-colors rounded-xl px-3 py-2 text-sm font-semibold" style="display:inline-flex;align-items:center;justify-content:center;" title="הצג את תחנות היום הזה על המפה (אם לא נמצאו תחנות ממופות, תוצג מפת האי המלאה)" aria-label="הצג את תחנות היום הזה על המפה">${GT_ICON_MAP}</button>`;
 
+        gtRenderItineraryRouteInfo(day);
         gtRenderItineraryRowList(day.items);
     } else {
         const swaps = (typeof getDaySwaps === 'function') ? getDaySwaps() : {};
@@ -284,6 +285,7 @@ function gtSelectItineraryDay(key) {
           </label>
           <span class="day-swap-status text-xs font-bold bg-white/15 px-2 py-1 rounded-full" data-swap-status="${key}">${escapeHtml(statusText)}</span>`;
 
+        gtRenderItineraryRouteInfo(day);
         gtRenderItineraryRowList(day.items);
     }
 
@@ -295,6 +297,85 @@ function gtSelectItineraryDay(key) {
     if (typeof fillTripPrivateHooks === 'function') fillTripPrivateHooks();
 }
 window.gtSelectItineraryDay = gtSelectItineraryDay;
+
+// -- Route/driving-distance info card (per day) ------------------------------
+// Renders js/itinerary-data.js's per-day routeInfo (hotel -> stop -> ... ->
+// hotel chain, real-world-researched km/min per leg, parking/walking
+// guidance) into #gt-itinerary-route-info. All distances/times were looked
+// up from public routing/travel sources (not live turn-by-turn routing, and
+// not invented) - see each leg's own `note` and the day's `estimateNote`,
+// both surfaced here so the estimate caveat is never separated from the
+// numbers it qualifies.
+function gtRouteLegHtml(leg) {
+    if (leg.walk) {
+        return `<div class="gt-route-leg gt-route-leg--walk"><span class="gt-route-leg__stops">${escapeHtml(leg.from)} → ${escapeHtml(leg.to)}</span><span class="gt-route-leg__metric">🚶 הליכה - ללא נסיעה</span>${leg.note ? `<span class="gt-route-leg__note">${escapeHtml(leg.note)}</span>` : ''}</div>`;
+    }
+    if (leg.boat) {
+        return `<div class="gt-route-leg gt-route-leg--boat"><span class="gt-route-leg__stops">${escapeHtml(leg.from)} → ${escapeHtml(leg.to)}</span><span class="gt-route-leg__metric">⛴️ שייט ים</span>${leg.note ? `<span class="gt-route-leg__note">${escapeHtml(leg.note)}</span>` : ''}</div>`;
+    }
+    return `<div class="gt-route-leg"><span class="gt-route-leg__stops">${escapeHtml(leg.from)} → ${escapeHtml(leg.to)}</span><span class="gt-route-leg__metric gt-tabular">🚗 ${leg.km} ק"מ · ${leg.min} דק'</span>${leg.note ? `<span class="gt-route-leg__note">${escapeHtml(leg.note)}</span>` : ''}</div>`;
+}
+
+function gtFormatDurationHe(totalMin) {
+    const hours = Math.floor(totalMin / 60);
+    const mins = Math.round(totalMin % 60);
+    const hoursPart = hours === 0 ? '' : (hours === 1 ? 'שעה ' : `${hours} שעות `);
+    return `${hoursPart}${mins} דק'`;
+}
+
+function gtItineraryRouteInfoHtml(day) {
+    const info = day && day.routeInfo;
+    if (!info) return '';
+    const legsHtml = (info.legs || []).map(gtRouteLegHtml).join('');
+    const routeChain = (info.route || []).join(' ← ');
+    return `<div class="gt-route-info-card" role="region" aria-label="מידע מסלול ומרחקי נהיגה ליום זה">
+        <div class="gt-route-info-card__header">
+            <span class="gt-route-info-card__area">📍 ${escapeHtml(info.area || '')}</span>
+            ${info.fixed ? '<span class="gt-route-info-card__fixed">קבוע - לא חלק מהאופטימיזציה</span>' : ''}
+        </div>
+        <p class="gt-route-info-card__chain">${escapeHtml(routeChain)}</p>
+        <div class="gt-route-info-card__legs">${legsHtml}</div>
+        <div class="gt-route-info-card__totals">
+            <span class="gt-tabular"><strong>סה"כ נהיגה משוערת:</strong> ${info.totalKm} ק"מ · ${gtFormatDurationHe(info.totalMin)}</span>
+        </div>
+        ${info.parking ? `<p class="gt-route-info-card__tip"><strong>🅿️ חניה:</strong> ${escapeHtml(info.parking)}</p>` : ''}
+        ${info.walking ? `<p class="gt-route-info-card__tip"><strong>🚶 הליכה:</strong> ${escapeHtml(info.walking)}</p>` : ''}
+        ${info.estimateNote ? `<p class="gt-route-info-card__estimate">⚠️ ${escapeHtml(info.estimateNote)}</p>` : ''}
+    </div>`;
+}
+
+function gtRenderItineraryRouteInfo(day) {
+    const el = document.getElementById('gt-itinerary-route-info');
+    if (!el) return;
+    el.innerHTML = gtItineraryRouteInfoHtml(day);
+}
+
+// -- Trip-wide optimization summary ------------------------------------------
+// Sums the real touring days' (2-6) own routeInfo.totalKm/totalMin - never a
+// hand-typed grand total - so this can never drift out of sync with the
+// per-day numbers shown above. Days 1/7 (fixed airport transfers) and the
+// two optional/alternative days are intentionally excluded: they aren't
+// part of the geographic-optimization pass this summary reports on.
+function gtRenderItineraryOptimizationSummary() {
+    const el = document.getElementById('gt-itinerary-optimization-summary');
+    if (!el || typeof window.ITINERARY_DAYS === 'undefined') return;
+    const touringDays = window.ITINERARY_DAYS.filter(d => !d.isAlt && d.dayNumber >= 2 && d.dayNumber <= 6 && d.routeInfo);
+    if (!touringDays.length) return;
+    const totalKm = touringDays.reduce((sum, d) => sum + (d.routeInfo.totalKm || 0), 0);
+    const totalMin = touringDays.reduce((sum, d) => sum + (d.routeInfo.totalMin || 0), 0);
+
+    el.innerHTML = `<details class="gt-optimization-summary">
+        <summary class="gt-optimization-summary__toggle">🧭 סיכום אופטימיזציית המסלול (למה הימים מסודרים ככה)</summary>
+        <div class="gt-optimization-summary__body">
+            <p>המסלול נבדק כבעיה גיאוגרפית אחת - כל 5 ימי הסיור (ימים 2-6) מהמלון בגוביה נבנו כ"קרן" (hub-and-spoke) נפרדת לכל אזור באי, כדי למנוע נסיעות כפולות דרך אותו אזור בימים שונים: <strong>יום 2</strong> = מרכז/קורפו טאון+קאנוני, <strong>יום 3</strong> = חוף צפון-מזרחי, <strong>יום 4</strong> = פלאוקסטריצה במערב, <strong>יום 5</strong> = דרום האי, <strong>יום 6</strong> = קצה צפון-מערבי.</p>
+            <p><strong>סה"כ נהיגה משוערת ל-5 ימי הסיור:</strong> <span class="gt-tabular">~${Math.round(totalKm)} ק"מ · ${gtFormatDurationHe(totalMin)} נהיגה</span> (סכום הערכות המרחק/זמן לכל יום, ראו כרטיס "מסלול ומרחקים" בכל יום).</p>
+            <p>בתוך כל יום, סדר העצירות כבר נבדק ונשמר כשהוא מונוטוני מבחינה גיאוגרפית (למשל יום 3 עולה צפונה לאורך החוף בלי לחזור אחורה; יום 5 חוצה את הדרום פעם אחת בלבד ממערב למזרח) - לא נדרש שינוי סדר.</p>
+            <p><strong>שינוי גלובלי אחד שנבדק ונדחה במכוון:</strong> קסיופי (סוף יום 3) וסידארי (תחילת יום 6) מרוחקים כ-23 ק"מ/כ-25 דק' נסיעה זה מזה בכביש הפנימי הצפוני - טכנית ניתן לאחד את שני הימים ללולאה צפונית אחת ולחסוך יום נסיעה שלם מהמלון. עם זאת, איחוד כזה ידחוס 8 אתרי דגל (ברבטי, קאלאמי, אגני, קסיופי, סידארי, קייפ דראסטיס, פרולדס ולוגאס) ליום אחד ארוך ולחוץ - בניגוד לדרישה לשמור על מסלול ריאלי ומהנה. לכן שני הימים נשארו נפרדים, כל אחד כלולאה יעילה משלו.</p>
+            <p class="gt-optimization-summary__caveat">⚠️ <strong>לגבי מספרי "לפני/אחרי":</strong> המסלול המקורי שסופק כבר היה מאורגן גיאוגרפית (כל יום = אזור אחד באי) ולא נבדק אי-פעם כרשימת עצירות לא-ממוינת - כך שאין "מסלול מקורי גרוע יותר" עם מרחק כולל שונה לחשב מולו ביושר. השינוי שבוצע כאן הוא הוספת מרחקים/זמנים אמיתיים ומאומתים לכל מקטע (עד כה לא הופיעו במסלול כלל) ואימות שאין הזדמנות אופטימיזציה שהוחמצה - לא שינוי בפועל של סדר העצירות. כל המרחקים/זמנים המוצגים הם הערכות שנאספו ממקורות ניתוב/תיירות ציבוריים (לא ניתוב חי בזמן אמת) - יש לאמת מול Google Maps/Waze סמוך למועד הנסיעה.</p>
+        </div>
+    </details>`;
+}
+window.gtRenderItineraryOptimizationSummary = gtRenderItineraryOptimizationSummary;
 
 // -- Tap-to-open detail sheet -------------------------------------------------
 // Now that the row itself already shows the item's first descriptive
@@ -396,5 +477,6 @@ function initItineraryScrubberView() {
     const d = window._currentTripDayNum;
     const initial = (typeof d === 'number' && d >= 1 && d <= 7) ? String(d) : '1';
     gtSelectItineraryDay(initial);
+    gtRenderItineraryOptimizationSummary();
 }
 window.initItineraryScrubberView = initItineraryScrubberView;

@@ -1492,6 +1492,7 @@
             תכנון מקיף, מדוקדק וחוויתי, מותאם לטיסה שלכם: <strong>ת"א (TLV) <span id="itinerary-intro-depart-time">15:40</span> ← קורפו (CFU) <span id="itinerary-intro-arrive-time">18:15</span>, ב-<span id="itinerary-intro-depart-date">02.09</span></strong>. כל יום במסלול זה נבנה כדי למקסם את הזמן שלכם, למנוע פקקים ולהבטיח שילוב מנצח של תרבות, חופים, קולינריה וטבע. כללנו שעות מדויקות, זמני נסיעה, חניונים, נקודות צילום, והכי חשוב - <strong>תוכנית גיבוי מפורטת לכל יום למקרה של גשם או מזג אוויר סוער</strong>.
         </p>
         <p class="text-xs gt-text-300 max-w-3xl mx-auto">* שעות השקיעה המוזכרות במסלול הן הערכה כללית לתחילת ספטמבר בקו הרוחב של קורפו (כ-39.6° צפון), לא חישוב מדויק ליום/למקום הספציפי - השקיעה בפועל יכולה לנוע ב-±10 דקות בהתאם לתאריך המדויק, לתנאי מזג האוויר ולאופק המקומי. כדאי לבדוק שעה מעודכנת קרוב למועד (למשל באפליקציית מזג אוויר) לפני שמתכננים סביבה משהו קריטי.</p>
+        <div id="gt-itinerary-optimization-summary" class="max-w-4xl mx-auto"></div>
     </div>
 
     <!-- Trip progress tracker (persisted via localStorage) -->
@@ -1521,6 +1522,7 @@
     <div class="gt-itinerary-view" id="gt-itinerary-view">
         <div class="gt-scrubber" id="gt-itinerary-scrubber" role="tablist" aria-label="בחירת יום במסלול" onkeydown="handleTablistKeydown(event)"></div>
         <div id="gt-itinerary-context"></div>
+        <div id="gt-itinerary-route-info"></div>
         <div id="gt-itinerary-row-list" class="gt-explore-list"></div>
         <div id="gt-itinerary-empty" class="hidden text-center py-10">
             <p class="gt-body">לא נמצאו פריטים ליום זה</p>
