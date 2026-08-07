@@ -63,6 +63,15 @@ window.ITINERARY_DAYS = [
             walking: null,
             estimateNote: "מרחק/זמן משוער (לא נמדד בניתוב חי) - יום זה קבוע לפי שעת הנחיתה ואינו חלק מהאופטימיזציה הגיאוגרפית."
         },
+        transitions: {
+            fromHotel: null,
+            between: [
+                { mode: "walk", min: 5 },
+                { mode: "drive", min: 18, km: 8 },
+                { mode: "walk", min: 5 }
+            ],
+            toHotel: null
+        },
         items: [
             { time: "18:15 - 19:00", title: `🛬 נחיתה בשדה התעופה יאניס קפודיסטריאס (CFU)`, html: `<div class="premium-event-desc"><p>השדה קטן וקומפקטי - יציאה מהמטוס ועד לביקורת הדרכונים ואיסוף מזוודות אורכת בדרך כלל 20-30 דקות בלבד. שדה התעופה נמצא בפועל בתוך העיר קורפו, כ-3 ק"מ מהמרכז.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> ללא עלות נוספת מעבר למחיר הטיסה</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> כ-30-45 דקות מהנחיתה ועד יציאה מהטרמינל</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> רגוע - שדה קטן ולא עמוס</span></li></ul></div>
                             <div class="premium-tip-box">
@@ -111,6 +120,18 @@ window.ITINERARY_DAYS = [
             walking: "כל אזור העיר העתיקה (הליסטון → המבצר הישן → קמפיילו) הוא מקטע הליכה אחד רציף, כ-1.5 ק\"מ הלוך-חזור - זו הסיבה שהחניה נשארת קבועה במקום אחד לאורך כל הבוקר.",
             estimateNote: "מרחקים/זמנים משוערים לפי נתוני ניתוב כלליים (לא ניתוב חי בזמן אמת) - יש לאמת מול Google Maps/Waze ביום הנסיעה."
         },
+        transitions: {
+            fromHotel: null,
+            between: [
+                { mode: "drive", min: 15, km: 8.5, parking: "חנו פעם אחת ליד הליסטון" },
+                { mode: "walk", min: 5, m: 400 },
+                { mode: "walk", min: 7, m: 500 },
+                { mode: "walk", min: 3, m: 200 },
+                { mode: "drive", min: 12, km: 4.5, parking: "חניה נפרדת בקאנוני" },
+                { mode: "walk", min: 3 }
+            ],
+            toHotel: { mode: "drive", min: 20, km: 12 }
+        },
         items: [
             { time: "08:00 - 08:30", title: `☕ ארוחת בוקר במלון`, html: `<div class="premium-event-desc"><p>ארוחת בוקר במלון <span class="trip-private-hotel-name">המלון שלכם</span> לפני היציאה לקורפו טאון.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> כלול במלון</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> כחצי שעה</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> רגוע - התחלה קלילה ליום</span></li></ul></div>` },
             { time: "08:30 - 09:30", title: `☕ עצירת קפה מול הליסטון (The Liston)`, html: `<div class="premium-event-desc"><p>התחילו את הסיור בטיילת הליסטון המפורסמת שנבנתה בהשראת רחוב ריבולי בפריז. שבו באחד מבתי הקפה האלגנטיים, הזמינו קפה פרדו וצפו בעיר מתעוררת לחיים מול כיכר הספיאנדה הרחבה. שרידי המורשת הבריטית ניכרים כאן ממש - בקצה הצפוני של הספיאנדה שוכן מגרש הקריקט היחיד ביוון, שהוקם עוד בתקופת השלטון הבריטי במאה ה-19 ופעיל עד היום.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> כ-4-6€ לקפה (ארוחת הבוקר עצמה כלולה במלון)</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> כחצי שעה</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> אלגנטי ואירופאי - נהדר לצפייה בעיר מתעוררת</span></li></ul></div>
@@ -158,6 +179,16 @@ window.ITINERARY_DAYS = [
             walking: "בקאלאמי ובאגני ההליכה מהחניה לים קצרה (כמה עשרות מטרים); בקסיופי יש הליכה נעימה מהנמל למבצר הביזנטי (כ-10 דקות).",
             estimateNote: "מרחקים/זמנים משוערים על סמך נתוני דרכים כלליים לחוף הצפון-מזרחי - כבישים צרים ותיירות קיץ יכולים להאריך את הזמנים בפועל; יש לאמת מול Google Maps/Waze ביום הנסיעה."
         },
+        transitions: {
+            fromHotel: null,
+            between: [
+                { mode: "drive", min: 18, km: 13 },
+                { mode: "drive", min: 15, km: 8.5 },
+                { mode: "drive", min: 5, km: 1 },
+                { mode: "drive", min: 20, km: 11, parking: "חניה בקסיופי ליד הנמל" }
+            ],
+            toHotel: { mode: "drive", min: 45, km: 35 }
+        },
         items: [
             { time: "08:00 - 08:45", title: `☕ ארוחת בוקר במלון`, html: `<div class="premium-event-desc"><p>ארוחת בוקר במלון <span class="trip-private-hotel-name">המלון שלכם</span> לפני היציאה לחוף הצפון-מזרחי.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> כלול במלון</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> כ-45 דקות</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> רגוע - התחלה קלילה ליום</span></li></ul></div>` },
             { time: "09:00 - 11:30", title: `🏖️ נסיעה וטבילת בוקר בחוף ברבטי (Barbati)`, html: `<div class="premium-event-desc"><p>סעו צפונה לאורך קו החוף. עצרו בחוף ברבטי - רצועת חוף ארוכה של חלוקי נחל לבנים ומים צלולים כבדולח, כשברקע מתנשא הר פנטוקרטור הירוק. שכרו מיטת שיזוף או פשוט פרסו מגבת.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> ללא עלות לחוף עצמו; כ-10-15€ למיטת שיזוף (אופציונלי)</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> שעתיים - שעתיים וחצי</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> נופי ומרגיע - מים צלולים ורקע הררי</span></li></ul></div>` },
@@ -194,6 +225,17 @@ window.ITINERARY_DAYS = [
             parking: "חנו בבוקר ליד המנזר/חוף השייט (Ampelaki או Alipa) - שני היעדים האלה הם אותו מפרץ, במרחק הליכה. אחר כך יש שתי נסיעות קצרות ובלתי נמנעות (לאנגלוקסטרו ולרוביניה) כי הם באתרים נפרדים לאורך אותו כביש חוף - אין דרך לאחד אותן בלי לוותר על אחד המקומות.",
             walking: "מהמנזר לחוף השייט - הליכה קצרה. באנגלוקסטרו - טיפוס תלול אך קצר (כ-15 דקות) מהחניה למבצר. ברוביניה - הליכה של כ-15-20 דקות דרך מטע זיתים מהחניה לחוף (אין גישת רכב עד הים עצמו).",
             estimateNote: "מרחקים/זמנים משוערים. שימו לב: הסדר נשמר בכוונה סביב אילוצי שעות היום (המנזר מוקדם לפני הפקקים, אנגלוקסטרו בשעות האור המלאות, רוביניה בשקיעה) גם אם זה מוסיף כמה ק\"מ לעומת סדר גיאוגרפי 'טהור' - זהו הפשרה הנכונה בין מרחק לחוויה."
+        },
+        transitions: {
+            fromHotel: null,
+            between: [
+                { mode: "drive", min: 18, km: 14, parking: "חנו ליד המנזר/חוף השייט" },
+                { mode: "walk", min: 5, m: 300 },
+                { mode: "drive", min: 18, km: 9 },
+                { mode: "drive", min: 10, km: 5 },
+                { mode: "drive", min: 8, km: 3 }
+            ],
+            toHotel: { mode: "drive", min: 20, km: 14 }
         },
         items: [
             { time: "07:30 - 08:00", title: `☕ ארוחת בוקר במלון`, html: `<div class="premium-event-desc"><p>ארוחת בוקר מוקדמת במלון <span class="trip-private-hotel-name">המלון שלכם</span> - יוצאים מוקדם כדי להקדים את פקקי האוטובוסים בפלאוקסטריצה.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> כלול במלון</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> כחצי שעה</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> רגוע - התחלה קצרה, יציאה מוקדמת</span></li></ul></div>` },
@@ -234,6 +276,16 @@ window.ITINERARY_DAYS = [
             parking: "היום הארוך ביותר מבחינת נסיעה כי דרום קורפו רחב וכולל גם את הצד המערבי (איסוס/חליקונאס) וגם את הצד המזרחי (בוקארי) - אך המסלול חוצה את האי פעם אחת בלבד (מערב→מזרח) ולא מבזבז נסיעות כפולות. חלומאס ובוקארי כמעט צמודים, כך שאפשר להשאיר את הרכב למטה ולעלות לחלומאס בקפיצה קצרה בלבד.",
             walking: "אכיליון - שוטטות בגנים המדורגים ברגל. חוף איסוס/חליקונאס - הליכה חופשית על רצועת החוף/הדיונות.",
             estimateNote: "מרחקים/זמנים משוערים - הקטע אכיליון↔חליקונאס לא אומת בניתוב חי, מבוסס על מרחקים כלליים מקורפו טאון לשני האתרים; יש לאמת מול Google Maps ביום הנסיעה."
+        },
+        transitions: {
+            fromHotel: null,
+            between: [
+                { mode: "drive", min: 38, km: 20 },
+                { mode: "drive", min: 30, km: 18 },
+                { mode: "drive", min: 20, km: 10, parking: "חניה בבוקארי" },
+                { mode: "walk", min: 3 }
+            ],
+            toHotel: { mode: "drive", min: 38, km: 25 }
         },
         items: [
             { time: "08:00 - 08:45", title: `☕ ארוחת בוקר במלון`, html: `<div class="premium-event-desc"><p>ארוחת בוקר במלון <span class="trip-private-hotel-name">המלון שלכם</span> לפני היציאה לדרום קורפו.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> כלול במלון</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> כ-45 דקות</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> רגוע - התחלה קלילה ליום</span></li></ul></div>` },
@@ -276,6 +328,16 @@ window.ITINERARY_DAYS = [
             walking: "קייפ דראסטיס - שביל עפר מהחניה לתצפית (כ-10-15 דקות הלוך-חזור). לוגאס - מדרגות מהחניה לחוף.",
             estimateNote: "מרחקים/זמנים משוערים - יש לאמת מול Google Maps/Waze ביום הנסיעה, בעיקר בעונת שיא עם עומס תיירותי."
         },
+        transitions: {
+            fromHotel: null,
+            between: [
+                { mode: "drive", min: 29, km: 27, parking: "חניה בסידארי" },
+                { mode: "drive", min: 8, km: 4.5 },
+                { mode: "drive", min: 6, km: 2.5 },
+                { mode: "walk", min: 3 }
+            ],
+            toHotel: { mode: "drive", min: 32, km: 28 }
+        },
         items: [
             { time: "08:30 - 09:15", title: `☕ ארוחת בוקר במלון`, html: `<div class="premium-event-desc"><p>ארוחת בוקר במלון <span class="trip-private-hotel-name">המלון שלכם</span> לפני היציאה לצפון הפראי.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> כלול במלון</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> כ-45 דקות</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> רגוע - התחלה קלילה ליום</span></li></ul></div>` },
             { time: "10:00 - 12:30", title: `❤️ תעלת האהבה (Canal d'Amour) בסידארי`, html: `<div class="premium-event-desc"><p>הגיעו לסידארי התוססת ולכו לעבר תעלת האהבה המפורסמת. האגדה המקומית מספרת שזוג שישחה יחד לאורך התעלה יישאר יחד לנצח. גם אם המים קרים, זהו מקום טוב לצילומים עם סלעי אבן החול השכבתית הפיסוליים.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> ללא עלות</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> שעה - שעה וחצי</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> קליל ורומנטי - אגדה מקומית ותמונות מרשימות</span></li></ul></div>` },
@@ -305,6 +367,15 @@ window.ITINERARY_DAYS = [
             parking: "אין החלפת חניה - נסיעה ישירה אחת למסוף ההחזרה של חברת ההשכרה.",
             walking: null,
             estimateNote: "מרחק/זמן משוער - יום זה קבוע לפי שעת ההמראה (הרכב חייב לחזור עד 09:00) ואינו חלק מהאופטימיזציה הגיאוגרפית."
+        },
+        transitions: {
+            fromHotel: null,
+            between: [
+                null,
+                { mode: "drive", min: 18, km: 8 },
+                null
+            ],
+            toHotel: null
         },
         items: [
             { time: "07:45 - 08:30", title: `☕ ארוחת בוקר אחרונה במלון וסידור מזוודות`, html: `<div class="premium-event-desc"><p>ארוחת בוקר במלון <span class="trip-private-hotel-name">המלון שלכם</span>. הבוקר הזה מתחיל מוקדם יותר מהרגיל כי הרכב השכור (<span class="trip-private-car-ref">פרטי ההזמנה שלכם</span>) חייב לחזור לשדה עד 09:00 - כדאי לסיים לארוז מבעוד מועד ולא להשאיר את זה לרגע האחרון.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> כלול במלון</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> כ-45 דקות</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> יעיל אך לא נסער - הזמן חשוב הבוקר הזה</span></li></ul></div>` },
@@ -344,6 +415,14 @@ window.ITINERARY_DAYS = [
             walking: null,
             estimateNote: "רוב היום הוא שייט ים ולא נהיגה - מרחק/זמן הנסיעה לנמל משוער בלבד."
         },
+        transitions: {
+            fromHotel: { mode: "drive", min: 15, km: 9, parking: "חניה ליד הנמל ליום שלם" },
+            between: [
+                { mode: "boat" },
+                { mode: "boat" }
+            ],
+            toHotel: { mode: "drive", min: 15, km: 9, boatFirst: true }
+        },
         items: [
             { time: "08:00 - 10:30", title: `⚓ יציאה לנמל והפלגה`, html: `<div class="premium-event-desc"><p>הגעה מוקדמת לנמל - קורפו טאון או לפקימי, בהתאם לחברת השייט הספציפית שתזמינו (יש כמה חברות מתחרות, ראו הפניה למידע על המעבורות/שייטים בפרק "מידע מעשי"). העלייה לספינה מלווה בבריזה בוקר נעימה. השייט כולל נופים של קו החוף הדרומי ולאחר כשעה וחצי תגיעו לאי הקטנטן אנטי-פאקסוס.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> ⚠️ טיול שייט יומי מאורגן לפאקסוס/אנטיפאקסוס עולה בדרך כלל כ-45-70€ לאדם (למבוגר, כולל את שתי העצירות המתוארות למטה) - מחיר משוער להזמנה מראש, תלוי בחברה ובעונה, יש לוודא מול הספק שתבחרו</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> כשעתיים וחצי הפלגה</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> רגוע ונעים - פתיחה נעימה ליום השייט</span></li></ul></div>` },
             { time: "10:30 - 13:00", title: `🤿 שחייה בחוף ווטומי והמערות הכחולות`, html: `<div class="premium-event-desc"><p>הספינה תעגון במפרץ ווטומי (Voutoumi) - מהחופים היפים בעולם בזכות צבע הטורקיז הזוהר של מימיו וקפלו עצי זית גולשים לים. קפיצה למים מהספינה היא חוויה חובה! לאחר מכן, הפלגה לתוך המערות הכחולות המרשימות שבמערב פאקסוס.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> כלול במחיר טיול השייט שהוזמן מראש (ראו הערת המחיר בסעיף הקודם)</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> כשעתיים וחצי</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> קסום - מים טורקיז זוהרים, חובה לקפוץ למים</span></li></ul></div>` },
@@ -374,6 +453,14 @@ window.ITINERARY_DAYS = [
             parking: "יום הררי - חונים פעם אחת בפסגה ופעם אחת בכפר הנטוש; אין חלופה, אלו שני אתרים נפרדים בהר.",
             walking: "שוטטות חופשית ברגל בין חורבות הכפר הנטוש פלאיה פריתיה.",
             estimateNote: "מרחקים/זמנים משוערים - כביש ההר לפנטוקרטור איטי ומפותל, ייתכנו סטיות משמעותיות מהזמן המשוער בהתאם למזג האוויר והראות."
+        },
+        transitions: {
+            fromHotel: { mode: "drive", min: 40, km: 20 },
+            between: [
+                { mode: "drive", min: 20, km: 9 },
+                { mode: "walk", min: 3 }
+            ],
+            toHotel: { mode: "drive", min: 35, km: 22 }
         },
         items: [
             { time: "09:00 - 11:30", title: `🏔️ טיפוס ברכב להר פנטוקרטור (Mount Pantokrator)`, html: `<div class="premium-event-desc"><p>נסיעה במעלה ההר הגבוה ביותר בקורפו (906 מטר). הדרך מלאה בפיתולים (סעו בזהירות!). בפסגה מחכה לכם מנזר פעיל ואנטנת תקשורת עצומה. הנוף ביום בהיר מאפשר לראות את כל צורת האי, את אלבניה הסמוכה, ואפילו את חופי איטליה באופק הרחוק.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> ללא עלות (מלבד דלק הנסיעה)</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> שעתיים וחצי (כולל הנסיעה המפותלת)</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> מרשים ופראי - נוף פנורמי לכל האי</span></li></ul></div>` },

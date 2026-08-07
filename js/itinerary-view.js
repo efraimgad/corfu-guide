@@ -167,7 +167,51 @@ function gtItineraryRowCardHtml(item, index) {
     </button>`;
 }
 
-function gtRenderItineraryRowList(items) {
+// Compact "what's next, how do I get there" connector rendered between two
+// consecutive row-cards (and, when the day's transitions data says so,
+// before the first/after the last card as a trip-to/from-the-hotel leg).
+// Deliberately NOT a card: a couple of centered lines of icon+time+distance,
+// reusing the exact km/min already researched into each day's
+// routeInfo.legs (js/itinerary-data.js's `transitions` field) - never a
+// separately-invented number. `null` in a day's `transitions.between` array
+// means "same spot, not worth a connector" (e.g. two items at the same
+// hotel/venue) and renders nothing, same as the gap already looked before
+// this feature existed.
+function gtTransitionConnectorHtml(t) {
+    if (!t) return '';
+    let icon, metricText, ariaText;
+    if (t.mode === 'walk') {
+        icon = '🚶';
+        const distText = t.m ? `${t.m} מ׳` : (t.km ? `${t.km} ק"מ` : '');
+        metricText = distText ? `${t.min} דק׳ · ${distText}` : `${t.min} דק׳`;
+        ariaText = `הליכה, ${metricText}`;
+    } else if (t.mode === 'boat') {
+        icon = '⛴️';
+        metricText = t.min ? `${t.min} דק׳ שייט` : 'שייט ים';
+        ariaText = metricText;
+    } else if (t.mode === 'bus') {
+        icon = '🚌';
+        metricText = `${t.min} דק׳`;
+        ariaText = `אוטובוס, ${metricText}`;
+    } else {
+        icon = '🚗';
+        metricText = `${t.min} דק׳ · ${t.km} ק"מ`;
+        ariaText = `נסיעה, ${metricText}`;
+    }
+    const boatPrefix = t.boatFirst ? '⛴️ + ' : '';
+    const parkingHtml = t.parking ? `<div class="gt-route-connector__parking">🅿️ ${escapeHtml(t.parking)}</div>` : '';
+    return `<div class="gt-route-connector" role="note" aria-label="${escapeAttr(ariaText)}">
+      <span class="gt-route-connector__arrow" aria-hidden="true">↓</span>
+      <span class="gt-route-connector__metric gt-tabular">${boatPrefix}${icon} ${escapeHtml(metricText)}</span>
+      ${parkingHtml}
+    </div>`;
+}
+
+function gtHotelEndpointHtml() {
+    return `<div class="gt-route-connector__hotel">🏨 המלון</div>`;
+}
+
+function gtRenderItineraryRowList(items, transitions) {
     gtItineraryCurrentItems = items;
     const listEl = document.getElementById('gt-itinerary-row-list');
     const emptyEl = document.getElementById('gt-itinerary-empty');
@@ -178,7 +222,22 @@ function gtRenderItineraryRowList(items) {
         return;
     }
     if (emptyEl) emptyEl.classList.add('hidden');
-    listEl.innerHTML = items.map((item, i) => gtItineraryRowCardHtml(item, i)).join('');
+
+    let html = '';
+    if (transitions && transitions.fromHotel) {
+        html += gtHotelEndpointHtml();
+        html += gtTransitionConnectorHtml(transitions.fromHotel);
+    }
+    items.forEach((item, i) => {
+        html += gtItineraryRowCardHtml(item, i);
+        const between = transitions && transitions.between ? transitions.between[i] : null;
+        if (i < items.length - 1) html += gtTransitionConnectorHtml(between);
+    });
+    if (transitions && transitions.toHotel) {
+        html += gtTransitionConnectorHtml(transitions.toHotel);
+        html += gtHotelEndpointHtml();
+    }
+    listEl.innerHTML = html;
 }
 
 document.addEventListener('click', (e) => {
@@ -255,7 +314,7 @@ function gtSelectItineraryDay(key) {
         actions.innerHTML = `<label class="flex items-center gap-2 shrink-0 bg-white/15 hover:bg-white/25 transition-colors rounded-xl px-3 py-2 cursor-pointer text-sm font-semibold select-none" onclick="event.stopPropagation()"><input type="checkbox" class="day-complete-checkbox w-5 h-5 accent-emerald-400 rounded" data-day="${dayNum}" onchange="toggleDayComplete(this)"${isChecked ? ' checked' : ''}> הושלם</label><label class="flex items-center gap-1.5 shrink-0 bg-white/15 hover:bg-white/25 transition-colors rounded-xl px-3 py-2 text-sm font-semibold select-none" onclick="event.stopPropagation()">${GT_ICON_EURO}<input type="number" min="0" step="1" inputmode="numeric" class="day-budget-input w-20 bg-white/20 text-white placeholder-white/60 rounded-lg px-1.5 py-1 text-sm font-semibold text-center focus:outline-none focus:ring-2 focus:ring-white/60" data-day="${dayNum}" placeholder="בפועל" aria-label="הוצאה בפועל ביום ${dayNum} (יורו)" oninput="updateDayBudgetActual(this)" onclick="event.stopPropagation()" value="${escapeAttr(String(budgetVal))}"></label><button onclick="event.stopPropagation(); openDayMap(${dayNum});" class="shrink-0 bg-white/15 hover:bg-white/25 transition-colors rounded-xl px-3 py-2 text-sm font-semibold" style="display:inline-flex;align-items:center;justify-content:center;" title="הצג את תחנות היום הזה על המפה (אם לא נמצאו תחנות ממופות, תוצג מפת האי המלאה)" aria-label="הצג את תחנות היום הזה על המפה">${GT_ICON_MAP}</button>`;
 
         gtRenderItineraryRouteInfo(day);
-        gtRenderItineraryRowList(day.items);
+        gtRenderItineraryRowList(day.items, day.transitions);
     } else {
         const swaps = (typeof getDaySwaps === 'function') ? getDaySwaps() : {};
         const selectedDay = swaps[key] || '';
@@ -286,7 +345,7 @@ function gtSelectItineraryDay(key) {
           <span class="day-swap-status text-xs font-bold bg-white/15 px-2 py-1 rounded-full" data-swap-status="${key}">${escapeHtml(statusText)}</span>`;
 
         gtRenderItineraryRouteInfo(day);
-        gtRenderItineraryRowList(day.items);
+        gtRenderItineraryRowList(day.items, day.transitions);
     }
 
     // These freshly-authored elements can carry trip-private hooks
