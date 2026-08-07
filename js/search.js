@@ -7,13 +7,25 @@
 let searchActiveIndex = -1;
 let searchIndex = [];
 
+// beaches/food/attractions/gems are NOT in SEARCH_SOURCES: their tabs are
+// lazy-rendered (ensureTabRendered() in js/ui.js only builds their cards the
+// first time a user opens that tab), so a DOM-querySelector source would
+// index nothing for them on a fresh page load. They're built straight from
+// window.CORFU_LOCATIONS instead - see buildLocationDataIndexEntries() -
+// which is always populated regardless of what's been rendered yet.
 const SEARCH_SOURCES = [
-    { selector: '#beaches [data-name]', tabId: 'beaches', icon: '🏖️', getName: el => el.getAttribute('data-name') },
-    { selector: '#food h4', tabId: 'food', icon: '🍽️', getName: el => el.textContent },
-    { selector: '#attractions h3', tabId: 'attractions', icon: '📸', getName: el => el.textContent.replace(/^\d+\.\s*/, '') },
-    { selector: '#gems h3', tabId: 'gems', icon: '💎', getName: el => el.textContent },
     { selector: '#activities-grid article h3', tabId: 'activities', icon: '🚤', getName: el => el.textContent },
     { selector: '#faq-list details', tabId: 'faq', icon: '❓', getName: el => (el.querySelector('summary span')?.textContent || '') }
+];
+
+// tabId -> { list: CORFU_LOCATIONS key, getText: item -> its body/description
+// text (bodyHtml needs tag-stripping, the rest don't) }. icon values match
+// what SEARCH_SOURCES used to hardcode for these same four categories.
+const LOCATION_DATA_SOURCES = [
+    { listKey: 'beaches', tabId: 'beaches', icon: '🏖️', getName: item => item.name, getText: item => item.description || '' },
+    { listKey: 'food', tabId: 'food', icon: '🍽️', getName: item => item.name, getText: item => item.subtitle || '' },
+    { listKey: 'attractions', tabId: 'attractions', icon: '📸', getName: item => item.title, getText: item => gtSearchStripTags(item.bodyHtml) },
+    { listKey: 'gems', tabId: 'gems', icon: '💎', getName: item => item.name, getText: item => item.description || '' }
 ];
 
 // Everything a query can match against, lowercased: the name, the card's
@@ -63,6 +75,41 @@ function gtSearchStripTags(html) {
     const el = document.createElement('div');
     el.innerHTML = html || '';
     return el.textContent || '';
+}
+
+// Same haystack shape as buildHaystack() (name + body text + tags/vibe/
+// parking/beachType/bestTime), but reading straight off a CORFU_LOCATIONS
+// record instead of a rendered card's DOM/attributes - so beaches/food/
+// attractions/gems are indexed correctly even when their tab has never
+// been opened yet.
+function buildLocationDataHaystack(item, name, text) {
+    const extra = [
+        text,
+        item.tags || '',
+        (item.vibe || []).join(' '),
+        item.parking || '',
+        item.beachType || '',
+        item.bestTime || ''
+    ].join(' ');
+    return expandWithAliases((name + ' ' + extra).toLowerCase());
+}
+
+function buildLocationDataIndexEntries() {
+    const entries = [];
+    const data = window.CORFU_LOCATIONS || {};
+    LOCATION_DATA_SOURCES.forEach(src => {
+        (data[src.listKey] || []).forEach(item => {
+            const name = (src.getName(item) || '').trim();
+            const text = src.getText(item) || '';
+            const haystack = buildLocationDataHaystack(item, name, text);
+            // dataId (not el): the card for this item may not exist in the
+            // DOM at all yet, since its tab may never have been opened -
+            // goToSearchResult() looks it up fresh by [data-id] after
+            // switchTab() has forced the tab (and its cards) to render.
+            entries.push({ name, tab: src.tabId, icon: src.icon, dataId: item.id, haystack });
+        });
+    });
+    return entries;
 }
 
 // The itinerary as a search source: one entry per timeline event (each
@@ -152,6 +199,7 @@ function buildSearchIndex() {
             index.push({ name, tab: src.tabId, icon: src.icon, el, haystack });
         });
     });
+    index.push(...buildLocationDataIndexEntries());
     index.push(...buildItineraryIndexEntries());
     index.push(...buildContentBlockIndexEntries('trip-planning', 'trip-planning', 'plan-', '🧭'));
     index.push(...buildContentBlockIndexEntries('health-safety', 'health-safety', 'health-', '🚑'));
@@ -185,7 +233,18 @@ function performGlobalSearch(query) {
         return;
     }
 
+    // Two-tier rank: a query matching the item's own name (e.g. searching a
+    // beach's name) is what the user is almost always after, so it should
+    // never be pushed below a result that only matches somewhere buried in
+    // its body text/tags, even though both are valid haystack substring
+    // hits. Sort is stable, so within each tier the original index order
+    // (and thus category grouping) is preserved.
     let matches = searchIndex.filter(m => m.haystack.includes(q));
+    matches.sort((a, b) => {
+        const aNameMatch = a.name.toLowerCase().includes(q) ? 0 : 1;
+        const bNameMatch = b.name.toLowerCase().includes(q) ? 0 : 1;
+        return aNameMatch - bNameMatch;
+    });
     matches = matches.slice(0, 8);
 
     resultsBox.innerHTML = '';
@@ -284,6 +343,16 @@ function goToSearchResult(index) {
             // view (js/itinerary-view.js) - match.expand() (called above)
             // already selected the right one, so it's there by now.
             card = document.querySelector(`#gt-itinerary-row-list .gt-itinerary-row[data-gt-row-index="${match.itemIndex}"]`);
+            if (!card) return;
+        } else if (match.dataId != null) {
+            // beaches/food/attractions/gems entries carry a dataId instead
+            // of a live element (built from CORFU_LOCATIONS, not the DOM -
+            // see buildLocationDataIndexEntries()), since their card may not
+            // have existed yet at index-build time. switchTab() above already
+            // ran ensureTabRendered() for match.tab, so the card is in the
+            // DOM by now regardless of whether this tab had been visited
+            // before this click.
+            card = document.querySelector(`[data-id="${CSS.escape(match.dataId)}"]`);
             if (!card) return;
         } else {
             // match.scrollEl lets a source point straight at its own

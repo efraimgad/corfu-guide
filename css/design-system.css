@@ -779,6 +779,15 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 }
 @media (min-width:640px){ .gt-home-map-wrap{ margin-inline: -24px; } }
 @media (min-width:1024px){ .gt-home-map-wrap{ margin-inline: -32px; } }
+/* Short landscape phones (e.g. 844x390, 926x428): topbar(64)+nav(60) alone
+   eat 124px, so the calc() height above already shrinks to ~265px - but the
+   360px min-height floor was still forcing the wrapper taller than that,
+   overflowing the viewport. .gt-home-peek is position:fixed and floats over
+   the map rather than sitting in normal flow below it, so there's no other
+   content height to protect here - just drop the floor to fit. */
+@media (orientation:landscape) and (max-height:500px){
+  .gt-home-map-wrap{ min-height:220px; }
+}
 .gt-home-map{ width:100%; height:100%; z-index:var(--gt-z-map); }
 
 /* Stat row (countdown/weather/today + trip-status shortcut), same real
@@ -1934,7 +1943,10 @@ div[class="text-4xl drop-shadow-sm"] {
    stopped flipping — see .gt-itinerary-context above. */
 
 /* ---------- Mobile Responsiveness Overrides (functional — unchanged) ---------- */
-@media (max-width: 768px) {
+/* 767, not 768: matches every other max-width breakpoint in this file (the
+   767/768 split was an unintentional 1px drift, not a deliberate choice -
+   768 is reserved as the min-width start of the md tier elsewhere). */
+@media (max-width: 767px) {
     /* Only the main card grids force a single column on mobile — the small
        2-column metadata grids inside cards (and the dashboard grid, which
        has its own override below) are left alone to keep their own
@@ -2262,10 +2274,10 @@ a[class*="rounded-2xl"]:not(.premium-card) {
 /* ==========================================================================
    MOBILE-ONLY: native-app feel
    Every rule here is inside a max-width media query — desktop is 100%
-   unaffected. Builds on the existing @media(max-width:768px) block above
+   unaffected. Builds on the existing @media(max-width:767px) block above
    rather than duplicating it.
    ========================================================================== */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 
     /* Bottom tab bar: bigger touch targets + safe-area padding for iOS home
        indicator, so it feels like a real native tab bar, not a web overlay */
