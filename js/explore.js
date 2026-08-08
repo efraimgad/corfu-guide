@@ -375,6 +375,11 @@ document.addEventListener('click', (e) => {
         const catKey = row.getAttribute('data-loc-cat');
         const id = row.getAttribute('data-loc-id');
         const action = actionBtn.getAttribute('data-explore-action');
+        // Stays on the Explore tab's inline map rather than jumping to the Map
+        // tab like the detail sheet's "במפה" button does: this button is tapped
+        // *from the list*, where keeping the surrounding rows on screen is the
+        // whole point (and at 1024px+ the inline map is already open beside the
+        // list, so a tab switch would throw away a view the user can see).
         if (action === 'map' && typeof showOnExploreMap === 'function') showOnExploreMap(catKey, id);
         if (action === 'reserve') handleExploreReserve(catKey, id);
         return;
@@ -448,7 +453,12 @@ function openExploreSheet(catKey, id) {
     const directionsBtn = d.mapsUrl
         ? `<a href="${escapeAttr(d.mapsUrl)}" target="_blank" rel="noopener noreferrer" class="gt-btn gt-btn--secondary">📍 ניווט</a>`
         : '';
-    const mapBtn = `<button type="button" class="gt-btn gt-btn--secondary" onclick="gtCloseExploreSheet(); showOnExploreMap('${escapeAttr(catKey)}','${escapeAttr(id)}');">${GT_ICON_MAP} במפה</button>`;
+    // Goes to the full-screen Map tab (showOnHomeMap, js/map.js), not the
+    // Explore tab's own inline map: showOnExploreMap() re-opens this very sheet
+    // through gtOnMarkerTap('explore'), so the panel looked stuck open and the
+    // bottom nav stayed on "גלה". The row cards' 🗺️ icon button still uses the
+    // inline map on purpose - see the click handler above.
+    const mapBtn = `<button type="button" class="gt-btn gt-btn--secondary" onclick="gtCloseExploreSheet(); showOnHomeMap('${escapeAttr(catKey)}','${escapeAttr(id)}');">${GT_ICON_MAP} במפה</button>`;
 
     bodyEl.innerHTML = `
       ${img.src ? `<img class="gt-explore-sheet-thumb" src="${escapeAttr(img.src)}" alt="${escapeAttr(img.alt || name)}" loading="lazy" decoding="async">` : ''}

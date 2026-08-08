@@ -88,14 +88,23 @@ function switchTab(tabId, skipScroll) {
             if (tabId === 'itinerary') setupTimelineScrollLife(targetTab);
             // Phase D, sub-step 1: Home's own live map (js/map.js) - lazy
             // Leaflet load / build on first visit, invalidateSize() on
-            // every visit after that. Also re-syncs the stat overlay +
-            // "today's plan" peek sheet right away (js/app-shell.js)
-            // instead of waiting up to 3s for their own polling interval
-            // to notice this tab just became active.
+            // every visit after that. Also re-syncs the stat overlay right
+            // away (js/app-shell.js) instead of waiting up to 3s for its
+            // own polling interval to notice this tab just became active.
+            //
+            // The second, rAF-deferred gtActivateHomeMap() is not
+            // redundant: this callback runs 10ms after display:block, so
+            // the map container can still be mid-layout (0-height or the
+            // pre-activation size) when Leaflet reads its dimensions,
+            // which is what leaves tiles/cluster icons clipped or
+            // mispositioned. Re-running it after the browser has painted
+            // a frame gives invalidateSize() the settled height.
             if (tabId === 'home') {
-                if (typeof gtActivateHomeMap === 'function') gtActivateHomeMap();
+                if (typeof gtActivateHomeMap === 'function') {
+                    gtActivateHomeMap();
+                    requestAnimationFrame(() => requestAnimationFrame(gtActivateHomeMap));
+                }
                 if (typeof gtSyncHomeStats === 'function') gtSyncHomeStats();
-                if (typeof gtRenderHomePeek === 'function') gtRenderHomePeek();
             }
             // Desktop split-view (1024px+, css/design-system.css): the map
             // is always visible beside the list there, not behind a tap on

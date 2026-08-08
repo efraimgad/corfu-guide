@@ -878,6 +878,68 @@ function initHomeMap() {
 // Leaflet map built while its container was display:none needs
 // invalidateSize() once that container is actually shown at real
 // dimensions, or its tiles render into the wrong area.
+// The Explore detail sheet's "במפה" button -> leave Explore entirely and hand
+// the user the full-screen Map tab ("מפה" in the bottom nav, tab id `home`),
+// centered on that one place with its pin selected.
+//
+// Deliberately NOT showOnExploreMap(): that one focuses the Explore tab's own
+// inline map, and its gtOnMarkerTap('explore') re-opens the very detail sheet
+// the button had just closed - so the panel looked stuck open and the bottom
+// nav never moved. Routing to the home map's own instance means the sheet
+// stays closed and the lighter shared map sheet takes over instead.
+//
+// Structurally a third sibling of showOnMap()/showOnExploreMap() rather than a
+// shared abstraction over all three: those two must reveal a collapsed
+// container inside the *current* tab (toggleBeachMap/toggleExploreMap), while
+// this one changes tabs and defers the build to switchTab(). The only genuinely
+// common part is the zoomToShowLayer-or-setView tail, which is four lines -
+// not enough to justify reshaping two functions other call sites depend on.
+function showOnHomeMap(layerKey, id) {
+    const item = ((window.CORFU_LOCATIONS || {})[layerKey] || []).find(x => x.id === id);
+    if (!item) return;
+
+    // switchTab() (js/ui.js) owns both the nav button's active state and the
+    // home map's lazy build / invalidateSize() - going through it is what makes
+    // the "מפה" nav button light up, so never hand-roll that state here.
+    switchTab('home', true);
+
+    // The tab switch above only *starts* the work: #home stays display:none
+    // until switchTab()'s own 10ms timer, Leaflet may still be loading from the
+    // CDN on a first visit, and initHomeMap() runs 50ms after that resolves.
+    // Leaflet can't pan/zoom correctly against a container it has never
+    // measured at real dimensions, so poll until the instance and its marker
+    // genuinely exist instead of firing setView at a hidden container and
+    // landing off-centre. Same wait-then-focus shape as showOnMap() above.
+    let attempts = 0;
+    const maxAttempts = 40; // ~5s, then give up quietly - initHomeMap() already paints its own "map unavailable" message when Leaflet never loads
+    const tryFocus = () => {
+        const marker = homeMarkerIndex[layerKey + '::' + id];
+        if (!homeMapInstance || !marker) {
+            if (++attempts <= maxAttempts) setTimeout(tryFocus, 120);
+            return;
+        }
+        // The container was hidden (or a different size) when the map was last
+        // laid out; re-measure before centering, or Leaflet centers against the
+        // stale size and the pin ends up off to one side. Cheap and idempotent,
+        // so doing it here rather than relying on gtActivateHomeMap()'s own
+        // 50ms invalidateSize() timer removes the ordering race entirely.
+        homeMapInstance.invalidateSize();
+
+        const group = homeMapLayerGroups[layerKey];
+        const selectIt = () => gtOnMarkerTap('home', homeMapInstance, homeMarkerIndex, item, layerKey);
+        // zoomToShowLayer un-clusters and pans correctly while clustering is
+        // active; plain setView is the fallback when it isn't.
+        if (group && typeof group.zoomToShowLayer === 'function') {
+            group.zoomToShowLayer(marker, selectIt);
+        } else {
+            homeMapInstance.setView(marker.getLatLng(), 14, { animate: true });
+            selectIt();
+        }
+    };
+    setTimeout(tryFocus, 120);
+}
+window.showOnHomeMap = showOnHomeMap;
+
 function gtActivateHomeMap() {
     const el = document.getElementById('home-map');
     if (!el) return;

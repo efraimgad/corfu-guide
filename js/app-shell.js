@@ -199,7 +199,7 @@ window.gtCloseMoreSheet = gtCloseMoreSheet;
 window.gtOpenTripSheet = gtOpenTripSheet;
 window.gtCloseTripSheet = gtCloseTripSheet;
 
-// -- Home tab live-stat row + "today's plan" summary -------------------------
+// -- Home tab live-stat row (chips overlaid on the map) ----------------------
 // Copies already-computed text out of the existing #dashboard tab's own
 // elements (js/dashboard.js updateDashCountdown()/updateDashToday()/
 // fetchDashWeather() keep these current regardless of which tab is open -
@@ -222,16 +222,6 @@ function gtSyncHomeStats() {
     if (statCountdown) statCountdown.textContent = '✈️ ' + (dashCountdown ? dashCountdown.textContent : '—');
     if (statWeather) statWeather.textContent = '🌡️ ' + (dashWeather ? dashWeather.textContent : '—');
     if (statToday) statToday.textContent = dashToday ? dashToday.textContent : '—';
-
-    const summaryEl = document.getElementById('home-today-summary');
-    const metaEl = document.getElementById('home-today-meta');
-    if (summaryEl) {
-        summaryEl.textContent = dashToday ? dashToday.textContent : '—';
-        if (metaEl) {
-            const dayNum = window._currentTripDayNum;
-            metaEl.textContent = dayNum ? 'גללו למסלול המלא של היום ←' : '';
-        }
-    }
 }
 window.gtSyncHomeStats = gtSyncHomeStats;
 
@@ -260,122 +250,3 @@ window.gtSyncTopbar = gtSyncTopbar;
 // countdown-refresh interval.
 setInterval(() => { gtSyncHomeStats(); gtSyncTopbar(); }, 3000);
 document.addEventListener('DOMContentLoaded', () => { gtSyncHomeStats(); gtSyncTopbar(); });
-
-// -- Home tab peek sheet ("today's plan", docked to the map's bottom edge) --
-// Phase D, sub-step 1. Reuses the exact same "what's today" data source
-// the old Home summary card and the full itinerary tab already use -
-// window._currentTripDayNum (js/dashboard.js) + window.ITINERARY_DAYS
-// (js/itinerary-data.js) - via that file's own findItineraryDay() helper,
-// not a second lookup. gtStripTags() is js/itinerary-view.js's own helper
-// (a top-level function declaration, so it's on window like every other
-// plain <script> in this app - loaded before this file, see index.html's
-// script order) - reused here rather than re-implemented, same principle
-// as everything else in this file.
-function gtHomeTodayDay() {
-    const dayNum = window._currentTripDayNum;
-    if (typeof dayNum !== 'number' || dayNum < 1 || dayNum > 7) return null;
-    return (typeof findItineraryDay === 'function') ? findItineraryDay(String(dayNum)) : null;
-}
-
-// Only rebuilds the stop list when the underlying day actually changed
-// (not on every 3s gtSyncHomeStats() tick) - cheap textContent syncing is
-// fine to repeat, but rebuilding a list of DOM nodes on a timer would
-// fight a user who's mid-scroll inside the peek body for no reason.
-let gtHomePeekRenderedDayKey = 'unset';
-function gtRenderHomePeek() {
-    const stopsEl = document.getElementById('gt-home-peek-stops');
-    if (!stopsEl) return;
-    const day = gtHomeTodayDay();
-    const key = day ? day.key : null;
-    if (key === gtHomePeekRenderedDayKey) return;
-    gtHomePeekRenderedDayKey = key;
-
-    if (!day || !Array.isArray(day.items) || !day.items.length) {
-        stopsEl.innerHTML = '<p class="gt-meta">אין תוכנית מפורטת להיום - צפו במסלול המלא.</p>';
-        return;
-    }
-    // First 4 stops only - a peek preview, not the full day (the "צפו
-    // במסלול המלא" button right below it is the way to see the rest).
-    stopsEl.innerHTML = day.items.slice(0, 4).map(item => {
-        const plainTitle = (typeof gtStripTags === 'function') ? gtStripTags(item.title || '') : (item.title || '');
-        return `<div class="gt-home-peek__stop">
-          <span class="gt-home-peek__stop-time gt-tabular">${escapeHtml(item.time || '')}</span>
-          <span>${escapeHtml(plainTitle)}</span>
-        </div>`;
-    }).join('');
-}
-window.gtRenderHomePeek = gtRenderHomePeek;
-
-// Two height states ("peek"/"expanded"), driven by the [data-state]
-// attribute + CSS custom property (see .gt-home-peek rules in
-// css/design-system.css). forceState lets the drag-release handler below
-// snap directly to whichever state is closer, instead of always just
-// flipping to the opposite of the current one (which a plain toggle-call
-// from the handle's own click does).
-function gtToggleHomePeek(forceState) {
-    const sheet = document.getElementById('gt-home-peek');
-    const handle = document.getElementById('gt-home-peek-handle');
-    if (!sheet) return;
-    const next = forceState || (sheet.getAttribute('data-state') === 'peek' ? 'expanded' : 'peek');
-    sheet.style.height = ''; // hand height back to the CSS var (transition included)
-    sheet.setAttribute('data-state', next);
-    if (handle) handle.setAttribute('aria-expanded', next === 'expanded' ? 'true' : 'false');
-}
-window.gtToggleHomePeek = gtToggleHomePeek;
-
-// Real pointer-drag on the handle, snapping to the nearer of the sheet's
-// two height states on release - not a 3-state (peek/half/full) gesture;
-// scoped down to 2 states for this batch's time budget (see Phase D
-// report). A plain tap (no meaningful pointer movement) still toggles
-// between the two states via the handle's own click listener below -
-// pointerup fires a click right after it either way, so the drag-end
-// handler only calls gtToggleHomePeek() itself (suppressing the
-// following click) when an actual drag happened.
-let gtHomePeekDrag = null;
-function gtHomePeekExpandedPx() {
-    // Mirrors the CSS: min(64dvh, 480px). innerHeight is the closest
-    // reliable JS stand-in for dvh available without a ResizeObserver.
-    return Math.min(window.innerHeight * 0.64, 480);
-}
-function gtInitHomePeekDrag() {
-    const handle = document.getElementById('gt-home-peek-handle');
-    const sheet = document.getElementById('gt-home-peek');
-    if (!handle || !sheet || handle.dataset.gtDragBound) return;
-    handle.dataset.gtDragBound = '1';
-    const PEEK_PX = 132;
-
-    handle.addEventListener('pointerdown', (e) => {
-        gtHomePeekDrag = { startY: e.clientY, startHeight: sheet.getBoundingClientRect().height, moved: false };
-        sheet.setAttribute('data-dragging', 'true');
-        try { handle.setPointerCapture(e.pointerId); } catch (err) { /* unsupported pointer type - drag just won't track, tap-toggle still works */ }
-    });
-    handle.addEventListener('pointermove', (e) => {
-        if (!gtHomePeekDrag) return;
-        const dy = e.clientY - gtHomePeekDrag.startY;
-        if (Math.abs(dy) > 4) gtHomePeekDrag.moved = true;
-        const maxH = gtHomePeekExpandedPx();
-        const newHeight = Math.min(maxH, Math.max(PEEK_PX, gtHomePeekDrag.startHeight - dy));
-        sheet.style.height = newHeight + 'px';
-    });
-    const endDrag = () => {
-        if (!gtHomePeekDrag) return;
-        sheet.removeAttribute('data-dragging');
-        const maxH = gtHomePeekExpandedPx();
-        const current = sheet.getBoundingClientRect().height;
-        const closerToExpanded = (current - PEEK_PX) > (maxH - current);
-        const wasDrag = gtHomePeekDrag.moved;
-        gtHomePeekDrag = null;
-        sheet.style.height = '';
-        if (wasDrag) {
-            handle.dataset.gtSuppressClick = '1'; // the pointerup below still fires a click - skip its own toggle once
-            gtToggleHomePeek(closerToExpanded ? 'expanded' : 'peek');
-        }
-    };
-    handle.addEventListener('pointerup', endDrag);
-    handle.addEventListener('pointercancel', endDrag);
-    handle.addEventListener('click', () => {
-        if (handle.dataset.gtSuppressClick === '1') { handle.dataset.gtSuppressClick = ''; return; }
-        gtToggleHomePeek();
-    });
-}
-document.addEventListener('DOMContentLoaded', gtInitHomePeekDrag);

@@ -35,6 +35,14 @@
    ============================================================ */
 
 :root{
+  /* Tells the browser which palette its OWN chrome should use - form
+     control interiors, spin buttons, scrollbars, caret. Without it the UA
+     paints <input> backgrounds light no matter what the page does, and
+     since Tailwind's preflight sets `color:inherit` on inputs, dark mode
+     produced light text on a UA-white field: an invisible value. Set on
+     :root (not just the dark blocks) so the light case is explicit too. */
+  color-scheme: light;
+
   /* ---------- Neutrals (cool, not warm) ---------- */
   --gt-paper:        #f4f6f6;
   --gt-paper-raised:  #ffffff;
@@ -245,6 +253,7 @@
 }
 
 :root[data-theme="dark"]{
+  color-scheme: dark; /* see :root's own note - keeps UA form-control chrome dark */
   --gt-paper:        #11171a;
   --gt-paper-raised:  #182022;
   --gt-paper-sunken:  #0c1113;
@@ -336,6 +345,7 @@
 
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
+    color-scheme: dark; /* see :root's own note - keeps UA form-control chrome dark */
     --gt-paper:        #11171a; --gt-paper-raised:  #182022; --gt-paper-sunken:  #0c1113;
     --gt-hair:          #2a3336; --gt-ink-900:       #eaeff0; --gt-ink-700:       #c2ccce;
     /* See the :root[data-theme="dark"] block's own comments above for why
@@ -568,9 +578,8 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
    edge-to-edge text lines, confirmed via screenshot. Recentered as a
    real desktop modal - capped width, floating clear of every edge,
    fully rounded - instead of just a wide bottom sheet. The drag handle
-   (mobile-only gesture, js/app-shell.js's gtInitHomePeekDrag() equivalent
-   isn't used on these tap-to-close sheets) is hidden since there's no
-   edge left to drag it to. */
+   (a mobile affordance only - these sheets are tap-to-close, nothing
+   drags them) is hidden since there's no edge left to drag it to. */
 @media (min-width:1024px){
   .gt-sheet.gt-app-sheet{
     inset-inline: auto;
@@ -761,10 +770,18 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
    secondary, inset toggle box within its tab's normal padding because
    Explore's primary content is the row-card list, not the map itself.
    Height fills the space between the fixed topbar and the fixed bottom
-   nav (both known, constant heights) rather than a guessed vh value. */
+   nav (both known, constant heights) rather than a guessed vh value.
+
+   Only the --gt-space-4 breathing room is cancelled vertically, NOT the
+   64px/60px bar clearance: those two paddings are what keep the content
+   BELOW the fixed topbar and ABOVE the fixed bottom nav. Cancelling them
+   too (as this rule used to) slid the whole wrapper up to y=0, so its
+   top 64px sat hidden behind the topbar - taking the stat chips with it -
+   while an equal 64px strip of empty page showed above the bottom nav.
+   Same total height either way, just aligned to the wrong window. */
 .gt-home-map-wrap{
   position:relative;
-  margin-block: calc(-1 * (64px + env(safe-area-inset-top,0) + var(--gt-space-4))) calc(-1 * (60px + env(safe-area-inset-bottom,0) + var(--gt-space-4)));
+  margin-block: calc(-1 * var(--gt-space-4)) calc(-1 * var(--gt-space-4));
   /* -16px cancels #main-content's own px-4 (Tailwind 1rem) - the
      min-width:640px/1024px rules below cancel its sm:px-6 (1.5rem)/
      lg:px-8 (2rem) instead once those breakpoints take over. These are
@@ -782,9 +799,9 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 /* Short landscape phones (e.g. 844x390, 926x428): topbar(64)+nav(60) alone
    eat 124px, so the calc() height above already shrinks to ~265px - but the
    360px min-height floor was still forcing the wrapper taller than that,
-   overflowing the viewport. .gt-home-peek is position:fixed and floats over
-   the map rather than sitting in normal flow below it, so there's no other
-   content height to protect here - just drop the floor to fit. */
+   overflowing the viewport. The map is the only thing in this tab (the stat
+   chips are absolutely positioned over it), so there's no other content
+   height to protect here - just drop the floor to fit. */
 @media (orientation:landscape) and (max-height:500px){
   .gt-home-map-wrap{ min-height:220px; }
 }
@@ -801,70 +818,6 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 }
 .gt-home-stats--overlay .gt-chip{ background:var(--gt-paper-raised); box-shadow:var(--gt-sh-2); pointer-events:auto; }
 .gt-home-stats__trip-btn{ border:none; cursor:pointer; font-family:var(--gt-font-sans); }
-
-/* Peek sheet: today's plan preview, docked to the bottom of the map.
-   Deliberately NOT built on .gt-sheet/.gt-app-sheet (those are
-   transient, backdrop-driven, one-at-a-time overlays for a single
-   tapped item - js/map.js's gtOpenMapSheet(), the "עוד"/trip-status
-   sheets). This is a permanent, always-present panel with its own pair
-   of height states ("peek"/"expanded"), toggled by a tap on the handle
-   or header, or a real pointer-drag on the handle - see
-   gtToggleHomePeek()/gtInitHomePeekDrag() in js/app-shell.js. Reuses
-   --gt-z-sheet (already in the token scale, one tier below
-   --gt-z-nav/the topbar/bottom-nav) since semantically this IS a sheet,
-   just a non-modal one. */
-.gt-home-peek{
-  position:fixed; inset-inline:0; z-index:var(--gt-z-sheet);
-  bottom:calc(60px + env(safe-area-inset-bottom,0));
-  background:var(--gt-paper-raised); border-radius:var(--gt-r-xl) var(--gt-r-xl) 0 0;
-  box-shadow:var(--gt-sh-4); padding:0 var(--gt-space-4) var(--gt-space-3);
-  height:var(--gt-home-peek-h, 132px); max-height:min(70dvh, 520px); overflow:hidden;
-  transition:height var(--gt-dur-slow) var(--gt-ease);
-}
-.gt-home-peek[data-state="peek"]{ --gt-home-peek-h: 132px; }
-.gt-home-peek[data-state="expanded"]{ --gt-home-peek-h: min(64dvh, 480px); }
-.gt-home-peek[data-dragging="true"]{ transition:none; }
-.gt-home-peek__handle{
-  display:flex; width:100%; justify-content:center; padding:8px 0 4px;
-  background:none; border:none; cursor:grab; touch-action:none;
-}
-.gt-home-peek__handle:active{ cursor:grabbing; }
-.gt-home-peek__handle:focus-visible{ outline:2px solid var(--gt-primary-500); outline-offset:2px; }
-.gt-home-peek__header{ cursor:pointer; padding-bottom:var(--gt-space-2); }
-.gt-home-peek__header:focus-visible{ outline:2px solid var(--gt-primary-500); outline-offset:2px; }
-.gt-home-peek__body{ overflow-y:auto; max-height:calc(min(70dvh, 520px) - 90px); }
-.gt-home-peek__stops{ display:flex; flex-direction:column; gap:var(--gt-space-2); margin-bottom:var(--gt-space-2); }
-.gt-home-peek__stop{
-  display:flex; gap:var(--gt-space-2); align-items:baseline;
-  font-family:var(--gt-font-sans); font-size:var(--gt-text-sm); color:var(--gt-ink-700);
-  padding:var(--gt-space-2); background:var(--gt-paper-sunken); border-radius:var(--gt-r-md);
-}
-.gt-home-peek__stop-time{ font-weight:700; color:var(--gt-ink-900); flex-shrink:0; }
-
-@media (prefers-reduced-motion: reduce){
-  .gt-home-peek{ transition:none; }
-}
-
-/* Home — desktop peek sheet (1024px+ only; mobile/tablet's full-width
-   docked sheet above is untouched below that breakpoint).
-   Full-bleed map + full-width bottom sheet is a mobile pattern (the sheet
-   IS the bottom edge of the screen); at desktop width that same
-   full-width sheet just centers its short content in a sea of empty
-   space either side - confirmed via screenshot at 1440px, matching the
-   reported complaint. Anchored as a comfortable fixed-width floating
-   card on the reading-start (right) side instead - same side Explore's
-   own list column sits on - fully rounded now that it's no longer
-   docked flush to the viewport's own edges, with a small gap from both
-   the bottom nav and the side. */
-@media (min-width:1024px){
-  .gt-home-peek{
-    inset-inline: auto;
-    inset-inline-start: var(--gt-space-5);
-    width: min(420px, calc(100vw - var(--gt-space-8)));
-    bottom: calc(60px + env(safe-area-inset-bottom,0) + var(--gt-space-4));
-    border-radius: var(--gt-r-xl);
-  }
-}
 
 /* ============================================================
    PHASE 4, BATCH 2 — EXPLORE (unified beach/food/attraction/gem
@@ -1189,6 +1142,23 @@ input:disabled, select:disabled, textarea:disabled {
   box-shadow: none;
   filter: none;
 }
+
+/* Text-entry controls paint their own surface from the tokens instead of
+   inheriting a half-set state. Tailwind's preflight sets `color:inherit`
+   on inputs, so an input with no background of its own showed the page's
+   (light, in dark mode) ink on the UA's white field - the typed value was
+   effectively invisible. color-scheme on :root fixes the UA side; this
+   makes it explicit so the result no longer depends on UA defaults at all.
+   Scoped to the text-entry types only: checkboxes/radios/ranges keep their
+   native rendering, and buttons keep .gt-btn/utility styling. */
+input[type="text"], input[type="number"], input[type="search"],
+input[type="email"], input[type="tel"], input[type="url"],
+input[type="password"], input[type="date"], input[type="time"],
+select, textarea {
+  background-color: var(--gt-paper-raised);
+  color: var(--gt-ink-900);
+}
+input::placeholder, textarea::placeholder { color: var(--gt-ink-300); opacity: 1; }
 .gt-btn:disabled:hover, .gt-btn[aria-disabled="true"]:hover,
 .gt-chip:disabled:hover, .gt-chip[aria-disabled="true"]:hover,
 button:disabled:hover {
@@ -1628,7 +1598,6 @@ h2 + p, h3 + p { margin-top: 0.6em; }
         display: inline-flex; align-items: center; justify-content: center;
     }
     .verified-tel { line-height: normal; }
-    .gt-home-peek__handle { min-height: 44px; }
     /* The small inline badge-links inside cards ("מידע נוסף", website /
        tip pills, the accent-soft chips) — authored at text-xs with tight
        padding, so they were 22-28px tall. */
