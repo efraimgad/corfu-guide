@@ -1233,6 +1233,25 @@ a[aria-disabled="true"] { pointer-events: auto; cursor: not-allowed; }
   max-width:none;
 }
 
+/* Belt-and-braces for the same blank-tile bug. Device evidence narrowed it
+   to "tiles download fine, then render invisibly": the map's own no-tiles
+   notice (js/map.js) never fires, which only happens when Leaflet's
+   tileload event HAS fired, yet nothing is painted. max-width above kills
+   one cause; these kill the rest of the ways a loaded <img> can occupy no
+   visible space, since the environment this was written in cannot run
+   Leaflet at all (its egress proxy blocks cdnjs and every tile host) and
+   guessing one cause at a time has already cost several round trips.
+
+   Scoped to .leaflet-tile-loaded, the class Leaflet itself adds once a tile
+   has decoded - so this only overrides the END state of Leaflet's fade-in,
+   never the fade itself, and cannot force a half-loaded or stale tile
+   visible during a zoom transition. */
+:root .leaflet-container img.leaflet-tile-loaded{
+  opacity:1 !important;
+  visibility:visible;
+  display:block;
+}
+
 /* Popup (still used by the hotel marker) */
 :root .leaflet-popup-content-wrapper,
 :root .leaflet-popup-tip{
