@@ -1252,6 +1252,21 @@ a[aria-disabled="true"] { pointer-events: auto; cursor: not-allowed; }
   display:block;
 }
 
+/* Tiles are <div>s with a background-image now, not <img>s - see
+   GtDivTileLayer in js/map.js for why. background-size:100% 100% (not
+   `cover`) because L.GridLayer sizes each div to exactly one tile, so the
+   image must fill it precisely; `cover` would crop at fractional zooms and
+   leave hairline seams between tiles. The rules above are kept for
+   Leaflet's own <img> elements (marker icons, image overlays), which still
+   exist. */
+:root .leaflet-container .gt-div-tile{
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+  opacity:1;
+  visibility:visible;
+  display:block;
+}
+
 /* Popup (still used by the hotel marker) */
 :root .leaflet-popup-content-wrapper,
 :root .leaflet-popup-tip{
