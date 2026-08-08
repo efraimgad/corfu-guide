@@ -233,10 +233,31 @@ function gtAddTileLayerWithFallback(map, index) {
     let anyTileLoaded = false;
     layer.on('tileload', () => { anyTileLoaded = true; gtClearTileDiagnostic(map); });
     setTimeout(() => {
-        if (anyTileLoaded) return;
+        // Two genuinely different failures look identical to a user (blank
+        // map), so report which one this is rather than assuming:
+        //   - nothing loaded  -> a fetch/provider problem
+        //   - loaded but blank -> a rendering problem, and then the tile's
+        //     own measured geometry/paint properties say which one, instead
+        //     of another round of guess-fix-redeploy.
+        const tile = map.getContainer().querySelector('img.leaflet-tile');
+        let painted = null;
+        if (tile) {
+            const cs = getComputedStyle(tile);
+            const r = tile.getBoundingClientRect();
+            painted = {
+                box: Math.round(r.width) + '×' + Math.round(r.height),
+                opacity: cs.opacity, visibility: cs.visibility, display: cs.display,
+                maxWidth: cs.maxWidth, transform: cs.transform === 'none' ? 'none' : 'set',
+                complete: tile.complete, natural: tile.naturalWidth + '×' + tile.naturalHeight
+            };
+        }
+        if (anyTileLoaded && painted && painted.box !== '0×0' && painted.opacity !== '0') return;
         gtShowTileDiagnostic(map, {
             provider: provider.name,
             errors: errorCount,
+            loaded: anyTileLoaded,
+            tilesInDom: map.getContainer().querySelectorAll('img.leaflet-tile').length,
+            painted: painted,
             swControlled: !!(navigator.serviceWorker && navigator.serviceWorker.controller),
             sampleUrl: provider.url.replace('{z}', 10).replace('{x}', 570).replace('{y}', 400)
         });
@@ -262,12 +283,18 @@ function gtTileDiagnosticEl(map, create) {
 function gtShowTileDiagnostic(map, info) {
     const el = gtTileDiagnosticEl(map, true);
     if (!el) return;
-    el.innerHTML = `<strong>מפת הרקע לא נטענה</strong>` +
+    const p = info.painted;
+    el.innerHTML = `<strong>${info.loaded ? 'האריחים נטענו אך לא מוצגים' : 'מפת הרקע לא נטענה'}</strong>` +
         `<span>ספק: ${escapeHtml(info.provider)} · שגיאות: ${info.errors} · ` +
-        `service worker: ${info.swControlled ? 'פעיל' : 'לא פעיל'}</span>` +
+        `אריחים ב-DOM: ${info.tilesInDom} · SW: ${info.swControlled ? 'פעיל' : 'לא'}</span>` +
+        (p
+            ? `<span dir="ltr">box ${escapeHtml(p.box)} · opacity ${escapeHtml(p.opacity)} · ` +
+              `${escapeHtml(p.visibility)}/${escapeHtml(p.display)} · max-w ${escapeHtml(p.maxWidth)}</span>` +
+              `<span dir="ltr">img ${p.complete ? 'complete' : 'incomplete'} · natural ${escapeHtml(p.natural)} · transform ${escapeHtml(p.transform)}</span>`
+            : `<span>לא נמצא אריח ב-DOM</span>`) +
         `<span dir="ltr" style="word-break:break-all;opacity:.75;">${escapeHtml(info.sampleUrl)}</span>` +
         `<span>הסמנים והניווט פועלים כרגיל.</span>`;
-    console.warn('[map] no tiles loaded', info);
+    console.warn('[map] tile diagnostic', info);
 }
 function gtClearTileDiagnostic(map) {
     const el = gtTileDiagnosticEl(map, false);
