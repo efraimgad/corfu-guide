@@ -1210,6 +1210,29 @@ a[aria-disabled="true"] { pointer-events: auto; cursor: not-allowed; }
    to beat them regardless of sheet order. */
 :root .leaflet-container{ background:var(--gt-paper-sunken); font-family:var(--gt-font-sans); }
 
+/* THE reason map tiles rendered blank (solid --gt-paper-sunken) on device
+   in both themes, across two different tile CDNs, while markers and the
+   attribution drew fine.
+   Tailwind's preflight (tailwind-production.css) ships a global
+   `img,video{max-width:100%;height:auto}`. Leaflet positions its tile
+   <img>s inside absolutely-positioned containers that have no resolved
+   width, so `max-width:100%` resolves against roughly zero and collapses
+   every tile to zero width - loaded, in the DOM, and invisible. Nothing
+   here is hiding them and no request is failing; they are simply sized
+   away. Markers were never affected because every icon in js/map.js is an
+   L.divIcon (a <div>, not an <img>), and the attribution is text - which
+   is exactly why those two kept working and made this look like a
+   tile-fetch problem for so long.
+   Scoped to Leaflet's own image classes rather than `.leaflet-container
+   img`, so images inside popup content keep the responsive behaviour
+   preflight intends for them. */
+:root .leaflet-container img.leaflet-tile,
+:root .leaflet-container .leaflet-marker-icon,
+:root .leaflet-container .leaflet-image-layer,
+:root .leaflet-container .leaflet-tile-container img{
+  max-width:none;
+}
+
 /* Popup (still used by the hotel marker) */
 :root .leaflet-popup-content-wrapper,
 :root .leaflet-popup-tip{
