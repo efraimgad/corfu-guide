@@ -223,15 +223,11 @@
      via js/app-shell.js gtSyncHomeStats() - unchanged) survives as a
      semi-transparent overlay pinned to the top of the map, plus a
      compact button in that same row re-opening the trip-status sheet
-     (hotel/car/reservations - gtOpenTripSheet(), unchanged). The old
-     "today's plan" summary card survives as a peek sheet docked to the
-     map's bottom edge (see .gt-home-peek below) - two height states
-     (peek/expanded), toggled by tap OR a real pointer-drag on its
-     handle (js/app-shell.js gtToggleHomePeek()/gtInitHomePeekDrag()).
-     Its stop list reuses window.ITINERARY_DAYS + window._currentTripDayNum
-     (js/itinerary-data.js / js/dashboard.js) - the exact same "what's
-     today" data source the old summary card and the full itinerary tab
-     already use, not a second computation.
+     (hotel/car/reservations - gtOpenTripSheet(), unchanged). That chip
+     row is the ONLY thing allowed to overlay the map: the "today's plan"
+     sheet that used to float above it was removed on request because it
+     covered the map, and the full day-by-day plan is one tap away on the
+     "מסלול" tab, so nothing is stranded by its absence.
      ============================================================ -->
 <section id="home" class="tab-content gt-home" dir="rtl" role="tabpanel" aria-labelledby="gt-nav-home-btn" tabindex="0">
     <div class="gt-home-map-wrap" id="gt-home-map-wrap">
@@ -242,21 +238,6 @@
             <button type="button" class="gt-chip gt-home-stats__trip-btn" onclick="gtOpenTripSheet()">🏨 לינה ורכב</button>
         </div>
         <div id="home-map" class="gt-home-map"></div>
-    </div>
-
-    <div class="gt-home-peek" id="gt-home-peek" data-state="peek">
-        <button type="button" class="gt-home-peek__handle" id="gt-home-peek-handle" aria-expanded="false" aria-controls="gt-home-peek-body" aria-label="הרחבה או כיווץ של תצוגת התוכנית של היום">
-            <span class="gt-sheet__handle" aria-hidden="true"></span>
-        </button>
-        <div class="gt-home-peek__header" role="button" tabindex="0" onclick="switchTab('itinerary')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();switchTab('itinerary');}">
-            <p class="gt-eyebrow">התוכנית שלנו</p>
-            <p class="gt-row-card__title" id="home-today-summary">טוען…</p>
-            <p class="gt-row-card__meta" id="home-today-meta"></p>
-        </div>
-        <div class="gt-home-peek__body" id="gt-home-peek-body">
-            <div id="gt-home-peek-stops" class="gt-home-peek__stops"></div>
-            <button type="button" class="gt-btn gt-btn--secondary" style="width:100%;" onclick="switchTab('itinerary')">צפו במסלול המלא ←</button>
-        </div>
     </div>
 </section>
 
