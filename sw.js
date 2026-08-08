@@ -1,7 +1,7 @@
 // Basic offline support: stale-while-revalidate for the app shell (this
 // file's own assets) and everything else same-origin; cache-first (capped,
-// own cache each) for third-party Pexels/Unsplash photos AND map tiles
-// (see TILE_HOSTS); and a deliberate pass-through (no caching at all) for Supabase
+// own cache) for third-party Pexels/Unsplash photos; and a deliberate
+// pass-through (no caching at all) for map tiles (see TILE_HOSTS) and Supabase
 // API calls — the app already has its own offline queue for those writes
 // (see js/sync.js). The broken-image SVG fallback in js/init.js still
 // covers any fetch that fails even after a cache-first attempt.
@@ -9,7 +9,7 @@
 // Bump this on every deploy that changes any APP_SHELL file — the SW
 // cache is otherwise not invalidated, and returning visitors would stay
 // pinned to the old cached JS/CSS indefinitely.
-const CACHE_NAME = 'corfu-guide-v10';
+const CACHE_NAME = 'corfu-guide-v11';
 
 // Photos live in their own cache so they can be evicted (and capped)
 // independently of the app shell, and so bumping CACHE_NAME for a code
@@ -17,13 +17,11 @@ const CACHE_NAME = 'corfu-guide-v10';
 const IMAGE_CACHE_NAME = 'corfu-guide-images-v1';
 const IMAGE_CACHE_MAX = 200;
 
-// Map tiles get their own capped cache too, same reasoning as photos - and
-// a higher cap, since a tile is a few KB (not a few hundred KB like a
-// photo) and panning/zooming around Corfu across three separate map
-// instances (home/beaches/explore) touches far more distinct tile URLs
-// than the handful of photos on any one screen.
-const TILE_CACHE_NAME = 'corfu-guide-tiles-v1';
-const TILE_CACHE_MAX = 600;
+// NOTE: there is deliberately no tile cache any more - see the fetch
+// handler's own note on why tiles bypass this worker entirely. The old
+// 'corfu-guide-tiles-v1' cache is intentionally left OUT of the activate
+// handler's keep-list below so it gets deleted, taking any bad entries
+// stored while tiles were being intercepted with it.
 
 const APP_SHELL = [
     'index.html',
@@ -78,7 +76,7 @@ self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys()
             .then((names) => Promise.all(
-                names.filter((name) => name !== CACHE_NAME && name !== IMAGE_CACHE_NAME && name !== TILE_CACHE_NAME)
+                names.filter((name) => name !== CACHE_NAME && name !== IMAGE_CACHE_NAME)
                      .map((name) => caches.delete(name))
             ))
             .then(() => self.clients.claim())
@@ -93,19 +91,18 @@ function isThirdPartyImage(url) {
     return /(^|\.)images\.pexels\.com$|(^|\.)pexels\.com$|(^|\.)unsplash\.com$/.test(url.hostname);
 }
 
-// The exact tile hosts js/map.js's GT_TILE_PROVIDERS can request (it
-// fails over between them, so both need caching). Matched by exact
+// The exact tile hosts js/map.js's GT_TILE_PROVIDERS can request (it fails
+// over between them, so both must bypass this worker). Matched by exact
 // hostname rather than a broad *.openstreetmap.org / *.cartocdn.com
-// pattern, so this can't accidentally intercept an unrelated API call on
-// a sibling subdomain later.
+// pattern, so this can't accidentally exempt an unrelated API call on a
+// sibling subdomain later.
 const TILE_HOSTS = ['basemaps.cartocdn.com', 'tile.openstreetmap.org'];
 function isMapTile(url) {
     return TILE_HOSTS.includes(url.hostname);
 }
 
 // Keeps a capped cache from growing without bound: FIFO eviction, oldest
-// entries first (cache.keys() preserves insertion order). Shared by the
-// photo and tile caches - same policy, different cap/cache per media type.
+// entries first (cache.keys() preserves insertion order).
 async function trimCappedCache(cache, max) {
     const keys = await cache.keys();
     if (keys.length <= max) return;
@@ -152,31 +149,25 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // Map tiles: same cache-first/capped treatment as third-party photos,
-    // in their own cache. Without this they fell into the generic
-    // "everything else" stale-while-revalidate branch below, sharing
-    // CACHE_NAME with the app shell - functionally similar, but a flaky
-    // mobile connection got no benefit from a tile already seen (no
-    // cache-first short-circuit) and a full trip's worth of tiles isn't
-    // something a shared, uncapped cache should be soaking up.
-    if (isMapTile(url)) {
-        event.respondWith(
-            caches.open(TILE_CACHE_NAME).then((cache) =>
-                cache.match(request).then((cached) => {
-                    if (cached) return cached;
-                    return fetch(request)
-                        .then((response) => {
-                            if (response && (response.ok || response.type === 'opaque')) {
-                                cache.put(request, response.clone()).then(() => trimCappedCache(cache, TILE_CACHE_MAX));
-                            }
-                            return response;
-                        })
-                        .catch(() => cached);
-                })
-            )
-        );
-        return;
-    }
+    // Map tiles: DELIBERATELY not intercepted - straight to the network,
+    // same hands-off treatment as Supabase above.
+    //
+    // Tiles rendered blank on a real device across two entirely different
+    // CDNs (OpenStreetMap, then Carto) in both light and dark mode, while
+    // markers/clustering - which need no network - drew correctly. Two
+    // unrelated hosts failing identically means the provider was never the
+    // variable; the one thing every tile request had in common was passing
+    // through this worker (first via the generic branch below, later via a
+    // cache-first branch here). A respondWith() that resolves to undefined
+    // - which is what any throw inside these handlers produces, since the
+    // .catch() fell back to an undefined `cached` - surfaces to an <img> as
+    // a network error, i.e. exactly a blank tile.
+    //
+    // Not caching tiles costs little: the cache-first path never actually
+    // served a tile here (none were ever stored), so there is no offline
+    // capability being given up, only one that never worked. Photos and the
+    // app shell keep their caching; only tiles opt out.
+    if (isMapTile(url)) return;
 
     const sameOrigin = url.origin === self.location.origin;
 

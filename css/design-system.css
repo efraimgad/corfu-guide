@@ -807,6 +807,22 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 }
 .gt-home-map{ width:100%; height:100%; z-index:var(--gt-z-map); }
 
+/* Basemap-failure notice (js/map.js gtShowTileDiagnostic). Sits inside the
+   Leaflet container but is styled entirely from our own tokens and needs no
+   Leaflet CSS to lay out - it has to stay readable even when the failure
+   being reported IS Leaflet's stylesheet not applying. Above the tile pane,
+   below the markers, and pointer-events:none so it never eats a marker tap. */
+.gt-tile-diagnostic{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  z-index:500; pointer-events:none; max-width:min(90%, 340px);
+  display:flex; flex-direction:column; gap:4px; text-align:center;
+  background:var(--gt-paper-raised); color:var(--gt-ink-700);
+  border:1px solid var(--gt-hair); border-radius:var(--gt-r-lg);
+  box-shadow:var(--gt-sh-3); padding:var(--gt-space-4);
+  font-family:var(--gt-font-sans); font-size:var(--gt-text-sm); line-height:1.5;
+}
+.gt-tile-diagnostic strong{ color:var(--gt-ink-900); font-size:var(--gt-text-md); }
+
 /* Stat row (countdown/weather/today + trip-status shortcut), same real
    chips as before Phase D - now floated over the map's top edge instead
    of stacked above it in normal flow. pointer-events:none on the row

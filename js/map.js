@@ -222,7 +222,56 @@ function gtAddTileLayerWithFallback(map, index) {
         gtAddTileLayerWithFallback(map, index + 1);
     });
 
+    // Tiles have now failed on a real device across two unrelated CDNs while
+    // being impossible to reproduce from the dev environment (its egress
+    // proxy blocks every tile host, so the map can never be exercised for
+    // real here). This surfaces the diagnosis ON the map instead: if not one
+    // tile has loaded a few seconds in, say so in place of an unexplained
+    // blank rectangle, and include the facts needed to tell the causes apart
+    // - which provider, whether a service worker is intercepting, and one
+    // real failing URL - so a single screenshot answers it.
+    let anyTileLoaded = false;
+    layer.on('tileload', () => { anyTileLoaded = true; gtClearTileDiagnostic(map); });
+    setTimeout(() => {
+        if (anyTileLoaded) return;
+        gtShowTileDiagnostic(map, {
+            provider: provider.name,
+            errors: errorCount,
+            swControlled: !!(navigator.serviceWorker && navigator.serviceWorker.controller),
+            sampleUrl: provider.url.replace('{z}', 10).replace('{x}', 570).replace('{y}', 400)
+        });
+    }, 6000);
+
     layer.addTo(map);
+}
+
+// Deliberately plain DOM over the map container rather than an L.Control:
+// it has to be able to render even if Leaflet's own CSS never applied,
+// which is one of the failure modes it exists to report on.
+function gtTileDiagnosticEl(map, create) {
+    const container = map.getContainer();
+    let el = container.querySelector('.gt-tile-diagnostic');
+    if (!el && create) {
+        el = document.createElement('div');
+        el.className = 'gt-tile-diagnostic';
+        el.setAttribute('role', 'status');
+        container.appendChild(el);
+    }
+    return el;
+}
+function gtShowTileDiagnostic(map, info) {
+    const el = gtTileDiagnosticEl(map, true);
+    if (!el) return;
+    el.innerHTML = `<strong>מפת הרקע לא נטענה</strong>` +
+        `<span>ספק: ${escapeHtml(info.provider)} · שגיאות: ${info.errors} · ` +
+        `service worker: ${info.swControlled ? 'פעיל' : 'לא פעיל'}</span>` +
+        `<span dir="ltr" style="word-break:break-all;opacity:.75;">${escapeHtml(info.sampleUrl)}</span>` +
+        `<span>הסמנים והניווט פועלים כרגיל.</span>`;
+    console.warn('[map] no tiles loaded', info);
+}
+function gtClearTileDiagnostic(map) {
+    const el = gtTileDiagnosticEl(map, false);
+    if (el) el.remove();
 }
 
 function gtCreateMap(elId, opts) {
