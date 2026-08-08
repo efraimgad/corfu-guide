@@ -13,7 +13,7 @@
 // Data flow: this file never recomputes or re-fetches anything. It only
 // reads values the existing #dashboard tab (js/dashboard.js) and the
 // existing reservations tracker (js/reservations.js) already compute/render,
-// and copies or reuses them - see gtSyncHomeStats() and gtOpenTripSheet().
+// and copies or reuses them - see gtSyncTopbar() and gtOpenTripSheet().
 // ============================================================================
 
 // -- Bottom-nav highlight state --------------------------------------------
@@ -199,40 +199,21 @@ window.gtCloseMoreSheet = gtCloseMoreSheet;
 window.gtOpenTripSheet = gtOpenTripSheet;
 window.gtCloseTripSheet = gtCloseTripSheet;
 
-// -- Home tab live-stat row (chips overlaid on the map) ----------------------
-// Copies already-computed text out of the existing #dashboard tab's own
-// elements (js/dashboard.js updateDashCountdown()/updateDashToday()/
-// fetchDashWeather() keep these current regardless of which tab is open -
-// initDashboard() runs once on load and updateDashCountdown() re-runs every
-// 60s) rather than recomputing the countdown/fetching weather a second time.
-// Runs on an interval (not just once) purely to pick up dashboard.js's own
-// periodic updates and the weather fetch resolving asynchronously after
-// load; it no-ops whenever the Home tab isn't the one currently on screen.
-function gtSyncHomeStats() {
-    const homeSection = document.getElementById('home');
-    if (!homeSection || !homeSection.classList.contains('active')) return;
-
-    const dashCountdown = document.getElementById('dash-countdown');
-    const dashWeather = document.getElementById('dash-weather');
-    const dashToday = document.getElementById('dash-today');
-
-    const statCountdown = document.getElementById('home-stat-countdown');
-    const statWeather = document.getElementById('home-stat-weather');
-    const statToday = document.getElementById('home-stat-today');
-    if (statCountdown) statCountdown.textContent = '✈️ ' + (dashCountdown ? dashCountdown.textContent : '—');
-    if (statWeather) statWeather.textContent = '🌡️ ' + (dashWeather ? dashWeather.textContent : '—');
-    if (statToday) statToday.textContent = dashToday ? dashToday.textContent : '—';
-}
-window.gtSyncHomeStats = gtSyncHomeStats;
+// -- Home tab map overlay -----------------------------------------------------
+// There is no longer a stat row to sync here: the countdown/weather/today
+// chips that used to overlay the map duplicated the sticky top bar (which
+// shows the same values on every tab), so they were removed along with
+// gtSyncHomeStats(). The only chip left on the map is the trip-status
+// button - static markup that needs no syncing.
 
 // -- Sticky top bar (day counter + weather) -----------------------------
-// Same reuse principle as gtSyncHomeStats() above: copies already-computed
+// Copies already-computed
 // text out of #dashboard's own #dash-today (day N / pre-trip countdown,
 // see updateDashToday() in js/dashboard.js) and #dash-weather (live
 // temperature, see fetchDashWeather()) rather than recomputing the date
-// math or re-fetching weather for the top bar. Unlike gtSyncHomeStats()
-// this one is NOT gated to a specific tab being active - the top bar is
-// visible on every tab, so it always needs a current value.
+// math or re-fetching weather for the top bar. Not gated to any specific
+// tab being active - the top bar is visible on every tab, so it always
+// needs a current value.
 function gtSyncTopbar() {
     const dashToday = document.getElementById('dash-today');
     const dashWeather = document.getElementById('dash-weather');
@@ -248,5 +229,5 @@ window.gtSyncTopbar = gtSyncTopbar;
 // needs to be frequent enough to catch dashboard.js's async weather fetch
 // resolving after load - it doesn't need to match dashboard.js's own 60s
 // countdown-refresh interval.
-setInterval(() => { gtSyncHomeStats(); gtSyncTopbar(); }, 3000);
-document.addEventListener('DOMContentLoaded', () => { gtSyncHomeStats(); gtSyncTopbar(); });
+setInterval(gtSyncTopbar, 3000);
+document.addEventListener('DOMContentLoaded', gtSyncTopbar);

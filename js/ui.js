@@ -104,7 +104,6 @@ function switchTab(tabId, skipScroll) {
                     gtActivateHomeMap();
                     requestAnimationFrame(() => requestAnimationFrame(gtActivateHomeMap));
                 }
-                if (typeof gtSyncHomeStats === 'function') gtSyncHomeStats();
             }
             // Desktop split-view (1024px+, css/design-system.css): the map
             // is always visible beside the list there, not behind a tap on
