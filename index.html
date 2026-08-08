@@ -219,22 +219,23 @@
      gtOnMarkerTap()/gtOpenMapSheet()/gtClearMapSelection() mechanism
      used by the other two - not a fourth popup pattern.
 
-     The old stat row (countdown/weather/today, synced from #dashboard
-     via js/app-shell.js gtSyncHomeStats() - unchanged) survives as a
-     semi-transparent overlay pinned to the top of the map, plus a
-     compact button in that same row re-opening the trip-status sheet
-     (hotel/car/reservations - gtOpenTripSheet(), unchanged). That chip
-     row is the ONLY thing allowed to overlay the map: the "today's plan"
+     A single compact button overlays the map, re-opening the trip-status
+     sheet (hotel/car/reservations - gtOpenTripSheet()). It is the ONLY
+     thing allowed over the map now: the old countdown/weather/today chips
+     duplicated the sticky top bar and were removed, and the "today's plan"
      sheet that used to float above it was removed on request because it
      covered the map, and the full day-by-day plan is one tap away on the
      "מסלול" tab, so nothing is stranded by its absence.
      ============================================================ -->
 <section id="home" class="tab-content gt-home" dir="rtl" role="tabpanel" aria-labelledby="gt-nav-home-btn" tabindex="0">
     <div class="gt-home-map-wrap" id="gt-home-map-wrap">
+        <!-- Only the trip-status button overlays the map now. The countdown/
+             weather/today chips that used to sit here duplicated what the
+             sticky top bar already shows on EVERY tab - invisible until the
+             map-wrap offset bug was fixed, then suddenly two near-identical
+             chip rows stacked on top of each other, eating map height the
+             Map tab is supposed to maximise. -->
         <div class="gt-home-stats gt-home-stats--overlay">
-            <span class="gt-chip gt-tabular" id="home-stat-countdown">—</span>
-            <span class="gt-chip gt-tabular" id="home-stat-weather">—</span>
-            <span class="gt-chip" id="home-stat-today">—</span>
             <button type="button" class="gt-chip gt-home-stats__trip-btn" onclick="gtOpenTripSheet()">🏨 לינה ורכב</button>
         </div>
         <div id="home-map" class="gt-home-map"></div>
@@ -3274,8 +3275,8 @@
     <script src="js/ui.js" defer></script>
     <script src="js/init.js" defer></script>
     <!-- Phase 4 batch 1: the new persistent bottom nav + its two sheets +
-         Home tab sync. Loaded after js/init.js so its own DOMContentLoaded
-         listener (gtSyncHomeStats' first run) fires after init.js's - by
+         top-bar sync. Loaded after js/init.js so its own DOMContentLoaded
+         listener (gtSyncTopbar's first run) fires after init.js's - by
          then initDashboard() has already populated the dashboard elements
          this file reads from. See js/app-shell.js for the full rationale. -->
     <script src="js/app-shell.js" defer></script>
