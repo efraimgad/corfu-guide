@@ -195,6 +195,53 @@ const GT_TILE_PROVIDERS = [
 // keeps the viewport over Corfu, so there are no legitimately-missing
 // out-of-coverage tiles to confuse this count.
 const GT_TILE_ERROR_THRESHOLD = 4;
+
+// Tiles as <div> + background-image instead of Leaflet's default <img>.
+//
+// Built from the one pattern that has held through every attempt at the
+// blank-basemap bug: markers render perfectly and tiles never do, across
+// two unrelated CDNs, both colour schemes, and every fix tried. The only
+// structural difference between them is the element type - every marker in
+// this file is an L.divIcon (a <div>), every default Leaflet tile is an
+// <img>. Device evidence also showed the tiles were downloading fine and
+// simply not painting (the no-tiles notice below stays silent, which only
+// happens once Leaflet's tileload event has fired), so this is a rendering
+// problem, not a fetch one. Rather than keep guessing which rule breaks
+// <img> inside this particular map, draw tiles as the element type that is
+// already proven to work here.
+//
+// L.GridLayer handles all the positioning/zoom/pruning; only tile creation
+// is overridden. The Image() probe exists so this still reports real
+// load/error state through GridLayer's own done() callback - that keeps the
+// provider-failover and diagnostic logic below working unchanged, which a
+// bare background-image (which fires no events) would have silently broken.
+// Built lazily, never at module scope: js/map.js is parsed on page load but
+// Leaflet is lazy-loaded on first map use, so a top-level L.GridLayer.extend()
+// throws "L is not defined" on every page view - the same trap the
+// GT_CORFU_BOUNDS_LATLNG comment above already calls out.
+let gtDivTileLayerClass = null;
+function gtGetDivTileLayerClass() {
+    if (gtDivTileLayerClass) return gtDivTileLayerClass;
+    gtDivTileLayerClass = L.GridLayer.extend({
+        createTile: function (coords, done) {
+            const tile = document.createElement('div');
+            tile.className = 'gt-div-tile';
+            const url = L.Util.template(this.options.tileUrl, {
+                z: coords.z, x: coords.x, y: coords.y, s: 'a'
+            });
+            const probe = new Image();
+            probe.onload = () => {
+                tile.style.backgroundImage = 'url("' + url + '")';
+                done(null, tile);
+            };
+            probe.onerror = () => done(new Error('tile load failed'), tile);
+            probe.src = url;
+            return tile;
+        }
+    });
+    return gtDivTileLayerClass;
+}
+
 function gtAddTileLayerWithFallback(map, index) {
     index = index || 0;
     const provider = GT_TILE_PROVIDERS[index];
@@ -203,7 +250,9 @@ function gtAddTileLayerWithFallback(map, index) {
     // reads as "tiles didn't load" instead of "the map is broken".
     if (!provider) return;
 
-    const layer = L.tileLayer(provider.url, {
+    const DivTileLayer = gtGetDivTileLayerClass();
+    const layer = new DivTileLayer({
+        tileUrl: provider.url,
         attribution: provider.attribution,
         maxZoom: provider.maxZoom
     });
@@ -239,7 +288,7 @@ function gtAddTileLayerWithFallback(map, index) {
         //   - loaded but blank -> a rendering problem, and then the tile's
         //     own measured geometry/paint properties say which one, instead
         //     of another round of guess-fix-redeploy.
-        const tile = map.getContainer().querySelector('img.leaflet-tile');
+        const tile = map.getContainer().querySelector('.gt-div-tile');
         let painted = null;
         if (tile) {
             const cs = getComputedStyle(tile);
@@ -248,7 +297,7 @@ function gtAddTileLayerWithFallback(map, index) {
                 box: Math.round(r.width) + '×' + Math.round(r.height),
                 opacity: cs.opacity, visibility: cs.visibility, display: cs.display,
                 maxWidth: cs.maxWidth, transform: cs.transform === 'none' ? 'none' : 'set',
-                complete: tile.complete, natural: tile.naturalWidth + '×' + tile.naturalHeight
+                bg: cs.backgroundImage === 'none' ? 'none' : 'set'
             };
         }
         if (anyTileLoaded && painted && painted.box !== '0×0' && painted.opacity !== '0') return;
@@ -256,7 +305,7 @@ function gtAddTileLayerWithFallback(map, index) {
             provider: provider.name,
             errors: errorCount,
             loaded: anyTileLoaded,
-            tilesInDom: map.getContainer().querySelectorAll('img.leaflet-tile').length,
+            tilesInDom: map.getContainer().querySelectorAll('.gt-div-tile').length,
             painted: painted,
             swControlled: !!(navigator.serviceWorker && navigator.serviceWorker.controller),
             sampleUrl: provider.url.replace('{z}', 10).replace('{x}', 570).replace('{y}', 400)
@@ -290,7 +339,7 @@ function gtShowTileDiagnostic(map, info) {
         (p
             ? `<span dir="ltr">box ${escapeHtml(p.box)} · opacity ${escapeHtml(p.opacity)} · ` +
               `${escapeHtml(p.visibility)}/${escapeHtml(p.display)} · max-w ${escapeHtml(p.maxWidth)}</span>` +
-              `<span dir="ltr">img ${p.complete ? 'complete' : 'incomplete'} · natural ${escapeHtml(p.natural)} · transform ${escapeHtml(p.transform)}</span>`
+              `<span dir="ltr">bg-image ${escapeHtml(p.bg)} · transform ${escapeHtml(p.transform)}</span>`
             : `<span>לא נמצא אריח ב-DOM</span>`) +
         `<span dir="ltr" style="word-break:break-all;opacity:.75;">${escapeHtml(info.sampleUrl)}</span>` +
         `<span>הסמנים והניווט פועלים כרגיל.</span>`;
