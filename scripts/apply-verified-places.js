@@ -121,19 +121,45 @@ function extractLegacyQueryText(record) {
 
 function rebuildMapsUrl(record) {
     const hasPlaceId = !!record.placeId;
-    const hasPreciseCoords =
-        typeof record.lat === 'number' &&
-        typeof record.lon === 'number' &&
-        decimalPlaces(record.lat) >= 4 &&
-        decimalPlaces(record.lon) >= 4;
+    const hasCoords = typeof record.lat === 'number' && typeof record.lon === 'number' &&
+        Number.isFinite(record.lat) && Number.isFinite(record.lon);
+    const isPrecise = hasCoords &&
+        decimalPlaces(record.lat) >= 4 && decimalPlaces(record.lon) >= 4;
 
     const coordQuery = encodeURIComponent(`${record.lat},${record.lon}`);
     if (hasPlaceId) {
         return `https://www.google.com/maps/search/?api=1&query=${coordQuery}&query_place_id=${record.placeId}`;
     }
-    if (hasPreciseCoords) {
+
+    // ANY usable coordinate beats a name search — precision only decides
+    // whether the record still needs verifying, not whether we navigate by it.
+    //
+    // This used to demand >= 4 decimal places before it would navigate by
+    // coordinate, and fell back to a free-text query otherwise. That inverted
+    // the guard's own purpose: it discarded a known point in favour of a string
+    // whose resolution is entirely up to Google's index. 87 of 169 records
+    // (51.5% — 7 beaches, 32 food, 19 attractions, 29 gems) took that branch,
+    // every one of them holding a valid in-bounds coordinate.
+    //
+    // The text it fell back to is a HEBREW name plus "Corfu" — e.g.
+    // "הטברנה של מרינה Corfu" for a small Greek taverna. Google is unlikely to
+    // hold a Hebrew name for such a place at all, so that query can resolve to
+    // nothing, or to somewhere else entirely. A 3-decimal coordinate is worth
+    // ~±70m here (0.001 deg latitude is ~111m; longitude at 39.6N is ~86m),
+    // which puts the traveller on the right street. The card itself already
+    // shows the place name, so the pin does not have to carry identification —
+    // it has to be in the right place.
+    if (hasCoords) {
+        if (!isPrecise) {
+            // Still worth verifying against Places later; just no longer a
+            // reason to degrade the navigation link.
+            record.needsCoordCheck = true;
+            needsCoordCheck.push(record.id);
+        }
         return `https://www.google.com/maps/search/?api=1&query=${coordQuery}`;
     }
+
+    // No coordinate at all: a name search is genuinely the only option left.
     const legacyText = extractLegacyQueryText(record) || `${record.name || record.id} Corfu`;
     record.needsCoordCheck = true;
     needsCoordCheck.push(record.id);
