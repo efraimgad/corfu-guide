@@ -30,8 +30,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "פופולרי במיוחד 🌟",
       "description": "החוף המרכזי והמפורסם ביותר באזור פלאוקסטריצה. מוקף בהרים מוריקים שגולשים אל תוך מי טורקיז קפואים וצלולים להפליא. מציע אפשרויות להשכרת סירות כדי לגלות מערות כחולות נסתרות, מנזר עתיק על הגבעה, ואווירה תוססת.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🔴 עומס גבוה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">📸 ספוט צילום מומלץ</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול וחלוקי נחל</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 מים קרים, צלולים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 שנירקול מעולה</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ שמשיות להשכרה</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 עמוס מאוד</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 משפחות וזוגות</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: רבות באזור</div>\n            <div>🚻 שירותים: יש</div>\n            <div>🚿 מקלחות: יש</div>\n            <div>🌳 צל טבעי: מעט בשוליים</div>\n            <div>🚗 גישה: קלה, רכב עד החוף</div>\n            <div>🅿️ חניה: בתשלום, עמוסה</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6726%2C19.7011",
       "lat": 39.6726,
@@ -57,8 +55,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "פנינה טבעית 🌿",
       "description": "פנינה אמיתית במערב קורפו עם מי קריסטל צלולים בצבע תכלת שקוף וחלוקי נחל לבנים. החוף פראי, ללא מתקנים, מלבד \"סירת גלידה\" קסומה שמגיעה מדי פעם. שווה את ההליכה הרגלית למטה בשביל החוויה המבודדת והמים הצלולים.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🧗 הליכה קשה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-sand-bg badge-sand-text\">🚫👶 פחות מתאים לילדים</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חלוקי נחל לבנים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 שקוף כקריסטל</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 שנירקול חווייתי</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ ללא מתקנים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 בינוני-עמוס</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 הרפתקנים וזוגות</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: סירת גלידה בלבד (מגיעה בצהריים)</div>\n            <div>🚻 שירותים: אין</div>\n            <div>🚿 מקלחות: אין</div>\n            <div>🌳 צל טבעי: אחה\"צ מהצוקים</div>\n            <div>🚗 גישה: הליכה בשביל (15 דק')</div>\n            <div>🅿️ חניה: מגרש בתשלום למעלה</div>\n            <div>🕗 מומלץ להגיע בבוקר מוקדם - המים קרים ועמוקים, מצוינים לשנורקלינג</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6644%2C19.7214",
       "lat": 39.6644,
@@ -82,8 +78,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "נקודת צילום 📸",
       "description": "שני מפרצונים מהממים הניצבים גב אל גב, מופרדים על ידי רצועת יבשה ירוקה. זהו אחד המקומות המצולמים באי. הגישה אליו דורשת ירידה רגלית של חצי שעה מהכפר אפיונס (חובה נעליים סגורות), אך המראה מלמעלה והמים השקטים שווים את המאמץ.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🧗 הליכה קשה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-sand-bg badge-sand-text\">🚫👶 פחות מתאים לילדים</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">📸 ספוט צילום מומלץ</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חלוקי נחל דקים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 טורקיז עמוק וצלול</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 שנירקול ברמה גבוהה</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ פראי לחלוטין</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 עמוס בקיץ</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 הרפתקנים ומיטיבי לכת</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: רק למעלה בכפר</div>\n            <div>🚻 שירותים: אין</div>\n            <div>🚿 מקלחות: אין</div>\n            <div>🌳 צל טבעי: אין</div>\n            <div>🚗 גישה: חניה בכפר אפיונס (€5), אח\"כ הליכה תלולה וסלעית 25-40 דק' (קושי בינוני, נעליים סגורות חובה)</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7208%2C19.6586",
       "lat": 39.7208,
@@ -106,8 +100,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "רחב ידיים ⛰️",
       "description": "רצועת חוף ארוכה, רחבה ומרהיבה בצורת פרסה, מוקפת בגבעות ירוקות. המים כאן נקיים בצורה יוצאת דופן וקרירים, אידיאליים לרחצה ביום חם. החוף מרווח מאד כך שתמיד תמצאו פינה שקטה, גם בשיא הקיץ.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול וחלוקי נחל</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 קרירים וצלולים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 טוב בשולי המפרץ</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ שמשיות בשפע</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 רגוע ומרווח</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 משפחות וזוגות</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: טברנות לאורך החוף</div>\n            <div>🚻 שירותים: זמין במסעדות</div>\n            <div>🚿 מקלחות: יש בחוף</div>\n            <div>🌳 צל טבעי: כמעט ואין</div>\n            <div>🚗 גישה: מצוינת, ממש עד המים</div>\n            <div>🅿️ חניה: חינם לאורך הכביש</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7155%2C19.6738",
       "lat": 39.7155,
@@ -132,8 +124,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "השקיעות היפות באי 🌅",
       "description": "חוף דרמטי למרגלות צוקי חרסית תלולים. מבקרים נוהגים למרוח את הבוץ הטיפולי על גופם. המקום מפורסם במיוחד בזכות נופי השקיעה עוצרי הנשימה, אותם מומלץ לראות ממסעדת 7th Heaven הממוקמת למעלה, על מרפסת התלויה מעל התהום.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול דק, רצועה צרה</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 תכלת יפהפה</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 חלש בגלל החול</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ ללא מתקנים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 עמוס מאד בערב</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 רומנטיקנים וצלמים</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: מסעדה יוקרתית למעלה</div>\n            <div>🚻 שירותים: במסעדה למעלה</div>\n            <div>🚿 מקלחות: אין למטה</div>\n            <div>🌳 צל טבעי: צל הצוקים</div>\n            <div>🚗 גישה: מדרגות תלולות מטה</div>\n            <div>🅿️ חניה: ליד המסעדה למעלה</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7942%2C19.6631",
       "lat": 39.7942,
@@ -157,8 +147,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "אגדת אהבה מקומית 💖",
       "description": "פלא טבע של סלעי אבן-חול בצורות ייחודיות היוצרים תעלות מי-ים. אגדה מקומית מספרת שזוגות שישחו יחד לאורך התעלה יישארו מאוהבים לנצח. אזור קטן, מתוייר מאוד ועמוס, אך מהווה חוויית צילום וביקור מרתקת.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🔴 עומס גבוה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">📸 ספוט צילום מומלץ</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\" title=\"עמוס מאוד בשיא הקיץ, עם דוכני מזכרות ומחירים מנופחים ליד החוף\">⚠️ עמוס/מסחרי</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ סלעי ומעט חול</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 ירוק-כחול רדוד</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 טוב בין המערות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מיטות שיזוף בצפיפות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 עמוס מאד בקיץ</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 זוגות וצעירים</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: מגוון אדיר מסביב</div>\n            <div>🚻 שירותים: בברים באזור</div>\n            <div>🚿 מקלחות: מסודרות חלקית</div>\n            <div>🌳 צל טבעי: אין</div>\n            <div>🚗 גישה: הליכה קצרה ונוחה</div>\n            <div>🅿️ חניה: בעייתית ברחובות</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7963%2C19.6976",
       "lat": 39.7963,
@@ -183,8 +171,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "עיירת נופש תוססת 🎉",
       "description": "חוף הדגל של אחת מעיירות הנופש הגדולות באי. רצועת חוף רחבה מאוד עם מים רדודים וחמימים למרחק רב, אידיאלית ובטוחה במיוחד לילדים קטנים. מציעה שפע של פעילויות ספורט ימי ואווירה משפחתית-צעירה ורועשת.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🔴 עומס גבוה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול רך וזהוב</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 חמים ורדודים מאוד</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 חלש (חולי)</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מסודר במלואו</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 עמוס מאד ותוסס</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 משפחות ונוער</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: עשרות לאורך הטיילת</div>\n            <div>🚻 שירותים: זמין וקל למצוא</div>\n            <div>🚿 מקלחות: בחוף</div>\n            <div>🌳 צל טבעי: אין</div>\n            <div>🚗 גישה: מעולה עם כסאות גלגלים</div>\n            <div>🅿️ חניה: מסודרת וברחובות</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7915%2C19.7042",
       "lat": 39.7915,
@@ -210,8 +196,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "רוגע וחול רך 🧘‍♂️",
       "description": "חוף הידוע באווירה שלוותית ומרגיעה. עם קהילת יוגה מתפתחת סביבו, מדובר במקום קסום לשקיעות נפלאות. המים הרדודים המשתרעים למרחק אל תוך הים, הופכים את החוף הזה לנוח ובטוח לכל המשפחה.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול רך ונעים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 רדודים ובטוחים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 חלש (קרקעית חול)</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מסודר בחלקו</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 רגוע ומרווח</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 משפחות ומחפשי שקט</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: טברנות מעולות בטיילת</div>\n            <div>🚻 שירותים: לאורך החוף</div>\n            <div>🚿 מקלחות: מסודרות</div>\n            <div>🌳 צל טבעי: אין</div>\n            <div>🚗 גישה: קלה ונוחה</div>\n            <div>🅿️ חניה: שפע חניה חינם</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7423%2C19.6508",
       "lat": 39.7423,
@@ -235,8 +219,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "רצועה חולית אינסופית 🏖️",
       "description": "חוף חולי רחב ועצום, אידיאלי למשחקי חוף, ארמונות חול והליכות ארוכות במים הרדודים. לעיתים תכופות נושבת כאן בריזה נעימה המושכת גולשי רוח מתחילים. לא להתבלבל עם החוף בעל השם הזהה במזרח האי!",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול דק וזהוב</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 רדודים שמתחממים מהר</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 חלש</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מוסדר ויש שמשיות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 מרווח ונוח</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 משפחות עם ילדים</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: שפע בתי קפה</div>\n            <div>🚻 שירותים: זמין</div>\n            <div>🚿 מקלחות: בחוף</div>\n            <div>🌳 צל טבעי: אין</div>\n            <div>🚗 גישה: נוחה מאוד</div>\n            <div>🅿️ חניה: שפע חניות גדולות</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7589%2C19.6465",
       "lat": 39.7589,
@@ -260,8 +242,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "מלכת החופים התוססים 👑",
       "description": "חוף אהוב ופופולרי מאד, המציע חול זהוב עמוק ומועדוני חוף אקסקלוסיביים. מוקף בגבעות מיוערות, כאן תמצאו מוזיקה טובה, קוקטיילים ואווירה צעירה שוקקת. הים יפהפה ולעתים קרובות מאופיין בגלים כיפיים לקפיצה.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🔴 עומס גבוה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול רך במיוחד</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 כחול עמוק וגלי לעיתים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 לא מתאים לשנירקול</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מיטות שיזוף מרובות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 עמוס מאד ותוסס</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 צעירים ומשפחות</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: מועדוני חוף אופנתיים</div>\n            <div>🚻 שירותים: מצוין, במועדונים</div>\n            <div>🚿 מקלחות: יש בחוף ובמועדונים</div>\n            <div>🌳 צל טבעי: אין</div>\n            <div>🚗 גישה: כביש יורד מפותל</div>\n            <div>🅿️ חניה: בתשלום, נסתמת מהר</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.5937%2C19.808",
       "lat": 39.5937,
@@ -287,8 +267,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "שכיית חמדה קסומה 🌅",
       "description": "רצועת חול מוזהבת וקסומה. בעבר מעוז של קהילת ההיפים באי, והיום יעד מבוקש למשפחות וצעירים. החוף מספק שקיעות מהפנטות ובתי קפה משוחררים שמציעים חופשה רגועה אבל מלאת אווירה.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🔴 עומס גבוה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול זהוב דק</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 תכלת נהדר</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 בינוני מינוס</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מיטות ושמשיות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 עמוס בקיץ</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 צעירים ומשפחות</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: מגוון מצוין</div>\n            <div>🚻 שירותים: יש</div>\n            <div>🚿 מקלחות: מסודר</div>\n            <div>🌳 צל טבעי: אין</div>\n            <div>🚗 גישה: כביש צר ותלול מאוד</div>\n            <div>🅿️ חניה: בעייתית מאד בעונה</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.5866%2C19.8142",
       "lat": 39.5866,
@@ -313,8 +291,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "החוף המשוחרר 🍃",
       "description": "חוף פראי וזעיר שמוקף בצוקים ענקיים. לורנס דארל כינה אותו \"היפה בעולם\". כיום מתפקד כחוף נודיסטים לא-רשמי. למרות שרצועת החול שלו הצטמצמה עם השנים, הוא נותר מקום אינטימי בעל מים צלולים וקרים באופן קיצוני.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🧗 הליכה קשה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-sand-bg badge-sand-text\">🚫👶 פחות מתאים לילדים</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">📸 ספוט צילום מומלץ</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול וסלעים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 שקוף כזכוכית</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 מצוין לשנירקול</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מעט מאד מתקנים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 בינוני</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 נטוריסטים (נודיסטים)</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: קנטינה קטנה למעלה</div>\n            <div>🚻 שירותים: אין מסודר</div>\n            <div>🚿 מקלחות: מים טבעיים מהסלע</div>\n            <div>🌳 צל טבעי: מהצוקים העצומים</div>\n            <div>🚗 גישה: כביש בטון תלול ומתפתל לכיוון החוף - חלקו הופך לעפר. מומלץ <strong>לחנות ליד טברנת Elia</strong> ולרדת ברגל (כ-15 דק' הליכה תלולה), ולא לנסות להוריד רכב גדול עד הסוף</div>\n            <div>🅿️ חניה: מוגבלת מאוד למעלה, ליד המנזר או הטברנה</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.5947%2C19.7997",
       "lat": 39.5947,
@@ -338,8 +314,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "היסטוריה ומיתולוגיה 🏛️",
       "description": "מפרצון עמוק במערב קורפו בו לפי המיתולוגיה אודיסאוס נשטף לחוף ונמצא על ידי הנסיכה נאוסקאה. החוף יושב בעמק ירוק ויפהפה בו נחל מתוק נשפך אל הים. מים מעולים לשחיינים.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול וחלוקי נחל</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 עמוקים ומצוינים לשחייה</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 מצוין בדפנות המפרץ</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מסודר במלואו</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 רגוע בדר\"כ</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 זוגות ומשפחות</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: טברנות מסורתיות</div>\n            <div>🚻 שירותים: יש</div>\n            <div>🚿 מקלחות: מסודר</div>\n            <div>🌳 צל טבעי: מעט בקצוות</div>\n            <div>🚗 גישה: כביש נוח היורד לעמק</div>\n            <div>🅿️ חניה: קיימת, לעתים צפופה</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6105%2C19.7801",
       "lat": 39.6105,
@@ -365,8 +339,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "פלאוקסטריצה - בשקט 🤫",
       "description": "חוף חלוקים לבנים קטן שמזכיר ביופיו את השכן המפורסם פלאוקסטריצה, אך פחות ממוסחר. המים ידועים בטמפרטורה הקרירה שלהם. מפה ניתן לשכור סירות ולשוט לחופים נסתרים לחלוטין ולמערות באזור.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🥾 הליכה בינונית</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חלוקי נחל לבנים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 קרים וצלולים מאד</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 אחד הטובים באי</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מעט שמשיות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 עמוס בשיא הקיץ</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 זוגות ואוהבי טבע</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: טברנה מעולה על החוף</div>\n            <div>🚻 שירותים: במסעדה</div>\n            <div>🚿 מקלחות: בסיסיות</div>\n            <div>🌳 צל טבעי: אין, החזר שמש חזק</div>\n            <div>🚗 גישה: ירידה בכביש תלול</div>\n            <div>🅿️ חניה: קטנה, נסתמת בבוקר</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6698%2C19.7397",
       "lat": 39.6698,
@@ -390,8 +362,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "הסהרה של קורפו 🐪",
       "description": "תופעת טבע מרתקת - דיונות חול ענקיות המפרידות בין הים לאגם קוריסיון. רצועה עצומה, פראית לחלוטין ורחבת ידיים. המקום פופולרי במיוחד בקרב גולשי קייטסרפינג בזכות הרוחות המתונות, והופיע בסרט של ג'יימס בונד.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ דיונות חול רך</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 ירוק-כחול, רדוד וחמים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 חלש</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מוסדר רק באזור הכניסה</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 ענק ולכן אינו צפוף</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 גולשי רוח ומשפחות</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: קיוסק בלבד</div>\n            <div>🚻 שירותים: כימיים בסיסיים</div>\n            <div>🚿 מקלחות: אין</div>\n            <div>🌳 צל טבעי: יער ארזים במרחק</div>\n            <div>🚗 גישה: כביש נוח</div>\n            <div>🅿️ חניה: מגרש ענק בחינם</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.4328%2C19.9366",
       "lat": 39.4328,
@@ -415,8 +385,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "שלווה על שפת האגם 🦩",
       "description": "המשכו הצפוני של איסוס, ואחד החופים הפראיים ביותר בקורפו. הוא מציע שקט טהור וניתוק ממלונות ההמונים, עם בר קטן ונינוח, ואפשרות לתצפת על להקות פלמינגו באגם קוריסיון הסמוך (בעיקר באביב ובסתיו).",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול רך וכהה</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 לעיתים קרובות גלי</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 לא מתאים לשנירקול</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ שמשיות ספורות בבר</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 דליל מאוד ושקט</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 אוהבי טבע ורומנטיקנים</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: בר (Tayio Beach Bar)</div>\n            <div>🚻 שירותים: בבר החוף</div>\n            <div>🚿 מקלחות: בבר החוף</div>\n            <div>🌳 צל טבעי: אין כלל</div>\n            <div>🚗 גישה: דרך עפר עבירה וטובה</div>\n            <div>🅿️ חניה: בשפע לאורך הדרך</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.4623%2C19.8973",
       "lat": 39.4623,
@@ -440,8 +408,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "מוזהב ומפנק 🌟",
       "description": "חוף נהדר בדרום המערב עם חול עמוק וזהוב שמתעמק בצורה נוחה. האזור משלב יופי טבעי יחד עם מתחמי מועדוני חוף שמציעים אוכל מוקפד, קוקטיילים ואווירת צ'יל אאוט כיפית המתאימה גם למשפחות בסטייל.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול זהוב רך</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 כחול עמוק וצלול</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 בינוני</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מיטות שיזוף מפנקות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 עמוס בנקודות מסוימות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 צעירים ומשפחות</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: ברים ומסעדות חוף מעולות</div>\n            <div>🚻 שירותים: מסודר ונקי</div>\n            <div>🚿 מקלחות: יש בחוף ובמסעדות</div>\n            <div>🌳 צל טבעי: אין</div>\n            <div>🚗 גישה: קלה ונוחה</div>\n            <div>🅿️ חניה: שפע חניה חלקית פרטית</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.418%2C20.0035",
       "lat": 39.418,
@@ -467,8 +433,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "סוד המקומיים 🤫",
       "description": "פנינה לא מתוירת ומוסתרת למחצה בדרום האי. על שם נהר קטן שנשפך ממש באמצע החוף. כאן תמצאו בעיקר טברנות משפחתיות אותנטיות, חול רך והמון שלווה – מקלט בטוח מאוטובוסים של תיירים גם בשיא חודש אוגוסט.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 מים צלולים ושקטים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 חלש</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ שמשיות בסיסיות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 מקומי ורגוע</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 מחפשי אותנטיות ומשפחות</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: טברנות מסורתיות נפלאות</div>\n            <div>🚻 שירותים: במסעדות</div>\n            <div>🚿 מקלחות: פתוחות בחוף</div>\n            <div>🌳 צל טבעי: אין</div>\n            <div>🚗 גישה: כביש צר ומפותל למטה</div>\n            <div>🅿️ חניה: נוחה וזמינה</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.3871%2C20.034",
       "lat": 39.3871,
@@ -493,8 +457,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "פראות קצה הדרום 🧭",
       "description": "הנקודה הדרומית ביותר בקורפו. חוף פראי בצורה קיצונית שמוקף בצוקים לבנים ועצומים המזדקרים ישירות מעל חול בתולי. הגישה המשובשת מבטיחה בידוד מוחלט. מומלץ מאד למיטיבי לכת ולאלו שמוכנים להרפתקה.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🧗 הליכה קשה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-sand-bg badge-sand-text\">🚫👶 פחות מתאים לילדים</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול עבה פראי</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 עם זרמים וגלים חזקים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 חלש ומסוכן לעתים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מעט מאד בשיא הקיץ</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 ריק לחלוטין רוב הזמן</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 הרפתקנים ומחפשי בידוד</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: קנטינה קטנה בלבד</div>\n            <div>🚻 שירותים: אין</div>\n            <div>🚿 מקלחות: אין</div>\n            <div>🌳 צל טבעי: בבוקר מהצוקים</div>\n            <div>🚗 גישה: דרך עפר קשה, עדיף 4x4</div>\n            <div>🅿️ חניה: רחבת עפר פראית</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.37%2C20.085",
       "lat": 39.37,
@@ -519,8 +481,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "מסיבות ללא הפסקה 🍻",
       "description": "בירת המסיבות הבלתי מעורערת של האי, אליה נוהרים המוני צעירים (בעיקר בריטים) בכל קיץ. החוף ארוך וחולי, מפוצץ בפעילויות אקסטרים ימיות, מסיבות קצף, עשרות פאבים ווייב שלא עוצר לעולם. לא למחפשי השקט.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🔴 עומס גבוה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-sand-bg badge-sand-text\">🚫👶 פחות מתאים לילדים</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\" title=\"ידוע כמרכז מסיבות תיירותי רועש, פחות משקף את קורפו האותנטית\">⚠️ עמוס/מסחרי</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 חמימים ורדודים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 מים מעט עכורים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מיטות שיזוף צפופות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 עמוס בצעירים מבלים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 חובבי מסיבות, רווקים</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: המון פאבים וג'אנק פוד</div>\n            <div>🚻 שירותים: זמינים בכל מקום</div>\n            <div>🚿 מקלחות: בחלק מהברים</div>\n            <div>🌳 צל טבעי: אין</div>\n            <div>🚗 גישה: קלה במרכז העיירה</div>\n            <div>🅿️ חניה: קשה למצוא במרכז</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.386%2C20.113",
       "lat": 39.386,
@@ -545,8 +505,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "כחול יוקרתי 💎",
       "description": "אחד החופים המרשימים בחוף הצפון-מזרחי היוקרתי. רצועה לבנה וארוכה של חלוקי נחל בוהקים היושבת למרגלות הר פנטוקראטור העצום. מתגאה במי קריסטל צלולים במיוחד בעלי 'דגל כחול' ומשופעת במועדוני חוף אופנתיים ואיכותיים.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חלוקי נחל לבנים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 איכות דגל כחול, עמוק</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 מעולה לשנירקול</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מיטות עץ יוקרתיות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 עמוס ואופנתי</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 חובבי יוקרה ופינוק</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: מועדוני חוף מעולים</div>\n            <div>🚻 שירותים: ברמה גבוהה</div>\n            <div>🚿 מקלחות: מסודרות ונקיות</div>\n            <div>🌳 צל טבעי: עצי זית לאורך החוף</div>\n            <div>🚗 גישה: שבילי ירידה מהכביש הראשי</div>\n            <div>🅿️ חניה: בעייתית מאד, רצוי חניון פרטי</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7214%2C19.8665",
       "lat": 39.7214,
@@ -570,8 +528,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "מפרץ ציורי קטנטן ⛵",
       "description": "מפרצון זעיר ורומנטי בעל צורת פרסה. שחייה כאן מרגישה כמו שחייה באקווריום טבעי בזכות מי זכוכית צלולים בצורה מרהיבה. ניתן לשכור מפה סירת מנוע (ללא צורך ברישיון) לשיט מהנה לאורך חופי המזרח היפהפיים.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🥾 הליכה בינונית</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חלוקי נחל קטנים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 שקוף עד הקרקעית</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 מהטובים באי כולו</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ צפוף, מעט שמשיות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 מתמלא בקלות וצפוף</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 זוגות וחובבי דגים ושיט</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: טברנות דגים מהוללות</div>\n            <div>🚻 שירותים: בטברנות</div>\n            <div>🚿 מקלחות: בסיסיות</div>\n            <div>🌳 צל טבעי: מעט מאד בחוף</div>\n            <div>🚗 גישה: כביש צר תלול במיוחד מטה</div>\n            <div>🅿️ חניה: קטנטנה, לרוב חונים הרחק למעלה</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7258%2C19.8974",
       "lat": 39.7258,
@@ -595,8 +551,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "הריביירה היוונית 🍽️",
       "description": "ידוע יותר בטברנות הפנומנליות שלו מאשר בחוף עצמו. מפרצון עם מזחי עץ ארוכים אליהם מגיעות יאכטות של תיירים עשירים העוצרים לארוחת צהריים יוקרתית. המים נהדרים ומוקפים בעצי זית שמספקים ארומה מיוחדת.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חלוקי נחל</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 נקי ושקט לחלוטין</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 טוב מסביב לריפים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ שמשיות ספורות על הצרורות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 עמוס בשעות הארוחה</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 אנשי יאכטות ופודיז</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: 3 מהידועות ביוון</div>\n            <div>🚻 שירותים: מעולים במסעדות</div>\n            <div>🚿 מקלחות: בסיסיות</div>\n            <div>🌳 צל טבעי: עצי זית נשפכים למים</div>\n            <div>🚗 גישה: ירידה תלולה במיוחד או בסירה</div>\n            <div>🅿️ חניה: קטנה מאוד למטה</div>\n            <div>📅 הזמינו מקום בטברנת Agni או Toula's לפחות שבוע מראש בקיץ</div>\n            <div>🚤 לכל טברנה מזח קטן משלה - אפשר לשכור סירה ולעגון ישירות</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7356%2C19.9272",
       "lat": 39.7356,
@@ -619,8 +573,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "השראה ספרותית 📖",
       "description": "מפרץ ירוק בצורת פרסה, הידוע כביתה ההיסטורי של משפחת דארל (\"משפחתי וחיות אחרות\"). המים תמיד שקטים כמו אגם - אידיאלי לסאפ (SUP). \"הבית הלבן\" ההיסטורי מתפקד כיום כטברנה נהדרת המשקיפה על המים החלקים.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">📸 ספוט צילום מומלץ</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חלוקי נחל נעימים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 פנטסטי, רגוע וחלק כאגם</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 מצוין בקצוות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מסודר לחלוטין</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 תוסס אך אלגנטי</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 קוראי ספרות ומשפחות</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: בתי קפה וטברנות</div>\n            <div>🚻 שירותים: זמין בקלות</div>\n            <div>🚿 מקלחות: פזורות בחוף</div>\n            <div>🌳 צל טבעי: עצי ברוש מהממים</div>\n            <div>🚗 גישה: ירידה קצרה מהכביש</div>\n            <div>🅿️ חניה: בעייתית באוגוסט</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7431%2C19.9351",
       "lat": 39.7431,
@@ -645,8 +597,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "פסטורליה טהורה 🌿",
       "description": "פינה סודית ואקסקלוסיבית המוקפת אחוזות פאר. רצועה ארוכה של חלוקים נקיים, עצי זית שנושקים לים ומים בצבע טורקיז זוהר שקוף במיוחד. השלווה כאן מוחלטת הודות לטברנה בודדת ומעולה המשרתת את החוף ללא רעש מסיבות.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-olive-bg badge-olive-text\">🟢 עומס נמוך</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🥾 הליכה בינונית</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חלוקי נחל נקיים ובהירים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 צלילות מהגבוהות בעולם</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 יעד חובה לשנירקול</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מסודר חלקית</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 שקט ושלו יחסית</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 אוהבי שלווה מוחלטת</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: טברנה איכותית אחת</div>\n            <div>🚻 שירותים: בטברנה</div>\n            <div>🚿 מקלחות: מסודרות בחוף</div>\n            <div>🌳 צל טבעי: רב, עצי זית נהדרים</div>\n            <div>🚗 גישה: כביש נוח לחניה</div>\n            <div>🅿️ חניה: מגרש מסודר מאחור</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7565%2C19.9408",
       "lat": 39.7565,
@@ -670,8 +620,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "אבנים כשלג ❄️",
       "description": "מוחבאים היטב מעבר לנמל קסיופי, אלו הם שני מפרצונים צמודים עוצרי נשימה המרופדים בחלוקי נחל לבנים בוהקים כשלג. השילוב מול צבעי כחול-טורקיז העמוקים, ונוף הרי אלבניה באופק, הופך אותם לחוויה צילומית (וימית) מיוחדת.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ אבנים בוהקות (חובה נעלי מים)</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 קריסטל צלול ועמוק</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">🤿 מסעיר מסביב לסלעים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">⛱️ מיטות יוקרתיות ויקרות</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">👥 צפוף מאד בשל הגודל</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 צלמים וחובבי אסתטיקה</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: במרחק הליכה בנמל</div>\n            <div>🚻 שירותים: חסר בקרבת הים</div>\n            <div>🚿 מקלחות: חסר</div>\n            <div>🌳 צל טבעי: אין (סנוור חזק)</div>\n            <div>🚗 גישה: שביל הליכה מהכפר</div>\n            <div>🅿️ חניה: חניונים גדולים בקסיופי</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7946%2C19.9213",
       "lat": 39.7946,
@@ -694,8 +642,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "נקודת יציאה לשיט 🚤",
       "description": "מפרץ קטן וחלוקי בתוך מפרץ פלאוקסטריצה הרחב, המשמש בעיקר כאחת מנקודות היציאה להשכרת סירות מנוע עצמאיות (עד 30 כ\"ס, ללא רישיון) לשיט אל המערות והמפרצים הנגישים רק מהים. חוף רחצה קטן וצנוע בפני עצמו, לא מוקד המשיכה העיקרי באזור.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול וחלוקים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 מים שקטים במפרץ</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">🚤 השכרת סירות מנוע</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 יציאה לשיט עצמאי</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: Akron Beach Bar בקרבת מקום</div>\n            <div>🚻 שירותים: לא אומת</div>\n            <div>🚿 מקלחות: לא אומת</div>\n            <div>🌳 צל טבעי: מעט</div>\n            <div>🚗 גישה: ירידה קצרה מכביש פלאוקסטריצה הראשי</div>\n            <div>🅿️ חניה: לא אומתה - כביש צר באזור</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.674%2C19.706",
       "lat": 39.674,
@@ -720,8 +666,6 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "popularityBadge": "נקודת יציאה לשיט 🚤",
       "description": "מפרץ נוסף בתוך מפרץ פלאוקסטריצה, סמוך לאמפלאקי, המשמש גם הוא כנקודת יציאה מקובלת להשכרת סירות מנוע עצמאיות. חוף קטן ורגוע להשלמת בוקר לפני היציאה לים, במרחק הליכה קצר מהמלונות והטברנות של האזור.",
-      "tagBadgesHtml": "<span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-gold-bg badge-gold-text\">🟡 עומס בינוני</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">🚶 גישה קלה</span><span class=\"px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1 badge-ion-bg badge-ion-text\">👨‍👩‍👧 ידידותי למשפחות</span>",
-      "featureBadgesHtml": "<span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🏖️ חול וחלוקים</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-ion-bg badge-ion-text\">💧 מים שקטים במפרץ</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-olive-bg badge-olive-text\">🚤 השכרת סירות מנוע</span>\n          <span class=\"px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 badge-gold-bg badge-gold-text\">🎯 יציאה לשיט עצמאי</span>",
       "infoPanelHtml": "<div>🍽️ מסעדות: Akron Beach Bar בקרבת מקום</div>\n            <div>🚻 שירותים: לא אומת</div>\n            <div>🚿 מקלחות: לא אומת</div>\n            <div>🌳 צל טבעי: מעט</div>\n            <div>🚗 גישה: ירידה קצרה מכביש פלאוקסטריצה הראשי</div>\n            <div>🅿️ חניה: לא אומתה - כביש צר באזור</div>",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.678%2C19.705",
       "lat": 39.678,
@@ -746,7 +690,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Rex Restaurant"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
       "name": "מסעדת רקס (Rex)",
@@ -780,7 +723,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Toula's Gastronomy"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.5",
       "price": "$$$",
       "name": "טולה גסטרונומיה",
@@ -814,7 +756,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Marina's Tavern"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.6",
       "price": "$",
       "name": "הטברנה של מרינה",
@@ -842,7 +783,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Roula Tavern"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
       "name": "ג'ורג' & אלנה טברנה",
@@ -870,7 +810,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Klimataria Taverna"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.7",
       "price": "$$",
       "name": "קלימטריה",
@@ -907,7 +846,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Fishalida"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.3</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.3",
       "price": "$$$",
       "name": "אבלי (Avli)",
@@ -941,7 +879,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Roumeli Fish Tavern"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
       "name": "סלטו (Salto)",
@@ -964,13 +901,11 @@ window.CORFU_LOCATIONS = {
       "id": "food-הבית-הלבן",
       "category": "cat-fish",
       "tags": "fish,luxury",
-      // TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Gulf of Mexico sunset, reused across About + 3 gem records + this restaurant)
       "image": {
         "src": "images/cards/food.svg",
         "alt": "The White House Restaurant"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.3</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
       "rating": "4.3",
       "price": "$$$$",
       "name": "הבית הלבן",
@@ -1004,7 +939,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Akrogiali Seafood"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
       "name": "אקרוגיאלי",
@@ -1032,7 +966,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Boukari Beach Taverna"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.3</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.3",
       "price": "$$",
       "name": "בוקארי ביץ'",
@@ -1066,7 +999,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Gialos Seafood"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.8",
       "price": "$$$",
       "name": "גיאלוס",
@@ -1103,7 +1035,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Thalassa"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
       "name": "א-מנו (A Mano)",
@@ -1130,7 +1061,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Captain Octopus"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
       "name": "קפטן אוקטופוס",
@@ -1158,7 +1088,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Kerasia Tavern"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.1</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.1",
       "price": "$$$",
       "name": "טברנת קראסיה",
@@ -1192,7 +1121,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Trilogia Plous"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.5",
       "price": "$$$",
       "name": "טרילוגיה",
@@ -1226,7 +1154,6 @@ window.CORFU_LOCATIONS = {
         "alt": "La Famiglia"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.5",
       "price": "$$$",
       "name": "לה פמיליה",
@@ -1264,7 +1191,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Il Vesuvio"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
       "name": "מוראג'יה (Mouragia)",
@@ -1292,7 +1218,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Pizza Del Sole"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.5",
       "price": "$",
       "name": "נוליטה (Nolita)",
@@ -1319,7 +1244,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Pasta Italiana"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.4</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.4",
       "price": "$$",
       "name": "פסטה איטליאנה",
@@ -1347,7 +1271,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Ninos Traditional"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
       "name": "נינוס טברנה",
@@ -1375,7 +1298,6 @@ window.CORFU_LOCATIONS = {
         "alt": "The Grill House"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
       "name": "דה גריל האוס",
@@ -1403,7 +1325,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Meat Me Grill"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.7",
       "price": "$$$",
       "name": "לדוקולה (Ladokolla)",
@@ -1440,7 +1361,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Pita Pita Grill"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.4</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.4",
       "price": "$",
       "name": "פיתה פיתה",
@@ -1468,7 +1388,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Bratsera Meat"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.4</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.4",
       "price": "$$$",
       "name": "פליסבוס (Flisvos)",
@@ -1502,7 +1421,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Liston"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
       "name": "קפה ליסטון",
@@ -1529,7 +1447,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Microcafe"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.8",
       "price": "$",
       "name": "מיקרו קפה (Mikro Café)",
@@ -1556,7 +1473,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Gabao Breakfast"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.7",
       "price": "$$",
       "name": "גבאו ארוחות בוקר",
@@ -1584,7 +1500,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Cavalieri Roof Garden"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.0</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.0",
       "price": "$$$",
       "name": "קבליירי גג",
@@ -1621,7 +1536,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Puppet Guesthouse Cafe"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.9</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.9",
       "price": "$$",
       "name": "פפט קפה",
@@ -1649,7 +1563,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Papagiorgis Patisserie"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.9</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.9",
       "price": "$$",
       "name": "פפג'ורג'יס פטיסרי",
@@ -1676,7 +1589,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Stathis Bakery"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.7",
       "price": "$",
       "name": "סטארניו בייקרי (Starenio)",
@@ -1704,7 +1616,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Corfu Lukumades"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.8",
       "price": "$",
       "name": "קוקוצי סושי בר (Kukutsi)",
@@ -1732,7 +1643,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Hans & Gretel"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
       "name": "הנזל וגרטל",
@@ -1760,7 +1670,6 @@ window.CORFU_LOCATIONS = {
         "alt": "The Cake Boutique"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.8",
       "price": "$$$",
       "name": "דה קייק בוטיק",
@@ -1788,7 +1697,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Imabari Seaside"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.3</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.3",
       "price": "$$$",
       "name": "אימאברי",
@@ -1822,7 +1730,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Pazuzu Beach Club"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 3.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "3.6",
       "price": "$$$",
       "name": "פאזוזו",
@@ -1856,7 +1763,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Bristol Cafe Bar"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
       "name": "סקייויו (Skyview)",
@@ -1884,7 +1790,6 @@ window.CORFU_LOCATIONS = {
         "alt": "NAOK Azur"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.2</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.2",
       "price": "$$$",
       "name": "נאוק אזור",
@@ -1918,7 +1823,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Barbati Beach Bar"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
       "name": "ברבטי קלאב",
@@ -1946,7 +1850,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Gyros Corner"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.7",
       "price": "$",
       "name": "דיוניסוס (Dionysos)",
@@ -1974,7 +1877,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Soul Souvlaki"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.8",
       "price": "$",
       "name": "סול סופלאקי",
@@ -2002,7 +1904,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Corfu Falafel"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.5",
       "price": "$",
       "name": "בוגנוויליה (Bougainvillea)",
@@ -2030,7 +1931,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Burger Bar"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
       "name": "ברגר בר",
@@ -2058,7 +1958,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Pizzeta Street"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.4</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.4",
       "price": "$",
       "name": "פיצטה",
@@ -2086,7 +1985,6 @@ window.CORFU_LOCATIONS = {
         "alt": "The Venetian Well"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
       "rating": "4.5",
       "price": "$$$$",
       "name": "הבאר הוונציאנית",
@@ -2123,7 +2021,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Etrusco"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
       "rating": "4.6",
       "price": "$$$$",
       "name": "אטרוסקו",
@@ -2160,7 +2057,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Botrini's Corfu"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
       "rating": "4.6",
       "price": "$$$$",
       "name": "ארקדיון ביסטרו (Arcadion Bistrot)",
@@ -2194,7 +2090,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Pomo D'Oro"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.5",
       "price": "$$$",
       "name": "פומו ד'אורו",
@@ -2229,7 +2124,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Aristou Fine Dining"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.1</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$$</span>",
       "rating": "4.1",
       "price": "$$$$",
       "name": "אורה (Ora)",
@@ -2263,7 +2157,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Akrotiri Lounge"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.6",
       "price": "$$$",
       "name": "רוזמרינו (Rosmarino)",
@@ -2298,7 +2191,6 @@ window.CORFU_LOCATIONS = {
         "alt": "7th Heaven Cafe"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$-$$$</span>",
       "rating": "4.6",
       "price": "$$-$$$",
       "name": "7th Heaven Cafe",
@@ -2332,7 +2224,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Sunset Taverna Krini"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.7",
       "price": "$",
       "name": "סאנסט טברנה (Sunset Taverna)",
@@ -2360,7 +2251,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Ambelonas Corfu"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.3</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "rating": "4.3",
       "price": "$$$",
       "name": "אמפלונאס (Ambelonas)",
@@ -2399,7 +2289,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Chris Place Sofia's"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.9</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.9",
       "price": "$",
       "name": "כריס פלייס / סופיה (Chris Place)",
@@ -2427,7 +2316,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Akron Beach Bar"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
       "name": "אקרון ביץ' בר (Akron)",
@@ -2455,7 +2343,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Nagual Beach Bar"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.4</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.4",
       "price": "$$",
       "name": "נגואל ביץ' בר (Nagual)",
@@ -2483,7 +2370,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Sirens Lounge"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.6",
       "price": "$$",
       "name": "סיירנס לאונג' (Sirens)",
@@ -2512,7 +2398,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Elia Taverna"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.6",
       "price": "$",
       "name": "אליה טברנה (Elia)",
@@ -2539,7 +2424,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Pane e Souvlaki"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.5",
       "price": "$",
       "name": "פאנה סובלאקי (Pane e Souvlaki)",
@@ -2566,7 +2450,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Stavros Traditional Grill"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.7</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.7",
       "price": "$",
       "name": "סטאברוס גריל (Stavros)",
@@ -2593,7 +2476,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Bizou Vegan Cafe"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.8</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.8",
       "price": "$",
       "name": "ביזו קפה (Bizou Vegan Café)",
@@ -2620,7 +2502,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Aubergine Cafe"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.5</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "rating": "4.5",
       "price": "$$",
       "name": "אוברג'ין (Aubergine)",
@@ -2647,7 +2528,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Tabule Rasa"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-bold rounded-lg shadow-sm flex items-center gap-1\">⭐ 4.6</span>\n                        <span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$</span>",
       "rating": "4.6",
       "price": "$",
       "name": "טאבולה ראסה (Tabule Rasa)",
@@ -2674,7 +2554,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Taverna Agni"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "price": "$$$",
       "name": "טברנת אגני (Taverna Agni)",
       "subtitle": "Taverna Agni, Agni Bay",
@@ -2703,7 +2582,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Ognistra Old Perithia"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "price": "$$",
       "name": "אוגניסטרה (Ognistra)",
       "subtitle": "Ognistra, Old Perithia",
@@ -2731,7 +2609,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Foros Old Perithia"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "price": "$$",
       "name": "פורוס (Foros)",
       "subtitle": "Foros, Old Perithia",
@@ -2759,7 +2636,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Bella Vista Lakones"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "price": "$$",
       "name": "בלה ויסטה (Bella Vista)",
       "subtitle": "Bella Vista, Lakones",
@@ -2787,7 +2663,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Golden Fox"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$$</span>",
       "price": "$$$",
       "name": "גולדן פוקס (Golden Fox)",
       "subtitle": "Golden Fox, Makrades ridge road",
@@ -2816,7 +2691,6 @@ window.CORFU_LOCATIONS = {
         "alt": "Vrachos Taverna Paleokastritsa"
       },
       "hasRealPhoto": false,
-      "ratingPriceHtml": "<span class=\"px-2.5 py-1 backdrop-blur-sm text-white text-xs font-bold rounded-lg shadow-sm badge-ion-solid\">$$</span>",
       "price": "$$",
       "name": "ורכוס טברנה (Vrachos)",
       "subtitle": "Vrachos Taverna, Paleokastritsa harbour",
@@ -3890,7 +3764,6 @@ window.CORFU_LOCATIONS = {
     {
       "id": "gem-7",
       "tags": "nature",
-      // TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Gulf of Mexico sunset, reused across About + 3 gem records + a restaurant)
       "image": {
         "src": "images/cards/nature.svg",
         "alt": "שמורת ארימיטיס"
@@ -4236,7 +4109,6 @@ window.CORFU_LOCATIONS = {
     {
       "id": "gem-22",
       "tags": "history",
-      // TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Gulf of Mexico sunset, reused across About + 3 gem records + a restaurant)
       "image": {
         "src": "images/cards/history.svg",
         "alt": "מוזיאון הפולקלור סינראדס"
@@ -4351,7 +4223,6 @@ window.CORFU_LOCATIONS = {
     {
       "id": "gem-27",
       "tags": "village",
-      // TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Gulf of Mexico sunset, reused across About + 3 gem records + a restaurant)
       "image": {
         "src": "images/cards/village.svg",
         "alt": "סטרינילס"
