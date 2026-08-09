@@ -41,6 +41,9 @@ are **honest gaps, not clean results**:
 | Live site headers / Pages config | `efraimgad.github.io` blocked; `api.github.com/repos/.../pages` rejected by proxy | `curl -sI https://efraimgad.github.io/corfu-guide/sw.js` |
 | Webfont rendering metrics | `fonts.googleapis.com` resets in-browser; all rendering measured against the CSS **fallback** stack | re-run agent scripts on a normal network |
 | 60 of 154 responsive matrix cells | Agent 6's exhaustive per-cell run was killed for time | re-run `scratchpad/agent6/full_matrix.js` |
+| SW-initiated precache of cross-origin URLs | Playwright `context.route()` does **not** intercept fetches made from inside the service worker — proven directly. So the 5 cdnjs + 1 fonts `APP_SHELL` entries genuinely fail here; expected to succeed in production | re-run `scratchpad/agent4/sw-first-load.js` on a normal network |
+| Photo cache population (`corfu-guide-images-v1`) | Same cause — once `clients.claim()` takes effect, image requests route through the SW's un-mocked `fetch()`. Cache measured 0 entries | same |
+| CLS 0.49 root cause | Lighthouse's root-cause gatherer crashed in both runs | inspect `trace.json` `LayoutShift` → `impacted_nodes` |
 
 **A methodology note that changed results.** My first contrast pass reported a 1.01:1
 "white-on-white" on the flight-countdown tile. It was false: the ancestor walk read only
@@ -179,8 +182,11 @@ No README, no host config. Combined with M1/M2 below, a deployer has nothing to 
 **M2 — A `robots.txt` in this repo would be silently ignored.**
 On a project site, crawlers read `https://efraimgad.github.io/robots.txt`, which lives in the **`efraimgad.github.io` repo**, not this one. `sitemap.xml` at the subpath is still fetchable and submittable.
 
-**M3 — `CACHE_NAME` discipline has no safety net and cannot be audited from history.**
-`sw.js:12` = `corfu-guide-v21`. Git history is wholesale `Remove all project files` / `Add new project files` commits, so whether `APP_SHELL` files changed since the last bump is **undeterminable**. Moot for launch (no returning visitors) but unguarded for every future deploy. **Fix:** a pre-deploy check that fails if any `APP_SHELL` file changed without a `CACHE_NAME` bump.
+**M3 — `CACHE_NAME` is currently consistent, but the discipline has no safety net.**
+`sw.js:12` = `corfu-guide-v21`. Agent 4 established via `git diff 2771ae8 4e56873 -- sw.js` that the v19→v21 bump landed in the **same commit** as every new `APP_SHELL` entry, and the working tree is clean — so **there is no live drift**. The risk is structural, not present: if a bump is ever missed, the SW script stays byte-identical, the browser never re-installs, and the stale entry persists **indefinitely** — not bounded by any TTL. **Fix:** a pre-deploy check that fails if any `APP_SHELL` file changed without a `CACHE_NAME` bump. Agent 4 also notes the background revalidation is a plain `fetch(request)` with no `cache: 'reload'`, so on Pages' `max-age=600` that fetch can itself be served from the browser's HTTP cache, extending convergence beyond the nominal 2 navigations.
+
+**M3b — `APP_SHELL` precaches a font URL nothing requests, and omits the one the page loads.**
+`sw.js:74` precaches `...family=Assistant:...&family=Frank+Ruhl+Libre:...&display=swap`; `index.html:51` requests `...family=Assistant:...&display=swap`. Different query strings = different cache keys. `Frank Ruhl Libre` is referenced nowhere in the CSS (`grep -n "Frank" index.html css/design-system.css` → no output). So install() spends a request on a stylesheet for an unused font, while the stylesheet the page actually loads is only cached opportunistically via the generic branch after a first successful online fetch. **Fix:** make `sw.js:74` the exact URL `index.html:51` requests. **Risk:** none, one-line string.
 
 **M4 — Canonical / `og:url` / `twitter:url` / `sitemap.xml` absent** *(now unblocked)*. Apply:
 ```
@@ -210,7 +216,11 @@ Its selectors (`#beaches-grid`, `#attractions-grid`, `#gems-container-grid`) tar
 
 **M11 — Sticky filter bars transiently collide with the FAB column.** `#faq-filter-bar` vs `#emergency-fab-btn` = 1,762 px² at 390×844, before any scroll; resolves on scroll.
 
-**M12 — 28 images lack intrinsic dimensions**, matching AUDIT.md M10 exactly — but measured **CLS = 0.000**, because containers pin size in CSS first. Real Lighthouse-flaggable gap, no measured shift.
+**M12 — Images without intrinsic dimensions: real at the attribute level, no measured shift.**
+Refined across two agents: **all 29 static `<img>` in `index.html` have both `width` and `height`**; the gap is entirely in the two `js/explore.js` templates (`:373`, `:645`), giving 34 of 63 rendered images missing dimensions once Explore is visited. Measured CLS from that path = **0.00036** (and Agent 6 measured 0.000 on Explore load) because `css/design-system.css:556` pins `.gt-row-card__thumb` to 64×64 in CSS before decode. AUDIT.md M10's "→ layout shift" framing is therefore wrong on impact though right on the attribute count. `.gt-explore-sheet-thumb` (`:1043`) sets only `max-height` and is comparatively more exposed. **Fix:** add width/height to the two templates for spec/Lighthouse compliance — hygiene, not a live CLS bug.
+
+**M13 — Google Fonts is a plain render-blocking `<link>`.**
+`index.html:49-51` uses `preconnect` ×2 then a blocking stylesheet link. `preconnect` speeds connection setup but does **not** make the stylesheet non-blocking. The 9.0 s FCP measured here is a **sandbox artifact** (the host resets after ~12.5 s through this proxy) and is *not* a production number — Google Fonts' real CDN is typically <300 ms. But the pattern is host-independent: any slow path (corporate proxy, ad-blocker, regional hiccup) stalls first paint entirely. **Fix:** preload + onload-swap with a `<noscript>` fallback, or self-host — which would also close M3b.
 
 ---
 
@@ -225,6 +235,66 @@ Its selectors (`#beaches-grid`, `#attractions-grid`, `#gems-container-grid`) tar
 - **L7** — Google Fonts stylesheet has no SRI, correctly (UA-varying response) but without the comment its Leaflet counterpart carries.
 - **L8** — `_audit/` is unpublished only because Jekyll skips underscore dirs. Adding `.nojekyll` — a commonly recommended Pages fix — would publish the audit history live. Verified 0 Liquid hazards, so nothing forces it.
 - **L9** — No `'use strict'` in any of 25 files; implicit-global creation possible on any future typo.
+
+---
+
+## Performance & PWA measurements
+
+Lighthouse 12.2.1, mobile, `--throttling-method=simulate` (4× CPU, 1.6 Mbps).
+**All byte figures are uncompressed** — `python3 -m http.server` sends no `Content-Encoding`,
+while GitHub Pages' Fastly CDN gzips/brotlis text assets (typically 65–80 % smaller for this
+content). Timing numbers are correspondingly pessimistic versus production.
+
+| Metric | Primary run | Fonts-blocked diagnostic | Desktop |
+|---|---|---|---|
+| Performance score | 0.54 | 0.44 | 0.79 |
+| FCP | 9.0 s ⚠️ | 3.6 s | 1.6 s |
+| LCP | 9.9 s ⚠️ | 8.5 s | 1.6 s |
+| Speed Index | 22.9 s ⚠️ | 3.6 s | 8.3 s |
+| TBT | 100 ms | 190 ms | 30 ms |
+| CLS | 0.0004 | 0.49 ⁉️ | 0 |
+
+⚠️ = inflated by the `fonts.googleapis.com` sandbox hang (M13), **not production numbers**.
+
+**Transferred: 1,306 KiB across 35 requests** — Script 843,310 B (26 files), Document 295,969 B,
+Stylesheet 197,850 B. Unused on first paint: `design-system.css` **84.2 %** (141,222 B),
+`tailwind-production.css` **77.8 %**, `js/map.js` 57.7 %, `js/explore.js` 58.6 % (the latter two
+expected — those tabs aren't open).
+
+**Corrects an assumption in the brief:** `locations-data.js` (446 KB) and `design-system.css`
+(168 KB) are the largest files but are **not** the CPU bottleneck. Lighthouse `bootup-time`'s
+top contributors are Unattributable 376 ms, `index.html` 348 ms, `js/init.js` 256 ms,
+`js/ui.js` 243 ms, `js/search.js` 123 ms — `locations-data.js` doesn't make the top 5, because a
+flat array-of-objects literal parses very cheaply per byte. The 84 % unused CSS is a real
+"one stylesheet for 15 tabs" tradeoff, but it is not a parse-cost problem.
+
+**⁉️ CLS 0.49 — UNRESOLVED, deliberately not rated.** It appears only under the combination of
+CPU throttling *and* a fast-failing font, and it contradicts three other measurements (primary
+Lighthouse run 0.0004, Agent 4's own unthrottled Playwright repro 0.0004, Agent 6's Explore-load
+observer 0.000). Lighthouse's `RootCauses`/`TraceElements` gatherers crashed
+(`Cannot read properties of undefined (reading 'frame_sequence')`) in both runs, so **no shifting
+element can be named**. Reported as a number without a diagnosis. **Do not action it without a
+working root-cause trace** — inspect `trace.json`'s `LayoutShift` events for `impacted_nodes`.
+
+### Offline behaviour — VERIFIED PASS (independently, twice)
+
+The highest-stakes question in the brief. Measured by both Agent 4 and the orchestrator, with
+byte-identical results:
+
+```
+Service worker:  active, 1 cache (corfu-guide-v21), 40 entries, trip-private absent
+Offline reload:  title intact, content present, all 11 tab sections present
+Offline map:     "לא ניתן לטעון את המפה כרגע (חיבור אינטרנט נדרש)."
+Offline weather: "📡 לא זמין / לא הצלחנו לטעון תחזית חיה כרגע"
+```
+
+No silent hang, no spinner, no blank grey box. `APP_SHELL` has 47 entries;
+47 − 1 (`trip-private.js`, 404 by design) − 6 (cross-origin, unreachable in-sandbox) = **40**, an
+exact match to what landed. The `cache.add(url).catch(() => {})` isolation at `sw.js:109` is
+confirmed empirically, not just by reading the comment. Agent 4 also checked all 47×47 entry
+pairs for the `endsWith` substring hazard at `sw.js:214` — **zero collisions**, and the two
+branches (`:214-233` and `:238-250`) run identical logic anyway, so a collision would be
+behaviourally inert.
 
 ---
 
@@ -261,7 +331,7 @@ Every item re-tested against current code. **Nothing was taken on the document's
 | L1 | 5× duplicate CSS blocks | **OVERSTATED** | 2 true duplicates, no conflicts |
 | L2 | 3 near-identical `init*Map()` | **FIXED** | 2 remain, ~31–36 % overlap, diverge by design |
 | L3 | `updateMapLayers()` unguarded | **FIXED** | function deleted; no live equivalent found |
-| L4 | 13,760 DOM nodes | **STALE** | **2,601** measured at 390×844 (Agent 4 pending for the authoritative 3-point figure) |
+| L4 | 13,760 DOM nodes | **STALE — 5.3× overstated** | **2,601** at DOMContentLoaded / FCP / load / networkidle; **3,019** after visiting every tab. Corroborated three ways: my measurement (2,601 / 2,947), Agent 4's (2,601 / 3,019), and Lighthouse's own `dom-size` audit (2,572). Cause: `js/ui.js:16-20` lazy-renders each tab on first open; AUDIT.md L4 predates that refactor. |
 
 ---
 
@@ -289,7 +359,7 @@ H5, H6, H9, H10, M4, M5, M6.
 - Document the GitHub Pages constraints (M1, M2, M3, H11).
 
 ### Verified clean — no action
-Data layer (counts 28/69/34 exact, 0/169 out-of-bounds coordinates, 0 duplicate IDs, 0 referential drift, 0 missing local images, 0 malformed/plain-`http` URLs); `schema.sql` RLS (both tables, 4/4 operations, `auth.uid()` on every policy, `WITH CHECK` present); no secrets in full git history; `trip-private.js` never committed; 14/14 + 3/3 external links carry `rel="noopener noreferrer"`; zero Supabase requests in the disabled state; search never touches `new RegExp` (10 metacharacter queries pass); no defer load-order violations across 26 scripts; no global collisions across 369 declarations; no `console.log`; subpath deployment correct for GitHub Pages (0 absolute-root paths, relative SW registration, `#itinerary` deep link verified); horizontal overflow 0 px across 154 combos; all 7 test scripts pass in 8.35 s.
+Data layer (counts 28/69/34 exact, 0/169 out-of-bounds coordinates, 0 duplicate IDs, 0 referential drift, 0 missing local images, 0 malformed/plain-`http` URLs); `schema.sql` RLS (both tables, 4/4 operations, `auth.uid()` on every policy, `WITH CHECK` present); no secrets in full git history; `trip-private.js` never committed; 14/14 + 3/3 external links carry `rel="noopener noreferrer"`; zero Supabase requests in the disabled state; search never touches `new RegExp` (10 metacharacter queries pass); no defer load-order violations across 26 scripts; no global collisions across 369 declarations; no `console.log`; subpath deployment correct for GitHub Pages (0 absolute-root paths, relative SW registration, `#itinerary` deep link verified); horizontal overflow 0 px across 154 combos; all 7 test scripts pass in 8.35 s; **offline degrades honestly** — map and weather both show explicit Hebrew unavailable-messages, SW reaches `activated` with 40/40 reachable `APP_SHELL` entries cached and the `trip-private.js` 404 isolated; no `endsWith` substring collisions across 47×47 `APP_SHELL` pairs; `CACHE_NAME` currently consistent with `APP_SHELL`.
 
 ---
 
