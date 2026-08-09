@@ -61,7 +61,16 @@
     <link rel="stylesheet" href="tailwind-production.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Loaded non-blocking: preload as a stylesheet, then promote it to one
+         once it arrives. preconnect above only warms the connection — it does
+         NOT stop a plain <link rel="stylesheet"> from blocking first paint, so
+         any slow path to Google Fonts (corporate proxy, ad blocker, regional
+         hiccup, or simply being offline) previously stalled the whole render.
+         The <noscript> keeps it working with JS disabled, and the CSS font
+         stack already names Hebrew-capable fallbacks for the interim. -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap"></noscript>
     <!-- Leaflet + marker-cluster (map library) are NOT loaded here anymore.
          The map is an opt-in feature behind the "הצג מפה" button on the
          beaches tab — most visits never open it, so ~150KB of JS/CSS used

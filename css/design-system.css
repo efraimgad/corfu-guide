@@ -204,7 +204,14 @@
   --gt-danger-text: #b3261e;
 
   /* ---------- Typography ---------- */
-  --gt-font-sans: 'Assistant', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* Hebrew-capable fallbacks are named explicitly rather than left to the
+     generic sans-serif: Assistant is loaded non-blocking from Google Fonts
+     and its font FILES (fonts.gstatic.com) are not precached, so a
+     first-time offline visitor renders the entire Hebrew UI in whatever the
+     platform picks. -apple-system/Segoe UI/Roboto do cover Hebrew on their
+     own platforms; the two named families cover the rest. */
+  --gt-font-sans: 'Assistant', -apple-system, 'Segoe UI', Roboto,
+                  'Noto Sans Hebrew', 'Arial Hebrew', Arial, sans-serif;
   --gt-font-mono: ui-monospace, Menlo, Consolas, monospace; /* tabular data: times, prices, distances */
 
   --gt-text-2xl: 1.75rem;   /* 28px — day title, section H1 */
@@ -1096,7 +1103,7 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 .gt-explore-icon-btn:focus-visible{ outline:2px solid var(--gt-primary-500); outline-offset:1px; }
 
 /* -- Detail sheet -- */
-.gt-explore-sheet-thumb{ width:100%; max-height:180px; object-fit:cover; border-radius:var(--gt-r-md); margin-bottom:var(--gt-space-3); }
+.gt-explore-sheet-thumb{ width:100%; max-height:180px; aspect-ratio:16/9; object-fit:cover; border-radius:var(--gt-r-md); margin-bottom:var(--gt-space-3); }
 .gt-explore-sheet-actions{ display:flex; gap:var(--gt-space-2); flex-wrap:wrap; margin:var(--gt-space-3) 0; }
 .gt-explore-sheet-body{ font-family:var(--gt-font-sans); font-size:var(--gt-text-md); line-height:var(--gt-lh-body); color:var(--gt-ink-700); margin-bottom:var(--gt-space-3); }
 .gt-explore-sheet-body p{ margin:0 0 var(--gt-space-2); }
