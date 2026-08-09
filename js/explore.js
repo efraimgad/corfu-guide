@@ -42,6 +42,74 @@ function exploreCategoryMeta(catKey) {
     return EXPLORE_CATEGORIES.find(c => c.key === catKey);
 }
 
+// --- Secondary facet filter (Phase A) --------------------------------------
+// The four legacy tabs (beaches/food/attractions/gems) each carried their own
+// tag-filter button row (js/filters.js). That was the ONE capability Explore
+// lacked, and the only real reason those tabs were still alive. Rather than
+// porting all 42 distinct tags - food alone has 18, which would pin ~96px of
+// permanently-sticky chip chrome to the top of a phone viewport - each
+// category gets ONE facet: the axis that category's tags are actually about.
+//
+// Tag counts these were chosen from (measured off window.CORFU_LOCATIONS,
+// not guessed):
+//   beaches     family 14, romantic 9, quiet 9, snorkeling 8
+//   food        midrange 25, upscale 18, budget 17   (a price TIER - 69/69
+//               records carry one, so it behaves like a column, not a tag)
+//   attractions history 13, nature 10, beach 7
+//   gems        food 9, village 7, nature 6, beach 6
+//
+// The long tail is deliberately dropped, not forgotten: `nudist` (1 record)
+// and `shopping` (1 record) are not filters - a control that narrows 34 items
+// to 1 is a search. The inline search box above already covers the tail, and
+// covers it better: typing "איטלקי" beats hunting for a 4-record chip.
+const EXPLORE_FACETS = {
+    beaches: [
+        { tag: 'family', label: 'משפחתי' },
+        { tag: 'romantic', label: 'רומנטי' },
+        { tag: 'quiet', label: 'שקט' },
+        { tag: 'snorkeling', label: 'שנרקול' }
+    ],
+    food: [
+        { tag: 'budget', label: '€' },
+        { tag: 'midrange', label: '€€' },
+        { tag: 'upscale', label: '€€€' }
+    ],
+    attractions: [
+        { tag: 'history', label: 'היסטוריה' },
+        { tag: 'nature', label: 'טבע' },
+        { tag: 'beach', label: 'חוף' }
+    ],
+    gems: [
+        { tag: 'food', label: 'אוכל' },
+        { tag: 'village', label: 'כפר' },
+        { tag: 'nature', label: 'טבע' },
+        { tag: 'beach', label: 'חוף' }
+    ]
+};
+
+// '' means "all" - the always-present first chip, not a tag.
+let exploreActiveFacet = '';
+
+// Records store tags as a comma-separated STRING ("family,romantic,quiet"),
+// verified present on all 169 records across the four arrays - so no
+// missing-field guard is needed here, only a shape guard in case that ever
+// changes.
+//
+// Split on comma and compare whole tokens. A substring test would be wrong
+// in a way that is easy to miss and hard to debug: `tags.includes('beach')`
+// matches the food tag `beachbars`, so the attractions "חוף" facet would
+// silently pull in beach bars. Whole-token equality is the fix.
+function exploreRecordTags(d) {
+    const raw = d && d.tags;
+    if (!raw) return [];
+    return String(raw).split(',').map(t => t.trim()).filter(Boolean);
+}
+
+function exploreMatchesFacet(d) {
+    if (!exploreActiveFacet) return true;
+    return exploreRecordTags(d).includes(exploreActiveFacet);
+}
+
 // Phase D, sub-step 2 — single-select segmented control, not a multi-select
 // filter: exactly one category is ever "current". Drives BOTH the row-card
 // list below and the map's visible pins (js/map.js setExploreMapCategories())
@@ -73,15 +141,71 @@ function selectExploreCategory(catKey, btn) {
 
     // A fresh category is a fresh view - carrying over a search typed for
     // the previous category would silently hide rows with no visible reason
-    // why, so the inline search resets alongside it.
+    // why, so the inline search resets alongside it. The facet resets for
+    // the same reason, and additionally because facet vocabularies are
+    // per-category: "€€" is meaningless once you are looking at beaches.
     exploreSearchTerm = '';
     const searchInput = document.getElementById('explore-search-input');
     if (searchInput) searchInput.value = '';
+    exploreActiveFacet = '';
+    renderExploreFacets();
 
     renderExploreList();
     if (typeof setExploreMapCategories === 'function') setExploreMapCategories(getExploreActiveCategories());
 }
 window.selectExploreCategory = selectExploreCategory;
+
+// Built in JS rather than as four static markup blocks in index.html: the
+// chip set is per-category, so static markup would mean four rows that all
+// have to be kept in sync with EXPLORE_FACETS by hand - the exact drift the
+// audit already caught between js/map.js's pin colours and the CSS tokens
+// they claimed to match. One definition, one renderer.
+function renderExploreFacets() {
+    const row = document.getElementById('explore-facet-row');
+    if (!row) return;
+
+    const facets = EXPLORE_FACETS[exploreActiveCategory] || [];
+    if (!facets.length) {
+        row.innerHTML = '';
+        row.classList.add('hidden');
+        return;
+    }
+    row.classList.remove('hidden');
+
+    // "הכל" is a real option, not a reset button - it carries aria-selected
+    // like every other chip so the row is a valid single-choice tablist with
+    // exactly one selected option at all times.
+    const chips = [{ tag: '', label: 'הכל' }].concat(facets);
+    row.innerHTML = chips.map(f => {
+        const selected = f.tag === exploreActiveFacet;
+        return `<button type="button" class="gt-chip gt-chip--facet" role="tab"`
+            + ` data-facet="${escapeAttr(f.tag)}" aria-selected="${selected}"`
+            + ` onclick="selectExploreFacet('${escapeAttr(f.tag)}')">${escapeHtml(f.label)}</button>`;
+    }).join('');
+
+    // The chip row changes height when it appears/disappears between
+    // categories, and the sticky group headers below are positioned off the
+    // subheader's measured height - so it has to be re-measured here or the
+    // food region headers sit in the wrong place (see
+    // --gt-explore-subheader-h in css/design-system.css).
+    updateExploreStickyOffsets();
+}
+window.renderExploreFacets = renderExploreFacets;
+
+function selectExploreFacet(tag) {
+    const valid = tag === '' || (EXPLORE_FACETS[exploreActiveCategory] || []).some(f => f.tag === tag);
+    if (!valid) return;
+    exploreActiveFacet = tag;
+
+    const row = document.getElementById('explore-facet-row');
+    if (row) {
+        row.querySelectorAll('[role="tab"]').forEach(chip => {
+            chip.setAttribute('aria-selected', String(chip.getAttribute('data-facet') === tag));
+        });
+    }
+    renderExploreList();
+}
+window.selectExploreFacet = selectExploreFacet;
 
 // --- Inline search (filters ONLY the currently-selected category's already
 // -rendered rows, live, client-side substring match - separate from the
@@ -117,7 +241,13 @@ const EXPLORE_GROUP_FIELD = { food: 'region' };
 
 function buildExploreGroups(catKey) {
     const term = exploreSearchTerm.trim().toLowerCase();
-    const rows = (window.CORFU_LOCATIONS[catKey] || []).filter(d => exploreMatchesSearch(d, catKey, term));
+    // Facet AND search - both narrow, neither replaces the other. Applied
+    // here rather than at render time so the grouping, empty state, lazy
+    // batch threshold and the aria-live count all see the same row set and
+    // cannot drift out of sync with each other.
+    const rows = (window.CORFU_LOCATIONS[catKey] || [])
+        .filter(d => exploreMatchesFacet(d))
+        .filter(d => exploreMatchesSearch(d, catKey, term));
     const groupField = EXPLORE_GROUP_FIELD[catKey];
     if (!groupField) return [{ label: null, rows }];
 
@@ -325,9 +455,20 @@ function renderExploreList() {
     // scroll-triggered batch away from being in the DOM.
     const countEl = document.getElementById('explore-filter-count');
     if (countEl) {
+        // The active facet is named in the count line on purpose. The map
+        // (setExploreMapCategories, js/map.js) toggles whole Leaflet layer
+        // GROUPS and so can only filter by category - it cannot honour a
+        // facet without rebuilding its marker layers, which is out of scope
+        // here. That means with a facet active the map legitimately shows
+        // MORE pins than the list shows rows. Stating the facet makes that
+        // difference explained rather than silent; the alternative - a list
+        // and a map quietly disagreeing - is exactly the failure mode the
+        // audit flagged for the pin colours.
+        const facetMeta = (EXPLORE_FACETS[catKey] || []).find(f => f.tag === exploreActiveFacet);
+        const suffix = facetMeta ? ` · מסונן לפי ${facetMeta.label}` : '';
         countEl.textContent = rowCount === 0
             ? 'לא נמצאו תוצאות עבור הסינון הנוכחי'
-            : `מציג ${rowCount} תוצאות`;
+            : `מציג ${rowCount} תוצאות${suffix}`;
     }
 
     updateExploreStickyOffsets();
@@ -351,6 +492,7 @@ let exploreListBuilt = false;
 function renderExploreTab() {
     if (exploreListBuilt) return;
     exploreListBuilt = true;
+    renderExploreFacets();
     renderExploreList();
 }
 window.renderExploreTab = renderExploreTab;

@@ -56,7 +56,13 @@ function ensureTabRendered(tabId) {
 // js/guide.js's gtShowGuidePanel() shows the specific section that was
 // asked for - so none of those existing onclick="switchTab('faq')"-style
 // call sites needed editing for this to work.
-const GT_GUIDE_PANEL_IDS = ['trip-planning', 'health-safety', 'language-daily', 'faq'];
+// Phase B: 'activities' joins the four originals. It was the one section
+// with NO nav entry point anywhere - not in the bottom nav, not in the "עוד"
+// sheet - reachable only through a single deep link buried in a Day 5 event
+// description (js/itinerary-data.js). Adding it here does double duty: it
+// gives the section a real home, and it makes that existing deep link land
+// somewhere the user can navigate back out of.
+const GT_GUIDE_PANEL_IDS = ['trip-planning', 'health-safety', 'language-daily', 'faq', 'activities'];
 window.GT_GUIDE_PANEL_IDS = GT_GUIDE_PANEL_IDS;
 
 function switchTab(tabId, skipScroll) {

@@ -17,7 +17,12 @@
 // engine itself.
 // ============================================================================
 
-const GT_GUIDE_PANEL_IDS_LIST = ['trip-planning', 'health-safety', 'language-daily', 'faq'];
+// Must stay in sync with GT_GUIDE_PANEL_IDS (js/ui.js) - the two lists are
+// the same set seen from two sides: that one decides which switchTab() calls
+// redirect into Guide, this one decides which panels Guide can show. A
+// mismatch is silent (a tab that redirects to a panel that never displays),
+// so scripts/test-guide-panels.js asserts they are equal.
+const GT_GUIDE_PANEL_IDS_LIST = ['trip-planning', 'health-safety', 'language-daily', 'faq', 'activities'];
 
 // Remembers the last panel shown, so re-opening Guide via the bottom nav
 // (switchTab('guide'), no specific panel named) returns to wherever the

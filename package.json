@@ -5,10 +5,13 @@
   "description": "Static, no-build Hebrew RTL travel-guide PWA for Corfu.",
   "scripts": {
     "build:css": "tailwindcss -i ./css/tailwind-input.css -o ./tailwind-production.css --minify",
-    "extract": "node scripts/extract-locations.js"
+    "extract": "node scripts/extract-locations.js",
+    "test": "node scripts/smoke-test.js && node scripts/test-explore-facets.js && node scripts/test-guide-panels.js && node scripts/test-day-map-matching.js",
+    "test:facets": "node scripts/test-explore-facets.js",
+    "test:guide": "node scripts/test-guide-panels.js"
   },
   "devDependencies": {
-    "cheerio": "^1.0.0",
+    "cheerio": "^1.2.0",
     "tailwindcss": "3.4.19"
   },
   "dependencies": {

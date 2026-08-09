@@ -859,6 +859,18 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 .gt-chip--attraction[aria-selected="true"]{ background:var(--gt-cat-attraction); color:#fff; }
 .gt-chip--gem[aria-selected="true"]{ background:var(--gt-cat-gem); color:#fff; }
 
+/* Secondary facet row (js/explore.js EXPLORE_FACETS). Deliberately NOT
+   category-tinted: the category chips above already own the colour
+   vocabulary, and tinting a second row the same way would make two rows
+   that mean different things look like one row that wrapped. This one is
+   neutral ink, so the hierarchy reads category-first, facet-second.
+   --gt-primary-600 is the unflipped FILL token (see the H1 fix in
+   _audit/CHANGES.md) - safe behind white text in both themes. */
+.gt-explore-facets{ margin-top:var(--gt-space-2); }
+.gt-explore-facets.hidden{ display:none; }
+.gt-chip--facet{ font-size:0.875rem; }
+.gt-chip--facet[aria-selected="true"]{ background:var(--gt-primary-600); color:#fff; border-color:var(--gt-primary-600); }
+
 /* The chip row sits in its own sticky bar just under the top nav (same
    --sticky-filter-top convention as #beach-filter-bar etc. - js/ui.js
    updateScrollUI()), so the sticky group headers below it (added next -
