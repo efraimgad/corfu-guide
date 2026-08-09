@@ -943,7 +943,18 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
      style always wins over any CSS selector's specificity, ID or not.
      Genuinely unavoidable without changing switchTab()'s shared show/hide
      mechanism for all 15 tabs just for this one tab's desktop layout. */
-  #explore.gt-explore{
+  /* Scoped to .active — WITHOUT it this rule also un-hid Explore on every
+     OTHER tab at >=1024px. switchTab() hides a tab with an inline
+     style.display='none', and `display:grid !important` out-specifies an
+     inline style, so #explore stayed a live grid while About/Dashboard/Guide
+     etc. were on screen: measured at 1440x900 on a session that had never
+     opened Explore, #explore rendered 1216x186 with its chip row and search
+     box (#explore-subheader, 1184x122) painted on top of unrelated content,
+     growing to the full ~750px map+list grid once Explore had been visited
+     once. switchTab() already toggles .active on the target tab, so scoping
+     to it keeps the !important that the inline style genuinely requires while
+     limiting it to the one tab it is meant for. */
+  #explore.gt-explore.active{
     display:grid !important;
     grid-template-columns: minmax(320px, 420px) 1fr;
     column-gap: var(--gt-space-5);

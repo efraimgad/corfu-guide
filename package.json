@@ -6,14 +6,15 @@
   "scripts": {
     "build:css": "tailwindcss -i ./css/tailwind-input.css -o ./tailwind-production.css --minify",
     "extract": "node scripts/extract-locations.js",
-    "test": "node scripts/smoke-test.js && node scripts/test-explore-facets.js && node scripts/test-guide-panels.js && node scripts/test-map-consolidation.js && node scripts/test-explore-map-sync.js && node scripts/test-app-shell.js && node scripts/test-day-map-matching.js && node scripts/test-favorites.js && node scripts/test-escaping.js",
+    "test": "node scripts/smoke-test.js && node scripts/test-explore-facets.js && node scripts/test-guide-panels.js && node scripts/test-map-consolidation.js && node scripts/test-explore-map-sync.js && node scripts/test-app-shell.js && node scripts/test-day-map-matching.js && node scripts/test-favorites.js && node scripts/test-escaping.js && node scripts/test-tab-isolation.js",
     "test:facets": "node scripts/test-explore-facets.js",
     "test:guide": "node scripts/test-guide-panels.js",
     "test:map": "node scripts/test-map-consolidation.js",
     "test:mapsync": "node scripts/test-explore-map-sync.js",
     "test:shell": "node scripts/test-app-shell.js",
     "test:favorites": "node scripts/test-favorites.js",
-    "test:escaping": "node scripts/test-escaping.js"
+    "test:escaping": "node scripts/test-escaping.js",
+    "test:isolation": "node scripts/test-tab-isolation.js"
   },
   "devDependencies": {
     "cheerio": "^1.2.0",
