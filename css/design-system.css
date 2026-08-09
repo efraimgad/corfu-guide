@@ -669,7 +669,7 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
      right where the notch/Dynamic Island sits. Every other fixed element in
      this file already adds the inset additively via calc(); the topbar was the
      one that did not. */
-  height:64px; padding:0 var(--gt-space-4);
+  height:calc(64px + env(safe-area-inset-top, 0)); padding:0 var(--gt-space-4);
   padding-top:env(safe-area-inset-top, 0);
   background:var(--gt-paper-raised); border-bottom:1px solid var(--gt-hair);
   box-shadow:var(--gt-sh-2);
