@@ -1,11 +1,13 @@
 {
+  "id": "./",
   "name": "קורפו 2026: מדריך הטיולים",
   "short_name": "קורפו 2026",
+  "description": "מדריך קורפו 2026: 28 חופים, 69 מסעדות, מסלולי טיול שעתיים מפורטים, ו-34 פנינים נסתרות.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "theme_color": "#0d3355",
-  "background_color": "#faf9f6",
+  "theme_color": "#ffffff",
+  "background_color": "#f4f6f6",
   "dir": "rtl",
   "lang": "he",
   "icons": [

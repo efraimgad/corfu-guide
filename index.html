@@ -6,17 +6,30 @@
     <title>קורפו 2026: מדריך הטיולים השלם</title>
     <meta name="description" content="מדריך קורפו 2026: 28 חופים, 69 מסעדות, מסלולי טיול שעתיים מפורטים, ו-34 פנינים נסתרות.">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#0d3355">
+    <!-- Matches the real .gt-topbar background (var(--gt-paper-raised)), measured
+         #ffffff light / #182022 dark. The previous single #0d3355 was a navy that
+         no element on the page actually paints, so the OS status bar / PWA title
+         bar showed a seam against the topbar on every launch, in both themes. -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#182022" media="(prefers-color-scheme: dark)">
+    <!-- Fallback for browsers that ignore the media attribute. -->
+    <meta name="theme-color" content="#ffffff">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="images/icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="images/icons/icon-512.png">
     <link rel="apple-touch-icon" href="images/icons/icon-192.png">
+    <!-- Many browsers and crawlers request /favicon.ico regardless of the tags
+         above; point them at a real file instead of letting it 404. -->
+    <link rel="icon" href="images/icons/icon-192.png" sizes="any">
 
-    <!-- Open Graph / Twitter Card: no canonical production URL has been
-         supplied yet, so og:url/twitter:url and <link rel="canonical"> are
-         intentionally omitted rather than guessed — add them once the site
-         has a real domain, or search engines/social previews may point to
-         the wrong place. -->
+    <link rel="canonical" href="https://efraimgad.github.io/corfu-guide/">
+
+    <!-- Open Graph / Twitter Card. The production origin is a GitHub Pages
+         PROJECT site, so the path segment is part of the canonical URL —
+         everything else in this app is deliberately relative so it keeps
+         working under that subpath. -->
+    <meta property="og:url" content="https://efraimgad.github.io/corfu-guide/">
+    <meta name="twitter:url" content="https://efraimgad.github.io/corfu-guide/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="קורפו 2026: מדריך הטיולים השלם">
     <meta property="og:description" content="מדריך קורפו 2026: 28 חופים, 69 מסעדות, מסלולי טיול שעתיים מפורטים, ו-34 פנינים נסתרות.">
