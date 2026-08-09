@@ -71,7 +71,11 @@ const APP_SHELL = [
     'images/cards/family.svg',
     'images/cards/food.svg',
     'images/cards/banner-attractions.svg',
-    'https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Frank+Ruhl+Libre:wght@400;500;700;900&display=swap',
+        // MUST match index.html's <link> byte for byte — a different query string
+    // is a different cache key. This used to precache a URL that also asked
+    // for Frank Ruhl Libre, a family referenced nowhere in the CSS, while the
+    // URL the page actually requests was absent from APP_SHELL entirely.
+    'https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap',
 
     // Phase E: Leaflet + the marker-cluster plugin (js/map.js loadLeafletThen()) are lazy-loaded from cdnjs on first map open rather
     // than blocking every page view on a map library most visits never use.
