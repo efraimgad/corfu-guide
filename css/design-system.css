@@ -1727,6 +1727,18 @@ h2 + p, h3 + p { margin-top: 0.6em; }
    min-height only so their horizontal rhythm is untouched. Scoped to
    pointer:coarse so desktop keeps its tighter, denser chip rows. */
 @media (pointer: coarse), (max-width: 767px) {
+    /* The itinerary day-header controls, one template in
+       js/itinerary-view.js rendered once per day (7 days = 21 controls).
+       Measured at 390x844 before this rule: the "הושלם" toggle 94.7x36,
+       the euro-amount input 80x28, the day-map button 38x30. The 44px floor
+       was applied by enumerating class names, and this template's ad-hoc
+       Tailwind utilities were never on that list — which is also why
+       CHANGES.md's "~9 remaining" undercounted.
+       These are the controls used once per day while standing in Corfu
+       adjusting the plan one-handed. */
+    .gt-itinerary-context label,
+    .gt-itinerary-context .day-budget-input,
+    .gt-itinerary-context button,
     .food-filter-btn, .beach-filter-btn, .attr-filter-btn,
     .gem-filter-btn, .faq-filter-btn,
     .gt-chip, .dashboard-card-link, .verified-tel,
@@ -1738,6 +1750,11 @@ h2 + p, h3 + p { margin-top: 0.6em; }
         min-height: 44px;
         display: inline-flex; align-items: center; justify-content: center;
     }
+    /* The day-map button is icon-only, so the 44px floor has to apply on the
+       cross axis too — it measured 38px wide. The 'הושלם' checkbox itself
+       stays 20x20 deliberately: it is wrapped in its <label>, which is the
+       real hit area at 95x44, and inflating the box would just look wrong. */
+    .gt-itinerary-context button { min-width: 44px; }
     .verified-tel { line-height: normal; }
     /* The small inline badge-links inside cards ("מידע נוסף", website /
        tip pills, the accent-soft chips) — authored at text-xs with tight
