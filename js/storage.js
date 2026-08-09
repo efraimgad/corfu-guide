@@ -38,8 +38,33 @@ function saveItemStateCache(cache) {
     }
 }
 
+// Normalises one cached item-state record to its declared shape.
+//
+// Everything in this cache is attacker-reachable: it is JSON.parse'd straight
+// out of localStorage, which a shared/family device, a browser extension, or a
+// previously-synced payload can all write. `rating` in particular was taken on
+// trust and interpolated into an HTML attribute by
+// notesFavoritesRowHtml() (js/notes-favorites.js), so a stored string like
+//     1" onmouseover="…
+// became a real event-handler attribute and ran on hover.
+//
+// Escaping at the sink is necessary but not sufficient on its own: a rating is
+// an integer 1-5 or nothing, and a value that is not that is corrupt whatever
+// it is escaped to. Coercing here means every reader gets the declared shape,
+// the same way is_visited is already forced to a real boolean.
+function normalizeItemState(state) {
+    const raw = state && typeof state === 'object' ? state : {};
+    const n = Number(raw.rating);
+    return {
+        is_visited: !!raw.is_visited,
+        note: typeof raw.note === 'string' ? raw.note : '',
+        rating: Number.isInteger(n) && n >= 1 && n <= 5 ? n : null,
+        updated_at: typeof raw.updated_at === 'string' ? raw.updated_at : null,
+    };
+}
+
 function getItemState(itemId) {
-    return getItemStateCache()[itemId] || { is_visited: false, note: '', rating: null, updated_at: null };
+    return normalizeItemState(getItemStateCache()[itemId]);
 }
 
 function setItemState(itemId, partial) {
