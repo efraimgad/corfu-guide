@@ -468,10 +468,25 @@ with a mechanical fix:**
   exactly what `'unsafe-inline'` permits, and 113 inline handlers require it)
   and cannot deliver `frame-ancestors` on this host at all. Worth adding as
   defence in depth; not worth pretending it is a security control here.
-- **M11** transient sticky/FAB overlap, **M12** `<img>` dimensions in the two
-  `js/explore.js` templates (measured CLS 0.0004 — a spec gap, not a live
-  shift), **M13** Google Fonts render-blocking (the 9.0s FCP is a sandbox
-  artifact; the pattern is still worth a preload swap).
+- **M12 and M13 were subsequently fixed** (commit `f5d612b`): the font now
+  loads non-blocking with a `<noscript>` fallback and an explicitly
+  Hebrew-capable fallback stack, and both `js/explore.js` image templates carry
+  intrinsic dimensions with `aspect-ratio:16/9` on the sheet thumb — the one
+  variant that genuinely reserved no box.
+- **M11**, the transient sticky-bar/FAB overlap, is left alone deliberately.
+  It resolves the moment the user scrolls, the FAB already sits above the chip
+  rather than under it, and there is no general fix that does not either shorten
+  those bars or move the FAB column — both worse trades than the symptom.
+- **The CSP is deliberately NOT shipped**, despite being written out in
+  Appendix A. On this host it can only be a `<meta>` tag, which cannot express
+  `frame-ancestors`, `report-uri` or `sandbox`; it cannot mitigate B2/B3,
+  because 113 inline handlers force `'unsafe-inline'`, which is exactly what
+  those exploits used; and a subtly wrong policy breaks the app in production
+  on a host where **you cannot hot-fix a header** — the failure mode this whole
+  audit exists to avoid. The security value is near zero here and the downside
+  is a broken app for travellers offline in Greece. Add it only alongside a
+  migration to a host that supports real headers, or after converting the
+  inline handlers to delegated listeners.
 - **The unresolved CLS 0.49.** Reproducible only under one throttled
   configuration, contradicted by three other measurements (0.0004, 0.0004,
   0.000), and Lighthouse's root-cause gatherer crashed both runs so no shifting
