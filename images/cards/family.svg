@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e1edf5"/><stop offset="1" stop-color="#e1edf5"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#sky)"/>
+  <circle cx="490" cy="86" r="34" fill="#c9a55f" opacity=".9"/>
+  <path d="M112 340 V178 a44 44 0 0 1 88 0 v34" fill="none" stroke="#1a6494" stroke-width="20" stroke-linecap="round"/>
+  <path d="M212 340 V206 a52 52 0 0 1 104 0 v46" fill="none" stroke="#b8934a" stroke-width="20" stroke-linecap="round"/>
+  <path d="M330 340 V232 a46 46 0 0 1 92 0 v40" fill="none" stroke="#6d7a4f" stroke-width="20" stroke-linecap="round"/>
+  <path d="M0 316 H600 V400 H0 Z" fill="#237fae"/>
+  <path d="M0 334 q60 -10 120 0 t120 0 t120 0 t120 0 t120 0 V400 H0 Z" fill="#e1edf5" opacity=".55"/>
+  <path d="M0 362 q75 -12 150 0 t150 0 t150 0 t150 0 V400 H0 Z" fill="#e1edf5" opacity=".4"/>
+  <g fill="#faf9f6" opacity=".7">
+    <circle cx="150" cy="352" r="9"/><circle cx="270" cy="364" r="7"/><circle cx="404" cy="356" r="8"/>
+  </g>
+</svg>

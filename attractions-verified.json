@@ -1,0 +1,19 @@
+{
+  "_meta": { "source": "Google Places", "verifiedOn": "2026-07-30" },
+  "attr-2": { "name": "Achilleion Palace", "placeId": "ChIJmw5o8qBfWxMRm4buTPgPS_k", "lat": 39.5628042, "lon": 19.9042949, "phone": "+302661056210", "hours": "08:00-20:00", "closedDays": [],
+    "PRICE_FLAG": "Guide says 12€. Recent visitor reviews mention 7€ and note the palace INTERIOR was closed for renovation. Verify price + whether the interior has reopened before Day 5." },
+  "attr-10": { "name": "Old Fortress", "placeId": "ChIJc8Bxy-ddWxMRhASx_pNTDTU", "lat": 39.6234796, "lon": 19.9274977, "phone": "+302661048120", "hours": "08:00-20:00", "closedDays": [],
+    "PRICE_FLAG": "Guide says 6€. A recent review mentions 10€. Verify." },
+  "attr-5": { "name": "Angelokastro Byzantine Castle", "placeId": "ChIJWUz9xmpRWxMR4f_taueTDQY", "lat": 39.6782141, "lon": 19.6865652, "phone": null, "hours": "10:00-17:30", "closedDays": ["TU"],
+    "PRICE_FLAG": "Guide says 3€. A recent review mentions 10€. Verify.",
+    "NOTE": "Guide's Tuesday closure is CORRECT. Guide hours 10:00-18:00 vs Google 10:00-17:30." },
+  "attr-3": { "name": "Holy Monastery of the Virgin Mary at Paleokastritsa", "placeId": "ChIJvyQxYiNRWxMROSB3OkWyCBA", "lat": 39.6695032, "lon": 19.7015685, "phone": "+302662041210", "hours": "06:30-13:00, 15:00-19:00", "closedDays": [],
+    "NOTE": "Guide says 15:00-20:00 for the afternoon slot; Google says 15:00-19:00." },
+  "attr-9": { "name": "Holy Monastery of Panagia Vlacherna", "placeId": "ChIJOSSxWEReWxMRbGerY3mwsw4", "lat": 39.5899918, "lon": 19.9171444, "phone": null, "hours": "08:00-23:00", "closedDays": [] },
+  "attr-12": { "name": "Cape Drastis", "placeId": "ChIJ16bUkbVPWxMRqYxyX32_PzM", "lat": 39.7986294, "lon": 19.6738109, "phone": null, "hours": "24/7", "closedDays": [] },
+  "attr-6": { "name": "Mount Pantokrator", "placeId": "ChIJRwxNOZxDWxMRDtfG5FsqoF8", "lat": 39.7469444, "lon": 19.8711111, "phone": null, "hours": "24/7", "closedDays": [],
+    "NOTE": "Summit cafe/monastery reported closed on some Sundays." },
+  "OLD_PERITHIA": { "name": "Old Peritheia", "placeId": "ChIJK5pB_OpDWxMR4f-i7dSpfe8", "lat": 39.764473, "lon": 19.8757991, "phone": null, "hours": "09:30-23:00", "closedDays": [] },
+  "SEVENTH_HEAVEN": { "name": "7th Heaven (Peroulades)", "placeId": "ChIJVeWe44JOWxMR9w5X4xyMDJ4", "lat": 39.7875953, "lon": 19.6672293, "phone": "+302663095035", "hours": "11:00-00:00", "closedDays": [] },
+  "_CANAL_DAMOUR_WARNING": "A Places lookup for 'Canal d'Amour' returns a HOTEL of that name, not the rock formation. Keep the existing coordinate pin for the natural feature - do not attach a Place ID."
+}
