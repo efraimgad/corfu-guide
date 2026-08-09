@@ -126,7 +126,7 @@ window.CORFU_LOCATIONS = {
       "name": "לוגאס - חוף השקיעה (Logas)",
       "tags": "romantic",
       "image": {
-        "src": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=800",
+        "src": "images/cards/beach.svg",
         "alt": "לוגאס - חוף השקיעה"
       },
       "hasRealPhoto": false,
@@ -613,7 +613,7 @@ window.CORFU_LOCATIONS = {
       "name": "קלאמי (Kalami)",
       "tags": "family,quiet,snorkeling",
       "image": {
-        "src": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=800",
+        "src": "images/cards/beach.svg",
         "alt": "קלאמי"
       },
       "hasRealPhoto": false,
@@ -966,7 +966,7 @@ window.CORFU_LOCATIONS = {
       "tags": "fish,luxury",
       // TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Gulf of Mexico sunset, reused across About + 3 gem records + this restaurant)
       "image": {
-        "src": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=800",
+        "src": "images/cards/food.svg",
         "alt": "The White House Restaurant"
       },
       "hasRealPhoto": false,
@@ -3892,7 +3892,7 @@ window.CORFU_LOCATIONS = {
       "tags": "nature",
       // TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Gulf of Mexico sunset, reused across About + 3 gem records + a restaurant)
       "image": {
-        "src": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=800",
+        "src": "images/cards/nature.svg",
         "alt": "שמורת ארימיטיס"
       },
       "hasRealPhoto": false,
@@ -4238,7 +4238,7 @@ window.CORFU_LOCATIONS = {
       "tags": "history",
       // TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Gulf of Mexico sunset, reused across About + 3 gem records + a restaurant)
       "image": {
-        "src": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=800",
+        "src": "images/cards/history.svg",
         "alt": "מוזיאון הפולקלור סינראדס"
       },
       "hasRealPhoto": false,
@@ -4353,7 +4353,7 @@ window.CORFU_LOCATIONS = {
       "tags": "village",
       // TODO(photo): placeholder only, replace with real trip photo after the trip — was showing wrong location (Gulf of Mexico sunset, reused across About + 3 gem records + a restaurant)
       "image": {
-        "src": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=800",
+        "src": "images/cards/village.svg",
         "alt": "סטרינילס"
       },
       "hasRealPhoto": false,

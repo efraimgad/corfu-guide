@@ -84,7 +84,7 @@ window.ITINERARY_DAYS = [
         icon: "🏛️",
         titleTemplate: `יום 2 ({weekday} {date}): קורפו טאון (Kerkyra) – קסם ונציאני וסמטאות היסטוריות`,
         subtitleTemplate: `היכרות ראשונה עם בירת האי, מבצרים עתיקים, סמטאות הקמפיילו ותצפיות מטוסים מרהיבות.`,
-        image: { src: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&q=80&w=1200", alt: "Corfu Town" },
+        image: { src: "images/cards/history.svg", alt: "איור: העיר קורפו" },
         rainAlt: `<p>במקום תצפיות ומבצרים בחוץ, העיר מציעה מוזיאונים פנימיים מרתקים:</p>
                     <ul class="list-disc list-inside space-y-2 ml-4">
                         <li><strong>מוזיאון האמנות האסיאתית:</strong> אוסף עצום ומפתיע מהמזרח הרחוק בתוך ארמון מרשים.</li>

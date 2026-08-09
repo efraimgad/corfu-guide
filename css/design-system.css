@@ -2973,6 +2973,20 @@ a[class*="rounded-2xl"]:not(.premium-card) {
 .dashboard-card:not(.dashboard-card-highlight) .dashboard-card-label {
   color: var(--accent-text, var(--gt-ink-500));
 }
+/* The highlight card paints a FIXED dark navy gradient
+   (linear-gradient(135deg, var(--gt-primary-900), var(--gt-primary-700))) that
+   does not flip between themes, so everything on it must be light in BOTH.
+   .dashboard-card-label and -sub already got that treatment; .dashboard-card-value
+   did not, and kept `color: var(--gt-ink-900)` from its own rule below. That
+   token IS theme-flipping — near-black in light mode — so the flight countdown,
+   the single most-glanced-at number on the dashboard, measured 1.34:1 against
+   the gradient's dark stop and 2.14:1 against its light one. It passed in dark
+   mode only by accident, because the ink token flipped near-white while the
+   card's gradient stayed put. */
+.dashboard-card-highlight .dashboard-card-value,
+.dashboard-card-highlight .dashboard-card-value-sm {
+  color: #fff;
+}
 .dashboard-card--trip      { --accent: var(--gt-primary-500); --accent-text: var(--gt-primary-700-text); }
 .dashboard-card--weather   { --accent: var(--gt-accent-gold-600); --accent-text: var(--gt-accent-gold-text); }
 .dashboard-card--today     { --accent: var(--gt-accent-gold-700); --accent-text: var(--gt-accent-gold-text); }
