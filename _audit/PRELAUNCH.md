@@ -11,6 +11,11 @@ the audit.
 
 ## Verdict
 
+> **STATUS: superseded by the Phase 3 section at the end of this file.** The
+> verdict below is the Phase 1 finding, kept as the record of what was found.
+> All five blockers are now fixed and verified; the current call is **GO,
+> conditional on the Leaflet SRI check (H8)**.
+
 **NO-GO.** Five blockers, and none of them are subtle: a dashboard button that is 100 % dead
 because it calls four functions that no longer exist, two separately-exploitable stored-XSS
 paths that execute real JavaScript from `localStorage`, an Explore-tab layout rule that
@@ -377,3 +382,116 @@ handlers in `index.html`, ~18 more generated in `js/` template strings, 59 inlin
 attributes, and the JSON-LD block. **Unachievable on this host:** `frame-ancestors`,
 `report-uri`/`report-to`, `sandbox`. **This CSP does not mitigate B2 or B3** — inline
 execution is exactly what `'unsafe-inline'` permits.
+
+---
+---
+
+# Phase 3 — Remediation, and the verification pass
+
+14 commits, one root cause each. Every fix was re-verified against the exact
+repro that proved the defect, `npm test` was re-run after each, and an
+all-tabs/both-themes sweep checked for adjacent regressions. `CACHE_NAME` was
+bumped **once**, at the end (`v21` → `v22`).
+
+The test suite went from **7 scripts to 12**. Every new test was
+mutation-checked — confirmed to *fail cleanly* against the pre-fix code rather
+than crash — because a regression test that cannot fail is worse than none.
+
+## What was fixed
+
+| ID | Finding | Before | After | Commit |
+|----|---------|--------|-------|--------|
+| B1 | Favourites button dead, every heart tap threw | `ReferenceError` 100% | runs clean; 14→1 filter works | `5edc2a0` |
+| B2 | Stored XSS via `rating` | executes on hover | payload inert, rating 4 still renders ★★★★☆ | `694537f` |
+| B3 | Stored XSS via reservation `id` | executes on click | payload inert, valid ids untouched | `694537f` |
+| B4 | Explore leaked onto every tab ≥1024px | `computed=grid`, 1216×186 | `computed=none` at 390/1440/2560 | `3e2b8a8` |
+| B5 | Content panels invisible on arrival | 5,634px panel at `opacity:0` | all reveal, no scroll needed | `09b8055` |
+| H1 | Navigation by Hebrew name search | 87/169 (51.5%) | 169/169 navigate by coordinate | `56568e9` |
+| H2 | Countdown unreadable in light mode | 1.34:1 | **12.02:1** | `aa28e37` |
+| H3 | "Gulf of Mexico sunset" photo | 9 placements, 2 false `alt` | 0 | `aa28e37` |
+| H5 | Focus rings invisible | 1.11–1.18:1 | **3.24–5.14:1** | `ea8e07d` |
+| H6 | Form borders invisible | 1.28–1.31:1 | **3.55–3.68:1** | `ea8e07d` |
+| H9 | Topbar overflows under a notch | 10–12px | **0** | `a16d3ac` |
+| H10 | Map double-init threw | 3/3 runs | **0** errors | `be1e1d4` |
+| M4/M5 | Canonical, og:url, sitemap, manifest | absent / drifted | added, resynced to tokens | `4b3ef7f` |
+| M7 | Dead generator-only payload | 64,130 B (14.58%) | removed | `c21499b` |
+| M8 | Extractor would blank the dataset | writes silently | refuses, exits 1 | `96ef510` |
+| M3b | APP_SHELL font URL drift | both directions | matches `index.html` | `a92937e` |
+| M6 | Itinerary touch targets | 21 under 44px | 44×44 | `a49c6d5` |
+| H11/M1/M2 | No deployment docs | none | `README.md` | `fd0b03d` |
+
+## Verification pass (Agents 1, 3, 4, 6 re-run)
+
+```
+Runtime      all 11 tabs x both themes: pageErrors 0
+             (5 console errors remain, all environment: trip-private.js 404 by
+              design, blocked fonts, blocked open-meteo, harness Leaflet bytes)
+Security     both stored-XSS payloads inert; pageErrors 0
+Contrast     C1 9.59  C3 6.09/5.47  C4 6.09/10.18  H7 7.32/5.19  — 0 failing
+Non-text     focus 5.14/4.77 light, 3.24/3.50 dark; borders 3.55/3.68
+Layout       #explore computed=none at 390x844, 1440x900, 2560x1200
+Reveal       trip-planning, language-daily, faq all reveal without scrolling
+PWA          cache corfu-guide-v22, 40 entries, trip-private absent
+Offline      map "לא ניתן לטעון את המפה כרגע", weather "📡 לא זמין" — honest
+DOM          2,607 first paint / 2,953 all tabs (AUDIT.md L4's 13,760 is stale)
+Tests        12/12 passing
+```
+
+## Still open
+
+**Gating — needs a human on an unrestricted network:**
+
+- **H8, the Leaflet SRI pin.** `cdnjs` is unreachable from the audit sandbox, so
+  the hash at `js/map.js:47` could never be checked against the real bytes.
+  npm ships no `leaflet.min.js` (cdnjs generates that variant itself), so the
+  mismatch against npm's `dist/leaflet.js` is *not* proof of a wrong hash —
+  but it is not proof of a right one either. If the pin is wrong, Leaflet never
+  executes and every map is permanently dead, though it fails honestly with the
+  Hebrew fallback rather than a blank box.
+  ```
+  curl -s https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js \
+    | openssl dgst -sha384 -binary | openssl base64 -A
+  ```
+  Note: `_audit/CHANGES.md:90` says the hashes were *"restored"* after local
+  testing, **not verified** — it is not evidence either way.
+
+**Deliberately not fixed — these are content or product decisions, not defects
+with a mechanical fix:**
+
+- **H4.** 22 images still reused across 2–7 unrelated records (one Pexels URL
+  backs 7 different restaurants), and `hasRealPhoto` is `false` on all 169
+  records while being read nowhere. Needs real photography, or a decision to
+  surface a "generic photo" badge. Substituting more stock would be motion,
+  not progress.
+- **M10, CSP.** A `<meta>`-delivered policy is written out in Appendix A and
+  would restrict origins, but it cannot mitigate B2/B3 (inline execution is
+  exactly what `'unsafe-inline'` permits, and 113 inline handlers require it)
+  and cannot deliver `frame-ancestors` on this host at all. Worth adding as
+  defence in depth; not worth pretending it is a security control here.
+- **M11** transient sticky/FAB overlap, **M12** `<img>` dimensions in the two
+  `js/explore.js` templates (measured CLS 0.0004 — a spec gap, not a live
+  shift), **M13** Google Fonts render-blocking (the 9.0s FCP is a sandbox
+  artifact; the pattern is still worth a preload swap).
+- **The unresolved CLS 0.49.** Reproducible only under one throttled
+  configuration, contradicted by three other measurements (0.0004, 0.0004,
+  0.000), and Lighthouse's root-cause gatherer crashed both runs so no shifting
+  element can be named. Recorded as a number without a diagnosis. Do not act on
+  it without a working trace.
+- **External link liveness** across 417 URLs — still unverifiable here. The
+  exported list and a ready-to-run script are in the coverage table above.
+
+## Revised call
+
+**GO, conditional on one check.**
+
+All five blockers are fixed and verified. Every WCAG failure found is measured
+clean in both themes. The data layer was already sound and is now more so:
+navigation resolves to coordinates for the whole guide rather than name-searching
+half of it, and the only actively misleading content — a photo of the Gulf of
+Mexico captioned as Corfu — is gone.
+
+The single thing standing between this and an unconditional GO is **H8**: run
+the `curl | openssl` command above and compare against `js/map.js:47`. If it
+matches, ship. If it does not, update the `integrity` attribute and ship.
+
+Everything else on the open list is a known, documented, non-blocking trade-off.
