@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e1edf5"/><stop offset="1" stop-color="#f2ecdf"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#sky)"/>
+  <circle cx="112" cy="84" r="30" fill="#c9a55f" opacity=".9"/>
+  <path d="M0 268 q140 -52 300 -20 t300 -14 V400 H0 Z" fill="#6d7a4f" opacity=".45"/>
+  <g>
+    <rect x="74" y="256" width="104" height="112" fill="#f2ecdf"/>
+    <path d="M66 256 L126 214 L186 256 Z" fill="#b8934a"/>
+    <rect x="192" y="288" width="90" height="80" fill="#e7ddc7"/>
+    <path d="M184 288 L237 254 L290 288 Z" fill="#b8934a"/>
+    <rect x="368" y="270" width="110" height="98" fill="#f2ecdf"/>
+    <path d="M360 270 L423 230 L486 270 Z" fill="#b8934a"/>
+    <rect x="300" y="196" width="52" height="172" fill="#faf9f6"/>
+    <path d="M292 196 L326 162 L360 196 Z" fill="#14507a"/>
+    <circle cx="326" cy="238" r="13" fill="#14507a" opacity=".85"/>
+  </g>
+  <g fill="#14507a" opacity=".7">
+    <rect x="102" y="288" width="20" height="28" rx="3"/><rect x="134" y="288" width="20" height="28" rx="3"/>
+    <rect x="214" y="314" width="18" height="26" rx="3"/><rect x="246" y="314" width="18" height="26" rx="3"/>
+    <rect x="396" y="300" width="20" height="28" rx="3"/><rect x="432" y="300" width="20" height="28" rx="3"/>
+  </g>
+  <path d="M0 368 H600 V400 H0 Z" fill="#0a2540" opacity=".25"/>
+</svg>
