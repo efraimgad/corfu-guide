@@ -553,3 +553,84 @@ the `curl | openssl` command above and compare against `js/map.js:47`. If it
 matches, ship. If it does not, update the `integrity` attribute and ship.
 
 Everything else on the open list is a known, documented, non-blocking trade-off.
+
+---
+
+# Phase 4 — Independent verification pass
+
+Phase 3's verification was run with the same scripts that were written while
+fixing — self-marking. Four **fresh, read-only agents** were then briefed
+adversarially to re-derive every claimed number and hunt for regressions in the
+paths the fixer touched but the suite does not cover.
+
+**They found three real defects that the fix-side verification missed.** That is
+the result worth recording: the self-check said clean, and it was not.
+
+## What they confirmed
+
+| Area | Verdict |
+|---|---|
+| Favourites path, map double-init, search metacharacters, 11-tab sweep | VERIFIED FIXED — 0 pageErrors, exactly the 5-error environment baseline |
+| Countdown contrast, focus rings | VERIFIED FIXED — 12.02:1 / 7.55:1; 5.14 & 3.24, 4.77 & 3.50 |
+| CACHE_NAME v22, dead-payload removal, APP_SHELL font parity, font swap, offline honesty, DOM count, CLS | VERIFIED FIXED (7/7) |
+| Explore leak, reveal-on-scroll, topbar safe-area, touch targets, all 154 overflow combos | VERIFIED FIXED — 0 failures |
+
+Several of their methods were **better than the originals** and are worth
+keeping:
+- Map double-init was re-tested by injecting a **mock Leaflet** and calling
+  `initHomeMap()`/`initExploreMap()` three times synchronously, proving
+  `L.map()` is constructed exactly once. The fix-side test only ever exercised
+  the `typeof L === 'undefined'` branch — i.e. it verified the wrong guard.
+- Cache invalidation was tested by **seeding fake `corfu-guide-v21` and
+  `corfu-guide-tiles-v1` caches** and confirming activate deletes both.
+- Safe-area was tested with a real CDP `Emulation.setSafeAreaInsetsOverride`
+  rather than a CSS override, confirming `env()` resolves to 44px in-page and
+  the bar measures exactly 108px with children at 96–97.5px.
+- The font `preload`→`stylesheet` promotion was proven by **stubbing the blocked
+  host**, which the fix-side pass could not demonstrate at all.
+
+## Defects they found, now fixed
+
+**1. Uncaught TypeErrors in the Explore detail sheet** (`js/storage.js`) — three
+per interaction on visited / star / note:
+`Cannot read properties of null (reading 'dataset')`. `js/explore.js` renders
+that widget deliberately outside any `[data-id]` card and wires its own scoped
+listener, but storage.js's document-wide listeners still matched it by class and
+dereferenced the null ancestor. State saved correctly throughout, which is
+precisely why it survived — invisible to the user, no broken behaviour, just
+three page-level exceptions on the sheet's most common interaction. **Pre-existing,
+not introduced by this branch.** Fixed in `e5bb56b`; 3 exceptions before, 0
+after, state still saving.
+
+**2. The H6 border fix was incomplete.** It was scoped to `.gt-border-hair` and
+the topbar, so controls that set their border directly were missed:
+`#explore-search-input` (**1.31:1** light / **1.28:1** dark) and
+`.pt-note-textarea` on every card (**1.21:1** / **1.40:1**). Both now use
+`--gt-hair-strong`; `#explore-search-input` re-measures at **3.55:1 / 3.68:1**.
+The claimed "worst is 3.55:1" was also imprecise — the true worst is **3.01:1**
+on the reservation inputs, still passing.
+
+**3. The M6 touch-target fix was incomplete.** It covered the itinerary template
+only. Still under 44px were both search inputs (height **41px**, on every tab),
+~19 packing-checklist labels (**266×40**), and `.dashboard-card-link`
+(**39.58px** wide). All now meet the floor.
+
+## Corrections to this report's own numbers
+
+- **M7's saving is 64,897 B (14.75%)**, not 64,130 (14.58%) — 439,880 → 374,983.
+  The 767-byte gap is four `TODO(photo)` comments removed after the measurement
+  was taken but committed alongside it. Commit `c21499b`'s message understates
+  its own diff; left as-is rather than force-rewriting shared history.
+- **The CLS 0.49 is resolved and is not a defect** — see the entry above.
+- **Commit hygiene slip:** `e5bb56b` was staged with `git add -A` and so carries
+  20 lines of accessibility CSS (defects 2 and 3 above) under a message that
+  describes only the storage fix. One root cause per commit was the rule; this
+  one bundles two. Recorded here rather than rewritten, since it is pushed.
+
+## Standing coverage gaps (unchanged)
+
+Real Leaflet rendering — tiles, markers, clustering, popups — remains
+**unverified**: cdnjs is unreachable, so `L` is always undefined in this
+sandbox. The double-init guard was proven with a mock; the visual integration
+was not. Supabase sync paths are likewise unexercised. Both are listed in the
+coverage table above with the commands to close them.
