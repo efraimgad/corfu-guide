@@ -1,12 +1,16 @@
 // Interactive map of all beaches/food/attractions/gems - built from
 // window.CORFU_LOCATIONS (js/locations-data.js), the same data source
-// that renders the cards themselves (js/cards.js), instead of four
+// that renders the cards themselves (js/explore.js; previously js/cards.js,
+// deleted in Phase C2), instead of four
 // separate hardcoded arrays that could silently drift out of sync with
 // the cards. Markers are keyed by data-id rather than by Hebrew display
 // name, so a card and its marker can never mismatch on a name typo.
 
-let beachMapInstance = null;
-let mapLayerGroups = { beaches: null, food: null, attractions: null, gems: null };
+// Phase C2 removed the #beaches section and its map. beachMapInstance was
+// never reassigned after this initialiser once initBeachMap() went, and
+// mapLayerGroups had zero references anywhere in the repo — both are gone.
+// The live instances are exploreMapInstance and homeMapInstance, declared
+// beside their own init functions below.
 
 // Loads Leaflet + the marker-cluster plugin on first use only (they
 // used to load unconditionally from head tags on every page view).
@@ -44,6 +48,13 @@ function loadLeafletThen(callback) {
 
             const leafletScript = document.createElement('script');
             leafletScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+            // VERIFIED against the live cdnjs bytes (2026-08-10): this hash is
+            // correct and Leaflet loads in production. Note that npm's leaflet
+            // package ships NO leaflet.min.js — cdnjs builds that variant itself —
+            // so hashing npm's dist/leaflet.js gives a DIFFERENT, legitimate value
+            // (sha384-cxOPjt7s...). Do not "correct" this pin to that one.
+            // Re-verify after any Leaflet version bump:
+            //   curl -sfL <this url> -o /tmp/l.js && node -e 'const c=require("crypto"),f=require("fs");console.log("sha384-"+c.createHash("sha384").update(f.readFileSync("/tmp/l.js")).digest("base64"))'
             leafletScript.integrity = 'sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO';
             leafletScript.crossOrigin = 'anonymous';
             leafletScript.onload = () => {
@@ -59,7 +70,12 @@ function loadLeafletThen(callback) {
             document.head.appendChild(leafletScript);
         });
     }
-    leafletLoadPromise.then(callback).catch(() => callback()); // initBeachMap already shows a friendly fallback if L is still undefined
+    // Callback runs even on failure: initExploreMap()/initHomeMap() each
+    // re-check `typeof L === "undefined"` as their first line and paint the
+    // Hebrew "map unavailable" fallback themselves, so invoking it IS what
+    // makes that fallback appear. (This used to credit initBeachMap(), which
+    // was deleted in Phase C2 along with the #beaches section.)
+    leafletLoadPromise.then(callback).catch(() => callback());
 }
 
 // Phase C2: toggleBeachMap() deleted — its #beach-map-container lived inside the deleted #beaches.
@@ -101,7 +117,7 @@ function gtCategoryColor(layerKey) {
 
 // Builds all four category layer groups for one map instance. Replaces the
 // four near-identical buildLayerGroup() calls that were copy-pasted into
-// each of initBeachMap/initExploreMap/initHomeMap.
+// each of initExploreMap/initHomeMap (and the since-deleted initBeachMap).
 function gtBuildCategoryLayers(groups, indexStore, onTap) {
     const locations = window.CORFU_LOCATIONS || { beaches: [], food: [], attractions: [], gems: [] };
     ['beaches', 'food', 'attractions', 'gems'].forEach(key => {
@@ -111,7 +127,7 @@ function gtBuildCategoryLayers(groups, indexStore, onTap) {
 }
 
 // The single "home base" marker, previously duplicated verbatim in
-// initBeachMap() and initHomeMap().
+// initExploreMap() and initHomeMap().
 function gtBuildHotelLayer() {
     const hotelIcon = L.divIcon({
         html: '<div style="background:#e11d48;width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.4);"><span style="transform:rotate(45deg);font-size:14px;">🏨</span></div>',
@@ -630,7 +646,9 @@ function gtOnMarkerTap(mapName, mapInstance, markerIndex, item, layerKey) {
 function gtClearMapSelection(mapName) {
     const ctx = gtMapSelection[mapName];
     if (!ctx || !ctx.ring) return;
-    const mapInstance = mapName === 'explore' ? exploreMapInstance : mapName === 'home' ? homeMapInstance : beachMapInstance;
+    // Only 'explore' and 'home' are ever passed (verified across every
+    // gtOnMarkerTap() call site); anything else has no live instance.
+    const mapInstance = mapName === 'explore' ? exploreMapInstance : mapName === 'home' ? homeMapInstance : null;
     if (mapInstance && mapInstance.hasLayer(ctx.ring)) mapInstance.removeLayer(ctx.ring);
     ctx.key = null;
 }
@@ -643,9 +661,12 @@ function gtClearMapSelection(mapName) {
 // "open full card" action that switches to Explore and opens the exact
 // same item's full detail sheet there.
 let gtMapSheetTriggerEl = null;
-// Which map instance most recently opened this shared sheet ('beach' or
-// 'home' - see gtOnMarkerTap() above) - defaults to 'beach' so nothing
-// changes for the pre-Phase-D call sites that only ever pass that one.
+// Which map instance most recently opened this shared sheet ('explore' or
+// 'home' - see gtOnMarkerTap() above). The initial 'beach' is now just a
+// sentinel meaning "no map has opened it yet": the #beaches map was deleted
+// in Phase C2, so nothing ever sets this back to that value. Left as-is
+// rather than retuned because gtMapSelection has no 'beach' entry either,
+// so every lookup on it correctly finds nothing.
 let gtMapSheetOpenerName = 'beach';
 function gtOpenMapSheet(layerKey, item) {
     const sheet = document.getElementById('gt-map-sheet');

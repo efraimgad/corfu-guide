@@ -1,5 +1,22 @@
 # Corfu Guide — Full UI/UX, Accessibility & Code Audit
 
+> ## ⚠️ SUPERSEDED — read this first
+>
+> This document is the **previous** audit round, kept for history. Every
+> Critical (C1–C6) and High (H1–H8) item below was re-tested by measurement
+> during the pre-launch audit and **all of them are fixed**. The status column
+> in the summary table records the verified outcome of each.
+>
+> For the current state of the codebase see **`_audit/PRELAUNCH.md`**.
+>
+> Two specifics worth knowing before you read further:
+> * C5 cites `js/cards.js:230`. **That file does not exist** and has not for
+>   some time; the reference is stale.
+> * L4 claims 13,760 DOM elements on first paint. The measured figure is
+>   **2,607** (2,953 after visiting every tab) — the claim predates the
+>   lazy-render refactor in `js/ui.js`.
+
+
 **Method.** The site was served locally and rendered in headless Chromium across 7 viewports (375×667 iPhone SE, 390×844 iPhone 13, 412×915 Pixel, 820×1180 iPad, 844×390 landscape, 1440×900 desktop, 2560×1200 ultrawide) in **both** `light` and `dark` `prefers-color-scheme`, across all 15 tabs. Contrast ratios were computed from real composited `getComputedStyle` values using the WCAG relative-luminance formula, not estimated by reading CSS. Overflow, fixed-element collision, touch-target size, ARIA reference integrity and heading order were measured programmatically.
 
 **Headline.** The design system itself is well built — the `--gt-*` token layer, the category/status colour split with separate `-text` variants, and the documented rationale in the CSS comments are genuinely above average. Almost every defect below is the *same class of bug*: **a surface colour that was hardcoded as light instead of routed through a token**, or **a token that flips in dark mode being used in a role where it must not flip**. There are 6 distinct root causes producing roughly 40 visible symptoms. Fixing the 6 causes fixes nearly all of it.
@@ -8,36 +25,36 @@
 
 ## Severity summary
 
-| # | Issue | Severity | Area |
-|---|---|---|---|
-| C1 | Itinerary day-context bar is white-on-white in dark mode | **Critical** | Dark mode |
-| C2 | `--ion-700` deleted but still referenced — 4 invisible buttons | **Critical** | Bug |
-| C3 | `.glass-panel` filter bars unreadable in dark mode (8 sites) | **Critical** | Dark mode |
-| C4 | `details` accordions stay cream in dark mode | **Critical** | Dark mode |
-| C5 | `bg-white/90` image badges invisible in dark mode (64 sites) | **Critical** | Dark mode |
-| C6 | Activities section heading is invisible in both themes | **Critical** | Bug |
-| H1 | `--gt-primary-600` used as fill behind white text → 2.6:1 | High | Dark mode |
-| H2 | Accent/gold/olive tokens never flip → badge text 1.8–3.1:1 | High | Dark mode |
-| H3 | Map tiles are bright white in dark mode (3 instances) | High | Map |
-| H4 | Leaflet chrome (popups, zoom, attribution, clusters) untheme | High | Map |
-| H5 | Marker colours diverged from the tokens they claim to match | High | Map |
-| H6 | Scroll-wheel / one-finger drag hijacks page scroll on maps | High | Map |
-| H7 | Dashboard tile labels fail AA in **both** themes | High | A11y |
-| H8 | `bg-white/15` itinerary controls fail in both themes | High | Dark mode |
-| M1 | Sync indicator overlaps emergency FAB; light disc in dark mode | Medium | Mobile |
-| M2 | 13 broken `aria-labelledby` references | Medium | A11y |
-| M3 | Touch targets below 44px (star rating, visited, note toggles) | Medium | Mobile |
-| M4 | Heading hierarchy skips h2→h4 on three tabs | Medium | A11y |
-| M5 | Fixed map heights break landscape & iPhone SE | Medium | Mobile |
-| M6 | 5 unlabelled form controls | Medium | A11y |
-| M7 | `text-gray-400` pinned to a warm grey that never flips | Medium | Dark mode |
-| M8 | Favourite button mispositioned/clipped on dual-image cards | Medium | Mobile |
-| M9 | Desktop: search field and bottom nav stretch to full width | Medium | Desktop |
-| M10 | 28 images without dimensions → layout shift | Medium | Performance |
-| L1 | Duplicated CSS selector blocks (5× `.premium-card-image`) | Low | Code |
-| L2 | Three near-identical `init*Map()` functions | Low | Code |
-| L3 | `updateMapLayers()` unguarded DOM lookups | Low | Code |
-| L4 | 13,760 DOM elements on first paint | Low | Performance |
+| # | Issue | Severity | Area | Verified status (pre-launch audit) |
+|---|---|---|---|---|
+| C1 | Itinerary day-context bar is white-on-white in dark mode | **Critical** | Dark mode | ✅ FIXED — 16.14:1 |
+| C2 | `--ion-700` deleted but still referenced — 4 invisible buttons | **Critical** | Bug | ✅ FIXED — 0 live refs |
+| C3 | `.glass-panel` filter bars unreadable in dark mode (8 sites) | **Critical** | Dark mode | ✅ FIXED — 6.09/5.47:1 |
+| C4 | `details` accordions stay cream in dark mode | **Critical** | Dark mode | ✅ FIXED — 6.09/10.18:1 |
+| C5 | `bg-white/90` image badges invisible in dark mode (64 sites) | **Critical** | Dark mode | ✅ FIXED — markup no longer shipped |
+| C6 | Activities section heading is invisible in both themes | **Critical** | Bug | ✅ FIXED — 12.02:1 |
+| H1 | `--gt-primary-600` used as fill behind white text → 2.6:1 | High | Dark mode | ✅ FIXED — 5.17:1 |
+| H2 | Accent/gold/olive tokens never flip → badge text 1.8–3.1:1 | High | Dark mode | ✅ FIXED — 6.47/8.71:1 |
+| H3 | Map tiles are bright white in dark mode (3 instances) | High | Map | ✅ FIXED |
+| H4 | Leaflet chrome (popups, zoom, attribution, clusters) untheme | High | Map | ✅ FIXED |
+| H5 | Marker colours diverged from the tokens they claim to match | High | Map | ✅ FIXED — reads tokens at runtime |
+| H6 | Scroll-wheel / one-finger drag hijacks page scroll on maps | High | Map | ✅ FIXED |
+| H7 | Dashboard tile labels fail AA in **both** themes | High | A11y | ✅ FIXED — 5.19–9.82:1 |
+| H8 | `bg-white/15` itinerary controls fail in both themes | High | Dark mode | ✅ FIXED — 10.05:1 |
+| M1 | Sync indicator overlaps emergency FAB; light disc in dark mode | Medium | Mobile | ✅ FIXED — 0px² overlap |
+| M2 | 13 broken `aria-labelledby` references | Medium | A11y | ✅ FIXED — 0 broken refs |
+| M3 | Touch targets below 44px (star rating, visited, note toggles) | Medium | Mobile | ✅ FIXED — incl. 21 missed targets |
+| M4 | Heading hierarchy skips h2→h4 on three tabs | Medium | A11y | ✅ FIXED — 0 skips |
+| M5 | Fixed map heights break landscape & iPhone SE | Medium | Mobile | ✅ FIXED |
+| M6 | 5 unlabelled form controls | Medium | A11y | ✅ FIXED — 0 unlabelled |
+| M7 | `text-gray-400` pinned to a warm grey that never flips | Medium | Dark mode | ✅ FIXED |
+| M8 | Favourite button mispositioned/clipped on dual-image cards | Medium | Mobile | ✅ FIXED |
+| M9 | Desktop: search field and bottom nav stretch to full width | Medium | Desktop | ✅ FIXED |
+| M10 | 28 images without dimensions → layout shift | Medium | Performance | ⚠️ attribute gap only — CLS 0.0004, since fixed |
+| L1 | Duplicated CSS selector blocks (5× `.premium-card-image`) | Low | Code | ⚠️ 2 true duplicates, not 5 |
+| L2 | Three near-identical `init*Map()` functions | Low | Code | ✅ FIXED — 2 functions, diverge by design |
+| L3 | `updateMapLayers()` unguarded DOM lookups | Low | Code | ✅ FIXED — function deleted |
+| L4 | 13,760 DOM elements on first paint | Low | Performance | ❌ STALE — actual 2,607, not 13,760 |
 
 ---
 

@@ -6,10 +6,11 @@
 // helpers are NOT legacy - js/explore.js, js/storage.js and js/itinerary.js
 // all depend on them, and they must outlive the sections cards.js served.
 //
-// Loaded BEFORE cards.js in index.html: cards.js's renderAll*() functions run
+// Was loaded BEFORE cards.js in index.html, whose renderAll*() functions ran
 // synchronously at load time and call buildVerifiedInfoHTML(), so the
 // definitions have to already exist. (This ordering constraint disappears in
-// Phase C2 along with cards.js itself, but is load-bearing until then.)
+// Phase C2 along with cards.js itself; that has happened, and this file
+// outlived it as intended.)
 
 // ---------------------------------------------------------------------------
 // Verified-details block (Step: Google Places verification pass).
@@ -92,7 +93,7 @@ function formatPhone(dial) {
 }
 
 // Personal tracking widget (visited toggle / 1-5 rating / note) markup.
-// Kept out of js/storage.js because js/cards.js's renderAll*() functions call
+// Kept out of js/storage.js because js/cards.js's renderAll*() functions used to call
 // it synchronously at load time, before storage.js (deferred, loaded later)
 // exists. Lives here rather than in cards.js so it outlives that file. storage.js's
 // injectPersonalTrackingWidgets() reuses this same global function for the

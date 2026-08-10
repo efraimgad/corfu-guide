@@ -305,7 +305,7 @@ function buildExploreEntries(catKey) {
     return entries;
 }
 
-// --- Per-category display helpers (same records js/cards.js already
+// --- Per-category display helpers (same records js/cards.js used to
 // renders, read the same way - no second copy of "how to read a beach vs a
 // food vs an attraction vs a gem record"). ---------------------------------
 
@@ -607,7 +607,7 @@ window.handleExploreReserve = handleExploreReserve;
 // Three zones per the Phase 3 spec: (1) name/status/actions/personal-tracking
 // widget, (2) description content, (3) one collapsed "מידע מאומת" fold for
 // verifiedOn/verifiedRating/priceFlag/needsCoordCheck/verifyNote - reusing
-// buildVerifiedInfoHTML() (js/cards.js) rather than re-deriving those rows.
+// buildVerifiedInfoHTML() (js/location-shared.js) rather than re-deriving those rows.
 let exploreSheetTriggerEl = null;
 
 function openExploreSheet(catKey, id) {

@@ -1,5 +1,7 @@
 // Shared HTML-escaping helpers, used by every module that builds markup via
-// template strings (cards.js, reservations.js, packing.js, notes-favorites.js).
+// template strings (explore.js, reservations.js, packing.js, notes-favorites.js,
+// itinerary-view.js, map.js). Note: an earlier version of this comment named
+// cards.js, which was deleted in Phase C2.
 // Loaded first so it's available no matter which of those loads next.
 
 // Escapes a value for use inside a DOUBLE-QUOTED HTML attribute.

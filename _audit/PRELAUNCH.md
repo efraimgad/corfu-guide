@@ -13,8 +13,9 @@ the audit.
 
 > **STATUS: superseded by the Phase 3 section at the end of this file.** The
 > verdict below is the Phase 1 finding, kept as the record of what was found.
-> All five blockers are now fixed and verified; the current call is **GO,
-> conditional on the Leaflet SRI check (H8)**.
+> All five blockers are fixed and verified, and the Leaflet SRI check (H8)
+> came back **CORRECT** on 2026-08-10. The current call is an unconditional
+> **GO** — see the Phase 5 section at the end of this file.
 
 **NO-GO.** Five blockers, and none of them are subtle: a dashboard button that is 100 % dead
 because it calls four functions that no longer exist, two separately-exploitable stored-XSS
@@ -42,7 +43,7 @@ are **honest gaps, not clean results**:
 | Unverifiable here | Why | Command to finish outside the sandbox |
 |---|---|---|
 | External link liveness (417 URLs) | `images.pexels.com`, `maps.google.com`, `images.unsplash.com` all fail CONNECT with 403 | `bash scratchpad/agent2/check-links.sh scratchpad/agent2/external-urls.txt > results.tsv` |
-| Leaflet SRI pin correctness | `cdnjs.cloudflare.com` unreachable | `curl -s https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js \| openssl dgst -sha384 -binary \| openssl base64 -A` |
+| ~~Leaflet SRI pin correctness~~ | **RESOLVED 2026-08-10** — checked against live cdnjs bytes by the owner: the pin at `js/map.js:47` is **CORRECT**. Leaflet loads in production. | closed |
 | Live site headers / Pages config | `efraimgad.github.io` blocked; `api.github.com/repos/.../pages` rejected by proxy | `curl -sI https://efraimgad.github.io/corfu-guide/sw.js` |
 | Webfont rendering metrics | `fonts.googleapis.com` resets in-browser; all rendering measured against the CSS **fallback** stack | re-run agent scripts on a normal network |
 | 60 of 154 responsive matrix cells | Agent 6's exhaustive per-cell run was killed for time | re-run `scratchpad/agent6/full_matrix.js` |
@@ -414,7 +415,7 @@ than crash — because a regression test that cannot fail is worse than none.
 | H9 | Topbar overflows under a notch | 10–12px | **0** | `a16d3ac` |
 | H10 | Map double-init threw | 3/3 runs | **0** errors | `be1e1d4` |
 | M4/M5 | Canonical, og:url, sitemap, manifest | absent / drifted | added, resynced to tokens | `4b3ef7f` |
-| M7 | Dead generator-only payload | 64,130 B (14.58%) | removed | `c21499b` |
+| M7 | Dead generator-only payload | 64,897 B (14.75%) | removed | `c21499b` |
 | M8 | Extractor would blank the dataset | writes silently | refuses, exits 1 | `96ef510` |
 | M3b | APP_SHELL font URL drift | both directions | matches `index.html` | `a92937e` |
 | M6 | Itinerary touch targets | 21 under 44px | 44×44 | `a49c6d5` |
@@ -487,13 +488,56 @@ with a mechanical fix:**
   is a broken app for travellers offline in Greece. Add it only alongside a
   migration to a host that supports real headers, or after converting the
   inline handlers to delegated listeners.
-- **The unresolved CLS 0.49.** Reproducible only under one throttled
-  configuration, contradicted by three other measurements (0.0004, 0.0004,
-  0.000), and Lighthouse's root-cause gatherer crashed both runs so no shifting
-  element can be named. Recorded as a number without a diagnosis. Do not act on
-  it without a working trace.
+- **The CLS 0.49 is now EXPLAINED, and is not a product defect.** The
+  independent verification pass reproduced it and found the cause: Lighthouse
+  does not use the harness's route stubbing, so its own `network-requests`
+  audit shows the Google Fonts stylesheet and the open-meteo fetch both
+  **hanging unresolved** (`statusCode: -1`, no `endTime`) rather than failing
+  fast. The shift is blocked-host placeholder collapse, not layout instability
+  in the app. Directly instrumented measurement of the same page and tab, with
+  those hosts stubbed, gives **0.00036**. Four measurements now agree
+  (0.0004 / 0.0004 / 0.000 / 0.00036) against one distorted outlier.
+  Lighthouse's absolute scores are not usable evidence in this sandbox.
 - **External link liveness** across 417 URLs — still unverifiable here. The
   exported list and a ready-to-run script are in the coverage table above.
+
+### The LOW tail, and one item rejected on evidence
+
+The remaining LOW findings were cleared in `2202076`: the stale-pointer
+comments, the dead `mapLayerGroups` / `beachMapInstance` declarations, the
+duplicate `.premium-card-image` cross-reference, the Google Fonts SRI
+rationale, banners on the two one-off scripts that cannot run, and — finding
+O-3 — a SUPERSEDED banner plus a verified-status column on `_audit/AUDIT.md`
+itself, so it no longer reads as an open list of six critical defects that are
+all fixed.
+
+**`'use strict'` (L9) was attempted and rejected on evidence, not preference.**
+Adding it to all 25 files broke **7 of the 12 test scripts**
+(`TypeError: win.focusMapOnDayLocations is not a function`). The cause is real
+and specific: the tests load source by joining files and running them through
+`win.eval()`, and a strict-mode `eval` gets its own scope, so top-level function
+declarations no longer leak to the global object. In a browser, `<script>` tags
+would still publish them — so this is a test-harness incompatibility rather
+than proof the app breaks.
+
+That distinction does not rescue the change. Adopting `'use strict'` would mean
+rewriting how every test loads the code, immediately before launch, to gain
+protection against a class of bug the audit measured at **zero occurrences**
+(369 top-level declarations scanned, 0 collisions, 12 implicit-global
+candidates all false positives). The suite is the only safety net this project
+has; trading it for a hypothetical benefit is the wrong way round. Reverted,
+12/12 restored.
+
+Worth doing later, alongside a change to how the tests load source — not as a
+pre-launch edit.
+
+**Two LOW items remain open by choice:** a 180×180 `apple-touch-icon` (needs an
+image library this project deliberately does not depend on; iOS downscales the
+existing 192 correctly), and `og:image` / `twitter:image` still hotlinked to
+Pexels — social-card-only, so it affects no offline behaviour, and no
+replacement could be sourced or content-verified from this sandbox.
+
+---
 
 ## Revised call
 
@@ -510,3 +554,135 @@ the `curl | openssl` command above and compare against `js/map.js:47`. If it
 matches, ship. If it does not, update the `integrity` attribute and ship.
 
 Everything else on the open list is a known, documented, non-blocking trade-off.
+
+---
+
+# Phase 4 — Independent verification pass
+
+Phase 3's verification was run with the same scripts that were written while
+fixing — self-marking. Four **fresh, read-only agents** were then briefed
+adversarially to re-derive every claimed number and hunt for regressions in the
+paths the fixer touched but the suite does not cover.
+
+**They found three real defects that the fix-side verification missed.** That is
+the result worth recording: the self-check said clean, and it was not.
+
+## What they confirmed
+
+| Area | Verdict |
+|---|---|
+| Favourites path, map double-init, search metacharacters, 11-tab sweep | VERIFIED FIXED — 0 pageErrors, exactly the 5-error environment baseline |
+| Countdown contrast, focus rings | VERIFIED FIXED — 12.02:1 / 7.55:1; 5.14 & 3.24, 4.77 & 3.50 |
+| CACHE_NAME v22, dead-payload removal, APP_SHELL font parity, font swap, offline honesty, DOM count, CLS | VERIFIED FIXED (7/7) |
+| Explore leak, reveal-on-scroll, topbar safe-area, touch targets, all 154 overflow combos | VERIFIED FIXED — 0 failures |
+
+Several of their methods were **better than the originals** and are worth
+keeping:
+- Map double-init was re-tested by injecting a **mock Leaflet** and calling
+  `initHomeMap()`/`initExploreMap()` three times synchronously, proving
+  `L.map()` is constructed exactly once. The fix-side test only ever exercised
+  the `typeof L === 'undefined'` branch — i.e. it verified the wrong guard.
+- Cache invalidation was tested by **seeding fake `corfu-guide-v21` and
+  `corfu-guide-tiles-v1` caches** and confirming activate deletes both.
+- Safe-area was tested with a real CDP `Emulation.setSafeAreaInsetsOverride`
+  rather than a CSS override, confirming `env()` resolves to 44px in-page and
+  the bar measures exactly 108px with children at 96–97.5px.
+- The font `preload`→`stylesheet` promotion was proven by **stubbing the blocked
+  host**, which the fix-side pass could not demonstrate at all.
+
+## Defects they found, now fixed
+
+**1. Uncaught TypeErrors in the Explore detail sheet** (`js/storage.js`) — three
+per interaction on visited / star / note:
+`Cannot read properties of null (reading 'dataset')`. `js/explore.js` renders
+that widget deliberately outside any `[data-id]` card and wires its own scoped
+listener, but storage.js's document-wide listeners still matched it by class and
+dereferenced the null ancestor. State saved correctly throughout, which is
+precisely why it survived — invisible to the user, no broken behaviour, just
+three page-level exceptions on the sheet's most common interaction. **Pre-existing,
+not introduced by this branch.** Fixed in `e5bb56b`; 3 exceptions before, 0
+after, state still saving.
+
+**2. The H6 border fix was incomplete.** It was scoped to `.gt-border-hair` and
+the topbar, so controls that set their border directly were missed:
+`#explore-search-input` (**1.31:1** light / **1.28:1** dark) and
+`.pt-note-textarea` on every card (**1.21:1** / **1.40:1**). Both now use
+`--gt-hair-strong`; `#explore-search-input` re-measures at **3.55:1 / 3.68:1**.
+The claimed "worst is 3.55:1" was also imprecise — the true worst is **3.01:1**
+on the reservation inputs, still passing.
+
+**3. The M6 touch-target fix was incomplete.** It covered the itinerary template
+only. Still under 44px were both search inputs (height **41px**, on every tab),
+~19 packing-checklist labels (**266×40**), and `.dashboard-card-link`
+(**39.58px** wide). All now meet the floor.
+
+## Corrections to this report's own numbers
+
+- **M7's saving is 64,897 B (14.75%)**, not 64,130 (14.58%) — 439,880 → 374,983.
+  The 767-byte gap is four `TODO(photo)` comments removed after the measurement
+  was taken but committed alongside it. Commit `c21499b`'s message understates
+  its own diff; left as-is rather than force-rewriting shared history.
+- **The CLS 0.49 is resolved and is not a defect** — see the entry above.
+- **Commit hygiene slip:** `e5bb56b` was staged with `git add -A` and so carries
+  20 lines of accessibility CSS (defects 2 and 3 above) under a message that
+  describes only the storage fix. One root cause per commit was the rule; this
+  one bundles two. Recorded here rather than rewritten, since it is pushed.
+
+## Standing coverage gaps (unchanged)
+
+Real Leaflet rendering — tiles, markers, clustering, popups — remains
+**unverified**: cdnjs is unreachable, so `L` is always undefined in this
+sandbox. The double-init guard was proven with a mock; the visual integration
+was not. Supabase sync paths are likewise unexercised. Both are listed in the
+coverage table above with the commands to close them.
+
+
+---
+
+# Phase 5 — H8 resolved: **GO**
+
+The last gate is closed. The Leaflet SRI pin at `js/map.js:47` was checked
+against the live cdnjs bytes on a normal network and **matches exactly**:
+
+```
+got:  sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO
+pin:  sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO
+```
+
+Confirmed twice, by independent Node and Python implementations.
+
+**What this settles.** The pin is correct, so Leaflet executes in production and
+the maps work. It also confirms the standing hypothesis about the sandbox
+mismatch: npm's `leaflet` package ships **no** `leaflet.min.js` — cdnjs builds
+that variant itself — so hashing npm's `dist/leaflet.js` legitimately yields a
+different value (`sha384-cxOPjt7s...`). The two SRI console errors present in
+every sandbox run were harness artifacts throughout, never a product defect.
+A provenance comment recording all of this now sits above the pin, so nobody
+"corrects" it to the npm value later.
+
+**Consequence for the remaining coverage gap.** Real Leaflet rendering — tiles,
+markers, clustering, popups — is still unverified *here*, because cdnjs is
+unreachable from the audit container. But the reason it could not load is now
+known to be environmental, not a broken pin. Give the maps a visual once-over on
+the live site after deploy; that is a smoke check, not an open risk.
+
+## Final call: **GO**
+
+Five blockers fixed. Twelve HIGH/MEDIUM fixed. The LOW tail cleared. Three
+further defects found by an independent verification pass and fixed. Every
+`_audit/AUDIT.md` C1–C6 and H1–H8 item re-verified by measurement. 12/12 tests
+green, 0 pageErrors across 11 tabs in both themes, offline degrades honestly,
+and `CACHE_NAME` is bumped once at `corfu-guide-v22`.
+
+Known and accepted, none blocking:
+- **H4** — 22 images reused across 2–7 unrelated records and `hasRealPhoto`
+  read nowhere. Needs photography or a disclosure badge; a content decision.
+- **CSP** — cannot mitigate the XSS class here and cannot deliver
+  `frame-ancestors` on GitHub Pages. Policy drafted in Appendix A for a future
+  host that supports headers.
+- **`'use strict'`** — rejected on evidence; would require rewriting how every
+  test loads source, for zero measured benefit.
+- **`apple-touch-icon` 180×180** and the Pexels-hotlinked `og:image` — neither
+  fixable without a dependency or an image this environment can fetch.
+- **External link liveness** across 417 URLs — script and list exported, run it
+  outside the sandbox when convenient.

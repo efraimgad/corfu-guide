@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // name/hours/phone/price of its matching CORFU_LOCATIONS food record -
     // see js/itinerary.js. Must run after CORFU_LOCATIONS is loaded.
     if (typeof fillItineraryDinnerHooks === 'function') fillItineraryDinnerHooks();
-    // Surfaces each attraction's own priceFlag/verifyNote (js/cards.js's
+    // Surfaces each attraction's own priceFlag/verifyNote (formerly js/cards.js's
     // buildVerifiedInfoHTML shows the same text on its card) inline in the
     // itinerary, instead of the itinerary hardcoding a second, possibly-
     // contradicting price of its own. See js/itinerary.js.
