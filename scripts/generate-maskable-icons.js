@@ -1,3 +1,10 @@
+// CANNOT RUN AS-IS: requires `sharp`, which is deliberately not a dependency
+// of this project (see README — the whole point is no build pipeline).
+// The four icons it produced are already committed under images/icons/ and
+// verified correct: maskable variants are distinct files from the `any`
+// ones, with content inside ~46% of the icon radius, well within the 80%
+// safe zone. Install sharp ad hoc only if the icons need regenerating.
+
 // One-off script for Step 17: generates maskable PWA icon variants by
 // compositing the EXISTING icon-512.png artwork (scaled to 60%, unchanged
 // otherwise - not redrawn) onto a solid background at the manifest's

@@ -270,7 +270,7 @@ function getDayLocationMatches(dayNum) {
 // The itinerary prose used to hardcode its own price for a few attractions
 // (Angelokastro "free entry", Old Fortress "~€6" twice, Achilleion "€7")
 // that each already have a priceFlag/verifyNote-shaped caveat on their own
-// CORFU_LOCATIONS record (see js/cards.js's buildVerifiedInfoHTML) - two
+// CORFU_LOCATIONS record (see buildVerifiedInfoHTML in js/location-shared.js) - two
 // numbers for the same venue that can silently drift apart. Placeholder
 // elements carrying data-price-flag-id="<attraction id>" are filled in
 // here with that record's own priceFlag/verifyNote text, so the itinerary
@@ -328,7 +328,7 @@ function findLocationById(id) {
     return null;
 }
 
-// +302661039649 -> +30 2661 039649 (mirrors js/cards.js's formatPhone(), a
+// +302661039649 -> +30 2661 039649 (mirrors formatPhone() in js/location-shared.js, a
 // tiny formatting helper that isn't worth exposing globally just for this).
 function formatDinnerPhone(dial) {
     const m = /^\+30(\d{4})(\d{6})$/.exec(dial);

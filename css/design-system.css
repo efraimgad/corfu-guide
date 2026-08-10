@@ -2166,6 +2166,10 @@ div[class="text-4xl drop-shadow-sm"] {
 
 /* Image area: consistent zoom-on-hover + bottom gradient so any badges/text
    sitting on the photo stay legible, regardless of the source image. */
+/* NOTE: .premium-card-image is also declared further down in this file
+   (aspect-ratio / height / border-radius). The two blocks share no
+   property, so neither overrides the other — but change one and check the
+   other, or you will wonder why your edit had no effect. */
 .premium-card-image { position: relative; }
 .premium-card-image img {
     transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;
@@ -2241,6 +2245,7 @@ span[class*="rounded-full"][class*="text-xs"][class*="font-bold"] {
    A consistent 4:3 frame (instead of arbitrary fixed pixel heights) so every
    card in a grid lines up cleanly regardless of the source photo's own
    dimensions, with the mask always matching the card's own corner radius. */
+/* Second .premium-card-image block — see the note on the earlier one. */
 .premium-card-image {
     aspect-ratio: 4 / 3;
     height: auto !important;

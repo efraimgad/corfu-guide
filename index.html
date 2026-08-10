@@ -61,7 +61,15 @@
     <link rel="stylesheet" href="tailwind-production.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Loaded non-blocking: preload as a stylesheet, then promote it to one
+    <!-- Deliberately NOT given an `integrity` hash. Google Fonts' css2
+         endpoint returns different bytes per User-Agent (different
+         @font-face src formats and unicode-range subsets), which is
+         fundamentally incompatible with a single fixed SRI hash — pinning
+         it would break the font for some browsers, not secure it. Same
+         reasoning as the Leaflet stylesheets in js/map.js, written down
+         here too so a future security pass does not have to re-derive it.
+
+         Loaded non-blocking: preload as a stylesheet, then promote it to one
          once it arrives. preconnect above only warms the connection — it does
          NOT stop a plain <link rel="stylesheet"> from blocking first paint, so
          any slow path to Google Fonts (corporate proxy, ad blocker, regional

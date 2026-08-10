@@ -1,3 +1,10 @@
+// BROKEN — DOES NOT RUN. This reads BEACH_LOCATIONS / FOOD_LOCATIONS /
+// ATTRACTION_LOCATIONS / GEMS_LOCATIONS from js/map.js. Those four arrays
+// were removed when the map was rewritten to read window.CORFU_LOCATIONS
+// directly, so this throws on load, before reaching any write — it is dead
+// rather than dangerous. Coordinates now live in js/locations-data.js and
+// are edited there directly.
+
 // One-off script for Step 9a: adds lat/lon to every entry in
 // js/locations-data.js, sourced from js/map.js's four hardcoded arrays
 // (BEACH_LOCATIONS/FOOD_LOCATIONS/ATTRACTION_LOCATIONS/GEMS_LOCATIONS),
