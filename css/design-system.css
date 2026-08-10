@@ -2047,13 +2047,20 @@ div[class="text-4xl drop-shadow-sm"] {
 
 /* Tailwind's opacity modifier compiles to a DIFFERENT class than .bg-white
    (.bg-white\/90 -> rgb(255 255 255 / .9)), so the remap just above never
-   reached it. These are the floating "scrim" badges that sit on top of card
-   photography — the ⭐ rating and category pills built in js/locations-data.js
-   (63 sites) and js/cards.js — and their paired text-gray-800/-slate-800
-   DOES flip to near-white in dark theme, so every one of them rendered
-   near-white on near-white (measured 1.05:1). Routed through a scrim token
-   so the badge stays a legible contrast plate over a photo in both themes
-   rather than a fixed white chip. */
+   reached it. Paired text-gray-800/-slate-800 DOES flip to near-white in dark
+   theme, so these rendered near-white on near-white (measured 1.05:1). Routing
+   them through a scrim token keeps the badge a legible contrast plate over a
+   photo in both themes rather than a fixed white chip.
+
+   STATUS: the .bg-white\/90 selectors below currently match NOTHING. They were
+   written for the ⭐ rating / category pills that lived in ratingPriceHtml in
+   js/locations-data.js, a generator-only field with no runtime consumer, which
+   the pre-launch audit removed (~64KB of markup nothing rendered). Kept
+   deliberately rather than deleted: .bg-white\/60 and .bg-white\/20 in the same
+   rule ARE still used (index.html and js/ respectively), and any future use of
+   the /90 variant would silently reintroduce the original 1.05:1 defect.
+   (An earlier version of this comment claimed "63 sites" and credited
+   js/cards.js — both stale; that file was deleted in Phase C2.) */
 .bg-white\/90, .bg-white\/60, .bg-white\/20 { background-color: var(--gt-scrim-raised); }
 .bg-white\/90, .bg-white\/60 { color: var(--gt-scrim-ink); }
 .bg-white\/90 .text-gray-800, .bg-white\/90 .text-slate-800,
