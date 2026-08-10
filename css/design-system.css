@@ -48,6 +48,12 @@
   --gt-paper-raised:  #ffffff;
   --gt-paper-sunken:  #e9edec;
   --gt-hair:          #dde2e2;
+  /* --gt-hair is tuned to read as a quiet DECORATIVE divider and measures
+     1.11-1.31:1 against the surfaces it sits on. That is fine for a section
+     rule, but WCAG 1.4.11 needs 3:1 for a boundary that is the only way to
+     perceive a control's extent - a text input's outline is the SC's own
+     named example. --gt-hair-strong is that second, functional token. */
+  --gt-hair-strong:   #7f8a8c;
   --gt-ink-900:       #1a2226;
   --gt-ink-700:       #384347;
   --gt-ink-500:       #5c6a6c;
@@ -198,7 +204,14 @@
   --gt-danger-text: #b3261e;
 
   /* ---------- Typography ---------- */
-  --gt-font-sans: 'Assistant', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* Hebrew-capable fallbacks are named explicitly rather than left to the
+     generic sans-serif: Assistant is loaded non-blocking from Google Fonts
+     and its font FILES (fonts.gstatic.com) are not precached, so a
+     first-time offline visitor renders the entire Hebrew UI in whatever the
+     platform picks. -apple-system/Segoe UI/Roboto do cover Hebrew on their
+     own platforms; the two named families cover the rest. */
+  --gt-font-sans: 'Assistant', -apple-system, 'Segoe UI', Roboto,
+                  'Noto Sans Hebrew', 'Arial Hebrew', Arial, sans-serif;
   --gt-font-mono: ui-monospace, Menlo, Consolas, monospace; /* tabular data: times, prices, distances */
 
   --gt-text-2xl: 1.75rem;   /* 28px — day title, section H1 */
@@ -258,6 +271,7 @@
   --gt-paper-raised:  #182022;
   --gt-paper-sunken:  #0c1113;
   --gt-hair:          #2a3336;
+  --gt-hair-strong:   #6d797b;
   --gt-ink-900:       #eaeff0;
   --gt-ink-700:       #c2ccce;
   --gt-ink-500:       #93a2a4;
@@ -347,7 +361,7 @@
   :root:not([data-theme="light"]){
     color-scheme: dark; /* see :root's own note - keeps UA form-control chrome dark */
     --gt-paper:        #11171a; --gt-paper-raised:  #182022; --gt-paper-sunken:  #0c1113;
-    --gt-hair:          #2a3336; --gt-ink-900:       #eaeff0; --gt-ink-700:       #c2ccce;
+    --gt-hair:          #2a3336; --gt-hair-strong:   #6d797b; --gt-ink-900:       #eaeff0; --gt-ink-700:       #c2ccce;
     /* See the :root[data-theme="dark"] block's own comments above for why
        these (--gt-ink-300, the four --gt-cat-*-text, the four
        --gt-status-*-text) are the contrast-fixed Phase E sub-step 1
@@ -460,8 +474,34 @@
    token only for the one genuinely danger-context control (the emergency
    FAB, already retinted to --gt-status-closed for its background - see
    #emergency-fab-btn above). */
-.gt-focus-ring:focus{ box-shadow:0 0 0 4px var(--gt-primary-100); }
-.gt-focus-ring-danger:focus{ box-shadow:0 0 0 4px var(--gt-status-closed-soft); }
+/* Two-layer ring: an inner band in the page colour separates the control from
+   the outer ring, and the outer ring carries a SATURATED token so it clears
+   WCAG 1.4.11's 3:1 for a focus indicator against the page.
+   These used to be a single 4px band in a "soft" background token
+   (--gt-primary-100 / --gt-status-closed-soft). Those are tuned to sit BEHIND
+   text, not to separate a ring from the page, and measured 1.11-1.18:1 against
+   the body background in both themes — an effectively invisible focus state on
+   the first three tab stops on the page, including the emergency-numbers
+   button, which is the control most likely to be needed under stress.
+   Both buttons also carry Tailwind's focus:outline-none, so this box-shadow is
+   the only focus affordance they have. */
+.gt-focus-ring:focus{ box-shadow:0 0 0 2px var(--gt-paper), 0 0 0 5px var(--gt-primary-600); }
+.gt-focus-ring-danger:focus{ box-shadow:0 0 0 2px var(--gt-paper), 0 0 0 5px var(--gt-status-closed); }
+
+/* Functional boundaries get --gt-hair-strong, decorative ones keep --gt-hair.
+   Scoped to real form controls rather than sweeping all 188 .gt-border-hair
+   call sites: on a card or a section divider the hairline is decoration and the
+   surrounding shadow/spacing already establishes the edge, so WCAG 1.4.11 does
+   not apply and darkening them would be a visual change with no accessibility
+   gain. On an input the border IS the control's only perceivable extent.
+   Covers the 9 inputs in index.html today and anything added later, including
+   the runtime-generated reservation and converter fields. */
+input.gt-border-hair,
+select.gt-border-hair,
+textarea.gt-border-hair,
+.gt-field-control{
+  border-color: var(--gt-hair-strong);
+}
 
 /* Native checkbox accent-color (map-layer toggles, legacy beach-map view) -
    these genuinely are the four map-pin categories, so token-bound to
@@ -628,7 +668,15 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 .gt-topbar{
   position:fixed; inset-inline:0; top:0; z-index:var(--gt-z-nav);
   display:flex; align-items:center; gap:var(--gt-space-3);
-  height:64px; padding:0 var(--gt-space-4);
+  /* The inset must GROW the bar, not eat into it. With a fixed height plus
+     padding-top under the global box-sizing:border-box, the safe-area inset
+     was subtracted from the content box instead: at a simulated 44px inset the
+     search field and status chips rendered 10-12px BELOW the bar's own bottom
+     edge, and ~25-36px below it on an iPhone 14/15 Pro Max (~59px inset) —
+     right where the notch/Dynamic Island sits. Every other fixed element in
+     this file already adds the inset additively via calc(); the topbar was the
+     one that did not. */
+  height:calc(64px + env(safe-area-inset-top, 0)); padding:0 var(--gt-space-4);
   padding-top:env(safe-area-inset-top, 0);
   background:var(--gt-paper-raised); border-bottom:1px solid var(--gt-hair);
   box-shadow:var(--gt-sh-2);
@@ -645,7 +693,11 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
   font-size:1rem; pointer-events:none;
 }
 .gt-topbar__search-input{
-  width:100%; border:1px solid var(--gt-hair); border-radius:var(--gt-r-full);
+  /* Functional boundary, not decoration — this outline is the only thing
+     marking where the search field is, so it takes --gt-hair-strong (3:1)
+     rather than the decorative --gt-hair (measured 1.31:1 light / 1.28:1 dark
+     against its own fill). */
+  width:100%; border:1px solid var(--gt-hair-strong); border-radius:var(--gt-r-full);
   padding:9px 40px 9px 14px; font-size:var(--gt-text-sm); font-family:var(--gt-font-sans);
   background:var(--gt-paper); color:var(--gt-ink-900);
 }
@@ -943,7 +995,18 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
      style always wins over any CSS selector's specificity, ID or not.
      Genuinely unavoidable without changing switchTab()'s shared show/hide
      mechanism for all 15 tabs just for this one tab's desktop layout. */
-  #explore.gt-explore{
+  /* Scoped to .active — WITHOUT it this rule also un-hid Explore on every
+     OTHER tab at >=1024px. switchTab() hides a tab with an inline
+     style.display='none', and `display:grid !important` out-specifies an
+     inline style, so #explore stayed a live grid while About/Dashboard/Guide
+     etc. were on screen: measured at 1440x900 on a session that had never
+     opened Explore, #explore rendered 1216x186 with its chip row and search
+     box (#explore-subheader, 1184x122) painted on top of unrelated content,
+     growing to the full ~750px map+list grid once Explore had been visited
+     once. switchTab() already toggles .active on the target tab, so scoping
+     to it keeps the !important that the inline style genuinely requires while
+     limiting it to the one tab it is meant for. */
+  #explore.gt-explore.active{
     display:grid !important;
     grid-template-columns: minmax(320px, 420px) 1fr;
     column-gap: var(--gt-space-5);
@@ -1040,7 +1103,7 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 .gt-explore-icon-btn:focus-visible{ outline:2px solid var(--gt-primary-500); outline-offset:1px; }
 
 /* -- Detail sheet -- */
-.gt-explore-sheet-thumb{ width:100%; max-height:180px; object-fit:cover; border-radius:var(--gt-r-md); margin-bottom:var(--gt-space-3); }
+.gt-explore-sheet-thumb{ width:100%; max-height:180px; aspect-ratio:16/9; object-fit:cover; border-radius:var(--gt-r-md); margin-bottom:var(--gt-space-3); }
 .gt-explore-sheet-actions{ display:flex; gap:var(--gt-space-2); flex-wrap:wrap; margin:var(--gt-space-3) 0; }
 .gt-explore-sheet-body{ font-family:var(--gt-font-sans); font-size:var(--gt-text-md); line-height:var(--gt-lh-body); color:var(--gt-ink-700); margin-bottom:var(--gt-space-3); }
 .gt-explore-sheet-body p{ margin:0 0 var(--gt-space-2); }
@@ -1671,6 +1734,18 @@ h2 + p, h3 + p { margin-top: 0.6em; }
    min-height only so their horizontal rhythm is untouched. Scoped to
    pointer:coarse so desktop keeps its tighter, denser chip rows. */
 @media (pointer: coarse), (max-width: 767px) {
+    /* The itinerary day-header controls, one template in
+       js/itinerary-view.js rendered once per day (7 days = 21 controls).
+       Measured at 390x844 before this rule: the "הושלם" toggle 94.7x36,
+       the euro-amount input 80x28, the day-map button 38x30. The 44px floor
+       was applied by enumerating class names, and this template's ad-hoc
+       Tailwind utilities were never on that list — which is also why
+       CHANGES.md's "~9 remaining" undercounted.
+       These are the controls used once per day while standing in Corfu
+       adjusting the plan one-handed. */
+    .gt-itinerary-context label,
+    .gt-itinerary-context .day-budget-input,
+    .gt-itinerary-context button,
     .food-filter-btn, .beach-filter-btn, .attr-filter-btn,
     .gem-filter-btn, .faq-filter-btn,
     .gt-chip, .dashboard-card-link, .verified-tel,
@@ -1682,6 +1757,11 @@ h2 + p, h3 + p { margin-top: 0.6em; }
         min-height: 44px;
         display: inline-flex; align-items: center; justify-content: center;
     }
+    /* The day-map button is icon-only, so the 44px floor has to apply on the
+       cross axis too — it measured 38px wide. The 'הושלם' checkbox itself
+       stays 20x20 deliberately: it is wrapped in its <label>, which is the
+       real hit area at 95x44, and inflating the box would just look wrong. */
+    .gt-itinerary-context button { min-width: 44px; }
     .verified-tel { line-height: normal; }
     /* The small inline badge-links inside cards ("מידע נוסף", website /
        tip pills, the accent-soft chips) — authored at text-xs with tight
@@ -2961,6 +3041,20 @@ a[class*="rounded-2xl"]:not(.premium-card) {
    both themes. */
 .dashboard-card:not(.dashboard-card-highlight) .dashboard-card-label {
   color: var(--accent-text, var(--gt-ink-500));
+}
+/* The highlight card paints a FIXED dark navy gradient
+   (linear-gradient(135deg, var(--gt-primary-900), var(--gt-primary-700))) that
+   does not flip between themes, so everything on it must be light in BOTH.
+   .dashboard-card-label and -sub already got that treatment; .dashboard-card-value
+   did not, and kept `color: var(--gt-ink-900)` from its own rule below. That
+   token IS theme-flipping — near-black in light mode — so the flight countdown,
+   the single most-glanced-at number on the dashboard, measured 1.34:1 against
+   the gradient's dark stop and 2.14:1 against its light one. It passed in dark
+   mode only by accident, because the ink token flipped near-white while the
+   card's gradient stayed put. */
+.dashboard-card-highlight .dashboard-card-value,
+.dashboard-card-highlight .dashboard-card-value-sm {
+  color: #fff;
 }
 .dashboard-card--trip      { --accent: var(--gt-primary-500); --accent-text: var(--gt-primary-700-text); }
 .dashboard-card--weather   { --accent: var(--gt-accent-gold-600); --accent-text: var(--gt-accent-gold-text); }

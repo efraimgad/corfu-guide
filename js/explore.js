@@ -370,7 +370,7 @@ function exploreRowCardHtml(d, catKey) {
 
     return `<div class="gt-row-card gt-explore-row" data-loc-cat="${escapeAttr(catKey)}" data-loc-id="${escapeAttr(d.id)}">
       <button type="button" class="gt-explore-row__main" aria-label="${escapeAttr(name)}">
-        <img class="gt-row-card__thumb" src="${escapeAttr(img.src || '')}" alt="${escapeAttr(img.alt || name)}" loading="lazy" decoding="async">
+        <img class="gt-row-card__thumb" src="${escapeAttr(img.src || '')}" alt="${escapeAttr(img.alt || name)}" width="64" height="64" loading="lazy" decoding="async">
         <div class="gt-row-card__body">
           <p class="gt-row-card__title">${escapeHtml(name)}</p>
           <div class="gt-row-card__meta">
@@ -642,7 +642,7 @@ function openExploreSheet(catKey, id) {
     const mapBtn = `<button type="button" class="gt-btn gt-btn--secondary" onclick="gtCloseExploreSheet(); showOnHomeMap('${escapeAttr(catKey)}','${escapeAttr(id)}');">${GT_ICON_MAP} במפה</button>`;
 
     bodyEl.innerHTML = `
-      ${img.src ? `<img class="gt-explore-sheet-thumb" src="${escapeAttr(img.src)}" alt="${escapeAttr(img.alt || name)}" loading="lazy" decoding="async">` : ''}
+      ${img.src ? `<img class="gt-explore-sheet-thumb" src="${escapeAttr(img.src)}" alt="${escapeAttr(img.alt || name)}" width="640" height="360" loading="lazy" decoding="async">` : ''}
       <div class="gt-row-card__meta" style="margin-bottom:var(--gt-space-2);">
         <span class="gt-cat-${cat.tag}-bg" style="display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:var(--gt-r-full);font-weight:700;">${cat.icon} ${cat.label}</span>
         <span class="sep">·</span><span class="gt-status ${status.cls}">${status.label}</span>

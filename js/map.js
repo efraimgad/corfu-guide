@@ -772,6 +772,13 @@ let exploreMapLayerGroups = { beaches: null, food: null, attractions: null, gems
 const exploreMarkerIndex = {};
 
 function initExploreMap() {
+    // Same stale-guard hazard as initHomeMap(): both callers below check
+    // `!exploreMapInstance` BEFORE loadLeafletThen() resolves, so two rapid
+    // entries (ensureExploreMapVisible then toggleExploreMap) can both pass
+    // that check and both queue an init. Re-initialising a Leaflet container
+    // throws. No caller depends on re-initialisation — they all guard on the
+    // instance being absent — so returning early is safe.
+    if (exploreMapInstance) return;
     if (typeof L === 'undefined') {
         const el = document.getElementById('explore-map');
         if (el) el.innerHTML = '<p class="text-center gt-text-500 p-10">לא ניתן לטעון את המפה כרגע (חיבור אינטרנט נדרש).</p>';
@@ -962,6 +969,17 @@ let homeMapLayerGroups = { beaches: null, food: null, attractions: null, gems: n
 const homeMarkerIndex = {};
 
 function initHomeMap() {
+    // Guarded HERE, not only in gtActivateHomeMap(), because the caller's
+    // `if (!homeMapInstance)` check is stale by the time this runs.
+    // js/ui.js calls gtActivateHomeMap() twice on every Home-tab entry — once
+    // immediately and again after a double requestAnimationFrame, to re-run
+    // invalidateSize() once layout has settled. While Leaflet is still loading
+    // homeMapInstance is null on BOTH calls, so both chain their own
+    // .then(callback) onto the same leafletLoadPromise; when it resolves,
+    // initHomeMap() runs twice and the second L.map('home-map') threw
+    // "Map container is already initialized". Reproduced 3/3, and real CDN
+    // latency on hotel wifi only widens the window.
+    if (homeMapInstance) return;
     if (typeof L === 'undefined') {
         const el = document.getElementById('home-map');
         if (el) el.innerHTML = '<p class="text-center gt-text-500 p-10">לא ניתן לטעון את המפה כרגע (חיבור אינטרנט נדרש).</p>';

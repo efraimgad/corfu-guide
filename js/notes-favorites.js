@@ -39,8 +39,15 @@ function collectNotesFavorites() {
 }
 
 function notesFavoritesRowHtml(entry) {
-    const starsHtml = entry.rating
-        ? `<span class="text-amber-500 font-semibold" aria-label="דירוג ${entry.rating} מתוך 5">${'★'.repeat(entry.rating)}${'☆'.repeat(5 - entry.rating)}</span>`
+    // entry.rating is normalised to an integer 1-5 or null by
+    // normalizeItemState() (js/storage.js) — but it is escaped here too, and
+    // the star counts are clamped, so this stays safe even if a future caller
+    // builds an `entry` from somewhere other than getItemState(). It used to
+    // be interpolated raw, which made a crafted localStorage value execute as
+    // an event handler on hover.
+    const stars = Math.max(0, Math.min(5, Number(entry.rating) || 0));
+    const starsHtml = stars
+        ? `<span class="text-amber-500 font-semibold" aria-label="דירוג ${escapeAttr(String(stars))} מתוך 5">${'★'.repeat(stars)}${'☆'.repeat(5 - stars)}</span>`
         : '';
     return `
     <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">

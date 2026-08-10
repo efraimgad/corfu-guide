@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Single-page app: index.html is the only route. Tab state lives in the URL
+     hash (#itinerary, #explore, ...), and crawlers do not index hash fragments
+     as separate URLs, so one <loc> is correct and complete here. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://efraimgad.github.io/corfu-guide/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

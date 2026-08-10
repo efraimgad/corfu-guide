@@ -224,26 +224,30 @@ function updateDashFavCount() {
     el.textContent = getFavorites().length;
 }
 
-// Favorites span four different tabs (beach-/food-/attr-/gem-), so a
-// single "view favorites" action jumps to whichever tab currently holds
-// the most saved items — the most useful single destination — with that
-// tab's own "favorites" filter already applied. Defaults to beaches
-// (matching the mobile bottom-nav heart button) when nothing is saved yet.
+// "View favourites" goes to the Activities tab, filtered to saved cards.
+//
+// This used to fan out across four tabs via
+// `{ beaches: filterBeaches, ... }[targetTab]`, counting favourites by a
+// `beach-`/`food-`/`attr-`/`gem-` id prefix. All four functions were deleted
+// with those tabs in Phase C2, so the object literal threw a ReferenceError
+// before ever reaching switchTab() and the button silently did nothing.
+//
+// The prefix-counting was doubly dead: the only favouritable cards in the
+// document are the 14 <article data-id="activity-N"> activity cards (Explore's
+// rows use data-loc-id and carry no heart), so no saved id can ever match a
+// `beach-`/`food-`/`attr-`/`gem-` prefix and the tally always resolved to its
+// `beaches` default. Activities is not one destination among four — it is the
+// only place a favourite can exist.
 function viewFavorites() {
-    const favorites = getFavorites();
-    const counts = { beaches: 0, food: 0, attractions: 0, gems: 0 };
-    const prefixToTab = { 'beach-': 'beaches', 'food-': 'food', 'attr-': 'attractions', 'gem-': 'gems' };
-    favorites.forEach(id => {
-        const prefix = Object.keys(prefixToTab).find(p => id.startsWith(p));
-        if (prefix) counts[prefixToTab[prefix]]++;
-    });
-    const tabByCount = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
-    const targetTab = (tabByCount && tabByCount[1] > 0) ? tabByCount[0] : 'beaches';
-
-    const filterFn = { beaches: filterBeaches, food: filterFood, attractions: filterAttractions, gems: filterGems }[targetTab];
-    switchTab(targetTab, true);
-    setTimeout(() => filterFn('favorites'), 150);
-    window.scrollTo({ top: 100, behavior: 'smooth' });
+    if (typeof switchTab === 'function') switchTab('activities', true);
+    const apply = () => {
+        if (typeof showActivityFavoritesOnly === 'function') showActivityFavoritesOnly(true);
+        const grid = document.getElementById('activities-grid');
+        if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    // switchTab() renders the tab lazily (js/ui.js ensureTabRendered), so the
+    // grid may not exist yet on the first visit.
+    if (document.getElementById('activities-grid')) apply(); else setTimeout(apply, 150);
 }
 
 // Live weather via Open-Meteo — free, no API key required. Open-Meteo's

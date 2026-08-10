@@ -264,7 +264,21 @@ const revealObserver = ('IntersectionObserver' in window) ? new IntersectionObse
             revealObserver.unobserve(entry.target); // reveal once, then stop watching (cheaper)
         }
     });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }) : null;
+    // threshold MUST stay 0 (any intersecting pixel), not a ratio.
+    //
+    // A ratio is a fraction of the TARGET'S OWN box, so an element taller than
+    // ~10x the viewport can never present 10% of itself no matter where the
+    // page is scrolled. The observed set here includes whole content panels —
+    // the FAQ list measures 5,634px tall at 390x844, trip-planning 1,879px,
+    // language-daily 3,252px — so with threshold 0.1 they were never marked
+    // .revealed and stayed at opacity:0 (css/design-system.css .reveal-on-scroll)
+    // for as long as the user sat at the top of the page. Tapping "מדריך" gave
+    // a blank screen below the intro with no cue to scroll.
+    //
+    // rootMargin's -40px bottom inset still delays the reveal until the element
+    // is genuinely on screen rather than one pixel past the fold, so the
+    // entrance animation keeps its intended feel.
+}, { threshold: 0, rootMargin: '0px 0px -40px 0px' }) : null;
 
 function setupRevealAnimations(container) {
     if (!revealObserver) return; // graceful no-op on very old browsers

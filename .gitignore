@@ -2,3 +2,8 @@ node_modules/
 js/trip-private.js
 package-lock.json
 .claude/
+
+# Pre-launch audit screenshot evidence (154 PNGs, ~122MB). Regenerable from
+# the audit harness, and this repo is also the deployed GitHub Pages site —
+# committing them would bloat history permanently for zero runtime benefit.
+_audit/shots/

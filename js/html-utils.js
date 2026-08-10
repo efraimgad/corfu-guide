@@ -2,10 +2,35 @@
 // template strings (cards.js, reservations.js, packing.js, notes-favorites.js).
 // Loaded first so it's available no matter which of those loads next.
 
+// Escapes a value for use inside a DOUBLE-QUOTED HTML attribute.
+//
+// The single quote matters as much as the double quote here, even though a
+// double-quoted attribute cannot be terminated by one. Most call sites in this
+// codebase nest the result inside a single-quoted JS string inside a
+// double-quoted attribute:
+//     onclick="openReservationForm('${escapeAttr(r.id)}')"
+// so an unescaped ' closes the JS string and everything after it is parsed as
+// code. That was a live, exploitable hole: a reservation id read back from
+// localStorage reached this exact pattern (js/reservations.js), and clicking
+// the row's ordinary edit button executed it.
+//
+// Escaping it HERE rather than at the call sites closes the hole for all of
+// them at once, including any added later by someone who has not noticed that
+// the surrounding quoting is two levels deep. &#39; is valid in both contexts:
+// the HTML parser decodes it back to ' before the JS is compiled.
+//
+// < and > are deliberately NOT escaped: inside a quoted attribute value they
+// are ordinary characters and cannot open a tag, and leaving them alone keeps
+// legitimate content (a note reading "3 < 5") intact. Use escapeHtml for text
+// that lands in element content, which is where they do matter.
+//
+// & must be replaced FIRST or the & in the entities emitted below would be
+// re-escaped into &amp;#39;.
 function escapeAttr(str) {
     return String(str == null ? '' : str)
         .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;');
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 }
 
 function escapeHtml(str) {
