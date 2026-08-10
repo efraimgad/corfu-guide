@@ -495,6 +495,44 @@ with a mechanical fix:**
 - **External link liveness** across 417 URLs — still unverifiable here. The
   exported list and a ready-to-run script are in the coverage table above.
 
+### The LOW tail, and one item rejected on evidence
+
+The remaining LOW findings were cleared in `2202076`: the stale-pointer
+comments, the dead `mapLayerGroups` / `beachMapInstance` declarations, the
+duplicate `.premium-card-image` cross-reference, the Google Fonts SRI
+rationale, banners on the two one-off scripts that cannot run, and — finding
+O-3 — a SUPERSEDED banner plus a verified-status column on `_audit/AUDIT.md`
+itself, so it no longer reads as an open list of six critical defects that are
+all fixed.
+
+**`'use strict'` (L9) was attempted and rejected on evidence, not preference.**
+Adding it to all 25 files broke **7 of the 12 test scripts**
+(`TypeError: win.focusMapOnDayLocations is not a function`). The cause is real
+and specific: the tests load source by joining files and running them through
+`win.eval()`, and a strict-mode `eval` gets its own scope, so top-level function
+declarations no longer leak to the global object. In a browser, `<script>` tags
+would still publish them — so this is a test-harness incompatibility rather
+than proof the app breaks.
+
+That distinction does not rescue the change. Adopting `'use strict'` would mean
+rewriting how every test loads the code, immediately before launch, to gain
+protection against a class of bug the audit measured at **zero occurrences**
+(369 top-level declarations scanned, 0 collisions, 12 implicit-global
+candidates all false positives). The suite is the only safety net this project
+has; trading it for a hypothetical benefit is the wrong way round. Reverted,
+12/12 restored.
+
+Worth doing later, alongside a change to how the tests load source — not as a
+pre-launch edit.
+
+**Two LOW items remain open by choice:** a 180×180 `apple-touch-icon` (needs an
+image library this project deliberately does not depend on; iOS downscales the
+existing 192 correctly), and `og:image` / `twitter:image` still hotlinked to
+Pexels — social-card-only, so it affects no offline behaviour, and no
+replacement could be sourced or content-verified from this sandbox.
+
+---
+
 ## Revised call
 
 **GO, conditional on one check.**
