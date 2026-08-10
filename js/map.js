@@ -48,6 +48,13 @@ function loadLeafletThen(callback) {
 
             const leafletScript = document.createElement('script');
             leafletScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+            // VERIFIED against the live cdnjs bytes (2026-08-10): this hash is
+            // correct and Leaflet loads in production. Note that npm's leaflet
+            // package ships NO leaflet.min.js — cdnjs builds that variant itself —
+            // so hashing npm's dist/leaflet.js gives a DIFFERENT, legitimate value
+            // (sha384-cxOPjt7s...). Do not "correct" this pin to that one.
+            // Re-verify after any Leaflet version bump:
+            //   curl -sfL <this url> -o /tmp/l.js && node -e 'const c=require("crypto"),f=require("fs");console.log("sha384-"+c.createHash("sha384").update(f.readFileSync("/tmp/l.js")).digest("base64"))'
             leafletScript.integrity = 'sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO';
             leafletScript.crossOrigin = 'anonymous';
             leafletScript.onload = () => {

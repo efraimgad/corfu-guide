@@ -13,8 +13,9 @@ the audit.
 
 > **STATUS: superseded by the Phase 3 section at the end of this file.** The
 > verdict below is the Phase 1 finding, kept as the record of what was found.
-> All five blockers are now fixed and verified; the current call is **GO,
-> conditional on the Leaflet SRI check (H8)**.
+> All five blockers are fixed and verified, and the Leaflet SRI check (H8)
+> came back **CORRECT** on 2026-08-10. The current call is an unconditional
+> **GO** — see the Phase 5 section at the end of this file.
 
 **NO-GO.** Five blockers, and none of them are subtle: a dashboard button that is 100 % dead
 because it calls four functions that no longer exist, two separately-exploitable stored-XSS
@@ -42,7 +43,7 @@ are **honest gaps, not clean results**:
 | Unverifiable here | Why | Command to finish outside the sandbox |
 |---|---|---|
 | External link liveness (417 URLs) | `images.pexels.com`, `maps.google.com`, `images.unsplash.com` all fail CONNECT with 403 | `bash scratchpad/agent2/check-links.sh scratchpad/agent2/external-urls.txt > results.tsv` |
-| Leaflet SRI pin correctness | `cdnjs.cloudflare.com` unreachable | `curl -s https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js \| openssl dgst -sha384 -binary \| openssl base64 -A` |
+| ~~Leaflet SRI pin correctness~~ | **RESOLVED 2026-08-10** — checked against live cdnjs bytes by the owner: the pin at `js/map.js:47` is **CORRECT**. Leaflet loads in production. | closed |
 | Live site headers / Pages config | `efraimgad.github.io` blocked; `api.github.com/repos/.../pages` rejected by proxy | `curl -sI https://efraimgad.github.io/corfu-guide/sw.js` |
 | Webfont rendering metrics | `fonts.googleapis.com` resets in-browser; all rendering measured against the CSS **fallback** stack | re-run agent scripts on a normal network |
 | 60 of 154 responsive matrix cells | Agent 6's exhaustive per-cell run was killed for time | re-run `scratchpad/agent6/full_matrix.js` |
@@ -634,3 +635,54 @@ Real Leaflet rendering — tiles, markers, clustering, popups — remains
 sandbox. The double-init guard was proven with a mock; the visual integration
 was not. Supabase sync paths are likewise unexercised. Both are listed in the
 coverage table above with the commands to close them.
+
+
+---
+
+# Phase 5 — H8 resolved: **GO**
+
+The last gate is closed. The Leaflet SRI pin at `js/map.js:47` was checked
+against the live cdnjs bytes on a normal network and **matches exactly**:
+
+```
+got:  sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO
+pin:  sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO
+```
+
+Confirmed twice, by independent Node and Python implementations.
+
+**What this settles.** The pin is correct, so Leaflet executes in production and
+the maps work. It also confirms the standing hypothesis about the sandbox
+mismatch: npm's `leaflet` package ships **no** `leaflet.min.js` — cdnjs builds
+that variant itself — so hashing npm's `dist/leaflet.js` legitimately yields a
+different value (`sha384-cxOPjt7s...`). The two SRI console errors present in
+every sandbox run were harness artifacts throughout, never a product defect.
+A provenance comment recording all of this now sits above the pin, so nobody
+"corrects" it to the npm value later.
+
+**Consequence for the remaining coverage gap.** Real Leaflet rendering — tiles,
+markers, clustering, popups — is still unverified *here*, because cdnjs is
+unreachable from the audit container. But the reason it could not load is now
+known to be environmental, not a broken pin. Give the maps a visual once-over on
+the live site after deploy; that is a smoke check, not an open risk.
+
+## Final call: **GO**
+
+Five blockers fixed. Twelve HIGH/MEDIUM fixed. The LOW tail cleared. Three
+further defects found by an independent verification pass and fixed. Every
+`_audit/AUDIT.md` C1–C6 and H1–H8 item re-verified by measurement. 12/12 tests
+green, 0 pageErrors across 11 tabs in both themes, offline degrades honestly,
+and `CACHE_NAME` is bumped once at `corfu-guide-v22`.
+
+Known and accepted, none blocking:
+- **H4** — 22 images reused across 2–7 unrelated records and `hasRealPhoto`
+  read nowhere. Needs photography or a disclosure badge; a content decision.
+- **CSP** — cannot mitigate the XSS class here and cannot deliver
+  `frame-ancestors` on GitHub Pages. Policy drafted in Appendix A for a future
+  host that supports headers.
+- **`'use strict'`** — rejected on evidence; would require rewriting how every
+  test loads source, for zero measured benefit.
+- **`apple-touch-icon` 180×180** and the Pexels-hotlinked `og:image` — neither
+  fixable without a dependency or an image this environment can fetch.
+- **External link liveness** across 417 URLs — script and list exported, run it
+  outside the sandbox when convenient.
