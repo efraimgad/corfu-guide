@@ -414,7 +414,7 @@ than crash — because a regression test that cannot fail is worse than none.
 | H9 | Topbar overflows under a notch | 10–12px | **0** | `a16d3ac` |
 | H10 | Map double-init threw | 3/3 runs | **0** errors | `be1e1d4` |
 | M4/M5 | Canonical, og:url, sitemap, manifest | absent / drifted | added, resynced to tokens | `4b3ef7f` |
-| M7 | Dead generator-only payload | 64,130 B (14.58%) | removed | `c21499b` |
+| M7 | Dead generator-only payload | 64,897 B (14.75%) | removed | `c21499b` |
 | M8 | Extractor would blank the dataset | writes silently | refuses, exits 1 | `96ef510` |
 | M3b | APP_SHELL font URL drift | both directions | matches `index.html` | `a92937e` |
 | M6 | Itinerary touch targets | 21 under 44px | 44×44 | `a49c6d5` |
@@ -487,11 +487,16 @@ with a mechanical fix:**
   is a broken app for travellers offline in Greece. Add it only alongside a
   migration to a host that supports real headers, or after converting the
   inline handlers to delegated listeners.
-- **The unresolved CLS 0.49.** Reproducible only under one throttled
-  configuration, contradicted by three other measurements (0.0004, 0.0004,
-  0.000), and Lighthouse's root-cause gatherer crashed both runs so no shifting
-  element can be named. Recorded as a number without a diagnosis. Do not act on
-  it without a working trace.
+- **The CLS 0.49 is now EXPLAINED, and is not a product defect.** The
+  independent verification pass reproduced it and found the cause: Lighthouse
+  does not use the harness's route stubbing, so its own `network-requests`
+  audit shows the Google Fonts stylesheet and the open-meteo fetch both
+  **hanging unresolved** (`statusCode: -1`, no `endTime`) rather than failing
+  fast. The shift is blocked-host placeholder collapse, not layout instability
+  in the app. Directly instrumented measurement of the same page and tab, with
+  those hosts stubbed, gives **0.00036**. Four measurements now agree
+  (0.0004 / 0.0004 / 0.000 / 0.00036) against one distorted outlier.
+  Lighthouse's absolute scores are not usable evidence in this sandbox.
 - **External link liveness** across 417 URLs — still unverifiable here. The
   exported list and a ready-to-run script are in the coverage table above.
 
