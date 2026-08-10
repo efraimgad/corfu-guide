@@ -229,10 +229,25 @@ function injectPersonalTrackingWidgets() {
 
 // Local-only writes for now (see file header) — one delegated listener
 // instead of inline onclick on every one of the ~176 injected widgets.
+// A widget with NO [data-id] ancestor belongs to a scoped owner that wires its
+// own listener — currently the Explore detail sheet, which renders into
+// #explore-sheet-tracking deliberately outside any [data-id] card so state
+// updates cannot paint the wrong element (see js/explore.js's own note).
+// These document-wide listeners still MATCH that widget, so without this guard
+// they dereferenced null and threw an uncaught TypeError on every visited /
+// star / note interaction inside the sheet. The state still saved, because the
+// scoped listener handled it — the exceptions were invisible to the user and
+// silent in normal use, which is exactly why they survived.
+function ptOwnerId(el) {
+    const host = el && el.closest('[data-id]');
+    return host ? host.dataset.id : null;
+}
+
 document.addEventListener('click', (e) => {
     const visitedBtn = e.target.closest('.pt-visited-btn');
     if (visitedBtn) {
-        const itemId = visitedBtn.closest('[data-id]').dataset.id;
+        const itemId = ptOwnerId(visitedBtn);
+        if (!itemId) return;   // scoped owner handles it
         setItemState(itemId, { is_visited: !getItemState(itemId).is_visited });
         renderPersonalTrackingWidget(itemId);
         // Push to Supabase in the background (Step 7) - the line above already
@@ -244,7 +259,8 @@ document.addEventListener('click', (e) => {
 
     const starBtn = e.target.closest('.pt-star');
     if (starBtn) {
-        const itemId = starBtn.closest('[data-id]').dataset.id;
+        const itemId = ptOwnerId(starBtn);
+        if (!itemId) return;   // scoped owner handles it
         const value = Number(starBtn.dataset.value);
         // Clicking the currently-set star clears the rating (common star-widget convention).
         const newRating = getItemState(itemId).rating === value ? null : value;
@@ -256,7 +272,9 @@ document.addEventListener('click', (e) => {
 
     const noteToggle = e.target.closest('.pt-note-toggle');
     if (noteToggle) {
-        const textarea = noteToggle.closest('.personal-tracking-widget').querySelector('.pt-note-textarea');
+        const widget = noteToggle.closest('.personal-tracking-widget');
+        const textarea = widget && widget.querySelector('.pt-note-textarea');
+        if (!textarea) return;
         const nowHidden = textarea.classList.toggle('hidden');
         noteToggle.setAttribute('aria-expanded', String(!nowHidden));
         if (!nowHidden) textarea.focus();
@@ -268,7 +286,8 @@ const noteSaveTimers = {};
 document.addEventListener('input', (e) => {
     const textarea = e.target.closest('.pt-note-textarea');
     if (!textarea) return;
-    const itemId = textarea.closest('[data-id]').dataset.id;
+    const itemId = ptOwnerId(textarea);
+    if (!itemId) return;   // scoped owner handles it
     clearTimeout(noteSaveTimers[itemId]);
     noteSaveTimers[itemId] = setTimeout(() => {
         setItemState(itemId, { note: textarea.value });
