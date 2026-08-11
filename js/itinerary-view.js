@@ -568,10 +568,15 @@ function gtRenderItineraryBrief(day) {
         if (GT_BEST_FOR[k]) chips.push(`<span class="gt-chip gt-chip--facet">${GT_BEST_FOR[k]}</span>`);
     });
 
+    // These three labels carry the whole tone of the itinerary. The first tier
+    // used to read "חובה" (mandatory), which framed a holiday as a checklist:
+    // skipping one stop meant failing the day. The tiers are unchanged
+    // structurally - same three groups, same classes, same styling - but they
+    // now say what they actually mean. Nothing in this guide is compulsory.
     const priorities = [
-        gtPriorityGroupHtml(brief.mustDo, 'must', 'חובה', '⭐'),
-        gtPriorityGroupHtml(brief.recommended, 'rec', 'מומלץ', '👍'),
-        gtPriorityGroupHtml(brief.optional, 'opt', 'אופציונלי', '➕')
+        gtPriorityGroupHtml(brief.mustDo, 'must', 'הלב של היום', '⭐'),
+        gtPriorityGroupHtml(brief.recommended, 'rec', 'אם אתם כבר באזור', '💡'),
+        gtPriorityGroupHtml(brief.optional, 'opt', 'אם בא לכם', '🌿')
     ].join('');
 
     const flexRows = [];
