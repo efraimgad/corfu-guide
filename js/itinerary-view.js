@@ -475,6 +475,7 @@ function gtDayComputedTotals(day) {
         if (out.endMin == null || finish > out.endMin) out.endMin = finish;
     });
 
+    out.solar = gtDaySolar(day);
     return out;
 }
 
@@ -495,6 +496,27 @@ function gtStatHtml(icon, label, value, ltr) {
     </div>`;
 }
 
+// Sunrise/sunset for the day, derived from TRIP_CONFIG's real dates - never
+// stored per day. See js/solar.js for why, and for how the algorithm was
+// validated against published values, a second independent implementation, and
+// the one sunset figure the guide already contained.
+//
+// The two alt days deliberately return a RANGE rather than a time. They have no
+// fixed date: each stands in for whichever numbered day you swap it into, so
+// quoting one exact sunset for them would be precision the data does not have.
+// Both ends of the range are themselves exact.
+function gtDaySolar(day) {
+    if (typeof solarCorfuTimes !== 'function' || typeof TRIP_CONFIG === 'undefined') return null;
+    if (day && day.isAlt) {
+        const first = solarCorfuTimes(TRIP_CONFIG.startDay);
+        const last = solarCorfuTimes(new Date(TRIP_CONFIG.startDay.getTime() + (TRIP_CONFIG.totalDays - 1) * 86400000));
+        if (!first || !last) return null;
+        return { isRange: true, sunrise: first.sunrise + '–' + last.sunrise, sunset: last.sunset + '–' + first.sunset };
+    }
+    if (!day || !day.dayNumber) return null;
+    return solarCorfuTimes(new Date(TRIP_CONFIG.startDay.getTime() + (day.dayNumber - 1) * 86400000));
+}
+
 function gtDayStatsHtml(totals) {
     const parts = [];
     if (totals.startMin != null) {
@@ -509,6 +531,14 @@ function gtDayStatsHtml(totals) {
     }
     if (totals.walkMin) parts.push(gtStatHtml('🚶', 'הליכה בין תחנות', gtFormatMinutes(totals.walkMin)));
     if (totals.boatLegs) parts.push(gtStatHtml('⛴️', 'הפלגות', String(totals.boatLegs)));
+    // Daylight is context, not a task: it answers "how long have we got" and
+    // "when does the evening actually start", sitting alongside the other
+    // computed facts rather than becoming an item on the timeline. Both are
+    // bidi-isolated for the same reason the day span is - see gtStatHtml.
+    if (totals.solar) {
+        parts.push(gtStatHtml('🌅', 'זריחה', totals.solar.sunrise, true));
+        parts.push(gtStatHtml('🌇', 'שקיעה', totals.solar.sunset, true));
+    }
     return parts.length ? `<div class="gt-day-stats">${parts.join('')}</div>` : '';
 }
 
@@ -554,6 +584,23 @@ function gtDayWeatherHtml(day) {
     return rows.join('');
 }
 
+// The sunset nudge. dayBrief.sunsetNote deliberately contains NO time - the
+// computed one is injected here, so the number has exactly one source and the
+// prose stays about the place. Framed as an invitation to linger, never as a
+// scheduled stop: the whole point is that staying put is allowed.
+//
+// Omitted where it would be noise - day 7 leaves before lunch, and the alt days
+// have no fixed date so no exact sunset to name.
+function gtSunsetNoteHtml(day, totals) {
+    const note = day && day.dayBrief && day.dayBrief.sunsetNote;
+    const solar = totals && totals.solar;
+    if (!note || !solar || solar.isRange) return '';
+    return `<p class="gt-day-sun">
+      <span aria-hidden="true">🌇</span>
+      <span><strong>שקיעה ב-<span dir="ltr">${escapeHtml(solar.sunset)}</span>.</strong> ${escapeHtml(note)}</span>
+    </p>`;
+}
+
 function gtRenderItineraryBrief(day) {
     const el = document.getElementById('gt-itinerary-brief');
     if (!el) return;
@@ -589,6 +636,7 @@ function gtRenderItineraryBrief(day) {
       ${chips.length ? `<div class="gt-day-brief__chips">${chips.join('')}</div>` : ''}
       ${gtDayStatsHtml(totals)}
       ${brief.overview ? `<div class="gt-day-brief__overview">${brief.overview}</div>` : ''}
+      ${gtSunsetNoteHtml(day, totals)}
       ${priorities ? `<div class="gt-day-prio gt-judgment">${priorities}</div>` : ''}
       ${gtDayFoldHtml('🌦️', 'מה עושים לפי מזג האוויר', gtDayWeatherHtml(day), 'gt-day-fold--weather')}
       ${gtDayFoldHtml('🎚️', 'לקצר או להאריך את היום', flexRows.length ? `<div class="gt-day-flex gt-judgment">${flexRows.join('')}</div>` : '', 'gt-day-fold--flex')}
