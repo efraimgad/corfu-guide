@@ -241,22 +241,52 @@ window.ITINERARY_DAYS = [
         rainAlt: `<p>קייפ דראסטיס ותעלת האהבה סגופים לרוחות ולגשמים עזים ואינם מומלצים. במקום זאת, סעו לעיירה אכראבי (Acharavi) וטיילו ב<strong>מוזיאון הפולקלור</strong> המרתק המציג את החיים בקורפו במאות הקודמות. לאחר מכן, המשיכו לעיירה ארילס (Arillas) לסיור מודרך וטעימות במבשלת הבוטיק המקומית - <strong>Corfu Microbrewery</strong>, המייצרת בירות קראפט מעולות תחת קורת גג חמימה.</p>
                     <p>עוד שתי אופציות מקורות לאזור: <strong>מוזיאון שמן הזית של קורפו</strong>, המציג את תהליך ייצור שמן הזית המסורתי באי לצד טעימות; ו<strong>יקב Theotoky Estate</strong>, המזמין לסיור מודרך בין חביות היין וטעימות יינות מקומיים בסביבה מקורה ונעימה.</p>`,
         dayArea: "צפון-מערב קורפו",
+        dayBrief: {
+            theme: `היום היחיד שנבנה אחורה מהשקיעה`,
+            pace: "balanced",
+            bestFor: ["sunset", "scenic", "couples", "beach"],
+            overview: `<p>זה לא יום של אתרים שצריך "לכסות" - יש בו בעצם דבר אחד גדול, השקיעה מעל צוקי לוגאס, וכל השאר מסודר סביבו. הצפון-מערב הוא הפינה הכי פחות ים-תיכונית בקורפו: צוקי חימר לבנים שנופלים ישר לים, אבן חול מפוסלת ברוח, וכפרים שנגמרים בבת אחת בקצה מצוק.</p>
+                <p>שימו לב לנקודה אחת בתזמון: השקיעה ב-7.9 היא בסביבות <strong>20:03</strong> (הערכה - ראו ההערה בראש פרק המסלול), ולכן לא נצא מלוגאס לפניה. המשמעות היא שארוחת הערב היא אחרי 20:15, וההגעה חזרה למלון סביב 21:00. אם זה מאוחר מדי עבורכם, הפתרון הוא לוותר על תעלת האהבה בבוקר ולא לדחוס את השקיעה.</p>`,
+            mustDo: [
+                { title: `שקיעה מעל חוף לוגאס`, why: `הסיבה שהיום הזה קיים. המרפסת של 7th Heaven תלויה מעל התהום, והאור האחרון על צוקי החימר הוא מה שתזכרו מהיום.` },
+                { title: `תצפית קייפ דראסטיס`, why: `הנקודה הצפונית של האי. חניה למעלה ושביל עפר קצר ברגל - התצפית עצמה שווה את הירידה.` }
+            ],
+            recommended: [
+                { title: `תעלת האהבה בסידארי`, why: `סלעי אבן חול מרשימים וצילומים טובים, אבל זה גם החלק ההומה והתיירותי ביותר של היום.` }
+            ],
+            optional: [
+                { title: `טבילה קצרה בסידארי`, why: `רק אם יצאתם מוקדם ויש עודף זמן לפני הצהריים - המים כאן רדודים ונוחים.` }
+            ],
+            ifTired: `<p>ותרו על תעלת האהבה וצאו מהמלון סביב 11:30 במקום 08:30. מגיעים ישר לדראסטיס לצהריים מאוחרים בפרולדס, ומשם ללוגאס לשקיעה. חוסך כשעתיים וחצי ולא פוגע בשום דבר מהותי.</p>`,
+            ifEnergy: `<p>בדרך חזרה מזרחה אפשר לעצור באכראבי או בארילס - שתיהן על הציר ולא עיקוף אמיתי. שימו לב שזה ידחוף את הארוחה והחזרה למלון מאוחר יותר, אחרי יום שכבר ארוך.</p>`,
+            skipFirst: `תעלת האהבה. היא הראשונה שיורדת מהיום אם משהו מתעכב - היא הכי עמוסה, והכי פחות ייחודית מבין שלוש התחנות.`,
+            weather: {
+                sun: `<p>יום מושלם ליום הזה בדיוק. כדאי לקחת כובע ומים - בדראסטיס ובלוגאס אין צל אמיתי ואין קיוסק, והשביל לתצפית חשוף לגמרי.</p>`,
+                cloud: `<p>עננים דווקא לא הורסים כאן כלום - הם מוסיפים דרמה לצוקים הלבנים ולצילומים. מה שכן, שקיעה מעוננת עשויה להיות פחות מרשימה, אז אל תבנו עליה את כל היום: תעדפו את דראסטיס ואת התעלה, ותתייחסו לשקיעה כבונוס.</p>`
+            },
+            highlights: [
+                `האור האחרון על צוקי החימר בלוגאס`,
+                `הקצה הצפוני של האי בקייפ דראסטיס`,
+                `ארוחת דגים בסידארי בדרך חזרה, בלי עיקוף`
+            ],
+            bestMoment: `עשרים הדקות שלפני 20:03 על המרפסת של 7th Heaven, כשהצוקים מתחילים לקבל צבע.`
+        },
         transitions: {
             fromHotel: null,
             between: [
                 { mode: "drive", min: 29, km: 27, parking: "חניה בסידארי" },
                 { mode: "drive", min: 8, km: 4.5 },
                 { mode: "drive", min: 6, km: 2.5 },
-                { mode: "walk", min: 3 }
+                { mode: "drive", min: 13, km: 9 }
             ],
-            toHotel: { mode: "drive", min: 32, km: 28 }
+            toHotel: { mode: "drive", min: 27, km: 23 }
         },
         items: [
             { time: "08:30 - 09:15", title: `☕ ארוחת בוקר במלון`, html: `<div class="premium-event-desc"><p>ארוחת בוקר במלון <span class="trip-private-hotel-name">המלון שלכם</span> לפני היציאה לצפון הפראי.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> כלול במלון</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> כ-45 דקות</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> רגוע - התחלה קלילה ליום</span></li></ul></div>` },
             { time: "10:00 - 12:30", title: `❤️ תעלת האהבה (Canal d'Amour) בסידארי`, html: `<div class="premium-event-desc"><p>הגיעו לסידארי התוססת ולכו לעבר תעלת האהבה המפורסמת. האגדה המקומית מספרת שזוג שישחה יחד לאורך התעלה יישאר יחד לנצח. גם אם המים קרים, זהו מקום טוב לצילומים עם סלעי אבן החול השכבתית הפיסוליים.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> ללא עלות</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> שעה - שעה וחצי</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> קליל ורומנטי - אגדה מקומית ותמונות מרשימות</span></li></ul></div>` },
             { time: "13:00 - 15:30", title: `🪨 קייפ דראסטיס (Cape Drastis) וצהריים בפרולדס`, html: `<div class="premium-event-desc"><p>נסיעה קצרה מערבה תיקח אתכם לקייפ דראסטיס - הנקודה הצפונית ביותר בקורפו. החנו את הרכב למעלה ורדו ברגל בשביל העפר לתצפית מטריפה על צוקי חימר לבנים המזדקרים מהים. לאחר מכן, סעו לכפר Peroulades לארוחת צהריים מסורתית באחת הטברנות המקומיות.</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> ללא עלות לתצפית; ארוחה כ-15€</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> 45 דקות לתצפית + כשעה לארוחה</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> דרמטי ומרשים - קצה האי הצפוני</span></li></ul></div>` },
             { time: "16:30 - 19:30", title: `🌇 חוף לוגאס (Logas Beach) ושקיעה ב-7th Heaven`, html: `<div class="premium-event-desc"><p>רדו במדרגות לחוף לוגאס המצומצם היושב תחת צוקים אימתניים. זהו 'חוף השקיעה' הרשמי. מקומיים נוהגים למרוח את הבוץ מהצוקים על הגוף כטיפול ספא טבעי. בשקיעה, עלו לבית הקפה 7th Heaven, שבו יש מרפסת זכוכית התלויה באוויר מעל התהום לתמונת אינסטגרם מנצחת (שקיעה בסביבות 20:03 ב-7.9, הערכה משוערת - ראו הערה בראש פרק המסלול*).</p><ul class="space-y-1.5 text-sm mt-3"><li class="flex items-center gap-2"><span class="text-amber-600 shrink-0">💶</span><span><strong class="font-semibold text-gray-900">עלות:</strong> ללא עלות לחוף; משקה בבית הקפה כ-8-12€</span></li><li class="flex items-center gap-2"><span class="text-blue-600 shrink-0">⏱️</span><span><strong class="font-semibold text-gray-900">משך מומלץ:</strong> כשלוש שעות</span></li><li class="flex items-center gap-2"><span class="text-purple-600 shrink-0">✨</span><span><strong class="font-semibold text-gray-900">אווירה:</strong> דרמטי ורומנטי - אחת השקיעות היפות בקורפו</span></li></ul></div>` },
-            { time: "19:30 ואילך", title: `🍽️ ארוחת ערב`, html: `<div class="premium-event-desc"><p>⚠️ לא מצאנו המלצת ארוחת ערב ספציפית לפינה הצפון-מערבית הזו של האי (סידארי / פרולדס) מעבר ל-7th Heaven שכבר ביקרתם בו לשקיעה - ראו את פרק הקולינריה המסונן לאזור <a href="#" onclick="event.preventDefault(); openExploreFiltered('food', 'צפון קורפו');" class="text-blue-600 font-semibold hover:underline">📍 צפון קורפו ←</a>, או פשוט חזרו ל-7th Heaven לארוחה קלה אם אתם כבר שם.</p></div>` }
+            { time: "20:15 ואילך", title: `🍽️ ארוחת ערב בסידארי`, html: `<div class="premium-event-desc"><p>אחרי השקיעה בלוגאס, סידארי היא ממילא על הדרך חזרה דרומה - לא עיקוף. שם נמצאת מסעדת הדגים <strong>גיאלוס</strong>, שנפתחת ב-18:00 ולכן פתוחה בדיוק בשעה שתגיעו. אם אתם מותשים מהיום ולא בא לכם לעצור, אפשר גם פשוט להישאר ל-7th Heaven לארוחה קלה במקום שאתם כבר בו, או לראות את כל האפשרויות ב<a href="#" onclick="event.preventDefault(); openExploreFiltered('food', 'צפון קורפו');" class="text-blue-600 font-semibold hover:underline">📍 צפון קורפו ←</a>.</p><div class="itinerary-dinner-slot" data-dinner-food-id="food-גיאלוס"><p>טוען המלצה...</p></div></div>` }
         ]
     },
     {

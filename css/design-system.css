@@ -1182,6 +1182,210 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
   margin:0 0 var(--gt-space-2); padding:0 2px;
 }
 
+/* ==========================================================================
+   DAY BRIEF / DAY SUMMARY — the two blocks bracketing the row-card timeline
+   (js/itinerary-view.js gtRenderItineraryBrief()/gtRenderItineraryDaySummary()).
+
+   The timeline answers "what happens next"; these answer why the day exists,
+   how heavy it is, what actually matters, and what to cut. Everything below
+   is built from existing tokens - no new color, radius, shadow or type value
+   is introduced, so a day brief sits in the same visual system as an explore
+   row or a dashboard card rather than reading as a bolted-on section.
+
+   Mobile-first: every horizontal group here wraps rather than scrolls, and
+   the two heaviest blocks (weather, shorten/extend) are native <details>
+   collapsed by default - so adding this content does NOT lengthen the
+   default phone view by more than the brief itself.
+   ========================================================================== */
+.gt-day-brief{
+  background:var(--gt-paper-raised); border:1px solid var(--gt-hair);
+  border-radius:var(--gt-r-lg); padding:var(--gt-space-4);
+  margin:0 0 var(--gt-space-3);
+}
+.gt-day-brief__theme{
+  font-size:var(--gt-text-lg); font-weight:800; color:var(--gt-ink-900);
+  line-height:var(--gt-lh-tight); margin:0 0 var(--gt-space-3);
+}
+.gt-day-brief__chips{
+  display:flex; flex-wrap:wrap; gap:var(--gt-space-2);
+  margin:0 0 var(--gt-space-3);
+}
+/* Pace chip: the day's authored intensity. Uses the status token families
+   already carrying "calm / caution / hot" meaning elsewhere in the app
+   rather than inventing a third traffic-light palette. */
+.gt-chip--pace{ font-weight:800; border:none; }
+.gt-chip--pace-relaxed{ background:var(--gt-status-open-soft);  color:var(--gt-status-open-text); }
+.gt-chip--pace-balanced{ background:var(--gt-primary-100);      color:var(--gt-primary-700-text); }
+.gt-chip--pace-active{ background:var(--gt-status-soon-soft);   color:var(--gt-status-soon-text); }
+
+/* Computed totals strip. Auto-fit rather than a fixed column count so it is
+   2-up on a narrow phone and 4-up on a wide screen with no media query, and
+   never overflows its container at any width in between. */
+.gt-day-stats{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(132px, 1fr));
+  gap:var(--gt-space-2); margin:0 0 var(--gt-space-3);
+}
+.gt-day-stat{
+  display:flex; align-items:center; gap:var(--gt-space-2);
+  background:var(--gt-paper-sunken); border-radius:var(--gt-r-md);
+  padding:var(--gt-space-2) var(--gt-space-3); min-width:0;
+}
+.gt-day-stat__icon{ font-size:15px; line-height:1; flex-shrink:0; }
+.gt-day-stat__label{
+  font-size:var(--gt-text-xs); color:var(--gt-ink-300); font-weight:600;
+  min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.gt-day-stat__value{
+  font-size:var(--gt-text-sm); color:var(--gt-ink-900); font-weight:800;
+  margin-inline-start:auto; flex-shrink:0;
+}
+.gt-day-brief__overview{
+  font-size:var(--gt-text-md); color:var(--gt-ink-700);
+  line-height:var(--gt-lh-body);
+}
+.gt-day-brief__overview p{ margin:0 0 var(--gt-space-2); }
+.gt-day-brief__overview p:last-child{ margin-bottom:0; }
+
+/* Judgment marker. Everything inside a .gt-judgment block is a planning
+   opinion (pace, priorities, what to skip, best moment) rather than a
+   verified fact, and says so once at the top of the block instead of
+   hedging every individual line. The itinerary's verified content -
+   venue hours, ratings, price flags - never carries this marker; it
+   carries its own verifiedOn stamp instead. */
+.gt-judgment{ position:relative; }
+.gt-judgment::before{
+  content:"המלצה שלנו - שיקול דעת, לא מידע מאומת";
+  display:block; font-size:var(--gt-text-xs); font-weight:700;
+  color:var(--gt-ink-300); margin:0 0 var(--gt-space-2);
+}
+
+/* Priority groups: must-do / recommended / optional. The leading rule is on
+   the inline-start edge so it lands on the right in this RTL page and would
+   flip correctly if the block were ever rendered LTR. */
+.gt-day-prio{ margin:var(--gt-space-4) 0 0; }
+.gt-day-prio__group{
+  border-inline-start:3px solid var(--gt-hair);
+  padding-inline-start:var(--gt-space-3);
+  margin:0 0 var(--gt-space-3);
+}
+.gt-day-prio__group:last-child{ margin-bottom:0; }
+.gt-day-prio__group--must{ border-inline-start-color:var(--gt-accent-gold-600); }
+.gt-day-prio__group--rec{ border-inline-start-color:var(--gt-primary-600); }
+.gt-day-prio__group--opt{ border-inline-start-color:var(--gt-hair-strong); }
+.gt-day-prio__label{
+  font-size:var(--gt-text-xs); font-weight:800; letter-spacing:.02em;
+  color:var(--gt-ink-500); margin:0 0 var(--gt-space-1);
+}
+.gt-day-prio__list{ list-style:none; margin:0; padding:0; }
+.gt-day-prio__item{ margin:0 0 var(--gt-space-2); }
+.gt-day-prio__item:last-child{ margin-bottom:0; }
+.gt-day-prio__title{
+  display:block; font-size:var(--gt-text-md); font-weight:700;
+  color:var(--gt-ink-900); line-height:var(--gt-lh-tight);
+}
+.gt-day-prio__why{
+  display:block; font-size:var(--gt-text-sm); color:var(--gt-ink-500);
+  line-height:var(--gt-lh-body); margin-top:2px;
+}
+
+/* Native <details> folds - see gtDayFoldHtml() for why disclosure is native
+   rather than a JS accordion. The marker is left in place (no list-style
+   removal) so the platform's own affordance and its keyboard behaviour stay
+   exactly as users expect. */
+.gt-day-fold{
+  border-top:1px solid var(--gt-hair);
+  margin-top:var(--gt-space-3); padding-top:var(--gt-space-3);
+}
+.gt-day-fold__summary{
+  font-size:var(--gt-text-sm); font-weight:800; color:var(--gt-ink-700);
+  cursor:pointer; padding:var(--gt-space-2) 0; min-height:44px;
+  display:flex; align-items:center; gap:var(--gt-space-2);
+}
+.gt-day-fold__summary:hover{ color:var(--gt-primary-700-text); }
+.gt-day-fold__summary:focus-visible{
+  outline:none; border-radius:var(--gt-r-sm);
+  box-shadow:0 0 0 2px var(--gt-paper-raised), 0 0 0 5px var(--gt-primary-600);
+}
+.gt-day-fold__body{ padding:var(--gt-space-2) 0 0; }
+
+.gt-day-weather__row{
+  display:flex; gap:var(--gt-space-3); align-items:flex-start;
+  padding:var(--gt-space-3) 0; border-bottom:1px solid var(--gt-hair);
+}
+.gt-day-weather__row:last-child{ border-bottom:none; padding-bottom:0; }
+.gt-day-weather__icon{ font-size:20px; line-height:1.2; flex-shrink:0; }
+.gt-day-weather__label{
+  font-size:var(--gt-text-sm); font-weight:800; color:var(--gt-ink-900);
+  margin:0 0 var(--gt-space-1);
+}
+.gt-day-weather__text{
+  font-size:var(--gt-text-sm); color:var(--gt-ink-700);
+  line-height:var(--gt-lh-body); min-width:0;
+}
+.gt-day-weather__text p{ margin:0 0 var(--gt-space-2); }
+.gt-day-weather__text p:last-child{ margin-bottom:0; }
+.gt-day-weather__text ul{ margin:var(--gt-space-2) 0; padding-inline-start:var(--gt-space-4); }
+.gt-day-weather__text li{ margin:0 0 var(--gt-space-1); }
+
+.gt-day-flex__row{ margin:0 0 var(--gt-space-3); }
+.gt-day-flex__row:last-child{ margin-bottom:0; }
+.gt-day-flex__label{
+  font-size:var(--gt-text-sm); font-weight:800; color:var(--gt-ink-900);
+  margin:0 0 var(--gt-space-1);
+}
+.gt-day-flex__text{
+  font-size:var(--gt-text-sm); color:var(--gt-ink-700);
+  line-height:var(--gt-lh-body);
+}
+.gt-day-flex__text p{ margin:0 0 var(--gt-space-2); }
+.gt-day-flex__text p:last-child{ margin-bottom:0; }
+
+/* Closing summary. Deliberately the one block on the page allowed a filled
+   accent surface - it is the day's last word, and the fill is what stops it
+   reading as just one more card at the bottom of a long scroll. */
+.gt-day-summary{
+  background:var(--gt-primary-50); border:1px solid var(--gt-primary-100);
+  border-radius:var(--gt-r-lg); padding:var(--gt-space-4);
+  margin:var(--gt-space-4) 0 0;
+}
+.gt-day-summary__title{
+  font-size:var(--gt-text-sm); font-weight:800; color:var(--gt-primary-700-text);
+  margin:0 0 var(--gt-space-3);
+}
+.gt-day-summary__highlights{
+  list-style:none; margin:0 0 var(--gt-space-3); padding:0;
+}
+.gt-day-summary__highlights li{
+  position:relative; padding-inline-start:var(--gt-space-4);
+  font-size:var(--gt-text-md); color:var(--gt-ink-900); font-weight:600;
+  line-height:var(--gt-lh-body); margin:0 0 var(--gt-space-2);
+}
+.gt-day-summary__highlights li:last-child{ margin-bottom:0; }
+.gt-day-summary__highlights li::before{
+  content:"—"; position:absolute; inset-inline-start:0;
+  color:var(--gt-primary-600); font-weight:800;
+}
+.gt-day-summary__facts{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));
+  gap:var(--gt-space-2); margin:0 0 var(--gt-space-3);
+}
+.gt-day-summary__fact{
+  background:var(--gt-paper-raised); border-radius:var(--gt-r-md);
+  padding:var(--gt-space-2) var(--gt-space-3); min-width:0;
+}
+.gt-day-summary__fact-label{
+  display:block; font-size:var(--gt-text-xs); color:var(--gt-ink-300); font-weight:600;
+}
+.gt-day-summary__fact-value{
+  display:block; font-size:var(--gt-text-md); color:var(--gt-ink-900); font-weight:800;
+}
+.gt-day-summary__moment{
+  font-size:var(--gt-text-sm); color:var(--gt-ink-700);
+  line-height:var(--gt-lh-body); margin:0;
+  padding-top:var(--gt-space-3); border-top:1px solid var(--gt-primary-100);
+}
+.gt-day-summary__moment strong{ color:var(--gt-ink-900); }
+
 /* Between-cards route connector ("what's next, how do I get there") - a
    sibling of .gt-row-card inside #gt-itinerary-row-list (a flex column, see
    .gt-explore-list), NOT another card: no border/shadow/background box, just

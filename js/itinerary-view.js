@@ -314,7 +314,9 @@ function gtSelectItineraryDay(key) {
         actions.innerHTML = `<label class="flex items-center gap-2 shrink-0 bg-white/15 hover:bg-white/25 transition-colors rounded-xl px-3 py-2 cursor-pointer text-sm font-semibold select-none" onclick="event.stopPropagation()"><input type="checkbox" class="day-complete-checkbox w-5 h-5 accent-emerald-400 rounded" data-day="${dayNum}" onchange="toggleDayComplete(this)"${isChecked ? ' checked' : ''}> הושלם</label><label class="flex items-center gap-1.5 shrink-0 bg-white/15 hover:bg-white/25 transition-colors rounded-xl px-3 py-2 text-sm font-semibold select-none" onclick="event.stopPropagation()">${GT_ICON_EURO}<input type="number" min="0" step="1" inputmode="numeric" class="day-budget-input w-20 bg-white/20 text-white placeholder-white/60 rounded-lg px-1.5 py-1 text-sm font-semibold text-center focus:outline-none focus:ring-2 focus:ring-white/60" data-day="${dayNum}" placeholder="בפועל" aria-label="הוצאה בפועל ביום ${dayNum} (יורו)" oninput="updateDayBudgetActual(this)" onclick="event.stopPropagation()" value="${escapeAttr(String(budgetVal))}"></label><button onclick="event.stopPropagation(); openDayMap(${dayNum});" class="shrink-0 bg-white/15 hover:bg-white/25 transition-colors rounded-xl px-3 py-2 text-sm font-semibold" style="display:inline-flex;align-items:center;justify-content:center;" title="הצג את תחנות היום הזה על המפה (אם לא נמצאו תחנות ממופות, תוצג מפת האי המלאה)" aria-label="הצג את תחנות היום הזה על המפה">${GT_ICON_MAP}</button>`;
 
         gtRenderItineraryAreaLabel(day);
+        gtRenderItineraryBrief(day);
         gtRenderItineraryRowList(day.items, day.transitions);
+        gtRenderItineraryDaySummary(day);
     } else {
         const swaps = (typeof getDaySwaps === 'function') ? getDaySwaps() : {};
         const selectedDay = swaps[key] || '';
@@ -345,7 +347,9 @@ function gtSelectItineraryDay(key) {
           <span class="day-swap-status text-xs font-bold bg-white/15 px-2 py-1 rounded-full" data-swap-status="${key}">${escapeHtml(statusText)}</span>`;
 
         gtRenderItineraryAreaLabel(day);
+        gtRenderItineraryBrief(day);
         gtRenderItineraryRowList(day.items, day.transitions);
+        gtRenderItineraryDaySummary(day);
     }
 
     // These freshly-authored elements can carry trip-private hooks
@@ -370,6 +374,237 @@ function gtRenderItineraryAreaLabel(day) {
     if (!el) return;
     const area = day && day.dayArea;
     el.innerHTML = area ? `<p class="gt-itinerary-area-label">📍 אזור היום: ${escapeHtml(area)}</p>` : '';
+}
+
+// ============================================================================
+// -- Day brief / day summary --------------------------------------------------
+//
+// The row-card timeline above answers "what happens next". These two blocks
+// answer the questions it structurally cannot: why this day exists, how heavy
+// it is, what actually matters on it, and what to cut when the day goes wrong.
+//
+// Everything here reads js/itinerary-data.js's per-day `dayBrief` EXCEPT the
+// numbers, which are computed from that same day's existing `transitions` legs
+// and its items' own time strings (gtDayComputedTotals() below). That's
+// deliberate: a hand-typed "about 75 minutes of driving" is a second number for
+// a fact the `transitions` array already states leg by leg, and the two drift
+// apart the first time a leg is edited. Nothing in the brief restates a number
+// the timeline already owns.
+//
+// Three tiers of certainty are kept visually distinct, so nothing reads as more
+// certain than it is:
+//   - verified  - venue hours/ratings, surfaced through the EXISTING dinner-hook
+//                 and price-flag mechanisms, carrying their own verifiedOn stamp.
+//   - computed  - the totals below, derived, never authored.
+//   - judgment  - pace, priorities, what to skip, best moment. Always rendered
+//                 under .gt-judgment, which prints an explicit "המלצה שלנו"
+//                 marker. These are planning opinions and are labelled as such.
+// ============================================================================
+
+const GT_PACE = {
+    relaxed:  { label: 'רגוע',  icon: '🌿' },
+    balanced: { label: 'מאוזן', icon: '⚖️' },
+    active:   { label: 'פעיל',  icon: '⚡' }
+};
+
+const GT_BEST_FOR = {
+    beach:       '🏖️ חוף',
+    nature:      '🌿 טבע',
+    food:        '🍽️ אוכל',
+    villages:    '🏘️ כפרים',
+    sightseeing: '🏛️ אתרים',
+    history:     '📜 היסטוריה',
+    sunset:      '🌅 שקיעה',
+    couples:     '💞 זוגי',
+    water:       '🤿 מים',
+    scenic:      '🚗 נסיעה נופית',
+    logistics:   '🧳 לוגיסטיקה'
+};
+
+// Start-of-day / end-of-day from the items' own time strings. Most items carry
+// a "HH:MM - HH:MM" range that js/itinerary.js's parseTimeRange() already
+// understands; the last item of several days is an open-ended "20:30 ואילך"
+// ("20:30 onwards"), which has a start but deliberately no end - so that form
+// is read for its start only and never invented an end for.
+function gtItemStartEnd(timeText) {
+    const range = (typeof parseTimeRange === 'function') ? parseTimeRange(timeText) : null;
+    if (range) return range;
+    const m = /(\d{1,2}):(\d{2})/.exec(timeText || '');
+    if (!m) return null;
+    const start = Number(m[1]) * 60 + Number(m[2]);
+    return { start: start, end: null };
+}
+
+function gtFormatMinutes(min) {
+    if (!min) return '0 דק׳';
+    const h = Math.floor(min / 60);
+    const m = min % 60;
+    if (!h) return `${m} דק׳`;
+    if (!m) return `${h} שע׳`;
+    return `${h} שע׳ ${m} דק׳`;
+}
+
+function gtFormatClock(min) {
+    if (min == null) return '';
+    return `${String(Math.floor(min / 60)).padStart(2, '0')}:${String(min % 60).padStart(2, '0')}`;
+}
+
+// Every number the brief and the summary show. Derived only - see this
+// section's header for why none of this is stored on the day.
+function gtDayComputedTotals(day) {
+    const tr = day.transitions || {};
+    const legs = [tr.fromHotel].concat(tr.between || [], [tr.toHotel]).filter(Boolean);
+    const out = { driveMin: 0, driveKm: 0, walkMin: 0, boatLegs: 0, startMin: null, endMin: null };
+
+    legs.forEach(leg => {
+        if (leg.mode === 'drive') {
+            out.driveMin += leg.min || 0;
+            out.driveKm += leg.km || 0;
+        } else if (leg.mode === 'walk') {
+            out.walkMin += leg.min || 0;
+        } else if (leg.mode === 'boat') {
+            out.boatLegs += 1;
+        }
+    });
+
+    (day.items || []).forEach(item => {
+        const se = gtItemStartEnd(item.time);
+        if (!se) return;
+        if (out.startMin == null || se.start < out.startMin) out.startMin = se.start;
+        const finish = se.end != null ? se.end : se.start;
+        if (out.endMin == null || finish > out.endMin) out.endMin = finish;
+    });
+
+    return out;
+}
+
+function gtStatHtml(icon, label, value) {
+    return `<div class="gt-day-stat">
+      <span class="gt-day-stat__icon" aria-hidden="true">${icon}</span>
+      <span class="gt-day-stat__label">${escapeHtml(label)}</span>
+      <span class="gt-day-stat__value gt-tabular">${escapeHtml(value)}</span>
+    </div>`;
+}
+
+function gtDayStatsHtml(totals) {
+    const parts = [];
+    if (totals.startMin != null) {
+        const span = totals.endMin != null && totals.endMin > totals.startMin
+            ? `${gtFormatClock(totals.startMin)}–${gtFormatClock(totals.endMin)}`
+            : gtFormatClock(totals.startMin);
+        parts.push(gtStatHtml('🕘', 'טווח היום', span));
+    }
+    if (totals.driveMin) {
+        const km = totals.driveKm ? ` · ${Math.round(totals.driveKm)} ק"מ` : '';
+        parts.push(gtStatHtml('🚗', 'נהיגה', gtFormatMinutes(totals.driveMin) + km));
+    }
+    if (totals.walkMin) parts.push(gtStatHtml('🚶', 'הליכה בין תחנות', gtFormatMinutes(totals.walkMin)));
+    if (totals.boatLegs) parts.push(gtStatHtml('⛴️', 'הפלגות', String(totals.boatLegs)));
+    return parts.length ? `<div class="gt-day-stats">${parts.join('')}</div>` : '';
+}
+
+// One priority group (must-do / recommended / optional). Renders nothing at
+// all when the day has no entries of that rank - an empty "Optional" heading
+// is noise, not structure.
+function gtPriorityGroupHtml(entries, modifier, label, icon) {
+    if (!entries || !entries.length) return '';
+    const rows = entries.map(e => `<li class="gt-day-prio__item">
+        <span class="gt-day-prio__title">${escapeHtml(e.title)}</span>
+        ${e.why ? `<span class="gt-day-prio__why">${escapeHtml(e.why)}</span>` : ''}
+      </li>`).join('');
+    return `<div class="gt-day-prio__group gt-day-prio__group--${modifier}">
+      <p class="gt-day-prio__label"><span aria-hidden="true">${icon}</span> ${escapeHtml(label)}</p>
+      <ul class="gt-day-prio__list">${rows}</ul>
+    </div>`;
+}
+
+// A <details> fold. Native disclosure rather than a JS-driven accordion: it is
+// keyboard- and screen-reader-correct for free, survives the day-switch
+// re-render with no state to restore, and needs no open/close handler of its
+// own. Collapsed by default so the default view stays short on a phone.
+function gtDayFoldHtml(summaryIcon, summaryLabel, bodyHtml, extraClass) {
+    if (!bodyHtml) return '';
+    return `<details class="gt-day-fold ${extraClass || ''}">
+      <summary class="gt-day-fold__summary"><span aria-hidden="true">${summaryIcon}</span> ${escapeHtml(summaryLabel)}</summary>
+      <div class="gt-day-fold__body">${bodyHtml}</div>
+    </details>`;
+}
+
+// The weather fold. The rain case is NOT newly written here: it renders the
+// day's existing `rainAlt` HTML, which js/itinerary-data.js has carried as
+// real fact-checked content all along while no view displayed it - even
+// though the itinerary intro in index.html promises "a detailed backup plan
+// for every day in case of rain" in bold. Surfacing it is the whole fix.
+function gtDayWeatherHtml(day) {
+    const brief = day.dayBrief || {};
+    const w = brief.weather || {};
+    const rows = [];
+    if (w.sun) rows.push(`<div class="gt-day-weather__row"><span class="gt-day-weather__icon" aria-hidden="true">☀️</span><div><p class="gt-day-weather__label">יום שמשי</p><div class="gt-day-weather__text">${w.sun}</div></div></div>`);
+    if (w.cloud) rows.push(`<div class="gt-day-weather__row"><span class="gt-day-weather__icon" aria-hidden="true">🌥️</span><div><p class="gt-day-weather__label">יום מעונן</p><div class="gt-day-weather__text">${w.cloud}</div></div></div>`);
+    if (day.rainAlt) rows.push(`<div class="gt-day-weather__row"><span class="gt-day-weather__icon" aria-hidden="true">🌧️</span><div><p class="gt-day-weather__label">יום גשום - תוכנית חלופית</p><div class="gt-day-weather__text">${day.rainAlt}</div></div></div>`);
+    return rows.join('');
+}
+
+function gtRenderItineraryBrief(day) {
+    const el = document.getElementById('gt-itinerary-brief');
+    if (!el) return;
+    const brief = day && day.dayBrief;
+    if (!brief) { el.innerHTML = ''; return; }
+
+    const totals = gtDayComputedTotals(day);
+    const pace = GT_PACE[brief.pace];
+    const chips = [];
+    if (pace) chips.push(`<span class="gt-chip gt-chip--pace gt-chip--pace-${escapeAttr(brief.pace)}">${pace.icon} קצב ${escapeHtml(pace.label)}</span>`);
+    (brief.bestFor || []).forEach(k => {
+        if (GT_BEST_FOR[k]) chips.push(`<span class="gt-chip gt-chip--facet">${GT_BEST_FOR[k]}</span>`);
+    });
+
+    const priorities = [
+        gtPriorityGroupHtml(brief.mustDo, 'must', 'חובה', '⭐'),
+        gtPriorityGroupHtml(brief.recommended, 'rec', 'מומלץ', '👍'),
+        gtPriorityGroupHtml(brief.optional, 'opt', 'אופציונלי', '➕')
+    ].join('');
+
+    const flexRows = [];
+    if (brief.ifTired) flexRows.push(`<div class="gt-day-flex__row"><p class="gt-day-flex__label">😴 אם נגמר לנו הכוח</p><div class="gt-day-flex__text">${brief.ifTired}</div></div>`);
+    if (brief.ifEnergy) flexRows.push(`<div class="gt-day-flex__row"><p class="gt-day-flex__label">⚡ אם יש לנו אנרגיה</p><div class="gt-day-flex__text">${brief.ifEnergy}</div></div>`);
+    if (brief.skipFirst) flexRows.push(`<div class="gt-day-flex__row"><p class="gt-day-flex__label">✂️ מה מוותרים עליו ראשון</p><div class="gt-day-flex__text">${escapeHtml(brief.skipFirst)}</div></div>`);
+
+    el.innerHTML = `<section class="gt-day-brief" aria-label="סקירת היום">
+      ${brief.theme ? `<p class="gt-day-brief__theme">${escapeHtml(brief.theme)}</p>` : ''}
+      ${chips.length ? `<div class="gt-day-brief__chips">${chips.join('')}</div>` : ''}
+      ${gtDayStatsHtml(totals)}
+      ${brief.overview ? `<div class="gt-day-brief__overview">${brief.overview}</div>` : ''}
+      ${priorities ? `<div class="gt-day-prio gt-judgment">${priorities}</div>` : ''}
+      ${gtDayFoldHtml('🌦️', 'מה עושים לפי מזג האוויר', gtDayWeatherHtml(day), 'gt-day-fold--weather')}
+      ${gtDayFoldHtml('🎚️', 'לקצר או להאריך את היום', flexRows.length ? `<div class="gt-day-flex gt-judgment">${flexRows.join('')}</div>` : '', 'gt-day-fold--flex')}
+    </section>`;
+}
+
+// Closing block under the timeline: the three things worth remembering, the
+// same computed totals restated once at the point of decision, and the single
+// moment worth looking forward to.
+function gtRenderItineraryDaySummary(day) {
+    const el = document.getElementById('gt-itinerary-summary');
+    if (!el) return;
+    const brief = day && day.dayBrief;
+    if (!brief) { el.innerHTML = ''; return; }
+
+    const totals = gtDayComputedTotals(day);
+    const pace = GT_PACE[brief.pace];
+    const highlights = (brief.highlights || []).map(h => `<li>${escapeHtml(h)}</li>`).join('');
+
+    const facts = [];
+    if (totals.driveMin) facts.push(`<div class="gt-day-summary__fact"><span class="gt-day-summary__fact-label">סה"כ נהיגה</span><span class="gt-day-summary__fact-value gt-tabular">${escapeHtml(gtFormatMinutes(totals.driveMin))}</span></div>`);
+    if (totals.startMin != null) facts.push(`<div class="gt-day-summary__fact"><span class="gt-day-summary__fact-label">יציאה מומלצת</span><span class="gt-day-summary__fact-value gt-tabular">${escapeHtml(gtFormatClock(totals.startMin))}</span></div>`);
+    if (pace) facts.push(`<div class="gt-day-summary__fact"><span class="gt-day-summary__fact-label">עומס היום</span><span class="gt-day-summary__fact-value">${pace.icon} ${escapeHtml(pace.label)}</span></div>`);
+
+    el.innerHTML = `<section class="gt-day-summary" aria-label="סיכום היום">
+      <p class="gt-day-summary__title">📌 סיכום היום</p>
+      ${highlights ? `<ul class="gt-day-summary__highlights">${highlights}</ul>` : ''}
+      ${facts.length ? `<div class="gt-day-summary__facts">${facts.join('')}</div>` : ''}
+      ${brief.bestMoment ? `<p class="gt-day-summary__moment"><span aria-hidden="true">✨</span> <strong>הרגע של היום:</strong> ${escapeHtml(brief.bestMoment)}</p>` : ''}
+    </section>`;
 }
 
 // -- Tap-to-open detail sheet -------------------------------------------------
