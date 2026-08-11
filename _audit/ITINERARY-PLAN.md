@@ -192,3 +192,88 @@ Mobile-first: chips wrap, no horizontal scroll, `<details>` keeps the default vi
 - No per-stop parking claims (F5 — cannot be sourced).
 - No padding of Day 1 / Day 7.
 - No new dependencies, no build step.
+
+---
+
+## 4. What was built
+
+All 9 days carry a `dayBrief`. Content volume is deliberately uneven — the
+arrival and departure days stayed short, as planned:
+
+| Day | Brief | Summary | Folds |
+| --- | --- | --- | --- |
+| 1 | 945 ch | 214 ch | 1 |
+| 2 | 2,881 ch | 244 ch | 2 |
+| 3 | 2,596 ch | 261 ch | 2 |
+| 4 | 2,591 ch | 274 ch | 2 |
+| 5 | 2,946 ch | 282 ch | 2 |
+| 6 | 2,824 ch | 284 ch | 2 |
+| 7 | 1,162 ch | 211 ch | 1 |
+| alt-paxos | 2,160 ch | 230 ch | 2 |
+| alt-pantokrator | 2,358 ch | 441 ch | 2 |
+
+### Dead data revived
+
+All three previously-unrendered fields now surface: `rainAlt` (7 days, in the
+weather fold), `closingNoteHtml` (Pantokrator, in the day summary). `image`
+remains unrendered — see the open item below.
+
+### Content fixes the data itself proved were needed
+
+1. **Day 6 dinner** — the "we found no recommendation" apology replaced with
+   `food-גיאלוס`, verified 2026-07-30, via the existing dinner hook.
+2. **Day 6 timing** — the timeline said leave at 19:30 while the stated reason
+   to be there was a ~20:03 sunset. Dinner moved to 20:15.
+3. **Day 3 dinner** — the day ended 45 min from the hotel with no dinner item;
+   `food-טרילוגיה` added, 0.2 km from the last stop, so the new leg is a walk.
+4. **Two stale connector legs** — Day 5's Chlomos→dinner and Day 6's
+   Logas→dinner were 3-minute walks, correct only while "dinner" meant
+   "wherever you already stand". Both are now drive legs whose distance is
+   derived from the records' own coordinates scaled by that day's observed
+   road/straight ratio, and labelled as derived in the source.
+
+### Defects found during implementation
+
+- **Bidi reversal (real, user-visible).** `08:00–19:00` rendered visually as
+  `19:00–08:00` on every day: the en-dash is bidi-neutral, so an RTL page lays
+  the halves out right-to-left. Caught on a screenshot, not in the DOM —
+  `textContent` reads correctly either way. Fixed with per-value `dir="ltr"`,
+  matching the convention `verifiedHours` already used, and verified by
+  comparing the on-screen x-position of the first and last glyph runs. Guarded
+  by three assertions.
+- **Grid overflow at every phone width.** `.gt-day-stats` chose two 143px
+  columns while the drive stat needed 178px. The track floor is now set from
+  the widest value the renderer can actually produce (190px), with `flex-wrap`
+  as a safety net.
+- **Fold summary overflow.** The label was a bare text node in a flex row and
+  could only shrink to its longest word. It now has its own span with
+  `flex:1 1 0%`, plus a custom chevron replacing the suppressed native marker.
+- **A test that failed for the wrong reason.** The call-site count matched the
+  function declarations too. Fixed the assertion, then confirmed it genuinely
+  fails by unwiring the alt-day branch and watching it report `found 1`.
+
+### Verification
+
+- `npm test` — 13 scripts, all pass. New: `scripts/test-itinerary-brief.js`,
+  29 checks.
+- Live sweep, 9 days × 2 themes × 3 widths (360/390/768): no page overflow, no
+  inner overflow, no fold summary under the 44px touch floor, no page errors.
+  Run twice to confirm stability after an initial measurement race.
+- WCAG contrast, composited, all 20 new text selectors × 9 days × 2 themes:
+  zero failures, worst 4.51:1 against a 4.5 requirement.
+- `CACHE_NAME` bumped once, `v22` → `v23`.
+
+### Still open (owner decisions, not code)
+
+- **`day.image` is still unrendered** on 7 days. Surfacing it means adding a
+  hero image to the day view — a visual-design decision, and two of the seven
+  point at generic stock photography rather than the real place. Worth deciding
+  deliberately rather than as a side effect of this pass.
+- **Day 5's Achilleion block.** Its own `priceFlag` says the interior has been
+  closed for renovation since 2021 and that reviews report €7 against a guide
+  price of €12. The brief now surfaces this, but if the interior is still shut
+  the 2.5-hour block is closer to a 1-hour one — worth confirming before the
+  trip, and it would free up a morning.
+- **`alt-paxos` boat legs carry no duration.** The connector falls back to a
+  label, so nothing is broken, but the sailing time is genuinely unknown and
+  varies by operator.

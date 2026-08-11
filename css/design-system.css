@@ -1221,23 +1221,32 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 /* Computed totals strip. Auto-fit rather than a fixed column count so it is
    2-up on a narrow phone and 4-up on a wide screen with no media query, and
    never overflows its container at any width in between. */
+/* 190px, not 132px: the widest real value here is a drive total like
+   "1 שע׳ 23 דק׳ · 66 ק"מ", which measures ~178px next to its label. At 132px
+   the grid happily chose two 143px columns and the drive stat overflowed its
+   own track on every narrow phone. The floor is set from the widest content
+   the renderer can actually produce, so this drops to one column on a 360px
+   screen and goes 3-up on a tablet without a media query. */
 .gt-day-stats{
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(132px, 1fr));
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr));
   gap:var(--gt-space-2); margin:0 0 var(--gt-space-3);
 }
+/* flex-wrap is the safety net for the same failure: if a future value is
+   longer still, it drops to a second line inside the tile instead of
+   spilling out of it. */
 .gt-day-stat{
-  display:flex; align-items:center; gap:var(--gt-space-2);
+  display:flex; align-items:center; gap:var(--gt-space-2); flex-wrap:wrap;
   background:var(--gt-paper-sunken); border-radius:var(--gt-r-md);
   padding:var(--gt-space-2) var(--gt-space-3); min-width:0;
 }
 .gt-day-stat__icon{ font-size:15px; line-height:1; flex-shrink:0; }
 .gt-day-stat__label{
   font-size:var(--gt-text-xs); color:var(--gt-ink-300); font-weight:600;
-  min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  min-width:0;
 }
 .gt-day-stat__value{
   font-size:var(--gt-text-sm); color:var(--gt-ink-900); font-weight:800;
-  margin-inline-start:auto; flex-shrink:0;
+  margin-inline-start:auto; min-width:0;
 }
 .gt-day-brief__overview{
   font-size:var(--gt-text-md); color:var(--gt-ink-700);
@@ -1296,11 +1305,30 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
   border-top:1px solid var(--gt-hair);
   margin-top:var(--gt-space-3); padding-top:var(--gt-space-3);
 }
+/* The label lives in its own span (see gtDayFoldHtml) so its text has a real
+   box to wrap inside - as a bare text node in a flex row it could only shrink
+   to its longest word, which overflowed the summary at every width tested. */
 .gt-day-fold__summary{
   font-size:var(--gt-text-sm); font-weight:800; color:var(--gt-ink-700);
   cursor:pointer; padding:var(--gt-space-2) 0; min-height:44px;
   display:flex; align-items:center; gap:var(--gt-space-2);
+  list-style:none;
 }
+.gt-day-fold__summary::-webkit-details-marker{ display:none; }
+.gt-day-fold__icon{ flex-shrink:0; }
+/* flex-basis 0, not auto: with `auto` the label still contributes its
+   intrinsic width to the row, which left the chevron a few pixels outside the
+   summary box at some widths. At 0 the label claims only leftover space. */
+.gt-day-fold__label{ flex:1 1 0%; min-width:0; }
+/* Own disclosure chevron, since the native marker is suppressed above.
+   Rotates on open; inset-inline-end so it lands on the left in this RTL page
+   and would flip correctly if ever rendered LTR. */
+.gt-day-fold__summary::after{
+  content:"⌄"; flex-shrink:0;
+  font-size:16px; line-height:1; color:var(--gt-ink-500);
+  transition:transform var(--gt-dur-fast) var(--gt-ease);
+}
+.gt-day-fold[open] > .gt-day-fold__summary::after{ transform:rotate(180deg); }
 .gt-day-fold__summary:hover{ color:var(--gt-primary-700-text); }
 .gt-day-fold__summary:focus-visible{
   outline:none; border-radius:var(--gt-r-sm);
@@ -1366,7 +1394,7 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
   color:var(--gt-primary-600); font-weight:800;
 }
 .gt-day-summary__facts{
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
   gap:var(--gt-space-2); margin:0 0 var(--gt-space-3);
 }
 .gt-day-summary__fact{
@@ -1385,6 +1413,14 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
   padding-top:var(--gt-space-3); border-top:1px solid var(--gt-primary-100);
 }
 .gt-day-summary__moment strong{ color:var(--gt-ink-900); }
+/* Pantokrator's closing correction - quieter than the moment line above it,
+   because it exists to prevent a misreading rather than to sell the day. */
+.gt-day-summary__note{
+  font-size:var(--gt-text-sm); color:var(--gt-ink-500);
+  line-height:var(--gt-lh-body); margin-top:var(--gt-space-3);
+  padding-top:var(--gt-space-3); border-top:1px solid var(--gt-primary-100);
+}
+.gt-day-summary__note p{ margin:0; }
 
 /* Between-cards route connector ("what's next, how do I get there") - a
    sibling of .gt-row-card inside #gt-itinerary-row-list (a flex column, see

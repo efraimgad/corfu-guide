@@ -478,11 +478,20 @@ function gtDayComputedTotals(day) {
     return out;
 }
 
-function gtStatHtml(icon, label, value) {
+// `ltr` marks a value whose internal order is Latin/numeric rather than
+// Hebrew - specifically a time range like "08:00-19:00". The en-dash between
+// two clock times is bidi-neutral, so inside this RTL page the browser lays
+// the two halves out right-to-left and the range renders as "19:00-08:00":
+// visually reversed, and read as a day that starts at 8pm. dir="ltr" isolates
+// the run, the same fix the venue-hours rows already use for verifiedHours.
+// It is applied per-value, never to the whole tile - "1 שע׳ 23 דק׳ · 66 ק"מ"
+// is Hebrew and must stay RTL.
+function gtStatHtml(icon, label, value, ltr) {
+    const valueAttr = ltr ? ' dir="ltr"' : '';
     return `<div class="gt-day-stat">
       <span class="gt-day-stat__icon" aria-hidden="true">${icon}</span>
       <span class="gt-day-stat__label">${escapeHtml(label)}</span>
-      <span class="gt-day-stat__value gt-tabular">${escapeHtml(value)}</span>
+      <span class="gt-day-stat__value gt-tabular"${valueAttr}>${escapeHtml(value)}</span>
     </div>`;
 }
 
@@ -492,7 +501,7 @@ function gtDayStatsHtml(totals) {
         const span = totals.endMin != null && totals.endMin > totals.startMin
             ? `${gtFormatClock(totals.startMin)}–${gtFormatClock(totals.endMin)}`
             : gtFormatClock(totals.startMin);
-        parts.push(gtStatHtml('🕘', 'טווח היום', span));
+        parts.push(gtStatHtml('🕘', 'טווח היום', span, true));
     }
     if (totals.driveMin) {
         const km = totals.driveKm ? ` · ${Math.round(totals.driveKm)} ק"מ` : '';
@@ -525,7 +534,7 @@ function gtPriorityGroupHtml(entries, modifier, label, icon) {
 function gtDayFoldHtml(summaryIcon, summaryLabel, bodyHtml, extraClass) {
     if (!bodyHtml) return '';
     return `<details class="gt-day-fold ${extraClass || ''}">
-      <summary class="gt-day-fold__summary"><span aria-hidden="true">${summaryIcon}</span> ${escapeHtml(summaryLabel)}</summary>
+      <summary class="gt-day-fold__summary"><span class="gt-day-fold__icon" aria-hidden="true">${summaryIcon}</span><span class="gt-day-fold__label">${escapeHtml(summaryLabel)}</span></summary>
       <div class="gt-day-fold__body">${bodyHtml}</div>
     </details>`;
 }
@@ -596,14 +605,20 @@ function gtRenderItineraryDaySummary(day) {
 
     const facts = [];
     if (totals.driveMin) facts.push(`<div class="gt-day-summary__fact"><span class="gt-day-summary__fact-label">סה"כ נהיגה</span><span class="gt-day-summary__fact-value gt-tabular">${escapeHtml(gtFormatMinutes(totals.driveMin))}</span></div>`);
-    if (totals.startMin != null) facts.push(`<div class="gt-day-summary__fact"><span class="gt-day-summary__fact-label">יציאה מומלצת</span><span class="gt-day-summary__fact-value gt-tabular">${escapeHtml(gtFormatClock(totals.startMin))}</span></div>`);
+    if (totals.startMin != null) facts.push(`<div class="gt-day-summary__fact"><span class="gt-day-summary__fact-label">יציאה מומלצת</span><span class="gt-day-summary__fact-value gt-tabular" dir="ltr">${escapeHtml(gtFormatClock(totals.startMin))}</span></div>`);
     if (pace) facts.push(`<div class="gt-day-summary__fact"><span class="gt-day-summary__fact-label">עומס היום</span><span class="gt-day-summary__fact-value">${pace.icon} ${escapeHtml(pace.label)}</span></div>`);
 
+    // day.closingNoteHtml is the third piece of real content this file has
+    // carried with no view rendering it (alongside rainAlt and image). Only
+    // the Pantokrator card has one, and it exists precisely to correct a
+    // wrong impression its own timeline creates - that its 14:00 meal is the
+    // trip's last. The day summary is where that belongs.
     el.innerHTML = `<section class="gt-day-summary" aria-label="סיכום היום">
       <p class="gt-day-summary__title">📌 סיכום היום</p>
       ${highlights ? `<ul class="gt-day-summary__highlights">${highlights}</ul>` : ''}
       ${facts.length ? `<div class="gt-day-summary__facts">${facts.join('')}</div>` : ''}
       ${brief.bestMoment ? `<p class="gt-day-summary__moment"><span aria-hidden="true">✨</span> <strong>הרגע של היום:</strong> ${escapeHtml(brief.bestMoment)}</p>` : ''}
+      ${day.closingNoteHtml ? `<div class="gt-day-summary__note">${day.closingNoteHtml}</div>` : ''}
     </section>`;
 }
 
