@@ -595,30 +595,47 @@ function gtRenderItineraryBrief(day) {
     </section>`;
 }
 
-// "Next day" control, rendered after the day summary.
+// Day-to-day pager, rendered after the day summary.
 //
 // Only the numbered days form a sequence, so only they get one. The two alt
 // days are alternates that stand in for a numbered day rather than occupying a
-// position of their own - "the day after Paxos" is not a thing - and day 7 is
-// the flight home, so neither renders a link to nowhere.
+// position of their own - "the day after Paxos" is not a thing - so they render
+// nothing. Day 1 has no previous and day 7 no next, and each link is emitted
+// only when its target actually exists.
 //
-// Reuses .gt-btn/.gt-btn--secondary, which already carry the 44px touch floor
-// and the focus ring, rather than introducing a second button treatment.
-function gtNextDayNavHtml(day) {
-    if (!day || day.isAlt || !day.dayNumber || day.dayNumber >= 7) return '';
-    const nextKey = String(day.dayNumber + 1);
-    const next = typeof findItineraryDay === 'function' ? findItineraryDay(nextKey) : null;
-    if (!next) return '';
-    const label = next.dayArea ? `יום ${nextKey} · ${next.dayArea}` : `יום ${nextKey}`;
-    return `<nav class="gt-day-next" aria-label="מעבר ליום הבא">
-      <button type="button" class="gt-btn gt-btn--secondary gt-day-next__btn" data-gt-next-day="${escapeAttr(nextKey)}">
-        <span class="gt-day-next__label">
-          <span class="gt-day-next__eyebrow">היום הבא</span>
-          <span class="gt-day-next__title">${escapeHtml(label)}</span>
+// Both links reuse .gt-btn/.gt-btn--secondary, which already carry the 44px
+// touch floor and the focus ring, rather than introducing a second button
+// treatment.
+//
+// Direction: the page is RTL, so forward points LEFT. "Next" therefore carries
+// ← with the arrow at the inline end, and "previous" carries → with the arrow
+// at the inline start, so the two mirror each other and each arrow points the
+// way it actually travels. They stack rather than sitting side by side: on a
+// phone two half-width buttons would crush labels like
+// "צפון-מזרח ההררי (פנטוקרטור)", and stacking also avoids an RTL row where
+// "next" would have to sit on the reading-start edge to be first in the DOM.
+// Next is authored first because it is the primary action at the end of a day.
+function gtDayNavLinkHtml(targetKey, eyebrow, arrow, modifier) {
+    const target = typeof findItineraryDay === 'function' ? findItineraryDay(targetKey) : null;
+    if (!target) return '';
+    const label = target.dayArea ? `יום ${targetKey} · ${target.dayArea}` : `יום ${targetKey}`;
+    return `<button type="button" class="gt-btn gt-btn--secondary gt-day-nav__btn gt-day-nav__btn--${modifier}" data-gt-goto-day="${escapeAttr(targetKey)}">
+        <span class="gt-day-nav__label">
+          <span class="gt-day-nav__eyebrow">${escapeHtml(eyebrow)}</span>
+          <span class="gt-day-nav__title">${escapeHtml(label)}</span>
         </span>
-        <span class="gt-day-next__arrow" aria-hidden="true">←</span>
-      </button>
-    </nav>`;
+        <span class="gt-day-nav__arrow" aria-hidden="true">${arrow}</span>
+      </button>`;
+}
+
+function gtDayNavHtml(day) {
+    if (!day || day.isAlt || !day.dayNumber) return '';
+    const links = [];
+    if (day.dayNumber < 7) links.push(gtDayNavLinkHtml(String(day.dayNumber + 1), 'היום הבא', '←', 'next'));
+    if (day.dayNumber > 1) links.push(gtDayNavLinkHtml(String(day.dayNumber - 1), 'היום הקודם', '→', 'prev'));
+    const rendered = links.filter(Boolean);
+    if (!rendered.length) return '';
+    return `<nav class="gt-day-nav" aria-label="מעבר בין ימי המסלול">${rendered.join('')}</nav>`;
 }
 
 // Switching day re-renders the whole view in place, which would otherwise leave
@@ -626,9 +643,9 @@ function gtNextDayNavHtml(day) {
 // end of the thing they just asked to start. Scroll back to the top of the
 // itinerary so the new day begins at its beginning.
 document.addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-gt-next-day]');
+    const btn = e.target.closest('[data-gt-goto-day]');
     if (!btn) return;
-    gtSelectItineraryDay(btn.getAttribute('data-gt-next-day'));
+    gtSelectItineraryDay(btn.getAttribute('data-gt-goto-day'));
     const view = document.getElementById('gt-itinerary-view');
     if (view) view.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
@@ -642,7 +659,7 @@ function gtRenderItineraryDaySummary(day) {
     const brief = day && day.dayBrief;
     // The next-day control is navigation, not summary content, so a day with no
     // brief still gets one rather than rendering a dead end.
-    if (!brief) { el.innerHTML = gtNextDayNavHtml(day); return; }
+    if (!brief) { el.innerHTML = gtDayNavHtml(day); return; }
 
     const totals = gtDayComputedTotals(day);
     const pace = GT_PACE[brief.pace];
@@ -665,7 +682,7 @@ function gtRenderItineraryDaySummary(day) {
       ${brief.bestMoment ? `<p class="gt-day-summary__moment"><span aria-hidden="true">✨</span> <strong>הרגע של היום:</strong> ${escapeHtml(brief.bestMoment)}</p>` : ''}
       ${day.closingNoteHtml ? `<div class="gt-day-summary__note">${day.closingNoteHtml}</div>` : ''}
     </section>
-    ${gtNextDayNavHtml(day)}`;
+    ${gtDayNavHtml(day)}`;
 }
 
 // -- Tap-to-open detail sheet -------------------------------------------------

@@ -1422,36 +1422,49 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 }
 .gt-day-summary__note p{ margin:0; }
 
-/* "Next day" control under the day summary. No new button treatment - it wears
-   .gt-btn--secondary, which already owns the padding, radius, hover, 44px touch
-   floor and focus ring. Everything below is layout only: make it full-width and
-   push the arrow to the far edge, with a two-line label inside.
-   The arrow is authored as ← because this page is RTL and "forward" points
-   left; it sits at the inline end so it lands on the left in Hebrew and would
-   flip correctly if the page were ever rendered LTR. */
-.gt-day-next{ margin-top:var(--gt-space-3); }
-.gt-day-next__btn{
+/* Day-to-day pager under the day summary. No new button treatment - both links
+   wear .gt-btn--secondary, which already owns the padding, radius, hover, 44px
+   touch floor and focus ring. Everything below is layout only.
+
+   Stacked, not side by side: at 390px two half-width buttons would crush a
+   label like "צפון-מזרח ההררי (פנטוקרטור)", and stacking sidesteps an RTL row
+   where "next" would have to take the reading-start edge just to come first in
+   the DOM. */
+.gt-day-nav{
+  display:flex; flex-direction:column; gap:var(--gt-space-2);
+  margin-top:var(--gt-space-3);
+}
+.gt-day-nav__btn{
   width:100%; justify-content:space-between; text-align:start;
   padding-top:var(--gt-space-3); padding-bottom:var(--gt-space-3);
 }
-.gt-day-next__label{
+/* Both labels stay on the same edge. Mirroring the previous link (arrow at the
+   inline start, label at the end) is the conventional pager arrangement, but
+   these are stacked vertically, and alternating the label edge made the pair
+   read as a zigzag rather than a list. The arrows still differ in direction,
+   which is what actually communicates which way each one goes. */
+.gt-day-nav__label{
   display:flex; flex-direction:column; align-items:flex-start; gap:2px;
   min-width:0;
 }
-.gt-day-next__eyebrow{
+.gt-day-nav__eyebrow{
   font-size:var(--gt-text-xs); font-weight:600; color:var(--gt-ink-300);
   line-height:1.2;
 }
-/* The area name can be long ("צפון-מזרח ההררי (פנטוקרטור)"), so it wraps rather
-   than pushing the arrow out of the button - the same overflow failure the day
-   stats grid hit. */
-.gt-day-next__title{
+/* Area names can be long, so the title wraps rather than pushing the arrow out
+   of the button - the same overflow failure the day stats grid hit. */
+.gt-day-nav__title{
   font-size:var(--gt-text-md); font-weight:800; color:var(--gt-ink-900);
   line-height:var(--gt-lh-tight); min-width:0; overflow-wrap:anywhere;
 }
-.gt-day-next__arrow{
+.gt-day-nav__arrow{
   flex-shrink:0; font-size:20px; line-height:1; color:var(--gt-ink-500);
 }
+/* The previous day is the secondary action - same size and hit area, quieter
+   fill, so "forward" stays the obvious default at the end of a day. */
+.gt-day-nav__btn--prev{ background:transparent; }
+.gt-day-nav__btn--prev:hover{ background:var(--gt-paper-sunken); }
+.gt-day-nav__btn--prev .gt-day-nav__title{ color:var(--gt-ink-700); font-weight:700; }
 
 /* Between-cards route connector ("what's next, how do I get there") - a
    sibling of .gt-row-card inside #gt-itinerary-row-list (a flex column, see
