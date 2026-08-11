@@ -252,6 +252,17 @@ DAYS.forEach(d => {
             }
         });
 });
+// Item HTML was the remaining hole, and it is the one that actually bit: day 3
+// carried "sunset around 20:06 on 4.9 (rough estimate)" inside a timeline item
+// long after solar.js began computing 20:08 for that date. The brief-prose scan
+// above never looked here, so the contradiction survived a whole pass.
+DAYS.forEach(d => {
+    d.items.forEach((item, i) => {
+        if (/(זריחה|שקיעה)[^<>]{0,80}\d{1,2}:\d{2}|\d{1,2}:\d{2}[^<>]{0,80}(זריחה|שקיעה)/.test(item.html)) {
+            storedTimes.push(`${d.key}.items[${i}]`);
+        }
+    });
+});
 ok(storedTimes.length === 0, 'no day hardcodes a sunrise/sunset time' + (storedTimes.length ? ' - found: ' + storedTimes.join(', ') : ''));
 // Alt days have no fixed date - they stand in for whichever day you swap them
 // into - so they must show a range, never one exact time presented as certain.
