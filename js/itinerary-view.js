@@ -595,14 +595,54 @@ function gtRenderItineraryBrief(day) {
     </section>`;
 }
 
+// "Next day" control, rendered after the day summary.
+//
+// Only the numbered days form a sequence, so only they get one. The two alt
+// days are alternates that stand in for a numbered day rather than occupying a
+// position of their own - "the day after Paxos" is not a thing - and day 7 is
+// the flight home, so neither renders a link to nowhere.
+//
+// Reuses .gt-btn/.gt-btn--secondary, which already carry the 44px touch floor
+// and the focus ring, rather than introducing a second button treatment.
+function gtNextDayNavHtml(day) {
+    if (!day || day.isAlt || !day.dayNumber || day.dayNumber >= 7) return '';
+    const nextKey = String(day.dayNumber + 1);
+    const next = typeof findItineraryDay === 'function' ? findItineraryDay(nextKey) : null;
+    if (!next) return '';
+    const label = next.dayArea ? `יום ${nextKey} · ${next.dayArea}` : `יום ${nextKey}`;
+    return `<nav class="gt-day-next" aria-label="מעבר ליום הבא">
+      <button type="button" class="gt-btn gt-btn--secondary gt-day-next__btn" data-gt-next-day="${escapeAttr(nextKey)}">
+        <span class="gt-day-next__label">
+          <span class="gt-day-next__eyebrow">היום הבא</span>
+          <span class="gt-day-next__title">${escapeHtml(label)}</span>
+        </span>
+        <span class="gt-day-next__arrow" aria-hidden="true">←</span>
+      </button>
+    </nav>`;
+}
+
+// Switching day re-renders the whole view in place, which would otherwise leave
+// the reader at the bottom of the page looking at the new day's summary - the
+// end of the thing they just asked to start. Scroll back to the top of the
+// itinerary so the new day begins at its beginning.
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-gt-next-day]');
+    if (!btn) return;
+    gtSelectItineraryDay(btn.getAttribute('data-gt-next-day'));
+    const view = document.getElementById('gt-itinerary-view');
+    if (view) view.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
 // Closing block under the timeline: the three things worth remembering, the
 // same computed totals restated once at the point of decision, and the single
-// moment worth looking forward to.
+// moment worth looking forward to - followed by the way on to tomorrow.
 function gtRenderItineraryDaySummary(day) {
     const el = document.getElementById('gt-itinerary-summary');
     if (!el) return;
     const brief = day && day.dayBrief;
-    if (!brief) { el.innerHTML = ''; return; }
+    // The next-day control is navigation, not summary content, so a day with no
+    // brief still gets one rather than rendering a dead end.
+    if (!brief) { el.innerHTML = gtNextDayNavHtml(day); return; }
 
     const totals = gtDayComputedTotals(day);
     const pace = GT_PACE[brief.pace];
@@ -624,7 +664,8 @@ function gtRenderItineraryDaySummary(day) {
       ${facts.length ? `<div class="gt-day-summary__facts">${facts.join('')}</div>` : ''}
       ${brief.bestMoment ? `<p class="gt-day-summary__moment"><span aria-hidden="true">✨</span> <strong>הרגע של היום:</strong> ${escapeHtml(brief.bestMoment)}</p>` : ''}
       ${day.closingNoteHtml ? `<div class="gt-day-summary__note">${day.closingNoteHtml}</div>` : ''}
-    </section>`;
+    </section>
+    ${gtNextDayNavHtml(day)}`;
 }
 
 // -- Tap-to-open detail sheet -------------------------------------------------
