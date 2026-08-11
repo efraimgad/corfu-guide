@@ -173,8 +173,8 @@ const EMITTED = ['gt-day-brief', 'gt-day-brief__theme', 'gt-day-brief__chips', '
     'gt-day-summary', 'gt-day-summary__title', 'gt-day-summary__highlights',
     'gt-day-summary__facts', 'gt-day-summary__fact', 'gt-day-summary__moment',
     'gt-day-summary__note', 'gt-chip--pace',
-    'gt-day-next', 'gt-day-next__btn', 'gt-day-next__label', 'gt-day-next__eyebrow',
-    'gt-day-next__title', 'gt-day-next__arrow'];
+    'gt-day-nav', 'gt-day-nav__btn', 'gt-day-nav__btn--prev', 'gt-day-nav__label',
+    'gt-day-nav__eyebrow', 'gt-day-nav__title', 'gt-day-nav__arrow'];
 const unstyled = EMITTED.filter(c => CSS.indexOf('.' + c) === -1);
 ok(unstyled.length === 0, `all ${EMITTED.length} emitted classes are styled` + (unstyled.length ? ' — unstyled: ' + unstyled.join(', ') : ''));
 // The judgment marker is the mechanism keeping opinion visually separate from
@@ -194,29 +194,33 @@ ok(/gt-day-summary__fact-value gt-tabular" dir="ltr"/.test(VIEW), 'the recommend
 // The Hebrew totals must NOT be forced LTR - that would reverse them instead.
 ok(/gtStatHtml\('🚗', 'נהיגה', gtFormatMinutes\(totals\.driveMin\) \+ km\)/.test(VIEW), 'the Hebrew drive total is left RTL');
 
-// -- 7c. Next-day control ----------------------------------------------------
-section('The next-day control exists and stops at the end of the trip');
-ok(/function gtNextDayNavHtml/.test(VIEW), 'gtNextDayNavHtml() exists');
-ok(/gtNextDayNavHtml\(day\)/.test(VIEW), 'the day summary renders it');
+// -- 7c. Day-to-day pager ----------------------------------------------------
+section('The day pager exists and stops at both ends of the trip');
+ok(/function gtDayNavHtml/.test(VIEW), 'gtDayNavHtml() exists');
+ok(/gtDayNavHtml\(day\)/.test(VIEW), 'the day summary renders it');
 // Only the numbered days form a sequence. Alt days stand in for a numbered day
-// rather than holding a position ("the day after Paxos" is not a thing), and
-// day 7 is the flight home - neither may render a link to nowhere.
-ok(/day\.isAlt \|\| !day\.dayNumber \|\| day\.dayNumber >= 7/.test(VIEW),
-   'alt days and the final day render no next-day link');
-ok(/data-gt-next-day=/.test(VIEW), 'the control carries its target day as a data attribute');
-ok(/\[data-gt-next-day\]/.test(VIEW), 'a delegated click handler is wired to that attribute');
+// rather than holding a position ("the day after Paxos" is not a thing).
+ok(/day\.isAlt \|\| !day\.dayNumber/.test(VIEW), 'alt days render no pager');
+ok(/day\.dayNumber < 7/.test(VIEW), 'the final day renders no next link');
+ok(/day\.dayNumber > 1/.test(VIEW), 'the first day renders no previous link');
+ok(/data-gt-goto-day=/.test(VIEW), 'each link carries its target day as a data attribute');
+ok(/\[data-gt-goto-day\]/.test(VIEW), 'a delegated click handler is wired to that attribute');
 ok(/scrollIntoView/.test(VIEW), 'switching day scrolls back to the top of the itinerary');
-ok(/gt-btn gt-btn--secondary/.test(VIEW), 'it reuses the existing button treatment (44px floor + focus ring)');
-// Every target it can produce must be a real day, or the button is a dead end.
+ok(/gt-btn gt-btn--secondary/.test(VIEW), 'both links reuse the existing button treatment');
+// RTL: forward points left. Getting these backwards would send readers the
+// wrong way, and it is invisible to any DOM-level assertion.
+ok(/'היום הבא', '←'/.test(VIEW), 'next points ← (forward in an RTL page)');
+ok(/'היום הקודם', '→'/.test(VIEW), 'previous points → (backward in an RTL page)');
+// Every target either link can produce must be a real day, or it is a dead end.
 const maxNumbered = Math.max(...DAYS.filter(d => !d.isAlt).map(d => d.dayNumber));
 ok(maxNumbered === 7, `the trip still ends at day 7 (found ${maxNumbered}) - the cutoff above assumes it`);
-let danglingNext = [];
+let dangling = [];
 DAYS.forEach(d => {
-    if (d.isAlt || !d.dayNumber || d.dayNumber >= 7) return;
-    const target = String(d.dayNumber + 1);
-    if (!DAYS.some(x => String(x.key) === target)) danglingNext.push(`${d.key} -> ${target}`);
+    if (d.isAlt || !d.dayNumber) return;
+    if (d.dayNumber < 7 && !DAYS.some(x => String(x.key) === String(d.dayNumber + 1))) dangling.push(`${d.key} -> next ${d.dayNumber + 1}`);
+    if (d.dayNumber > 1 && !DAYS.some(x => String(x.key) === String(d.dayNumber - 1))) dangling.push(`${d.key} -> prev ${d.dayNumber - 1}`);
 });
-ok(danglingNext.length === 0, 'every next-day target resolves to a real day' + (danglingNext.length ? ' - dangling: ' + danglingNext.join(', ') : ''));
+ok(dangling.length === 0, 'every pager target resolves to a real day' + (dangling.length ? ' - dangling: ' + dangling.join(', ') : ''));
 
 // -- 8. Pace labels are complete --------------------------------------------
 section('Every authored pace and bestFor tag has a label');
