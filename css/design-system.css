@@ -1255,6 +1255,19 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 .gt-day-brief__overview p{ margin:0 0 var(--gt-space-2); }
 .gt-day-brief__overview p:last-child{ margin-bottom:0; }
 
+/* The sunset nudge under the day overview. Quiet by design: it is an
+   invitation to stay put, not another thing to do, so it reads closer to a
+   caption than to a heading. Warm accent tokens rather than the primary blue,
+   since it is about light rather than navigation. */
+.gt-day-sun{
+  display:flex; gap:var(--gt-space-2); align-items:flex-start;
+  margin:var(--gt-space-3) 0 0; padding:var(--gt-space-3);
+  background:var(--gt-accent-gold-100); border-radius:var(--gt-r-md);
+  font-size:var(--gt-text-sm); color:var(--gt-ink-700);
+  line-height:var(--gt-lh-body);
+}
+.gt-day-sun strong{ color:var(--gt-ink-900); }
+
 /* Judgment marker. Everything inside a .gt-judgment block is a planning
    opinion (pace, priorities, what to skip, best moment) rather than a
    verified fact, and says so once at the top of the block instead of

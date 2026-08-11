@@ -173,6 +173,7 @@ const EMITTED = ['gt-day-brief', 'gt-day-brief__theme', 'gt-day-brief__chips', '
     'gt-day-summary', 'gt-day-summary__title', 'gt-day-summary__highlights',
     'gt-day-summary__facts', 'gt-day-summary__fact', 'gt-day-summary__moment',
     'gt-day-summary__note', 'gt-chip--pace',
+    'gt-day-sun',
     'gt-day-nav', 'gt-day-nav__btn', 'gt-day-nav__btn--prev', 'gt-day-nav__label',
     'gt-day-nav__eyebrow', 'gt-day-nav__title', 'gt-day-nav__arrow'];
 const unstyled = EMITTED.filter(c => CSS.indexOf('.' + c) === -1);
@@ -221,6 +222,47 @@ DAYS.forEach(d => {
     if (d.dayNumber > 1 && !DAYS.some(x => String(x.key) === String(d.dayNumber - 1))) dangling.push(`${d.key} -> prev ${d.dayNumber - 1}`);
 });
 ok(dangling.length === 0, 'every pager target resolves to a real day' + (dangling.length ? ' - dangling: ' + dangling.join(', ') : ''));
+
+// -- 7d. Sunrise / sunset ----------------------------------------------------
+section('Daylight times are computed from the real trip dates, never stored');
+const SOLAR = fs.readFileSync(path.join(ROOT, 'js/solar.js'), 'utf8');
+ok(/function solarEvents/.test(SOLAR) && /function solarCorfuTimes/.test(SOLAR), 'js/solar.js provides the calculation');
+ok(/gtDaySolar\(day\)/.test(VIEW), 'the day brief derives its times per day');
+ok(/TRIP_CONFIG\.startDay/.test(VIEW), 'derived from the real trip start date, not a constant');
+// The specific regression: someone pastes a table of times into the data file.
+// That is a second source of truth that silently goes stale if the trip moves.
+let storedTimes = [];
+DAYS.forEach(d => {
+    const b = d.dayBrief || {};
+    if (b.sunsetNote && /\d{1,2}:\d{2}/.test(b.sunsetNote)) storedTimes.push(`${d.key}.sunsetNote`);
+    ['sunrise', 'sunset', 'sunriseTime', 'sunsetTime'].forEach(f => { if (b[f]) storedTimes.push(`${d.key}.${f}`); });
+});
+// Prose is the hole this originally slipped through: day 6's overview carried
+// "sunset is around 20:03 (estimate)" long after the value became computed and
+// exact. Any clock time in the same sentence as זריחה/שקיעה is a second source
+// of truth for something js/solar.js already owns.
+DAYS.forEach(d => {
+    const b = d.dayBrief || {};
+    [['overview', b.overview], ['ifTired', b.ifTired], ['ifEnergy', b.ifEnergy],
+     ['weather.sun', (b.weather || {}).sun], ['weather.cloud', (b.weather || {}).cloud]]
+        .filter(([, v]) => v)
+        .forEach(([name, text]) => {
+            if (/(זריחה|שקיעה)[^<.]{0,60}\d{1,2}:\d{2}|\d{1,2}:\d{2}[^<.]{0,60}(זריחה|שקיעה)/.test(text)) {
+                storedTimes.push(`${d.key}.${name}`);
+            }
+        });
+});
+ok(storedTimes.length === 0, 'no day hardcodes a sunrise/sunset time' + (storedTimes.length ? ' - found: ' + storedTimes.join(', ') : ''));
+// Alt days have no fixed date - they stand in for whichever day you swap them
+// into - so they must show a range, never one exact time presented as certain.
+ok(/day\.isAlt/.test(VIEW) && /isRange/.test(VIEW), 'alt days render a range rather than a false exact time');
+ok(/solar\.isRange/.test(VIEW), 'the sunset nudge is suppressed when only a range is known');
+ok(/js\/solar\.js/.test(HTML), 'solar.js is loaded by index.html');
+const SW = fs.readFileSync(path.join(ROOT, 'sw.js'), 'utf8');
+ok(/js\/solar\.js/.test(SW), 'solar.js is precached by the service worker');
+// Clock values are bidi-isolated for the same reason the day span is.
+ok(/'🌅', 'זריחה', totals\.solar\.sunrise, true/.test(VIEW), 'sunrise is bidi-isolated');
+ok(/'🌇', 'שקיעה', totals\.solar\.sunset, true/.test(VIEW), 'sunset is bidi-isolated');
 
 // -- 8. Pace labels are complete --------------------------------------------
 section('Every authored pace and bestFor tag has a label');
