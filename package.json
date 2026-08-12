@@ -6,7 +6,7 @@
   "scripts": {
     "build:css": "tailwindcss -i ./css/tailwind-input.css -o ./tailwind-production.css --minify",
     "extract": "node scripts/extract-locations.js",
-    "test": "node scripts/smoke-test.js && node scripts/test-explore-facets.js && node scripts/test-guide-panels.js && node scripts/test-map-consolidation.js && node scripts/test-explore-map-sync.js && node scripts/test-app-shell.js && node scripts/test-day-map-matching.js && node scripts/test-favorites.js && node scripts/test-escaping.js && node scripts/test-tab-isolation.js && node scripts/test-reveal.js && node scripts/test-maps-links.js && node scripts/test-itinerary-brief.js && node scripts/test-destination-chrome.js",
+    "test": "node scripts/smoke-test.js && node scripts/test-explore-facets.js && node scripts/test-guide-panels.js && node scripts/test-map-consolidation.js && node scripts/test-explore-map-sync.js && node scripts/test-app-shell.js && node scripts/test-day-map-matching.js && node scripts/test-favorites.js && node scripts/test-escaping.js && node scripts/test-tab-isolation.js && node scripts/test-reveal.js && node scripts/test-maps-links.js && node scripts/test-itinerary-brief.js && node scripts/test-destination-chrome.js && node scripts/test-paxos-destination.js",
     "test:facets": "node scripts/test-explore-facets.js",
     "test:guide": "node scripts/test-guide-panels.js",
     "test:map": "node scripts/test-map-consolidation.js",
@@ -18,7 +18,8 @@
     "test:reveal": "node scripts/test-reveal.js",
     "test:maps": "node scripts/test-maps-links.js",
     "test:brief": "node scripts/test-itinerary-brief.js",
-    "test:chrome": "node scripts/test-destination-chrome.js"
+    "test:chrome": "node scripts/test-destination-chrome.js",
+    "test:paxos": "node scripts/test-paxos-destination.js"
   },
   "devDependencies": {
     "cheerio": "^1.2.0",

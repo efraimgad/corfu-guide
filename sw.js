@@ -9,7 +9,7 @@
 // Bump this on every deploy that changes any APP_SHELL file — the SW
 // cache is otherwise not invalidated, and returning visitors would stay
 // pinned to the old cached JS/CSS indefinitely.
-const CACHE_NAME = 'corfu-guide-v34';
+const CACHE_NAME = 'corfu-guide-v35';
 
 // Photos live in their own cache so they can be evicted (and capped)
 // independently of the app shell, and so bumping CACHE_NAME for a code
@@ -33,19 +33,26 @@ const APP_SHELL = [
     'js/destination-gate.js',
     'data/destinations/corfu.js',
     'data/destinations/testdest.js',
+    'data/destinations/paxos.js',
     'data/destinations/empty.js',
     'js/locations-data.js',
     'js/testdest-locations.js',
+    'js/paxos-locations.js',
     'js/corfu-faq.js',
     'js/testdest-faq.js',
+    'js/paxos-faq.js',
     'js/corfu-activities.js',
     'js/testdest-activities.js',
+    'js/paxos-activities.js',
     'js/corfu-weather.js',
     'js/testdest-weather.js',
+    'js/paxos-weather.js',
     'js/corfu-about.js',
     'js/testdest-about.js',
+    'js/paxos-about.js',
     'js/corfu-language.js',
     'js/testdest-language.js',
+    'js/paxos-language.js',
     'js/location-shared.js',
     'js/search.js',
     'js/faq-filters.js',
@@ -58,6 +65,7 @@ const APP_SHELL = [
     'js/notes-favorites.js',
     'js/itinerary-data.js',
     'js/testdest-itinerary.js',
+    'js/paxos-itinerary.js',
     'js/itinerary.js',
     'js/solar.js',
     'js/itinerary-view.js',

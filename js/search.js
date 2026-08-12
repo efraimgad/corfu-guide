@@ -36,16 +36,25 @@ const LOCATION_DATA_SOURCES = [
     { listKey: 'gems', tabId: 'gems', icon: '💎', getName: item => item.name, getText: item => item.description || '' }
 ];
 
-// window.CORFU_NAME_ALIASES (js/locations-data.js) maps a canonical place
+// window.DESTINATION.nameAliases (js/locations-data.js's window.CORFU_NAME_ALIASES
+// for Corfu, each destination's own equivalent otherwise — see
+// data/destinations/*.js's `nameAliases` field) maps a canonical place
 // spelling to its old/alternate transliterations, e.g.
 // 'אכיליון' -> ['אכיליאון']. A haystack that contains any one of those
 // spellings gets every spelling appended to it, so a query typed in either
 // the itinerary's wording or a card's wording matches the same entries -
 // regardless of which specific spelling that entry's own text happens to
 // use.
+//
+// Reads window.DESTINATION.nameAliases (not the bare window.CORFU_NAME_ALIASES
+// global) so this expands aliases for the ACTIVE destination - reading the
+// bare global here meant every destination's search silently reused Corfu's
+// alias table (harmless on its own, since a non-Corfu haystack just never
+// matches Corfu's spellings, but see buildLocationDataIndexEntries() and
+// buildItineraryIndexEntries() below for the same-shaped bug that DID leak
+// visible Corfu content into other destinations' results).
 function expandWithAliases(haystack) {
-    const aliasMap = window.CORFU_NAME_ALIASES;
-    if (!aliasMap) return haystack;
+    const aliasMap = (window.DESTINATION && window.DESTINATION.nameAliases) || {};
     let extra = '';
     Object.keys(aliasMap).forEach(canonical => {
         const variants = [canonical, ...aliasMap[canonical]];
@@ -109,9 +118,20 @@ function buildFaqIndexEntries() {
     });
 }
 
+// Reads window.DESTINATION.locations (not the bare window.CORFU_LOCATIONS
+// global) — the same real bug expandWithAliases() above notes, but visible
+// here: js/locations-data.js's window.CORFU_LOCATIONS always exists (it's
+// unconditionally loaded for every destination, same as every
+// data/destinations/*.js file), so reading it directly meant every
+// destination's beaches/food/attractions/gems search results were always
+// Corfu's, regardless of which destination was active - a second
+// destination (testdest) with a deliberately different, non-overlapping
+// category taxonomy never surfaced this, since its fake "museums"/"trails"
+// results just sat alongside Corfu's real ones without looking wrong; a
+// third, real destination with real place names did.
 function buildLocationDataIndexEntries() {
     const entries = [];
-    const data = window.CORFU_LOCATIONS || {};
+    const data = (window.DESTINATION && window.DESTINATION.locations) || {};
     LOCATION_DATA_SOURCES.forEach(src => {
         (data[src.listKey] || []).forEach(item => {
             const name = (src.getName(item) || '').trim();
@@ -136,9 +156,11 @@ function buildLocationDataIndexEntries() {
 // rather than one entry per day - so a query like "אכיליון" or "Kanoni"
 // lands on the exact stop it's describing instead of just "day 5"
 // generically.
+// Reads window.DESTINATION.itineraryDays (not the bare window.ITINERARY_DAYS
+// global) — same bug class as buildLocationDataIndexEntries() above.
 function buildItineraryIndexEntries() {
     const entries = [];
-    (window.ITINERARY_DAYS || []).forEach(day => {
+    ((window.DESTINATION && window.DESTINATION.itineraryDays) || []).forEach(day => {
         const fullLabel = gtSearchStripTags(typeof gtItineraryDayTitle === 'function' ? gtItineraryDayTitle(day) : (day.title || ''));
         const shortLabel = day.isAlt ? 'יום חלופי' : `יום ${day.dayNumber}`;
 
