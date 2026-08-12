@@ -98,7 +98,7 @@ window.DESTINATIONS.testdest = {
     editorial: {
         about: window.TESTDEST_ABOUT,
         tripPlanning: { weather: window.TESTDEST_WEATHER },
-        language: null,
+        language: window.TESTDEST_LANGUAGE,
         activities: window.TESTDEST_ACTIVITIES,
         faq: window.TESTDEST_FAQ,
         // Placeholder healthSafety data, matching the labeling convention
@@ -127,7 +127,18 @@ window.DESTINATIONS.testdest = {
                     showInModal: true
                 }
             ],
-            insuranceReminderHtml: '💡 טיפ placeholder: זכרו ליצור קשר עם חברת הביטוח שלכם (טקסט לדוגמה בלבד).'
+            insuranceReminderHtml: '💡 טיפ placeholder: זכרו ליצור קשר עם חברת הביטוח שלכם (טקסט לדוגמה בלבד).',
+            // Placeholder common-mistakes data, matching the labeling
+            // convention used throughout this file — proves
+            // renderHealthMistakes() (js/health-safety.js) works with an
+            // arbitrary destination's data, including the optional
+            // `variant: 'sunken'` per-item style flag Corfu's real data
+            // uses on one of its 8 cards.
+            commonMistakes: [
+                { icon: '🧪', title: 'טעות לדוגמה מס\' 1', description: 'תיאור placeholder של טעות נפוצה — אין כאן מידע אמיתי על שום יעד.' },
+                { icon: '🧪', title: 'טעות לדוגמה מס\' 2', description: 'תיאור placeholder שני, בסגנון החלופי.', variant: 'sunken' }
+            ],
+            commonMistakesDisclaimer: '⚠️ הרשימה מבוססת על מידע placeholder בלבד — אין כאן מידע אמיתי על שום יעד.'
         }
     }
 };

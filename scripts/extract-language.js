@@ -1,0 +1,124 @@
+// Extracts the Language & Daily Life tab's structured record types (shopping
+// streets, souvenirs, supermarket chains, and the phrasebook cards) from
+// index.html into js/corfu-language.js, verbatim (never retyped) - same
+// cheerio-based pattern as scripts/extract-about.js / scripts/extract-faq.js
+// / scripts/extract-activities.js. Re-run after any hand-edit to the source
+// markup; do not hand-edit js/corfu-language.js directly.
+//
+// Deliberately NOT extracted (stays static prose in index.html): the
+// no-malls intro paragraph, the pharmacies block, and the public-restrooms
+// block inside #lang-shopping - none of those are repeated record types.
+//
+// Usage: node scripts/extract-language.js
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+const cheerio = require('cheerio');
+
+const ROOT = path.join(__dirname, '..');
+const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+const $ = cheerio.load(html);
+
+const langShopping = $('#lang-shopping');
+const langPhrasebook = $('#lang-phrasebook');
+
+// --- Shopping streets (#lang-shopping's first column) ---------------------
+const shoppingStreets = [];
+langShopping.find('.grid > div').first().find('> .flex.gap-4').each((i, el) => {
+    const $el = $(el);
+    const icon = $el.find('.text-3xl').first().text().trim();
+    const name = $el.find('h5').first().text().trim();
+    const description = $el.find('p').first().text().trim();
+    const mapsUrl = $el.find('a').first().attr('href') || '';
+    shoppingStreets.push({ icon, name, description, mapsUrl });
+});
+
+// --- Souvenirs (#lang-shopping's second column) ----------------------------
+const souvenirs = [];
+langShopping.find('.grid > div').eq(1).find('ul > li').each((i, el) => {
+    const $el = $(el);
+    const icon = $el.find('span').first().text().trim();
+    const title = $el.find('strong').first().text().trim();
+    const description = $el.find('span.text-sm').first().text().trim();
+    souvenirs.push({ icon, title, description });
+});
+
+// --- Supermarket chains -----------------------------------------------------
+const supermarkets = [];
+langShopping.find('.grid.grid-cols-1.sm\\:grid-cols-2.gap-3 > div').each((i, el) => {
+    const $el = $(el);
+    const name = $el.find('strong').first().text().trim();
+    // The description is the text node following <strong>, not inside any tag.
+    const fullText = $el.text().trim();
+    const description = fullText.slice(name.length).trim();
+    supermarkets.push({ name, description });
+});
+
+// --- Phrasebook cards --------------------------------------------------------
+// The first 5 cards are uniform phrase lists; the 6th ("טיפ הגייה") is a
+// single prose paragraph and is handled separately below.
+const phraseCards = langPhrasebook.find('.grid > div');
+const phrasebook = [];
+let pronunciationTip = null;
+
+phraseCards.each((i, el) => {
+    const $el = $(el);
+    const titleFull = $el.find('h4').first().text().trim();
+    const emojiMatch = titleFull.match(/^(\S+)\s*/);
+    const icon = emojiMatch ? emojiMatch[1] : '';
+    const title = titleFull.replace(/^\S+\s*/, '').trim();
+
+    const phraseItems = $el.find('ul > li');
+    if (phraseItems.length) {
+        const phrases = [];
+        phraseItems.each((j, li) => {
+            const $li = $(li);
+            const hebrew = $li.find('strong').first().text().replace(/:\s*$/, '').trim();
+            const span = $li.find('span').first();
+            const transliteration = span.text().trim().replace(/^\(|\)$/g, '');
+            // Greek text is the text node between </strong> and <span>.
+            const liClone = $li.clone();
+            liClone.find('strong').remove();
+            liClone.find('span').remove();
+            const greek = liClone.text().trim();
+            phrases.push({ hebrew, greek, transliteration });
+        });
+        phrasebook.push({ icon, title, phrases });
+    } else {
+        // The 6th, prose-only card.
+        const html = $el.find('p').first().html().trim();
+        pronunciationTip = { icon, title, html };
+    }
+});
+
+if (shoppingStreets.length !== 2) {
+    throw new Error(`extract-language: expected 2 shopping streets, found ${shoppingStreets.length} - aborting, not writing a possibly-truncated file`);
+}
+if (souvenirs.length !== 4) {
+    throw new Error(`extract-language: expected 4 souvenirs, found ${souvenirs.length} - aborting, not writing a possibly-truncated file`);
+}
+if (supermarkets.length !== 4) {
+    throw new Error(`extract-language: expected 4 supermarket chains, found ${supermarkets.length} - aborting, not writing a possibly-truncated file`);
+}
+if (phrasebook.length !== 5) {
+    throw new Error(`extract-language: expected 5 phrasebook category cards, found ${phrasebook.length} - aborting, not writing a possibly-truncated file`);
+}
+if (!pronunciationTip) {
+    throw new Error('extract-language: expected a 6th pronunciation-tip card, found none - aborting, not writing a possibly-truncated file');
+}
+
+const out = `// Auto-generated by scripts/extract-language.js from the original index.html.
+// Do not hand-edit lightly — regenerate via the script if the source markup
+// changes.
+window.CORFU_LANGUAGE = {
+  shoppingStreets: ${JSON.stringify(shoppingStreets, null, 2).split('\n').join('\n  ')},
+  souvenirs: ${JSON.stringify(souvenirs, null, 2).split('\n').join('\n  ')},
+  supermarkets: ${JSON.stringify(supermarkets, null, 2).split('\n').join('\n  ')},
+  phrasebook: ${JSON.stringify(phrasebook, null, 2).split('\n').join('\n  ')},
+  pronunciationTip: ${JSON.stringify(pronunciationTip, null, 2).split('\n').join('\n  ')}
+};
+`;
+
+fs.writeFileSync(path.join(ROOT, 'js/corfu-language.js'), out, 'utf8');
+console.log(`Extracted ${shoppingStreets.length} shopping streets, ${souvenirs.length} souvenirs, ${supermarkets.length} supermarkets, ${phrasebook.length} phrasebook cards + 1 pronunciation tip -> js/corfu-language.js`);

@@ -18,5 +18,14 @@ window.TESTDEST_ABOUT = {
             title: 'אזור בדיקה מס\' 2',
             description: 'תיאור לדוגמה שני — נתוני placeholder בלבד.'
         }
+    ],
+    // Placeholder quick-facts pills — proves renderAboutQuickFacts()
+    // (js/about.js) works for a destination other than Corfu, including the
+    // {iconHtml, text} raw-markup pill shape (Corfu's currency pill uses an
+    // inline <svg> instead of an emoji).
+    quickFacts: [
+        { icon: '🧪', text: 'עובדה לדוגמה מס\' 1 — נתוני placeholder בלבד' },
+        { icon: '🧪', text: 'עובדה לדוגמה מס\' 2 — נתוני placeholder בלבד' },
+        { iconHtml: '<svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/></svg>', text: 'מטבע לדוגמה: יורו (€)' }
     ]
 };

@@ -194,5 +194,49 @@ function renderHealthSafetyEmergency() {
     }
 }
 
+// One "common mistake" card in the Health & Safety tab's #health-mistakes
+// grid. Exactly one of the original 8 hand-authored cards used a
+// differently-styled container (gt-bg-sunken/gt-text-900 instead of the
+// other seven's gt-bg-accent-soft/gt-text-accent) with no content-based
+// pattern explaining it — preserved verbatim via the optional
+// `variant: 'sunken'` data flag rather than normalized away or silently
+// dropped (see data/destinations/corfu.js's commonMistakes comment and
+// scripts/extract-health-mistakes.js's header for the full note).
+function healthMistakeCardHtml(m) {
+    const sunken = m.variant === 'sunken';
+    const bgClass = sunken ? 'gt-bg-sunken' : 'gt-bg-accent-soft';
+    const borderClass = sunken ? 'gt-border-hair' : 'gt-border-accent';
+    const textClass = sunken ? 'gt-text-900' : 'gt-text-accent';
+    const icon = escapeHtml(m.icon || '');
+    const title = escapeHtml(m.title || '');
+    const description = escapeHtml(m.description || '');
+    return `<div class="${bgClass} rounded-lg p-4 border ${borderClass}">
+                <p class="font-bold ${textClass} mb-1">${icon} ${title}</p>
+                <p class="${textClass}">${description}</p>
+            </div>`;
+}
+
+// Renders the Health & Safety tab's #health-mistakes "common mistakes"
+// cards into #health-mistakes-grid, plus the closing disclaimer paragraph
+// into #health-mistakes-disclaimer. No-ops per-container if that container
+// isn't found, and no-ops entirely if there's no healthSafety data or no
+// commonMistakes array (e.g. the 'empty' destination) — same convention as
+// renderHealthSafetyEmergency() above.
+function renderHealthMistakes() {
+    const hs = getHealthSafetyData();
+    const mistakes = (hs && Array.isArray(hs.commonMistakes)) ? hs.commonMistakes : [];
+
+    const grid = document.getElementById('health-mistakes-grid');
+    if (grid) {
+        grid.innerHTML = mistakes.map(healthMistakeCardHtml).join('\n            ');
+    }
+
+    const disclaimer = document.getElementById('health-mistakes-disclaimer');
+    if (disclaimer) {
+        disclaimer.textContent = (mistakes.length && hs.commonMistakesDisclaimer) ? hs.commonMistakesDisclaimer : '';
+    }
+}
+
 window.renderEmergencyModal = renderEmergencyModal;
 window.renderHealthSafetyEmergency = renderHealthSafetyEmergency;
+window.renderHealthMistakes = renderHealthMistakes;

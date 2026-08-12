@@ -183,6 +183,15 @@ document.addEventListener("DOMContentLoaded", function() {
     if (typeof renderEmergencyModal === 'function') renderEmergencyModal();
     if (typeof renderHealthSafetyEmergency === 'function') renderHealthSafetyEmergency();
 
+    // Phase 2 (hybrid): Language & Daily Life's structured record types —
+    // shopping streets, souvenirs, supermarket chains, and the 5 uniform
+    // phrasebook cards + 6th pronunciation-tip card — from
+    // window.DESTINATION.editorial.language (js/language.js).
+    if (typeof renderShoppingStreets === 'function') renderShoppingStreets();
+    if (typeof renderSouvenirs === 'function') renderSouvenirs();
+    if (typeof renderSupermarkets === 'function') renderSupermarkets();
+    if (typeof renderPhrasebook === 'function') renderPhrasebook();
+
     // Quality-gate finding (FAQ/Activities migration): js/search.js builds
     // its search index on its OWN DOMContentLoaded listener, registered
     // earlier in script load order than this one - so anything rendered
