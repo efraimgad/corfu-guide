@@ -50,7 +50,7 @@ win.IntersectionObserver = function () {
 // stale whenever a file is added or (Phase C2) deleted, and the resulting
 // failure looks like an app bug rather than a harness bug.
 const SCRIPTS = [...fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8')
-    .matchAll(/<script[^>]+src="(js\/[^"]+)"/g)].map(m => m[1])
+    .matchAll(/<script[^>]+src="((?:js|data)\/[^"]+)"/g)].map(m => m[1])
     .filter(f => fs.existsSync(path.join(ROOT, f)));
 win.eval(
     SCRIPTS.map(f => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n;\n')

@@ -5,7 +5,8 @@
 // used throughout the app (see js/storage.js's getItemStateCache).
 // ============================================================================
 
-const RESERVATIONS_KEY = 'corfu-guide-reservations';
+const RESERVATIONS_KEY = gtDestKey('corfu-guide-reservations');
+gtMigrateLegacyKey('corfu-guide-reservations');
 // Shape: [{ id, place, date ('YYYY-MM-DD' or ''), time ('HH:MM' or ''),
 //           confirmation, phone, partySize (number, default 2) }]
 

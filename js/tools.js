@@ -1,55 +1,11 @@
-// Distance calculator
-const DISTANCE_LOCATIONS = [
-    { name: "העיר העתיקה קורפו (Corfu Town)", key: "corfu-town", lat: 39.6243, lon: 19.9217 },
-    { name: "פלקאס (Pelekas)", key: "pelekas", lat: 39.6000, lon: 19.8170 },
-    { name: "אגיוס גורדיוס (Agios Gordios)", key: "agios-gordios", lat: 39.5470, lon: 19.8530 },
-    { name: "ארמונס (Ermones)", key: "ermones", lat: 39.6105, lon: 19.7801 },
-    { name: "גליפאדה (Glyfada)", key: "glyfada", lat: 39.5937, lon: 19.8080 },
-    { name: "פלאוקסטריצה (Paleokastritsa)", key: "paleokastritsa", lat: 39.6726, lon: 19.7011 },
-    { name: "סידארי (Sidari)", key: "sidari", lat: 39.7915, lon: 19.7042 },
-    { name: "רודה (Roda)", key: "roda", lat: 39.7790, lon: 19.7930 },
-    { name: "אכרווי (Acharavi)", key: "acharavi", lat: 39.7830, lon: 19.8170 },
-    { name: "קאסיופי (Kassiopi)", key: "kassiopi", lat: 39.7946, lon: 19.9213 },
-    { name: "ברבטי (Barbati)", key: "barbati", lat: 39.7214, lon: 19.8665 },
-    { name: "ניסאקי (Nissaki)", key: "nissaki", lat: 39.7258, lon: 19.8974 },
-    { name: "גוביה (Gouvia) - מקום הלינה שלכם", key: "gouvia", lat: 39.6500, lon: 19.8520 },
-    // Dassia previously carried Gouvia's own coordinates (copy-paste error); real village center is ~2km further north
-    { name: "דאסיה (Dassia)", key: "dassia", lat: 39.6800, lon: 19.8398 },
-    // Ipsos was placed too far west of the real coastal village, ~2-3km further north of Dassia
-    { name: "איפסוס (Ipsos)", key: "ipsos", lat: 39.6995, lon: 19.8395 },
-    { name: "בניצס (Benitses)", key: "benitses", lat: 39.5433, lon: 19.9139 },
-    { name: "מוראיטיקה / מסונגי (Moraitika)", key: "moraitika", lat: 39.5200, lon: 19.9000 },
-    { name: "קאבוס (Kavos)", key: "kavos", lat: 39.3860, lon: 20.1130 }
-];
-
-// Real driving distances/times for the routes also covered by index.html's static
-// "טבלת זמני נסיעה" table (source: Corfu Scooter Rental, measured from Corfu Town).
-// The "gouvia" entries apply that same table's own north/south adjustment note
-// (+-~9km / ~12min vs. Corfu Town) since Gouvia is this trip's actual starting point.
-// Haversine estimation below under-estimates these longer, mountain-road routes,
-// so known pairs are looked up here first and haversine is used only as a fallback.
-const ROAD_DISTANCES = {
-    "corfu-town|pelekas": { km: 13, min: 20 },
-    "agios-gordios|corfu-town": { km: 18, min: 35 },
-    "barbati|corfu-town": { km: 20, min: 30 },
-    "corfu-town|nissaki": { km: 22, min: 35 },
-    "corfu-town|paleokastritsa": { km: 25, min: 38 },
-    "corfu-town|roda": { km: 36, min: 50 },
-    "corfu-town|sidari": { km: 37, min: 50 },
-    "corfu-town|kassiopi": { km: 35, min: 55 },
-    "acharavi|corfu-town": { km: 44, min: 60 },
-    "corfu-town|kavos": { km: 46, min: 67 },
-    "barbati|gouvia": { km: 11, min: 18 },
-    "gouvia|nissaki": { km: 13, min: 23 },
-    "gouvia|kassiopi": { km: 26, min: 43 },
-    "gouvia|roda": { km: 27, min: 38 },
-    "gouvia|sidari": { km: 28, min: 38 },
-    "acharavi|gouvia": { km: 35, min: 48 },
-    "gouvia|pelekas": { km: 22, min: 32 },
-    "agios-gordios|gouvia": { km: 27, min: 47 },
-    "gouvia|paleokastritsa": { km: 34, min: 50 },
-    "gouvia|kavos": { km: 55, min: 79 }
-};
+// Distance calculator - both destination-sourced (was a hardcoded Corfu-only
+// array/object literal). See data/destinations/*.js's own `distanceTool`
+// field. ROAD_DISTANCES can legitimately be `{}` for a destination that
+// hasn't researched real road distances yet (see testdest) - lookupRoadDistance()
+// below already degrades to the haversine-estimate fallback on any miss, so an
+// empty table needs no extra guard here.
+const DISTANCE_LOCATIONS = window.DESTINATION.distanceTool.locations;
+const ROAD_DISTANCES = window.DESTINATION.distanceTool.roadDistances;
 
 function lookupRoadDistance(from, to) {
     if (!from.key || !to.key) return null;
@@ -84,10 +40,11 @@ function populateDistanceSelects() {
         opt2.textContent = loc.name;
         toSel.appendChild(opt2);
     });
-    // default "from" to Gouvia (this trip's confirmed accommodation)
-    const gouviaIdx = DISTANCE_LOCATIONS.findIndex(l => l.name.includes('גוביה'));
-    fromSel.selectedIndex = gouviaIdx >= 0 ? gouviaIdx : 0;
-    toSel.selectedIndex = 5;
+    // default "from" to the destination's home base if present in the list,
+    // otherwise the first entry
+    const homeIdx = DISTANCE_LOCATIONS.findIndex(l => l.name.includes(window.DESTINATION.map.homeBase.name));
+    fromSel.selectedIndex = homeIdx >= 0 ? homeIdx : 0;
+    toSel.selectedIndex = Math.min(5, DISTANCE_LOCATIONS.length - 1);
 }
 
 function calculateDistance() {
@@ -126,9 +83,10 @@ function calculateDistance() {
         minutes = known.min;
     } else {
         const straightKm = haversineKm(from.lat, from.lon, to.lat, to.lon);
-        // Road-windiness correction factor for Corfu's mountainous coastal roads
-        roadKm = straightKm * 1.45;
-        const avgSpeedKmh = 32; // accounts for narrow, winding roads
+        // Road-windiness correction factor + average speed, both destination-sourced
+        // (was hardcoded for Corfu's mountainous coastal roads specifically).
+        roadKm = straightKm * window.DESTINATION.distanceTool.windinessFactor;
+        const avgSpeedKmh = window.DESTINATION.distanceTool.avgSpeedKmh; // accounts for narrow, winding roads
         minutes = Math.round((roadKm / avgSpeedKmh) * 60);
     }
     const hours = Math.floor(minutes / 60);

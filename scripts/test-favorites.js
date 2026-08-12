@@ -101,8 +101,23 @@ Object.defineProperty(win.HTMLElement.prototype, 'scrollIntoView', { value() {},
 // evaluating them together reproduces the real environment rather than a
 // stubbed approximation.
 win.fetch = () => new Promise(() => {});   // dashboard's weather call: never settles, never throws
+// favorites.js/dashboard.js both read window.DESTINATION (storage-key
+// namespacing, TRIP_CONFIG/timezone, weather coords) at their own top level,
+// so the destination-data bootstrap chain has to be evaluated first, same
+// as index.html's real script order.
 win.eval(
-    ['js/html-utils.js', 'js/favorites.js', 'js/dashboard.js']
+    [
+        'js/html-utils.js',
+        'js/locations-data.js',
+        'js/itinerary-data.js',
+        'data/destinations/corfu.js',
+        'js/testdest-locations.js',
+        'js/testdest-itinerary.js',
+        'data/destinations/testdest.js',
+        'js/destination-registry.js',
+        'js/favorites.js',
+        'js/dashboard.js'
+    ]
         .map(f => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n;\n')
 );
 
@@ -113,7 +128,7 @@ const firstId = cards[0].getAttribute('data-id');
 // Save one favourite through the real toggle path (this is what used to throw).
 const TOGGLE_FIRST = `toggleFavorite(document.querySelector('#activities-grid article[data-id] .favorite-btn'))`;
 eq(tryEval(win, TOGGLE_FIRST).error, null, 'toggleFavorite() does not throw');
-eq(JSON.parse(win.localStorage.getItem('corfu-guide-favorites') || '[]')[0], firstId, 'favourite persisted to localStorage');
+eq(JSON.parse(win.localStorage.getItem('corfu-guide-favorites:corfu') || '[]')[0], firstId, 'favourite persisted to localStorage');
 
 // Filter to favourites only.
 const shownRes = tryEval(win, 'showActivityFavoritesOnly(true)');

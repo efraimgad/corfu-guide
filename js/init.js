@@ -88,7 +88,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // instead of straight into the itinerary; every visit after that keeps
     // the itinerary default. skipScroll:true - nothing to scroll away from
     // yet on load.
-    const FIRST_VISIT_KEY = 'corfu-guide-visited';
+    const FIRST_VISIT_KEY = gtDestKey('corfu-guide-visited');
+    gtMigrateLegacyKey('corfu-guide-visited');
     let isFirstVisit = true;
     try {
         isFirstVisit = !localStorage.getItem(FIRST_VISIT_KEY);

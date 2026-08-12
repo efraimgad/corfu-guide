@@ -24,8 +24,8 @@ const io_read = (p) => fs.readFileSync(p, 'utf8');
 //
 // js/trip-private.js is intentionally untracked/optional - a missing file
 // must not break the test (see the existsSync guard below).
-const SCRIPT_ORDER = [...io_read(INDEX_PATH).matchAll(/<script[^>]+src="(js\/[^"]+)"/g)].map(m => m[1]);
-if (!SCRIPT_ORDER.length) throw new Error('smoke-test: found no js/ <script> tags in index.html');
+const SCRIPT_ORDER = [...io_read(INDEX_PATH).matchAll(/<script[^>]+src="((?:js|data)\/[^"]+)"/g)].map(m => m[1]);
+if (!SCRIPT_ORDER.length) throw new Error('smoke-test: found no js/ or data/ <script> tags in index.html');
 
 const TABS = ['home', 'about', 'dashboard', 'itinerary', 'explore', 'beaches', 'food', 'attractions', 'gems', 'activities', 'trip-planning', 'health-safety', 'language-daily', 'faq', 'guide'];
 

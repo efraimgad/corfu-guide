@@ -25,8 +25,34 @@
 // ---------------------------------------------------------------------------
 const HE_DAY_NAME = { SU: 'ראשון', MO: 'שני', TU: 'שלישי', WE: 'רביעי', TH: 'חמישי', FR: 'שישי', SA: 'שבת' };
 
-// Which calendar dates of THIS trip fall on a given weekday code.
-const TRIP_DAY_DATES = { WE: '02.09', TH: '03.09', FR: '04.09', SA: '05.09', SU: '06.09', MO: '07.09', TU: '08.09' };
+// Which calendar dates of THIS trip fall on a given weekday code (SU/MO/.../SA).
+//
+// Lazily computed and memoized rather than a hand-typed per-destination table
+// (was a fixed 7-entry object for one specific trip week) - a second source of
+// truth that would have to be re-typed correctly for every new destination and
+// every trip-date change. Walks every day from window.DESTINATION.tripConfig's
+// startDay to endDay (inclusive - so this equally covers a 2-day trip like
+// testdest's or a 9+ day one), deriving each date's real weekday + DD.MM string
+// via Intl in the destination's own timezone - the same formatToParts technique
+// js/dashboard.js's datePart()/formatDateDM() already use, so this can never
+// disagree with how dates are formatted everywhere else on the page.
+let _gtTripDayDatesCache = null;
+function getTripDayDates() {
+    if (_gtTripDayDatesCache) return _gtTripDayDatesCache;
+    const map = {};
+    const tz = window.DESTINATION.timezone;
+    const { startDay, endDay } = window.DESTINATION.tripConfig;
+    for (let t = startDay.getTime(); t <= endDay.getTime(); t += 86400000) {
+        const date = new Date(t);
+        // SU/MO/TU/WE/TH/FR/SA are exactly the first two letters of the
+        // English weekday name, uppercased - no separate lookup table needed.
+        const code = new Intl.DateTimeFormat('en-US', { timeZone: tz, weekday: 'long' }).format(date).slice(0, 2).toUpperCase();
+        const parts = new Intl.DateTimeFormat('en-GB', { timeZone: tz, day: '2-digit', month: '2-digit' }).formatToParts(date);
+        map[code] = `${parts.find(p => p.type === 'day').value}.${parts.find(p => p.type === 'month').value}`;
+    }
+    _gtTripDayDatesCache = map;
+    return map;
+}
 
 function buildVerifiedInfoHTML(d) {
     const rows = [];
@@ -34,7 +60,7 @@ function buildVerifiedInfoHTML(d) {
     if (Array.isArray(d.closedDays) && d.closedDays.length) {
         const parts = d.closedDays.map(code => {
             const name = HE_DAY_NAME[code] || code;
-            const date = TRIP_DAY_DATES[code];
+            const date = getTripDayDates()[code];
             return date ? `${name} (${date})` : name;
         });
         rows.push(`<p class="verified-closed">🚫 <strong>סגור ביום ${parts.join(', ')}</strong></p>`);
@@ -86,10 +112,15 @@ function buildVerifiedInfoHTML(d) {
     return `<div class="verified-info">${rows.join('')}${stamp}</div>`;
 }
 
-// +302661039649 -> +30 2661 039649  (Greek numbers are 10 digits after +30)
+// +302661039649 -> +30 2661 039649  (destination-sourced country code, was
+// hardcoded to Greece's +30 specifically - see window.DESTINATION.phoneCountryCode
+// and data/destinations/*.js. Still assumes a 4-digit + 6-digit split after the
+// country code, same as before.)
 function formatPhone(dial) {
-    const m = /^\+30(\d{4})(\d{6})$/.exec(dial);
-    return m ? `+30 ${m[1]} ${m[2]}` : dial;
+    const cc = (window.DESTINATION && window.DESTINATION.phoneCountryCode) || '+30';
+    const ccEscaped = cc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const m = new RegExp(`^${ccEscaped}(\\d{4})(\\d{6})$`).exec(dial);
+    return m ? `${cc} ${m[1]} ${m[2]}` : dial;
 }
 
 // Personal tracking widget (visited toggle / 1-5 rating / note) markup.
