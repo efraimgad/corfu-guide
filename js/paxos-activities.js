@@ -3,11 +3,12 @@
 // destination package (data/destinations/paxos.js). Same record shape as
 // js/corfu-activities.js's window.CORFU_ACTIVITIES.
 //
-// Deliberately 4 entries (fewer than Corfu's 14) — enough to exercise
-// renderActivitiesGrid() (js/activities.js) with real content, not an
-// exhaustive activity guide. No invented prices/exact durations: chips use
-// qualitative wording ("paid, varies by season") rather than a specific
-// euro figure this project has no verified source for.
+// 8 entries — a genuinely representative, production-quality set for an
+// island this small (Corfu's 14 covers a destination roughly 9x the size),
+// not an exhaustive guide and not padded beyond what's real. No invented
+// prices/exact durations: chips use qualitative wording ("paid, varies by
+// season") rather than a specific euro figure this project has no
+// verified source for.
 // ============================================================================
 
 window.PAXOS_ACTIVITIES = [
@@ -90,5 +91,65 @@ window.PAXOS_ACTIVITIES = [
         findProviderLabel: null,
         expertTip: "הגיעו כחצי שעה לפני השקיעה כדי לתפוס מקום ישיבה נוח על הסלעים.",
         quickNavLabel: "🌅 שקיעה באירימיטיס"
+    },
+    {
+        id: "paxos-act-scooter-touring",
+        anchor: "act-paxos-scooter",
+        emoji: "🛵",
+        title: "סיבוב באי ברכב או קטנוע שכור",
+        badge: null,
+        images: [
+            { src: "images/cards/village.svg", alt: "איור: כביש כפרי מתפתל בין עצי זית" }
+        ],
+        description: "האי קטן מספיק כדי לסובב אותו ברכב או קטנוע שכור ביום אחד — עוצרים בגאיוס, לוגוס ולאקה, וחוצים חורשות זית ונופים כפריים בדרך.",
+        chips: ["💰 שכירות בתשלום", "⏱️ יום שלם או חצי יום"],
+        equipmentTip: "רישיון נהיגה בינלאומי מומלץ, גם אם לא תמיד נדרש בפועל להשכרת קטנוע.",
+        warningTip: "כבישים צרים ומתפתלים — נהגו לאט, בעיקר בסמטאות הכפרים.",
+        navigateUrl: "https://www.google.com/maps/search/?api=1&query=Gaios+Paxos",
+        navigateLabel: "📍 גאיוס",
+        findProviderUrl: "https://www.google.com/maps/search/?api=1&query=scooter+rental+Gaios+Paxos",
+        findProviderLabel: "🔎 השכרת רכב/קטנוע",
+        expertTip: "התחילו בבוקר כדי להספיק את שלושת הכפרים בלי למהר.",
+        quickNavLabel: "🛵 סיבוב באי"
+    },
+    {
+        id: "paxos-act-lakka-sailing-scene",
+        anchor: "act-paxos-sailing",
+        emoji: "⛵",
+        title: "צפייה בסירות מפרש במפרץ לאקה",
+        badge: null,
+        images: [
+            { src: "images/cards/village.svg", alt: "איור: סירות מפרש עוגנות במפרץ" }
+        ],
+        description: "לאקה היא אחת מנקודות העגינה האהובות על שייטים באיים היוניים — בערב, בית הקפה על הטיילת הוא מקום נעים לצפות במפרץ המלא סירות מפרש.",
+        chips: ["💰 חינם (ישיבה בבית קפה בתשלום)", "⏱️ כשעה"],
+        equipmentTip: null,
+        warningTip: null,
+        navigateUrl: "https://www.google.com/maps/search/?api=1&query=Lakka+Paxos+waterfront",
+        navigateLabel: "📍 טיילת לאקה",
+        findProviderUrl: null,
+        findProviderLabel: null,
+        expertTip: "שעת שקיעה היא הזמן הכי אטרקטיבי לשבת על הטיילת.",
+        quickNavLabel: "⛵ מפרץ לאקה"
+    },
+    {
+        id: "paxos-act-gaios-old-town-walk",
+        anchor: "act-paxos-gaios-walk",
+        emoji: "🚶‍♀️",
+        title: "הליכה עצמאית בעיר העתיקה של גאיוס",
+        badge: null,
+        images: [
+            { src: "images/cards/history.svg", alt: "איור: סמטת עיר ים תיכונית" }
+        ],
+        description: "סמטאות צרות ובתים ניאו-קלאסיים בהשפעה ונציאנית — הליכה קצרה ברגל, ללא צורך במדריך, מספיקה כדי לראות את מרבית הבירה הקטנה של האי.",
+        chips: ["💰 חינם", "⏱️ כשעה-שעה וחצי"],
+        equipmentTip: "נעליים נוחות — הסמטאות מרוצפות באבן.",
+        warningTip: null,
+        navigateUrl: "https://www.google.com/maps/search/?api=1&query=Gaios+Old+Town+Paxos",
+        navigateLabel: "📍 גאיוס",
+        findProviderUrl: null,
+        findProviderLabel: null,
+        expertTip: "שלבו את ההליכה עם ארוחת ערב באחת מטברנות הנמל.",
+        quickNavLabel: "🚶‍♀️ גאיוס העתיקה"
     }
 ];

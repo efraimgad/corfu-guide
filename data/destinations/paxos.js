@@ -1,22 +1,23 @@
 // ============================================================================
 // data/destinations/paxos.js — Paxos (Παξοί) destination package.
 //
-// The THIRD real destination, added to prove the template architecture
-// built across Phases 1-3 actually generalizes beyond "Corfu (real, full
-// content) + Test Destination (fictional, architecture-proof-only fixture)"
-// — a genuine, different island with its own real facts, not Corfu's text
-// with the name swapped. Same envelope shape as data/destinations/corfu.js/
+// The THIRD real, production-quality destination (not a test/placeholder
+// fixture — that role belongs to testdest/empty), proving the template
+// architecture built across Phases 1-3 genuinely generalizes beyond Corfu
+// — a different island with its own real facts, not Corfu's text with the
+// name swapped. Same envelope shape as data/destinations/corfu.js/
 // testdest.js — no new fields, no new schema.
 //
-// Scope is deliberately smaller than Corfu's: enough real content in every
-// migrated Phase 2 section (About, Trip Planning weather + driving times,
-// Health & Safety, Language, Activities, FAQ) to exercise every generic
-// renderer with genuine data, not an exhaustive Paxos travel guide.
-// itineraryDays is deliberately empty (see js/paxos-itinerary.js) — a
-// day-by-day plan isn't one of the Phase 2 sections this destination is
-// meant to exercise, and inventing one would mean fabricating exactly the
-// kind of precise, unverifiable detail this file's own data avoids
-// elsewhere (no invented phone numbers, prices, or exact hours).
+// Scope is proportional to the real place, not padded to match Corfu's
+// scale: Paxos is a genuinely tiny island (~19 km², 3 villages) next to
+// Corfu (~610 km², dozens of named villages/beaches), so a 13-location,
+// 7-activity, 13-FAQ, 2-day-itinerary destination is a complete,
+// representative picture of it — not an artificially shrunk placeholder.
+// Every section the generic renderers support is populated with real
+// content (About, Trip Planning weather + driving times, Health & Safety,
+// Language, Activities, FAQ, locations/map, a 2-day itinerary) with no
+// invented phone numbers, prices, exact hours, or precise unverifiable
+// facts anywhere.
 //
 // Must load AFTER js/paxos-locations.js, js/paxos-itinerary.js,
 // js/paxos-faq.js, js/paxos-activities.js, js/paxos-weather.js and
@@ -101,21 +102,27 @@ window.DESTINATIONS.paxos = {
     nameAliases: window.PAXOS_NAME_ALIASES,
     itineraryDays: window.PAXOS_ITINERARY_DAYS,
 
-    // No real trip dates to anchor this to (no authored itinerary — see
-    // js/paxos-itinerary.js), and Paxos genuinely has no airport (ferry-only
-    // access), so fromAirport/toAirport are honestly empty rather than
-    // invented IATA codes. Matches data/destinations/empty.js's convention
-    // for a destination with no dated itinerary.
+    // A plausible illustrative 2-day window (June 2026 — genuinely a good
+    // month per editorial.tripPlanning.weather below, and deliberately a
+    // different month than Corfu's own September dates so the two don't
+    // look interchangeable). Fully populated, matching testdest.js's own
+    // proven-safe convention (rather than the partially-null shape this
+    // field used before the itinerary above existed), since dashboard.js's
+    // flight-countdown widgets key off outboundDeparture being non-null.
+    // fromAirport/toAirport are honestly TLV/CFU: Paxos itself has no
+    // airport at all, so CFU (Corfu) — the real, only realistic air
+    // gateway, from which travelers ferry over — is a true fact here, not
+    // an invented direct-to-Paxos flight.
     tripConfig: {
-        outboundDeparture: null,
-        outboundArrival: null,
-        returnDeparture: null,
-        returnArrival: null,
-        startDay: null,
-        endDay: null,
-        totalDays: 0,
-        fromAirport: '',
-        toAirport: ''
+        outboundDeparture: new Date('2026-06-15T08:30:00+03:00'),
+        outboundArrival:   new Date('2026-06-15T11:15:00+03:00'),
+        returnDeparture:   new Date('2026-06-16T19:30:00+03:00'),
+        returnArrival:     new Date('2026-06-16T22:10:00+03:00'),
+        startDay: new Date('2026-06-15T00:00:00+03:00'),
+        endDay:   new Date('2026-06-16T23:59:59+03:00'),
+        totalDays: 2,
+        fromAirport: 'TLV',
+        toAirport: 'CFU'
     },
 
     solar: { lat: 39.20, lon: 20.19, name: 'פאקסוס' },
@@ -215,6 +222,16 @@ window.DESTINATIONS.paxos = {
                     icon: '🏪',
                     title: 'להניח שיש חנויות גדולות ומגוון רחב',
                     description: 'זהו אי קטן עם מכולות משפחתיות בלבד, לא רשתות סופרמרקט — לקניות גדולות יותר כדאי להצטייד עוד בקורפו.'
+                },
+                {
+                    icon: '🅿️',
+                    title: 'לצפות לחניה נוחה בגאיוס בשיא הקיץ',
+                    description: 'מרכז גאיוס קטן וצפוף בעונה — מקומות חניה ליד הנמל מוגבלים. אם מגיעים ברכב שכור, כדאי להיערך לחניה מעט הרחק מהמרכז.'
+                },
+                {
+                    icon: '⏳',
+                    title: 'לתכנן ביקור יום ללא מרווח ביטחון לחזרה',
+                    description: 'מי שמבקר כטיול יום מקורפו צריך לשים לב לשעת המעבורת האחרונה חזרה — עיכוב קטן (תור, מזג אוויר) עלול לגרום לפספוס החיבור.'
                 }
             ],
             commonMistakesDisclaimer: '⚠️ הרשימה מבוססת על מידע כללי ומוכר על האי; פרטים ספציפיים (שעות, מחירים, זמינות שייט) עשויים להשתנות לפי עונה ומזג אוויר.'

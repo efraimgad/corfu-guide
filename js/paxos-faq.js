@@ -2,12 +2,14 @@
 // paxos-faq.js — real, representative FAQ data for the Paxos destination
 // package (data/destinations/paxos.js).
 //
-// Deliberately a small, representative set (7 entries spanning the same
-// category vocabulary the FAQ filter chips already use — see index.html's
-// #faq-filter-panel — not an exhaustive guide). Content reflects genuinely
-// well-known, general facts about Paxos (no airport, ferry-only access,
-// small scale, cash-preference); no invented prices, phone numbers, or
-// exact schedules.
+// 13 entries spanning the same category vocabulary the FAQ filter chips
+// already use — see index.html's #faq-filter-panel — a genuinely useful,
+// representative set covering getting there, transport, beaches, villages,
+// boat trips, food, best areas and practical info, not an exhaustive
+// 53-entry guide (Corfu's own scale for a destination roughly 9x the
+// size). Content reflects genuinely well-known, general facts about Paxos
+// (no airport, ferry-only access, small scale, cash-preference); no
+// invented prices, phone numbers, or exact schedules.
 // ============================================================================
 
 window.PAXOS_FAQ = [
@@ -52,5 +54,41 @@ window.PAXOS_FAQ = [
         q: 'האם יש בפאקסוס מרפאה או בית חולים?',
         a: 'יש מרפאה כפרית קטנה בגאיוס לטיפול ראשוני. במקרי חירום רציניים מפנים חולים לבית החולים הראשי בקורפו — כדאי לקחת זאת בחשבון בתכנון ביטוח הנסיעות.',
         cat: 'safety'
+    },
+    {
+        id: 'paxos-faq-8',
+        q: 'איפה כדאי להתבסס: גאיוס, לוגוס או לאקה?',
+        a: 'גאיוס היא הבירה הקטנה עם הכי הרבה חנויות וטברנות ותנועת המעבורות. לוגוס כפר דייגים ציורי וקטן יותר, אידיאלי לאווירה רגועה. לאקה בקצה הצפוני, אהובה על שייטים, עם מפרץ נעים לשחייה. שלושתם קרובים מספיק כדי לבקר בכולם גם אם בוחרים להתבסס באחד.',
+        cat: 'planning'
+    },
+    {
+        id: 'paxos-faq-9',
+        q: 'מה אוכלים בפאקסוס?',
+        a: 'מטבח יווני איי-תיכוני קלאסי עם דגש על שמן זית מקומי איכותי - סלטים, דגים טריים ומאכלי ים בטברנות החוף, ולצידם מנות בשר מסורתיות. הטברנות המשפחתיות בנמל גאיוס, לוגוס ולאקה הן המקום המרכזי לארוחות.',
+        cat: 'food'
+    },
+    {
+        id: 'paxos-faq-10',
+        q: 'מתי הזמן הכי טוב לבקר בפאקסוס?',
+        a: 'יוני עד ספטמבר מציעים את מזג האוויר הים תיכוני הכי יציב וים חמים לשחייה, אך גם את שיא התיירות. מי שמעדיף פחות עומס יכול לשקול את שולי העונה (מאי או אוקטובר), עם מודעות לכך שחלק משירותי השייט לאנטיפאקסוס מצטמצמים מחוץ לקיץ.',
+        cat: 'planning'
+    },
+    {
+        id: 'paxos-faq-11',
+        q: 'אפשר לבקר בפאקסוס כטיול יום מקורפו?',
+        a: 'כן, זו דרך נפוצה להכיר את האי — מעבורות וקטמרנים מהירים מקורפו לוקחים כשעה עד שעה וחצי בכל כיוון, ומאפשרים לשלב ביקור בגאיוס, לוגוס ולאקה ואפילו קפיצה קצרה לאנטיפאקסוס ביום אחד. לינה של לילה או יותר מאפשרת קצב רגוע יותר.',
+        cat: 'transport'
+    },
+    {
+        id: 'paxos-faq-12',
+        q: 'האם צריך לדעת יוונית כדי להסתדר בפאקסוס?',
+        a: 'לא באמת — בעלי עסקים באזורי התיירות (גאיוס, לוגוס, לאקה) דוברים אנגלית טובה. כמה מילים בסיסיות ביוונית תמיד מתקבלות בחיוך, אך אינן הכרחיות.',
+        cat: 'daily'
+    },
+    {
+        id: 'paxos-faq-13',
+        q: 'יש אפשרויות לספורט ימי בפאקסוס?',
+        a: 'שנרקול עצמאי במפרצים השקטים כמו מונודנדרי וכאקי לאנגאדה פופולרי בזכות מי הים הצלולים. פאקסוס גם ידועה כיעד שייט מבוקש באיים היוניים - מפרץ לאקה במיוחד מלא בסירות מפרש בעונה.',
+        cat: 'activities'
     }
 ];

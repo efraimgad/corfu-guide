@@ -97,8 +97,8 @@ async function main() {
     if (hospitalCards.length >= 1) ok('Health & Safety: hospital/clinic card rendered');
     else fail('No hospital/clinic card rendered');
     const mistakeCards = document.querySelectorAll('#health-mistakes-grid > div');
-    if (mistakeCards.length === 5) ok('Health & Safety: 5 common-mistake cards rendered');
-    else fail('Common-mistakes count wrong', 'expected 5, got ' + mistakeCards.length);
+    if (mistakeCards.length === 7) ok('Health & Safety: 7 common-mistake cards rendered');
+    else fail('Common-mistakes count wrong', 'expected 7, got ' + mistakeCards.length);
 
     // Language: shopping streets, souvenirs, supermarkets, phrasebook
     const streets = document.querySelectorAll('#lang-shopping-streets > div');
@@ -114,10 +114,18 @@ async function main() {
     if (phrasebookCards.length === 4) ok('Language: 4 phrasebook cards rendered (3 categories + pronunciation tip)');
     else fail('Phrasebook card count wrong', 'expected 4, got ' + phrasebookCards.length);
 
+    // Itinerary: 2 real days, using Paxos's own locations
+    const scrubberButtons = document.querySelectorAll('#gt-itinerary-scrubber [role="tab"], #gt-itinerary-scrubber button');
+    if (scrubberButtons.length === 2) ok('Itinerary: 2-day scrubber rendered');
+    else fail('Itinerary scrubber day count wrong', 'expected 2, got ' + scrubberButtons.length);
+    const day1Rows = document.querySelectorAll('#gt-itinerary-row-list .gt-itinerary-row');
+    if (day1Rows.length >= 1) ok('Itinerary: day 1 rows rendered (' + day1Rows.length + ')');
+    else fail('No itinerary rows rendered for day 1');
+
     // FAQ + Activities
     const faqItems = document.querySelectorAll('#faq-list details');
-    if (faqItems.length === 7) ok('FAQ: 7 Paxos-specific entries rendered');
-    else fail('FAQ count wrong', 'expected 7, got ' + faqItems.length);
+    if (faqItems.length === 13) ok('FAQ: 13 Paxos-specific entries rendered');
+    else fail('FAQ count wrong', 'expected 13, got ' + faqItems.length);
     const activityCards = document.querySelectorAll('#activities-grid > div, #activities-grid > article');
     if (activityCards.length >= 1) ok('Activities: cards rendered (' + activityCards.length + ')');
     else fail('No activity cards rendered');
@@ -183,6 +191,12 @@ async function main() {
         const hasPaxosTerm = idx.some(m => m.haystack && m.haystack.includes('אנטיפאקסוס'));
         if (hasPaxosTerm) ok('Search index contains Paxos-specific content (אנטיפאקסוס)');
         else fail('Search index missing Paxos-specific content');
+
+        // The 2-day itinerary is new this round — confirm it's actually
+        // indexed (tab: 'itinerary', built from window.DESTINATION.itineraryDays).
+        const hasPaxosItineraryTerm = idx.some(m => m.tab === 'itinerary' && m.haystack && m.haystack.includes('לוגוס'));
+        if (hasPaxosItineraryTerm) ok('Search index contains Paxos itinerary content (לוגוס)');
+        else fail('Search index missing Paxos itinerary content');
 
         // The bug this checks for (js/search.js reading window.CORFU_LOCATIONS/
         // window.ITINERARY_DAYS/window.CORFU_NAME_ALIASES directly instead of
