@@ -169,6 +169,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // window.DESTINATION.editorial.about (js/about.js).
     if (typeof renderAboutRegions === 'function') renderAboutRegions();
 
+    // Phase 2 (hybrid): the About tab's quick-facts pill row, from
+    // window.DESTINATION.editorial.about.quickFacts (js/about.js).
+    if (typeof renderAboutQuickFacts === 'function') renderAboutQuickFacts();
+
     // Phase 2 (hybrid): Trip Planning's driving-times TABLE, rendered from
     // the same distanceTool data js/tools.js's interactive calculator
     // already uses (js/tools.js's renderDrivingTimesTable()) instead of a
@@ -182,6 +186,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // to be two independently hand-maintained copies.
     if (typeof renderEmergencyModal === 'function') renderEmergencyModal();
     if (typeof renderHealthSafetyEmergency === 'function') renderHealthSafetyEmergency();
+
+    // Phase 2 (hybrid): Health & Safety's "common mistakes" cards
+    // (js/health-safety.js), from the same
+    // window.DESTINATION.editorial.healthSafety object.
+    if (typeof renderHealthMistakes === 'function') renderHealthMistakes();
 
     // Phase 2 (hybrid): Language & Daily Life's structured record types —
     // shopping streets, souvenirs, supermarket chains, and the 5 uniform
