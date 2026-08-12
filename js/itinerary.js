@@ -47,7 +47,7 @@ function toggleDayComplete(checkboxEl) {
 
 function updateTripProgressUI(completed) {
     const count = completed.length;
-    const pct = Math.round((count / TRIP_CONFIG.totalDays) * 100);
+    const pct = TRIP_CONFIG.totalDays ? Math.round((count / TRIP_CONFIG.totalDays) * 100) : 0;
     const textEl = document.getElementById('trip-progress-text');
     const fillEl = document.getElementById('trip-progress-bar-fill');
     const trackEl = document.getElementById('trip-progress-bar-track');
@@ -399,6 +399,7 @@ const HE_WEEKDAY_NAME_FROM_CODE = { SU: 'ראשון', MO: 'שני', TU: 'שלי�
 // TRIP_CONFIG.startDay the dashboard's date injection uses (js/dashboard.js)
 // - not a second hand-typed calendar that could disagree with it.
 function getDayWeekdayCode(dayNum) {
+    if (!TRIP_CONFIG.startDay) return null;
     const date = new Date(TRIP_CONFIG.startDay.getTime() + (dayNum - 1) * 86400000);
     const short = new Intl.DateTimeFormat('en-US', { timeZone: TRIP_TIMEZONE, weekday: 'short' }).format(date);
     return WEEKDAY_CODE_FROM_SHORT[short] || null;

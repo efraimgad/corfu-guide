@@ -529,7 +529,7 @@ function gtStatHtml(icon, label, value, ltr) {
 // quoting one exact sunset for them would be precision the data does not have.
 // Both ends of the range are themselves exact.
 function gtDaySolar(day) {
-    if (typeof solarCorfuTimes !== 'function' || typeof TRIP_CONFIG === 'undefined') return null;
+    if (typeof solarCorfuTimes !== 'function' || typeof TRIP_CONFIG === 'undefined' || !TRIP_CONFIG.startDay) return null;
     if (day && day.isAlt) {
         const first = solarCorfuTimes(TRIP_CONFIG.startDay);
         const last = solarCorfuTimes(new Date(TRIP_CONFIG.startDay.getTime() + (TRIP_CONFIG.totalDays - 1) * 86400000));

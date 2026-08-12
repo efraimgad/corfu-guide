@@ -28,7 +28,7 @@ function same(a, b, l) {
 }
 
 const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const dom = new JSDOM(html, { runScripts: 'outside-only' });
+const dom = new JSDOM(html, { runScripts: 'outside-only', url: 'http://localhost/index.html?destination=corfu' });
 const win = dom.window;
 const doc = win.document;
 

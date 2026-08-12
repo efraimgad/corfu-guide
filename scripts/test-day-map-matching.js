@@ -116,7 +116,7 @@ const EXPECTED_ATTRACTIONS = {
 async function main() {
     const html = fs.readFileSync(INDEX_PATH, 'utf8');
     const dom = new JSDOM(html, {
-        url: 'http://localhost/index.html',
+        url: 'http://localhost/index.html?destination=corfu',
         runScripts: 'dangerously',
         pretendToBeVisual: true,
         beforeParse(window) {

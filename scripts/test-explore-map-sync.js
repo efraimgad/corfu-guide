@@ -30,7 +30,7 @@ const SCRIPT_ORDER = [...fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8')
     .matchAll(/<script[^>]+src="((?:js|data)\/[^"]+)"/g)].map(m => m[1])
     .filter(f => fs.existsSync(path.join(ROOT, f)));
 
-const dom = new JSDOM(fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), { runScripts: 'outside-only' });
+const dom = new JSDOM(fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), { runScripts: 'outside-only', url: 'http://localhost/index.html?destination=corfu' });
 const win = dom.window;
 win.IntersectionObserver = function () { return { observe() {}, disconnect() {}, unobserve() {} }; };
 win.matchMedia = () => ({ matches: false, addEventListener() {}, removeEventListener() {} });

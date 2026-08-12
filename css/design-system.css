@@ -915,10 +915,13 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
    role="tab" / aria-selected — see js/explore.js selectExploreCategory()),
    so the "active" signal is aria-selected, not aria-pressed. */
 .gt-explore-chips{ display:flex; gap:var(--gt-space-2); flex-wrap:wrap; }
-.gt-chip--beach[aria-selected="true"]{ background:var(--gt-cat-1); color:#fff; }
-.gt-chip--food[aria-selected="true"]{ background:var(--gt-cat-2); color:#fff; }
-.gt-chip--attraction[aria-selected="true"]{ background:var(--gt-cat-3); color:#fff; }
-.gt-chip--gem[aria-selected="true"]{ background:var(--gt-cat-4); color:#fff; }
+/* Generic, not per-category: js/explore.js's renderExploreCategoryTabs()
+   sets --gt-chip-accent inline per button from that category's own
+   colorVar (window.DESTINATION.categories[].colorVar), so any destination's
+   category set is tinted correctly - including one this stylesheet has
+   never heard of - without a matching .gt-chip--<tag> rule existing here.
+   Falls back to the neutral primary accent if a chip never got a tint. */
+.gt-chip[aria-selected="true"]{ background:var(--gt-chip-accent, var(--gt-primary-600)); color:#fff; }
 
 /* Secondary facet row (js/explore.js EXPLORE_FACETS). Deliberately NOT
    category-tinted: the category chips above already own the colour

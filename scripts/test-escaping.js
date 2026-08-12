@@ -46,7 +46,7 @@ function ev(win, code) {
 }
 
 const load = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
-const dom = new JSDOM('<!doctype html><body>', { runScripts: 'outside-only', url: 'http://localhost/' });
+const dom = new JSDOM('<!doctype html><body>', { runScripts: 'outside-only', url: 'http://localhost/?destination=corfu' });
 const win = dom.window;
 win.eval(load('js/html-utils.js'));
 
@@ -76,7 +76,7 @@ eq(eh(null), '', 'null -> empty string');
 
 // --- 2. Item-state normalisation (B2 root cause) ---------------------------
 console.log('\n--- normalizeItemState(): a rating is an integer 1-5 or nothing ---');
-const w2 = new JSDOM('<!doctype html><body>', { runScripts: 'outside-only', url: 'http://localhost/' }).window;
+const w2 = new JSDOM('<!doctype html><body>', { runScripts: 'outside-only', url: 'http://localhost/?destination=corfu' }).window;
 ev(w2, load('js/storage.js'));
 const norm = v => ev(w2, 'normalizeItemState(' + JSON.stringify({ rating: v }) + ').rating');
 eq(norm('1" onmouseover="window.__pwned2=true" data-x="'), null, 'the B2 payload is rejected');
@@ -92,7 +92,7 @@ eq(ev(w2, 'normalizeItemState({note: 42}).note'), '', 'a non-string note is reje
 
 // --- 3. Reservation id normalisation (B3 root cause) -----------------------
 console.log('\n--- getReservations(): a malformed id is regenerated, not round-tripped ---');
-const w3 = new JSDOM('<!doctype html><body>', { runScripts: 'outside-only', url: 'http://localhost/' }).window;
+const w3 = new JSDOM('<!doctype html><body>', { runScripts: 'outside-only', url: 'http://localhost/?destination=corfu' }).window;
 // reservations.js reads window.DESTINATION (storage-key namespacing) at its
 // own top level, so the destination-data bootstrap chain has to be
 // evaluated first, same as index.html's real script order.

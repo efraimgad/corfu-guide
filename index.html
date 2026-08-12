@@ -96,6 +96,32 @@
 </head>
 <body class="antialiased gt-text-900 leading-relaxed">
 
+    <!-- Destination gate: full-viewport takeover shown instead of the app
+         when no destination is chosen yet, or an unknown one was requested.
+         Hidden by default; js/destination-gate.js (loaded right after
+         js/destination-registry.js) shows the right sub-view and hides this
+         whole element for the normal 'ready' state - the rest of the page
+         underneath is otherwise unaffected: every other script still runs
+         normally against window.DESTINATION (which is always a valid, if
+         content-free, object - see js/destination-registry.js), so nothing
+         here needs to stop other init code from running, only cover it. -->
+    <div id="destination-gate" class="fixed inset-0 z-[999] hidden overflow-y-auto" style="background:var(--gt-paper);">
+        <div class="max-w-2xl mx-auto px-4 py-16 text-center">
+            <div id="destination-selector-view" class="hidden">
+                <div class="inline-block gt-bg-accent-soft gt-text-accent px-4 py-2 rounded-full text-sm font-bold tracking-wide shadow-sm mb-4">בחירת יעד</div>
+                <h1 class="text-3xl md:text-4xl font-extrabold gt-text-900 mb-4 tracking-tight">לאיזה יעד תרצו להיכנס?</h1>
+                <p class="text-base gt-text-500 max-w-lg mx-auto mb-8">בחרו יעד כדי להיכנס למדריך שלו. הרשימה נטענת מרשימת היעדים הרשומים במערכת.</p>
+                <div id="destination-selector-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-right"></div>
+            </div>
+            <div id="destination-unknown-view" class="hidden">
+                <div class="inline-block gt-bg-accent-soft gt-text-accent px-4 py-2 rounded-full text-sm font-bold tracking-wide shadow-sm mb-4">יעד לא נמצא</div>
+                <h1 class="text-3xl md:text-4xl font-extrabold gt-text-900 mb-4 tracking-tight">היעד "<span id="destination-unknown-id"></span>" אינו קיים</h1>
+                <p class="text-base gt-text-500 max-w-lg mx-auto mb-8">בדקו את הכתובת שהזנתם, או חזרו לרשימת היעדים הזמינים.</p>
+                <a href="?" class="gt-btn gt-btn--primary inline-block px-6 py-3 rounded-xl font-bold">חזרה לבחירת יעד</a>
+            </div>
+        </div>
+    </div>
+
     <a href="#main-content" class="skip-link">דלגו לתוכן הראשי</a>
 
     <!-- Header Section -->
@@ -283,12 +309,11 @@
      ============================================================ -->
 <section id="explore" class="tab-content gt-explore" dir="rtl" role="tabpanel" aria-labelledby="gt-nav-explore-btn" tabindex="0">
   <div id="explore-subheader" class="gt-explore-subheader">
-    <div id="explore-cat-tablist" class="gt-explore-chips" role="tablist" aria-label="סינון לפי קטגוריה" onkeydown="handleTablistKeydown(event)">
-      <button type="button" class="gt-chip gt-chip--beach" role="tab" data-cat="beaches" aria-selected="true" onclick="selectExploreCategory('beaches', this)"><svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 18 0Z"/><path d="M12 12v7a2 2 0 0 1-2 2"/><path d="M12 3v2"/></svg> חופים</button>
-      <button type="button" class="gt-chip gt-chip--food" role="tab" data-cat="food" aria-selected="false" onclick="selectExploreCategory('food', this)"><svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v6a1.5 1.5 0 0 0 3 0V3M8.5 9V21"/><path d="M16.5 3c-1.4 0-2.5 1.8-2.5 4.5S15.1 12 16.5 12V21"/></svg> מסעדות</button>
-      <button type="button" class="gt-chip gt-chip--attraction" role="tab" data-cat="attractions" aria-selected="false" onclick="selectExploreCategory('attractions', this)"><svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.3-2.5h5.4L16 7"/><circle cx="12" cy="13.5" r="3.3"/></svg> אטרקציות</button>
-      <button type="button" class="gt-chip gt-chip--gem" role="tab" data-cat="gems" aria-selected="false" onclick="selectExploreCategory('gems', this)"><svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8 9 3.5h6l2.5 4.5L12 20.5Z"/><path d="M6.5 8h11"/></svg> פנינים</button>
-    </div>
+    <!-- Filled by renderExploreCategoryTabs() (js/explore.js) from
+         window.DESTINATION.categories rather than hardcoded here, so a
+         destination with a different category set (different count, tags,
+         or none at all) renders its own chips instead of Corfu's four. -->
+    <div id="explore-cat-tablist" class="gt-explore-chips" role="tablist" aria-label="סינון לפי קטגוריה" onkeydown="handleTablistKeydown(event)"></div>
     <div id="explore-facet-row" class="gt-explore-chips gt-explore-facets" role="tablist"
          aria-label="סינון משני בתוך הקטגוריה" onkeydown="handleTablistKeydown(event)"></div>
     <div class="gt-explore-search">
@@ -474,7 +499,7 @@
 
                 <!-- Weather -->
                 <div class="dashboard-card dashboard-card--weather">
-                    <p class="dashboard-card-label">מזג אוויר בקורפו</p>
+                    <p class="dashboard-card-label" id="dash-weather-label">מזג אוויר</p>
                     <p class="dashboard-card-value" id="dash-weather">טוען...</p>
                     <p class="dashboard-card-sub" id="dash-weather-sub">מתחבר לתחזית חיה</p>
                     <!-- Honest failure-state CTA (js/dashboard.js fillWeatherFailureState),
@@ -1506,11 +1531,14 @@
 <section id="itinerary" class="tab-content space-y-8" dir="rtl" role="tabpanel" aria-label="המסלול המלא" tabindex="0">
     <div class="text-center space-y-6 mb-12">
         <span class="inline-block gt-bg-accent-soft gt-text-accent text-sm font-bold px-4 py-2 rounded-full tracking-wide shadow-sm">מסלול הדגל 🌟</span>
-        <h2 class="text-4xl md:text-5xl font-extrabold gt-text-900 leading-tight">🗺️ מסלול ל-7 ימים בקורפו</h2>
-        <p class="text-lg md:text-xl gt-text-500 max-w-4xl mx-auto leading-relaxed">
-            תכנון מקיף, מדוקדק וחוויתי, מותאם לטיסה שלכם: <strong>ת"א (TLV) <span id="itinerary-intro-depart-time">15:40</span> ← קורפו (CFU) <span id="itinerary-intro-arrive-time">18:15</span>, ב-<span id="itinerary-intro-depart-date">02.09</span></strong>. כל יום במסלול זה נבנה כדי למקסם את הזמן שלכם, למנוע פקקים ולהבטיח שילוב מנצח של תרבות, חופים, קולינריה וטבע. כללנו שעות מדויקות, זמני נסיעה, חניונים, נקודות צילום, והכי חשוב - <strong>תוכנית גיבוי מפורטת לכל יום למקרה של גשם או מזג אוויר סוער</strong>.
+        <!-- Filled from window.DESTINATION by injectDestinationChrome() (js/dashboard.js)
+             rather than hardcoded here, so this reads correctly for any destination
+             (including one with zero itinerary days) instead of always naming Corfu. -->
+        <h2 id="itinerary-intro-heading" class="text-4xl md:text-5xl font-extrabold gt-text-900 leading-tight">🗺️ מסלול</h2>
+        <p id="itinerary-intro-flight-p" class="text-lg md:text-xl gt-text-500 max-w-4xl mx-auto leading-relaxed hidden">
+            תכנון מקיף, מדוקדק וחוויתי, מותאם לטיסה שלכם: <strong>ת"א (TLV) <span id="itinerary-intro-depart-time"></span> ← <span id="itinerary-intro-destination"></span> <span id="itinerary-intro-arrive-time"></span>, ב-<span id="itinerary-intro-depart-date"></span></strong>. כל יום במסלול זה נבנה כדי למקסם את הזמן שלכם, למנוע פקקים ולהבטיח שילוב מנצח של תרבות, חופים, קולינריה וטבע. כללנו שעות מדויקות, זמני נסיעה, חניונים, נקודות צילום, והכי חשוב - <strong>תוכנית גיבוי מפורטת לכל יום למקרה של גשם או מזג אוויר סוער</strong>.
         </p>
-        <p class="text-xs gt-text-300 max-w-3xl mx-auto">* שעות השקיעה המוזכרות במסלול הן הערכה כללית לתחילת ספטמבר בקו הרוחב של קורפו (כ-39.6° צפון), לא חישוב מדויק ליום/למקום הספציפי - השקיעה בפועל יכולה לנוע ב-±10 דקות בהתאם לתאריך המדויק, לתנאי מזג האוויר ולאופק המקומי. כדאי לבדוק שעה מעודכנת קרוב למועד (למשל באפליקציית מזג אוויר) לפני שמתכננים סביבה משהו קריטי.</p>
+        <p id="itinerary-intro-sunset-p" class="text-xs gt-text-300 max-w-3xl mx-auto hidden">* שעות השקיעה המוזכרות במסלול הן הערכה כללית, לא חישוב מדויק ליום/למקום הספציפי - השקיעה בפועל יכולה לנוע ב-±10 דקות בהתאם לתאריך המדויק, לתנאי מזג האוויר ולאופק המקומי. כדאי לבדוק שעה מעודכנת קרוב למועד (למשל באפליקציית מזג אוויר) לפני שמתכננים סביבה משהו קריטי.</p>
     </div>
 
     <!-- Trip progress tracker (persisted via localStorage) -->
@@ -2821,21 +2849,28 @@
     <script src="js/html-utils.js" defer></script>
     <script src="js/locations-data.js" defer></script>
     <script src="js/itinerary-data.js" defer></script>
-    <!-- Destination data layer. corfu.js/testdest.js wrap the location +
-         itinerary data above (and testdest's own small data files) into
-         window.DESTINATIONS.<id>; destination-registry.js then resolves
-         which one is ACTIVE (?destination=<id> query param, a remembered
-         localStorage choice, or 'corfu' by default) and sets
-         window.DESTINATION. Every script below this point that reads
-         window.DESTINATION at its own top level (solar.js, tools.js,
-         packing.js, dashboard.js, map.js, explore.js) depends on this
-         block having already run - see js/destination-registry.js's own
-         header comment for the full ordering rationale. -->
+    <!-- Destination data layer. corfu.js/testdest.js/empty.js wrap the
+         location + itinerary data above (and testdest's own small data
+         files) into window.DESTINATIONS.<id>; destination-registry.js then
+         resolves which of three states this load is in PURELY from
+         ?destination=<id> - no param means the destination-selector state,
+         an id that matches nothing means the unknown-destination state,
+         only a matching id is 'ready' and sets window.DESTINATION to that
+         destination's data (never a default/remembered fallback - see that
+         file's own header). destination-gate.js then shows/hides the
+         selector/unknown takeover screen (markup right after <body>).
+         Every script below this point that reads window.DESTINATION at its
+         own top level (solar.js, tools.js, packing.js, dashboard.js,
+         map.js, explore.js) depends on this block having already run - see
+         js/destination-registry.js's own header comment for the full
+         ordering rationale. -->
     <script src="data/destinations/corfu.js" defer></script>
     <script src="js/testdest-locations.js" defer></script>
     <script src="js/testdest-itinerary.js" defer></script>
     <script src="data/destinations/testdest.js" defer></script>
+    <script src="data/destinations/empty.js" defer></script>
     <script src="js/destination-registry.js" defer></script>
+    <script src="js/destination-gate.js" defer></script>
     <script src="js/location-shared.js" defer></script>
     <script src="js/search.js" defer></script>
     <script src="js/faq-filters.js" defer></script>

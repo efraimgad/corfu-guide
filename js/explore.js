@@ -35,7 +35,7 @@
 // testdest, 4 for Corfu, or any other count a future destination adds) -
 // never a hardcoded 4-item literal.
 const EXPLORE_CATEGORIES = ((window.DESTINATION && window.DESTINATION.categories) || [])
-    .map(cat => ({ key: cat.key, tag: cat.tag, label: cat.label, icon: cat.iconSvg }));
+    .map(cat => ({ key: cat.key, tag: cat.tag, label: cat.label, icon: cat.iconSvg, colorVar: cat.colorVar }));
 
 function exploreCategoryMeta(catKey) {
     return EXPLORE_CATEGORIES.find(c => c.key === catKey);
@@ -99,7 +99,10 @@ function exploreMatchesFacet(d) {
 // getExploreActiveCategories() keeps its old array-returning shape (now
 // always length 1) purely so js/map.js's setExploreMapCategories(), which
 // takes activeCategories.includes(key), needs no changes at all.
-let exploreActiveCategory = EXPLORE_CATEGORIES[0].key;
+// null (not a throw) when the destination defines no categories at all -
+// every renderer below already treats "no active category" as "nothing to
+// show" the same way it treats an active category with zero records.
+let exploreActiveCategory = EXPLORE_CATEGORIES.length ? EXPLORE_CATEGORIES[0].key : null;
 function getExploreActiveCategories() { return [exploreActiveCategory]; }
 window.getExploreActiveCategories = getExploreActiveCategories;
 
@@ -509,10 +512,31 @@ window.addEventListener('resize', () => {
     if (exploreListBuilt) updateExploreStickyOffsets();
 });
 
+// Category tablist itself (the beach/food/attraction/gem-equivalent chips),
+// built from EXPLORE_CATEGORIES rather than left as static per-destination
+// markup - a destination with a different category set (different count,
+// different tags) needs this to render its OWN chips, not Corfu's four.
+// --gt-chip-accent is set inline per chip from that category's own
+// colorVar (see the matching CSS rule's comment), so the selected-state
+// tint works for any category without a matching stylesheet rule existing.
+function renderExploreCategoryTabs() {
+    const tablist = document.getElementById('explore-cat-tablist');
+    if (!tablist) return;
+    tablist.innerHTML = EXPLORE_CATEGORIES.map(cat => {
+        const selected = cat.key === exploreActiveCategory;
+        return `<button type="button" class="gt-chip gt-chip--${escapeAttr(cat.tag)}" role="tab"`
+            + ` data-cat="${escapeAttr(cat.key)}" aria-selected="${selected}"`
+            + ` style="--gt-chip-accent:var(${cat.colorVar || '--gt-primary-600'})"`
+            + ` onclick="selectExploreCategory('${escapeAttr(cat.key)}', this)">${cat.icon || ''} ${escapeHtml(cat.label)}</button>`;
+    }).join('');
+}
+window.renderExploreCategoryTabs = renderExploreCategoryTabs;
+
 let exploreListBuilt = false;
 function renderExploreTab() {
     if (exploreListBuilt) return;
     exploreListBuilt = true;
+    renderExploreCategoryTabs();
     renderExploreFacets();
     renderExploreList();
 }

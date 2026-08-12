@@ -20,23 +20,34 @@ const TRIP_CONFIG = window.DESTINATION.tripConfig;
 // silently shift every displayed date/time for anyone not in that zone.
 const TRIP_TIMEZONE = window.DESTINATION.timezone;
 
+// Every formatter below is null-safe: a destination with no trip window
+// configured (tripConfig.startDay/outboundDeparture/etc. all null - e.g. no
+// content yet) has no date to format, so each returns '' instead of
+// throwing. Every caller already treats an empty string as "nothing to
+// show" (the shared `set()` helper below just writes it into the DOM), so
+// this is the one place that needs to know a date might be absent.
 function datePart(date, type) {
+    if (!date) return '';
     return new Intl.DateTimeFormat('en-GB', { timeZone: TRIP_TIMEZONE, day: '2-digit', month: '2-digit', year: 'numeric' })
         .formatToParts(date).find(p => p.type === type).value;
 }
-function formatDateDM(date) { return `${datePart(date, 'day')}.${datePart(date, 'month')}`; }
-function formatDateDMY(date) { return `${formatDateDM(date)}.${datePart(date, 'year')}`; }
+function formatDateDM(date) { return date ? `${datePart(date, 'day')}.${datePart(date, 'month')}` : ''; }
+function formatDateDMY(date) { return date ? `${formatDateDM(date)}.${datePart(date, 'year')}` : ''; }
 function formatTimeHM(date) {
+    if (!date) return '';
     return new Intl.DateTimeFormat('en-GB', { timeZone: TRIP_TIMEZONE, hour: '2-digit', minute: '2-digit', hour12: false }).format(date);
 }
 function formatMonthYearHe(date) {
+    if (!date) return '';
     return new Intl.DateTimeFormat('he', { timeZone: TRIP_TIMEZONE, month: 'long', year: 'numeric' }).format(date);
 }
 
 // Day N (2-6) of the trip as a real Date, derived from TRIP_CONFIG.startDay -
 // the same single source of truth Day 1/Day 7 already use (outboundDeparture/
-// returnDeparture) - so a Day-N date can never hand-drift from those.
+// returnDeparture) - so a Day-N date can never hand-drift from those. Returns
+// null (not a throw) when the destination has no trip window configured.
 function dateForTripDay(dayNum) {
+    if (!TRIP_CONFIG.startDay) return null;
     return new Date(TRIP_CONFIG.startDay.getTime() + (dayNum - 1) * 86400000);
 }
 
@@ -73,14 +84,12 @@ function injectTripDates() {
 
     set('checklist-return-datetime', `${formatDateDM(TRIP_CONFIG.returnDeparture)}, ${formatTimeHM(TRIP_CONFIG.returnDeparture)}`);
 
-    set('itinerary-intro-depart-time', formatTimeHM(TRIP_CONFIG.outboundDeparture));
-    set('itinerary-intro-arrive-time', formatTimeHM(TRIP_CONFIG.outboundArrival));
-    set('itinerary-intro-depart-date', formatDateDM(TRIP_CONFIG.outboundDeparture));
-
     set('day-1-date', formatDateDM(TRIP_CONFIG.outboundDeparture));
     set('day-1-arrive-time', formatTimeHM(TRIP_CONFIG.outboundArrival));
     set('day-7-date', formatDateDM(TRIP_CONFIG.returnDeparture));
     set('day-7-depart-time', formatTimeHM(TRIP_CONFIG.returnDeparture));
+
+    injectDestinationChrome();
 
     // Days 2-6 previously printed no date at all in their header (only Day
     // 1/Day 7 did) - filled in here from the same TRIP_CONFIG.startDay used
@@ -91,6 +100,38 @@ function injectTripDates() {
         set(`day-${day}-date`, formatDateDM(date));
         set(`day-${day}-weekday`, formatWeekdayHe(date));
     }
+}
+
+// Fills the itinerary tab's intro heading/flight-route sentence from
+// window.DESTINATION instead of the hardcoded Corfu text index.html used to
+// carry there directly - a destination with a different name, or with no
+// itinerary days / no configured trip dates at all, must not claim to be a
+// "7-day Corfu itinerary" regardless of what content it actually has.
+function injectDestinationChrome() {
+    const set = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+    const show = (id, visible) => { const el = document.getElementById(id); if (el) el.classList.toggle('hidden', !visible); };
+
+    const destName = window.DESTINATION.name || window.DESTINATION.nameEn || '';
+    set('dash-weather-label', destName ? `מזג אוויר ב${destName}` : 'מזג אוויר');
+
+    const numberedDays = (window.DESTINATION.itineraryDays || []).filter(d => !d.isAlt).length;
+    const heading = numberedDays
+        ? `🗺️ מסלול ל-${numberedDays} ${numberedDays === 1 ? 'יום' : 'ימים'}${destName ? ' ב' + destName : ''}`
+        : `🗺️ מסלול${destName ? ' ' + destName : ''}`;
+    set('itinerary-intro-heading', heading);
+
+    const hasFlightInfo = !!TRIP_CONFIG.outboundDeparture;
+    show('itinerary-intro-flight-p', hasFlightInfo);
+    if (hasFlightInfo) {
+        set('itinerary-intro-destination', TRIP_CONFIG.toAirport ? `${destName} (${TRIP_CONFIG.toAirport})` : destName);
+        set('itinerary-intro-depart-time', formatTimeHM(TRIP_CONFIG.outboundDeparture));
+        set('itinerary-intro-arrive-time', formatTimeHM(TRIP_CONFIG.outboundArrival));
+        set('itinerary-intro-depart-date', formatDateDM(TRIP_CONFIG.outboundDeparture));
+    }
+
+    // The sunset-estimate footnote only makes sense once there's an actual
+    // itinerary to attach it to.
+    show('itinerary-intro-sunset-p', numberedDays > 0);
 }
 
 // Hero stat badges and nav pills show these counts as static numerals in

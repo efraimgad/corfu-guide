@@ -58,6 +58,13 @@ function calculateDistance() {
     const resultTime = document.getElementById('dist-result-time');
     const resultLink = document.getElementById('dist-result-link');
 
+    // A destination with no distance-tool locations configured (e.g. no
+    // content at all yet) has nothing to select between.
+    if (!from || !to) {
+        if (resultBox) resultBox.classList.add('hidden');
+        return;
+    }
+
     let disclaimer = document.getElementById('dist-result-disclaimer');
     if (!disclaimer) {
         disclaimer = document.createElement('p');

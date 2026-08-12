@@ -70,7 +70,7 @@ else fail('deleted filter functions still referenced in code', liveRefs.join('\n
 // --- 2. The favouritable set is exactly the activity cards ------------------
 console.log('\n--- Favourites are an Activities-tab feature ---');
 const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const dom = new JSDOM(html, { runScripts: 'outside-only', url: 'http://localhost/' });
+const dom = new JSDOM(html, { runScripts: 'outside-only', url: 'http://localhost/?destination=corfu' });
 const win = dom.window;
 const doc = win.document;
 

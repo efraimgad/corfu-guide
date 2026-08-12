@@ -42,6 +42,10 @@ function getTripDayDates() {
     const map = {};
     const tz = window.DESTINATION.timezone;
     const { startDay, endDay } = window.DESTINATION.tripConfig;
+    // A destination with no trip window configured (tripConfig.startDay/endDay
+    // null - e.g. no content yet) has no calendar dates to derive; every
+    // weekday code simply stays unmapped rather than crashing.
+    if (!startDay || !endDay) { _gtTripDayDatesCache = map; return map; }
     for (let t = startDay.getTime(); t <= endDay.getTime(); t += 86400000) {
         const date = new Date(t);
         // SU/MO/TU/WE/TH/FR/SA are exactly the first two letters of the

@@ -31,7 +31,7 @@ const dom = new JSDOM(`<!DOCTYPE html><html><body>
   <div id="explore-list"></div>
   <div id="explore-empty-state"></div>
   <div id="explore-filter-count"></div>
-</body></html>`, { runScripts: 'outside-only' });
+</body></html>`, { runScripts: 'outside-only', url: 'http://localhost/index.html?destination=corfu' });
 
 const win = dom.window;
 // Real html-utils.js, not a stub: it owns escapeHtml/escapeAttr AND the
