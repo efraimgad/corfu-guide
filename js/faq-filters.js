@@ -47,7 +47,13 @@ function renderFAQList() {
         // alongside this codebase) — inserted as-is, same as the static
         // markup it replaces, so any nested tags (e.g. <strong>) survive.
         const a = item.a || '';
-        return `<details data-cat="${cat}" class="group bg-white rounded-xl shadow-sm border gt-border-hair overflow-hidden hover:shadow-md transition duration-300">
+        // data-id (not present in the original hand-authored markup) lets
+        // js/search.js's global search jump straight to the right answer
+        // via a fresh [data-id] lookup after switching tabs - the same
+        // mechanism location cards already use - instead of depending on a
+        // stale element reference captured before this function ran.
+        const id = escapeAttr(item.id || '');
+        return `<details data-cat="${cat}" data-id="${id}" class="group bg-white rounded-xl shadow-sm border gt-border-hair overflow-hidden hover:shadow-md transition duration-300">
     <summary class="cursor-pointer font-bold p-5 gt-bg-sunken gt-text-900 text-lg gt-bg-accent-soft gt-text-accent transition-colors flex justify-between items-center select-none">
         <span class="pl-4">${q}</span>
         <span class="text-2xl group-open:rotate-180 transition-transform gt-text-accent">▾</span>

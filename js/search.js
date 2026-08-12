@@ -7,16 +7,24 @@
 let searchActiveIndex = -1;
 let searchIndex = [];
 
-// beaches/food/attractions/gems are NOT in SEARCH_SOURCES: their tabs are
-// lazy-rendered (ensureTabRendered() in js/ui.js only builds their cards the
-// first time a user opens that tab), so a DOM-querySelector source would
-// index nothing for them on a fresh page load. They're built straight from
-// window.CORFU_LOCATIONS instead - see buildLocationDataIndexEntries() -
-// which is always populated regardless of what's been rendered yet.
-const SEARCH_SOURCES = [
-    { selector: '#activities-grid article h3', tabId: 'activities', icon: '🚤', getName: el => el.textContent },
-    { selector: '#faq-list details', tabId: 'faq', icon: '❓', getName: el => (el.querySelector('summary span')?.textContent || '') }
-];
+// beaches/food/attractions/gems, activities and faq are NOT indexed via
+// DOM querySelector: activities/FAQ used to be safe to read straight off
+// the DOM because their markup was static and always present by the time
+// DOMContentLoaded fired, but Phase 2 made both destination-data-driven
+// (js/activities.js's renderActivitiesGrid() / js/faq-filters.js's
+// renderFAQList(), both invoked from js/init.js's own DOMContentLoaded
+// handler) - and this file's OWN `document.addEventListener('DOMContentLoaded',
+// buildSearchIndex)` below has no guaranteed ordering against that other
+// listener (each script registers its own listener in load order, and
+// search.js loads before faq-filters.js/js/activities.js). A DOM-query
+// source here would silently index 0 activities/FAQ entries on every load.
+// Built straight from window.DESTINATION.editorial instead - see
+// buildActivityIndexEntries()/buildFaqIndexEntries() below - the same fix
+// already applied to beaches/food/attractions/gems via
+// buildLocationDataIndexEntries() for the identical reason (lazy-rendered
+// tabs, not lazy-rendered-relative-to-this-file's-own-listener, but the
+// same underlying hazard: don't query DOM that another listener may not
+// have populated yet).
 
 // tabId -> { list: CORFU_LOCATIONS key, getText: item -> its body/description
 // text (bodyHtml needs tag-stripping, the rest don't) }. icon values match
@@ -27,25 +35,6 @@ const LOCATION_DATA_SOURCES = [
     { listKey: 'attractions', tabId: 'attractions', icon: '📸', getName: item => item.title, getText: item => gtSearchStripTags(item.bodyHtml) },
     { listKey: 'gems', tabId: 'gems', icon: '💎', getName: item => item.name, getText: item => item.description || '' }
 ];
-
-// Everything a query can match against, lowercased: the name, the card's
-// full visible text (description, badges, info panel, etc. - wherever it
-// lives, category to category), its data-tags, and the data-vibe/
-// data-parking/data-beach-type/data-best-time metadata added earlier.
-// Falls back to the source element itself when there's no [data-id]
-// ancestor (e.g. FAQ <details>, which already IS the whole item).
-function buildHaystack(el, name) {
-    const card = el.closest('[data-id]') || el;
-    const extra = [
-        card.textContent || '',
-        card.getAttribute('data-tags') || '',
-        card.getAttribute('data-vibe') || '',
-        card.getAttribute('data-parking') || '',
-        card.getAttribute('data-beach-type') || '',
-        card.getAttribute('data-best-time') || ''
-    ].join(' ');
-    return expandWithAliases((name + ' ' + extra).toLowerCase());
-}
 
 // window.CORFU_NAME_ALIASES (js/locations-data.js) maps a canonical place
 // spelling to its old/alternate transliterations, e.g.
@@ -92,6 +81,32 @@ function buildLocationDataHaystack(item, name, text) {
         item.bestTime || ''
     ].join(' ');
     return expandWithAliases((name + ' ' + extra).toLowerCase());
+}
+
+// Activities: same dataId-based approach as buildLocationDataIndexEntries()
+// - goToSearchResult() already knows how to fresh-lookup `[data-id]` (the
+// exact attribute js/activities.js's renderActivitiesGrid() puts on every
+// <article>), so no changes needed there.
+function buildActivityIndexEntries() {
+    const dest = window.DESTINATION;
+    const activities = (dest && dest.editorial && Array.isArray(dest.editorial.activities)) ? dest.editorial.activities : [];
+    return activities.map(a => {
+        const name = [a.emoji, a.title].filter(Boolean).join(' ').trim();
+        const extra = [a.description || '', (a.chips || []).join(' '), a.equipmentTip || '', a.warningTip || '', a.expertTip || ''].join(' ');
+        return { name, tab: 'activities', icon: '🚤', dataId: a.id, haystack: expandWithAliases((name + ' ' + extra).toLowerCase()) };
+    });
+}
+
+// FAQ: same shape, using the data-id renderFAQList() (js/faq-filters.js)
+// now puts on every rendered <details> for exactly this purpose.
+function buildFaqIndexEntries() {
+    const dest = window.DESTINATION;
+    const faq = (dest && dest.editorial && Array.isArray(dest.editorial.faq)) ? dest.editorial.faq : [];
+    return faq.map(f => {
+        const name = (f.q || '').trim();
+        const answerText = gtSearchStripTags(f.a || '');
+        return { name, tab: 'faq', icon: '❓', dataId: f.id, haystack: expandWithAliases((name + ' ' + answerText).toLowerCase()) };
+    });
 }
 
 function buildLocationDataIndexEntries() {
@@ -195,13 +210,8 @@ function buildContentBlockIndexEntries(sectionId, tabId, idPrefix, defaultIcon) 
 
 function buildSearchIndex() {
     const index = [];
-    SEARCH_SOURCES.forEach(src => {
-        document.querySelectorAll(src.selector).forEach(el => {
-            const name = src.getName(el).trim();
-            const haystack = buildHaystack(el, name);
-            index.push({ name, tab: src.tabId, icon: src.icon, el, haystack });
-        });
-    });
+    index.push(...buildActivityIndexEntries());
+    index.push(...buildFaqIndexEntries());
     index.push(...buildLocationDataIndexEntries());
     index.push(...buildItineraryIndexEntries());
     index.push(...buildContentBlockIndexEntries('trip-planning', 'trip-planning', 'plan-', '🧭'));
