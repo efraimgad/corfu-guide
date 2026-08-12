@@ -15,7 +15,8 @@
 // by DOM position - keep working unchanged.
 // ============================================================================
 
-// -- Scrubber (7 numbered days + 2 dashed alt-day pills) --------------------
+// -- Scrubber (N numbered days + however many dashed alt-day pills the
+// active destination defines - zero for testdest, two for Corfu) ----------
 // role="tab"/aria-selected turns this into a real ARIA tablist (the
 // container declares role="tablist" in index.html, with
 // onkeydown="handleTablistKeydown(event)" wired to the exact same
@@ -23,15 +24,29 @@
 // main premium-nav tablist - not a new keyboard implementation.
 // aria-current stays alongside aria-selected purely for the existing CSS
 // hook (.gt-scrubber__day[aria-current="true"]) - no visual change.
+//
+// Renders straight from window.DESTINATION.itineraryDays instead of a
+// hardcoded "7 numbered + 2 named alt" loop, so this handles however many
+// numbered/alt days a destination actually defines. Sorted defensively
+// (numbered days ascending by dayNumber, alt days after them in their
+// existing relative order) rather than trusting the data's own array order,
+// since nothing else guarantees that ordering.
 function gtRenderItineraryScrubber() {
     const el = document.getElementById('gt-itinerary-scrubber');
     if (!el) return;
+    const days = (window.DESTINATION.itineraryDays || []).slice().sort((a, b) => {
+        if (a.isAlt !== b.isAlt) return a.isAlt ? 1 : -1; // numbered days always render before alt days
+        if (!a.isAlt) return (a.dayNumber || 0) - (b.dayNumber || 0); // numbered days: ascending
+        return 0; // alt days: keep their existing relative order (stable sort)
+    });
     let html = '';
-    for (let n = 1; n <= 7; n++) {
-        html += `<button type="button" class="gt-scrubber__day" role="tab" data-gt-scrubber-key="${n}" aria-current="false" aria-selected="false">יום ${n}</button>`;
-    }
-    html += `<button type="button" class="gt-scrubber__day gt-scrubber__day--alt" role="tab" data-gt-scrubber-key="alt-paxos" aria-current="false" aria-selected="false" style="gap:6px;"><svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14h16l-2 5H6Z"/><path d="M6 14V9h5l3 5"/><path d="M12 9V4"/></svg> פאקסוס</button>`;
-    html += `<button type="button" class="gt-scrubber__day gt-scrubber__day--alt" role="tab" data-gt-scrubber-key="alt-pantokrator" aria-current="false" aria-selected="false" style="gap:6px;"><svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18 9 7l4 6 2-3 6 8Z"/></svg> פנטוקרטור</button>`;
+    days.forEach(day => {
+        if (!day.isAlt) {
+            html += `<button type="button" class="gt-scrubber__day" role="tab" data-gt-scrubber-key="${day.dayNumber}" aria-current="false" aria-selected="false">יום ${day.dayNumber}</button>`;
+        } else {
+            html += `<button type="button" class="gt-scrubber__day gt-scrubber__day--alt" role="tab" data-gt-scrubber-key="${escapeAttr(day.key)}" aria-current="false" aria-selected="false" style="gap:6px;"><span aria-hidden="true">${day.icon || ''}</span> ${escapeHtml(day.title || '')}</button>`;
+        }
+    });
     el.innerHTML = html;
 }
 
@@ -253,15 +268,21 @@ document.addEventListener('click', (e) => {
 // listener above (which finds the row via closest('.gt-itinerary-row'),
 // not by tag) already handles that for free.
 
-// Numbered-day swap-<select> option list is always days 2-6 (never Day
-// 1/7, the fixed arrival/departure days) - same static set the old markup
-// hardcoded for both optional cards, kept here rather than in
+// Numbered-day swap-<select> option list is every numbered day except the
+// first and last by dayNumber order (never the fixed arrival/departure
+// days) - was a hardcoded ['2','3','4','5','6'] assuming exactly 7 numbered
+// days; now derived from window.DESTINATION.itineraryDays so it stays
+// correct for a trip that isn't exactly 7 days (e.g. testdest's 2, which
+// leaves this empty - no swappable middle day, and the UI already renders
+// nothing when GT_SWAP_DAY_OPTIONS is empty). Computed once at load time,
+// same as the constant it replaces - kept here rather than in
 // js/itinerary-data.js since it's UI chrome, not itinerary content.
-const GT_SWAP_DAY_OPTIONS = ['2', '3', '4', '5', '6'];
-const GT_SWAP_ARIA_LABEL = {
-    'alt-paxos': 'החליפו את שייט פאקסוס עם איזה יום ממוספר',
-    'alt-pantokrator': 'החליפו את יום הפנטוקרטור עם איזה יום ממוספר'
-};
+const GT_SWAP_DAY_OPTIONS = (window.DESTINATION.itineraryDays || [])
+    .filter(d => !d.isAlt)
+    .slice()
+    .sort((a, b) => a.dayNumber - b.dayNumber)
+    .slice(1, -1)
+    .map(d => d.key);
 
 // -- Day-context bar (numbered days) / swap-bar (alt days) ------------------
 // Selecting a day: build the context/swap bar for this day/card from
@@ -321,7 +342,9 @@ function gtSelectItineraryDay(key) {
         const swaps = (typeof getDaySwaps === 'function') ? getDaySwaps() : {};
         const selectedDay = swaps[key] || '';
         const statusText = selectedDay ? `✅ החליף את יום ${selectedDay}` : '';
-        const ariaLabel = GT_SWAP_ARIA_LABEL[key] || 'החליפו יום';
+        // Derived from the alt day's own title (was a hardcoded per-key lookup
+        // table naming only Corfu's two alt days).
+        const ariaLabel = day.title ? `החליפו את ${day.title} עם איזה יום ממוספר` : 'החליפו יום';
 
         contextEl.innerHTML = `
           <div class="gt-itinerary-context gt-itinerary-context--swap">
@@ -678,8 +701,9 @@ function gtDayNavLinkHtml(targetKey, eyebrow, arrow, modifier) {
 
 function gtDayNavHtml(day) {
     if (!day || day.isAlt || !day.dayNumber) return '';
+    const maxDayNumber = Math.max(...(window.DESTINATION.itineraryDays || []).filter(d => !d.isAlt).map(d => d.dayNumber));
     const links = [];
-    if (day.dayNumber < 7) links.push(gtDayNavLinkHtml(String(day.dayNumber + 1), 'היום הבא', '←', 'next'));
+    if (day.dayNumber < maxDayNumber) links.push(gtDayNavLinkHtml(String(day.dayNumber + 1), 'היום הבא', '←', 'next'));
     if (day.dayNumber > 1) links.push(gtDayNavLinkHtml(String(day.dayNumber - 1), 'היום הקודם', '→', 'prev'));
     const rendered = links.filter(Boolean);
     if (!rendered.length) return '';
@@ -827,11 +851,13 @@ document.addEventListener('keydown', (e) => {
 // window.ITINERARY_DAYS with the live content and computed warnings this
 // view only reads. Defaults to today's real trip day
 // (window._currentTripDayNum, set by js/dashboard.js) when it's one of the
-// 7 numbered days, else Day 1.
+// destination's numbered days (was a hardcoded 1-7 bound), else Day 1.
 function initItineraryScrubberView() {
     gtRenderItineraryScrubber();
+    const numberedDays = (window.DESTINATION.itineraryDays || []).filter(d => !d.isAlt);
+    const maxDayNumber = numberedDays.length ? Math.max(...numberedDays.map(d => d.dayNumber)) : 1;
     const d = window._currentTripDayNum;
-    const initial = (typeof d === 'number' && d >= 1 && d <= 7) ? String(d) : '1';
+    const initial = (typeof d === 'number' && d >= 1 && d <= maxDayNumber) ? String(d) : '1';
     gtSelectItineraryDay(initial);
 }
 window.initItineraryScrubberView = initItineraryScrubberView;

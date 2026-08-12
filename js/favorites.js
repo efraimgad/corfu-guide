@@ -1,4 +1,5 @@
-const FAVORITES_KEY = 'corfu-guide-favorites';
+const FAVORITES_KEY = gtDestKey('corfu-guide-favorites');
+gtMigrateLegacyKey('corfu-guide-favorites');
 
 function getFavorites() {
     try {

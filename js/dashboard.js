@@ -1,6 +1,5 @@
 // ==========================================================================
 // TRAVEL DASHBOARD
-// Trip window: 02.09.2026 15:40 (departure) → 08.09.2026 15:35 (landing back).
 //
 // TRIP_CONFIG is the single source of truth for every trip date/time shown
 // anywhere on the page (hero badges, dashboard cards, the itinerary intro,
@@ -8,24 +7,18 @@
 // injectTripDates() (called from initDashboard()) pushes it out to every
 // [id^="..."] placeholder in the HTML instead of it being hand-edited in
 // half a dozen places that can drift out of sync with each other.
+//
+// Both constants are destination-sourced (window.DESTINATION.tripConfig /
+// .timezone, see data/destinations/corfu.js) rather than hardcoded, so a
+// different destination's trip window/timezone is used automatically.
 // ==========================================================================
-const TRIP_CONFIG = {
-    outboundDeparture: new Date('2026-09-02T15:40:00+03:00'), // TLV -> CFU takeoff
-    outboundArrival:   new Date('2026-09-02T18:15:00+03:00'), // CFU landing
-    returnDeparture:   new Date('2026-09-08T13:10:00+03:00'), // CFU -> TLV takeoff
-    returnArrival:     new Date('2026-09-08T15:35:00+03:00'), // TLV landing
-    startDay: new Date('2026-09-02T00:00:00+03:00'),
-    endDay:   new Date('2026-09-08T23:59:59+03:00'),
-    totalDays: 7,
-    fromAirport: 'TLV',
-    toAirport: 'CFU'
-};
+const TRIP_CONFIG = window.DESTINATION.tripConfig;
 
-// All display formatting is pinned to Corfu's own timezone (Europe/Athens),
-// NOT the visitor's browser timezone - date.getDate()/getHours() read local
+// All display formatting is pinned to the DESTINATION's own timezone, NOT
+// the visitor's browser timezone - date.getDate()/getHours() read local
 // wall-clock time wherever the page happens to be viewed from, which would
-// silently shift every displayed date/time for anyone not in a +03:00 zone.
-const TRIP_TIMEZONE = 'Europe/Athens';
+// silently shift every displayed date/time for anyone not in that zone.
+const TRIP_TIMEZONE = window.DESTINATION.timezone;
 
 function datePart(date, type) {
     return new Intl.DateTimeFormat('en-GB', { timeZone: TRIP_TIMEZONE, day: '2-digit', month: '2-digit', year: 'numeric' })
@@ -119,7 +112,8 @@ function injectCounts() {
     set('nav-count-faq', document.querySelectorAll('#faq-list details').length);
 }
 
-const DASH_STORAGE_KEY = 'corfu-guide-dashboard';
+const DASH_STORAGE_KEY = gtDestKey('corfu-guide-dashboard');
+gtMigrateLegacyKey('corfu-guide-dashboard');
 // The confirmed hotel and car rental for this trip. Real values live in
 // the untracked js/trip-private.js (window.TRIP_PRIVATE, see .gitignore)
 // so booking details never land in git history; these are placeholder
@@ -132,15 +126,16 @@ window.DEFAULT_HOTEL = DEFAULT_HOTEL; // read by js/map.js for the hotel marker 
 const DEFAULT_CAR = (window.TRIP_PRIVATE && window.TRIP_PRIVATE.car) ||
     { name: 'הרכב השכור שלכם', note: 'הוסיפו פרטי הזמנה ב-js/trip-private.js' };
 
-const ITINERARY_DAY_TITLES = {
-    1: 'נחיתה, איסוף רכב והתאקלמות ראשונית',
-    2: 'קורפו טאון – קסם ונציאני וסמטאות היסטוריות',
-    3: 'החוף הצפון-מזרחי – מפרצים נסתרים ואחוזות עתיקות',
-    4: 'פלאוקסטריצה – חופים אמרלד ומנזרים תלויים',
-    5: 'דרום קורפו – ארמון הקיסרית, דיונות חול וטברנות דגים',
-    6: 'הצפון הפראי – תצורות סלע, תעלת האהבה ושקיעות דרמטיות',
-    7: 'יום העזיבה – צ׳ק אאוט וטיסה חזרה'
-};
+// Short per-day theme strings for the "current day" banner - built from
+// each numbered day's own dayBrief.theme (window.DESTINATION.itineraryDays)
+// instead of a hardcoded Corfu-specific lookup table, so it reflects
+// whichever destination is active.
+const ITINERARY_DAY_TITLES = (window.DESTINATION.itineraryDays || [])
+    .filter(d => !d.isAlt)
+    .reduce((acc, d) => {
+        acc[d.dayNumber] = (d.dayBrief && d.dayBrief.theme) || '';
+        return acc;
+    }, {});
 
 // Fills every itinerary-prose "trip-private" hook with the real hotel
 // name / car rental reference from window.TRIP_PRIVATE when it's present,
@@ -284,7 +279,7 @@ function fetchDashWeather() {
     };
     const timeoutId = setTimeout(showFailure, DASH_WEATHER_TIMEOUT_MS);
 
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=39.6243&longitude=19.9217&current_weather=true')
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${window.DESTINATION.solar.lat}&longitude=${window.DESTINATION.solar.lon}&current_weather=true`)
         .then(r => r.ok ? r.json() : Promise.reject())
         .then(data => {
             const w = data && data.current_weather;

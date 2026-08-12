@@ -565,6 +565,14 @@ window.ITINERARY_DAYS = [
         image: { src: "https://images.pexels.com/photos/934063/pexels-photo-934063.jpeg?auto=compress&cs=tinysrgb&w=1200", alt: "Pantokrator Mountain" },
         rainAlt: `<p>אזהרה חשובה: אם יורד גשם או שיש ערפל כבד, <strong>אל תטפסו להר פנטוקרטור ברכב</strong>! הראות בפסגה תהיה אפסית והכביש מסוכן. לעומת זאת, הכפר הנטוש פלאיה פריתיה הוא המקום היפה והדרמטי ביותר בקורפו ביום גשום וערפילי! סעו לאט רק עד לכפר (הכביש לשם בטוח יותר). הצטיידו במטריה, טיילו בין החורבות האפופות ערפל קסום ולאחר מכן היכנסו לטברנה המקומית, שבו ליד קמין העצים והזמינו נזיד חם וכוס יין אדום מקומי לסיום נעים של החופשה.</p>`,
         closingNoteHtml: `<p id="alt-pantokrator-closing-note" class="text-sm text-purple-800 bg-purple-50 border border-purple-100 rounded-xl p-4 mt-2">שימו לב: אלא אם החלפתם ביום זה ספציפית את יום 6 (בבורר למעלה), זו לא ה"ארוחה האחרונה" של הטיול - היא פשוט ארוחת ערב יפה בכפר הררי ציורי. יום 7 (עזיבה) תמיד ממשיך אחריה כרגיל.</p>`,
+        // Generalized source for js/itinerary.js's updateAltDayClosingNote(): the
+        // same two sentences the old Pantokrator-specific function used to hardcode
+        // inline, moved here verbatim so any alt day (not just this one) can carry
+        // its own conditionally-worded closing line.
+        closingNote: {
+            whenSwappedIntoLastDay: `🥂 מאחר שהחלפתם בזה את יום 6, זו אכן הארוחה האחרונה שלכם בקורפו לפני העזיבה ביום 7 - סעודת פרידה אמיתית.`,
+            default: `שימו לב: אלא אם החלפתם ביום זה ספציפית את יום 6 (בבורר למעלה), זו לא ה"ארוחה האחרונה" של הטיול - היא פשוט ארוחת ערב יפה בכפר הררי ציורי. יום 7 (עזיבה) תמיד ממשיך אחריה כרגיל.`
+        },
         dayBrief: {
             theme: `906 מטר, ואז כפר שאיש לא חזר אליו`,
             pace: "balanced",

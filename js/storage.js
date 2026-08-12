@@ -15,7 +15,8 @@
 // writes to the cloud, with offline queueing, is sync.js in Step 7.
 // ============================================================================
 
-const ITEM_STATE_CACHE_KEY = 'corfu-guide-item-state-cache';
+const ITEM_STATE_CACHE_KEY = gtDestKey('corfu-guide-item-state-cache');
+gtMigrateLegacyKey('corfu-guide-item-state-cache');
 
 // --- Local cache for visited / note / rating --------------------------
 // Shape: { [itemId]: { is_visited, note, rating, updated_at } }

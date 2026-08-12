@@ -27,7 +27,7 @@ const eq = (a, b, l) => { a === b ? ok(l + ' (' + a + ')') : fail(l, 'expected '
 // goes stale whenever a file is added (Phase C1 added two), and the failure
 // looks like an app bug rather than a harness bug.
 const SCRIPT_ORDER = [...fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8')
-    .matchAll(/<script[^>]+src="(js\/[^"]+)"/g)].map(m => m[1])
+    .matchAll(/<script[^>]+src="((?:js|data)\/[^"]+)"/g)].map(m => m[1])
     .filter(f => fs.existsSync(path.join(ROOT, f)));
 
 const dom = new JSDOM(fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'), { runScripts: 'outside-only' });

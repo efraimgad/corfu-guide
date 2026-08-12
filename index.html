@@ -2820,13 +2820,28 @@
 
     <script src="js/html-utils.js" defer></script>
     <script src="js/locations-data.js" defer></script>
+    <script src="js/itinerary-data.js" defer></script>
+    <!-- Destination data layer. corfu.js/testdest.js wrap the location +
+         itinerary data above (and testdest's own small data files) into
+         window.DESTINATIONS.<id>; destination-registry.js then resolves
+         which one is ACTIVE (?destination=<id> query param, a remembered
+         localStorage choice, or 'corfu' by default) and sets
+         window.DESTINATION. Every script below this point that reads
+         window.DESTINATION at its own top level (solar.js, tools.js,
+         packing.js, dashboard.js, map.js, explore.js) depends on this
+         block having already run - see js/destination-registry.js's own
+         header comment for the full ordering rationale. -->
+    <script src="data/destinations/corfu.js" defer></script>
+    <script src="js/testdest-locations.js" defer></script>
+    <script src="js/testdest-itinerary.js" defer></script>
+    <script src="data/destinations/testdest.js" defer></script>
+    <script src="js/destination-registry.js" defer></script>
     <script src="js/location-shared.js" defer></script>
     <script src="js/search.js" defer></script>
     <script src="js/faq-filters.js" defer></script>
     <script src="js/favorites.js" defer></script>
     <script src="js/notes-favorites.js" defer></script>
     <script src="js/solar.js" defer></script>
-    <script src="js/itinerary-data.js" defer></script>
     <script src="js/itinerary.js" defer></script>
     <script src="js/itinerary-view.js" defer></script>
     <script src="js/reservations.js" defer></script>

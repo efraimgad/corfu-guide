@@ -93,8 +93,21 @@ eq(ev(w2, 'normalizeItemState({note: 42}).note'), '', 'a non-string note is reje
 // --- 3. Reservation id normalisation (B3 root cause) -----------------------
 console.log('\n--- getReservations(): a malformed id is regenerated, not round-tripped ---');
 const w3 = new JSDOM('<!doctype html><body>', { runScripts: 'outside-only', url: 'http://localhost/' }).window;
-ev(w3, load('js/html-utils.js') + '\n;\n' + load('js/reservations.js'));
-w3.localStorage.setItem('corfu-guide-reservations', JSON.stringify([
+// reservations.js reads window.DESTINATION (storage-key namespacing) at its
+// own top level, so the destination-data bootstrap chain has to be
+// evaluated first, same as index.html's real script order.
+ev(w3, [
+    'js/html-utils.js',
+    'js/locations-data.js',
+    'js/itinerary-data.js',
+    'data/destinations/corfu.js',
+    'js/testdest-locations.js',
+    'js/testdest-itinerary.js',
+    'data/destinations/testdest.js',
+    'js/destination-registry.js',
+    'js/reservations.js'
+].map(load).join('\n;\n'));
+w3.localStorage.setItem('corfu-guide-reservations:corfu', JSON.stringify([
     { id: payload, place: 'Evil', partySize: 2 },
     { id: 'res-1750000000000-abc12', place: 'Legit', partySize: 2 },
 ]));

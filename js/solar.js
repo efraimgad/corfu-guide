@@ -35,7 +35,10 @@
 // rather than pretending to per-village precision.
 // ============================================================================
 
-const SOLAR_CORFU = { lat: 39.6243, lon: 19.9217, name: 'קורפו' };
+// Destination-sourced (was a hardcoded Corfu lat/lon/name literal) - see
+// data/destinations/*.js's own `solar` field. Identifier name kept as-is so
+// every function below that already reads SOLAR_CORFU keeps working unchanged.
+const SOLAR_CORFU = window.DESTINATION.solar;
 
 function solarRad(d) { return d * Math.PI / 180; }
 function solarDeg(r) { return r * 180 / Math.PI; }

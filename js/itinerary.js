@@ -1,6 +1,7 @@
 // Trip progress tracker: lets users mark each itinerary day as completed,
 // persisted in localStorage so it survives page reloads.
-const TRIP_PROGRESS_KEY = 'corfu-guide-trip-progress';
+const TRIP_PROGRESS_KEY = gtDestKey('corfu-guide-trip-progress');
+gtMigrateLegacyKey('corfu-guide-trip-progress');
 // Total day count now lives on TRIP_CONFIG (js/dashboard.js) - the single
 // centralized source for every trip date/duration on the page.
 
@@ -75,7 +76,8 @@ function initTripProgress() {
 // day - reusing it here would mean changing its shape and touching the
 // cloud-merge logic in storage.js that already depends on it staying an
 // array. This is local-only, exactly like the rest of this file.
-const DAY_BUDGET_KEY = 'corfu-guide-day-budget-actual';
+const DAY_BUDGET_KEY = gtDestKey('corfu-guide-day-budget-actual');
+gtMigrateLegacyKey('corfu-guide-day-budget-actual');
 // Shape: { [dayNumber]: number }
 
 function getDayBudgetActuals() {
@@ -330,9 +332,13 @@ function findLocationById(id) {
 
 // +302661039649 -> +30 2661 039649 (mirrors formatPhone() in js/location-shared.js, a
 // tiny formatting helper that isn't worth exposing globally just for this).
+// Destination-sourced country code, same fix as formatPhone() - was hardcoded
+// to Greece's +30 specifically.
 function formatDinnerPhone(dial) {
-    const m = /^\+30(\d{4})(\d{6})$/.exec(dial);
-    return m ? `+30 ${m[1]} ${m[2]}` : dial;
+    const cc = (window.DESTINATION && window.DESTINATION.phoneCountryCode) || '+30';
+    const ccEscaped = cc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const m = new RegExp(`^${ccEscaped}(\\d{4})(\\d{6})$`).exec(dial);
+    return m ? `${cc} ${m[1]} ${m[2]}` : dial;
 }
 
 function renderDinnerSlotHTML(food) {
@@ -486,7 +492,8 @@ function checkDayVenueWarnings() {
 // complete state is: a small localStorage-backed map, { [optionalCardId]:
 // dayNumber }, kept in its own key since its shape (object, not array) is
 // unrelated to TRIP_PROGRESS_KEY's.
-const DAY_SWAP_KEY = 'corfu-guide-day-swaps';
+const DAY_SWAP_KEY = gtDestKey('corfu-guide-day-swaps');
+gtMigrateLegacyKey('corfu-guide-day-swaps');
 
 function getDaySwaps() {
     try {
@@ -526,15 +533,17 @@ function setDaySwap(cardId, dayNum) {
 
 // Re-renders every swap-dependent bit of the itinerary from the current
 // localStorage state: each <select>'s own value, the matching
-// .day-swap-status text, and the Pantokrator card's conditionally-worded
-// closing line (see updatePantokratorClosingNote below).
+// .day-swap-status text, and whichever alt day's conditionally-worded
+// closing line is currently open (see updateAltDayClosingNote below).
 //
 // The old "הוחלף ב..." badge + dimmed/struck-through day-card treatment
 // this used to also apply is gone along with the old .premium-day-card
 // markup itself (Phase A subtraction) - the day-swap state's real
 // user-visible feedback going forward is the scrubber pill dimming/
 // highlighting gtSyncItineraryScrubberSwapState() (js/itinerary-view.js)
-// already drives, called at the end of this function same as before.
+// already drives, called at the end of this function same as before, plus
+// whichever alt day's own closing line updateAltDayClosingNote() below
+// updates (only alt-pantokrator carries one today).
 //
 // The .day-swap-select/.day-swap-status lookups below keep working
 // unchanged: js/itinerary-view.js's gtSelectItineraryDay() now authors
@@ -560,25 +569,46 @@ function applyDaySwapUI() {
         if (statusEl) statusEl.textContent = `✅ החליף את יום ${dayNum}`;
     });
 
-    updatePantokratorClosingNote(swaps);
+    updateAltDayClosingNote(swaps);
     // New day-scrubber view (js/itinerary-view.js, Phase 4 batch 3): keep its
     // scrubber pills / currently-open context bar in sync with this same
     // swap state. Additive no-op if that file hasn't loaded.
     if (typeof gtSyncItineraryScrubberSwapState === 'function') gtSyncItineraryScrubberSwapState(swaps);
 }
 
-// Keeps the Pantokrator card's closing line honest in both readings: as
-// just an option being browsed (where it's misleading to call it the
-// trip's "last night", since Day 7/departure still follows whichever
-// numbered day it wasn't actually swapped into) and as an actually-
-// scheduled Day 6 replacement (where that framing becomes accurate).
-function updatePantokratorClosingNote(swaps) {
-    const el = document.getElementById('alt-pantokrator-closing-note');
-    if (!el) return;
-    const swappedIntoDay6 = swaps['alt-pantokrator'] === '6';
-    el.textContent = swappedIntoDay6
-        ? '🥂 מאחר שהחלפתם בזה את יום 6, זו אכן הארוחה האחרונה שלכם בקורפו לפני העזיבה ביום 7 - סעודת פרידה אמיתית.'
-        : 'שימו לב: אלא אם החלפתם ביום זה ספציפית את יום 6 (בבורר למעלה), זו לא ה"ארוחה האחרונה" של הטיול - היא פשוט ארוחת ערב יפה בכפר הררי ציורי. יום 7 (עזיבה) תמיד ממשיך אחריה כרגיל.';
+// Keeps an alt day's closing line honest in both readings: as just an option
+// being browsed (where it's misleading to call it the trip's "last night",
+// since the final numbered day still follows whichever day it wasn't actually
+// swapped into) and as an actually-scheduled replacement for the trip's last
+// regular day (where that framing becomes accurate).
+//
+// Generalized from the old Pantokrator-only version: works for whichever
+// alt-day card is currently open rather than hardcoding 'alt-pantokrator',
+// and only does anything for a day whose window.DESTINATION.itineraryDays
+// record actually carries a closingNote (most alt days, and every numbered
+// day, don't - see js/itinerary-data.js). Only ONE alt day's closing-note
+// element can exist in the DOM at a time (js/itinerary-view.js's
+// gtRenderItineraryDaySummary() only ever renders the currently-selected
+// day/card), so trying every alt day with a closingNote and updating
+// whichever one's element is actually present is enough to find "the open
+// one" without tracking selection state here.
+//
+// The element id itself is still baked into the day's own closingNoteHtml
+// (real trip content, not this file) as `${day.key}-closing-note` - e.g.
+// alt-pantokrator-closing-note - so this looks it up by that same
+// convention instead of a second hardcoded id.
+function updateAltDayClosingNote(swaps) {
+    const itineraryDays = (window.DESTINATION && window.DESTINATION.itineraryDays) || [];
+    const numberedDays = itineraryDays.filter(d => !d.isAlt);
+    if (!numberedDays.length) return;
+    const lastDayNumber = Math.max(...numberedDays.map(d => d.dayNumber));
+
+    itineraryDays.filter(d => d.isAlt && d.closingNote).forEach(day => {
+        const el = document.getElementById(`${day.key}-closing-note`);
+        if (!el) return; // this alt day's card isn't the one currently open
+        const swappedIntoLastDay = swaps[day.key] === String(lastDayNumber);
+        el.textContent = swappedIntoLastDay ? day.closingNote.whenSwappedIntoLastDay : day.closingNote.default;
+    });
 }
 
 window.toggleDayComplete = toggleDayComplete;

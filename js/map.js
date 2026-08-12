@@ -97,31 +97,34 @@ const mapMarkerIndex = {};
 // Reading the token at runtime means there is now exactly one source of
 // truth, and any future token change follows automatically.
 // ---------------------------------------------------------------------------
-const GT_CAT_FALLBACK = {
-    beaches: '#2160eb', food: '#bb460a', attractions: '#9230ea', gems: '#047b56'
-};
+// Fallback color if a category's colorVar token isn't defined in CSS for
+// some reason - a generic neutral blue, not tied to any one category.
+const GT_CAT_FALLBACK_COLOR = '#2160eb';
 let gtCatColorCache = null;
 function gtCategoryColor(layerKey) {
     if (!gtCatColorCache) {
         const cs = getComputedStyle(document.documentElement);
-        const read = (name, fallback) => (cs.getPropertyValue(name) || '').trim() || fallback;
-        gtCatColorCache = {
-            beaches:     read('--gt-cat-beach', GT_CAT_FALLBACK.beaches),
-            food:        read('--gt-cat-food', GT_CAT_FALLBACK.food),
-            attractions: read('--gt-cat-attraction', GT_CAT_FALLBACK.attractions),
-            gems:        read('--gt-cat-gem', GT_CAT_FALLBACK.gems)
-        };
+        const categories = (window.DESTINATION && window.DESTINATION.categories) || [];
+        gtCatColorCache = {};
+        categories.forEach(cat => {
+            const value = (cs.getPropertyValue(cat.colorVar) || '').trim();
+            gtCatColorCache[cat.key] = value || GT_CAT_FALLBACK_COLOR;
+        });
     }
-    return gtCatColorCache[layerKey] || GT_CAT_FALLBACK[layerKey] || '#2160eb';
+    return gtCatColorCache[layerKey] || GT_CAT_FALLBACK_COLOR;
 }
 
-// Builds all four category layer groups for one map instance. Replaces the
-// four near-identical buildLayerGroup() calls that were copy-pasted into
-// each of initExploreMap/initHomeMap (and the since-deleted initBeachMap).
+// Builds one category layer group per window.DESTINATION.categories entry,
+// for one map instance. Replaces what used to be four near-identical
+// buildLayerGroup() calls copy-pasted into each of initExploreMap/initHomeMap
+// (and the since-deleted initBeachMap) - now driven by however many
+// categories the active destination actually has (2 for testdest, 4 for
+// Corfu, or any other count a future destination defines).
 function gtBuildCategoryLayers(groups, indexStore, onTap) {
-    const locations = window.CORFU_LOCATIONS || { beaches: [], food: [], attractions: [], gems: [] };
-    ['beaches', 'food', 'attractions', 'gems'].forEach(key => {
-        groups[key] = buildLayerGroup(locations[key] || [], gtCategoryColor(key), key, indexStore, onTap);
+    const categories = (window.DESTINATION && window.DESTINATION.categories) || [];
+    const locations = (window.DESTINATION && window.DESTINATION.locations) || {};
+    categories.forEach(cat => {
+        groups[cat.key] = buildLayerGroup(locations[cat.key] || [], gtCategoryColor(cat.key), cat.key, indexStore, onTap);
     });
     return groups;
 }
@@ -136,10 +139,13 @@ function gtBuildHotelLayer() {
         iconAnchor: [15, 30]
     });
     const hotelName = (window.DEFAULT_HOTEL && window.DEFAULT_HOTEL.name) || 'המלון שלכם';
+    const homeBase = (window.DESTINATION && window.DESTINATION.map && window.DESTINATION.map.homeBase) || {};
+    const homeBaseLatLng = [homeBase.lat, homeBase.lon];
+    const mapsQuery = homeBase.mapsQuery || homeBase.name || '';
     return L.layerGroup([
-        L.marker([39.6500, 19.8520], { icon: hotelIcon, title: hotelName, alt: hotelName, keyboard: true }).bindPopup(
-            `<strong>${escapeHtml(hotelName)}</strong><br>גוביה (Gouvia) - מקום הלינה שלכם<br>` +
-            `<a href="https://maps.google.com/?q=${encodeURIComponent(hotelName + ' Gouvia Corfu')}" target="_blank" rel="noopener noreferrer">📍 נווט לשם</a>`
+        L.marker(homeBaseLatLng, { icon: hotelIcon, title: hotelName, alt: hotelName, keyboard: true }).bindPopup(
+            `<strong>${escapeHtml(hotelName)}</strong><br>${escapeHtml(homeBase.name || '')} - מקום הלינה שלכם<br>` +
+            `<a href="https://maps.google.com/?q=${encodeURIComponent(hotelName + ' ' + mapsQuery)}" target="_blank" rel="noopener noreferrer">📍 נווט לשם</a>`
         )
     ]);
 }
@@ -152,11 +158,14 @@ function gtBuildHotelLayer() {
 //     scroll trap. One click (or keyboard focus) arms it; leaving disarms it.
 //  2. maxBounds keeps Corfu on screen. Without it a stray pinch could pan
 //     into empty ocean with no way back short of reloading.
-const GT_CORFU_CENTER = [39.62, 19.85];
+// Read from window.DESTINATION rather than hardcoded to Corfu - map.js runs
+// after destination-registry.js has set window.DESTINATION (see index.html's
+// script-order comment), so this is safe at module scope.
+const GT_CORFU_CENTER = (window.DESTINATION && window.DESTINATION.map && window.DESTINATION.map.center) || [39.62, 19.85];
 // Bounds are built INSIDE gtCreateMap(), not at module scope: js/map.js is
 // parsed on page load but Leaflet is lazy-loaded on first map use, so any
 // top-level reference to `L` throws "L is not defined" on every page view.
-const GT_CORFU_BOUNDS_LATLNG = [[39.20, 19.30], [39.95, 20.40]];
+const GT_CORFU_BOUNDS_LATLNG = (window.DESTINATION && window.DESTINATION.map && window.DESTINATION.map.bounds) || [[39.20, 19.30], [39.95, 20.40]];
 
 // Tile providers, in preference order, with automatic failover.
 //
@@ -355,12 +364,13 @@ function gtClearTileDiagnostic(map) {
 }
 
 function gtCreateMap(elId, opts) {
+    const destMap = (window.DESTINATION && window.DESTINATION.map) || {};
     const map = L.map(elId, Object.assign({
         scrollWheelZoom: false,
         maxBounds: L.latLngBounds(GT_CORFU_BOUNDS_LATLNG[0], GT_CORFU_BOUNDS_LATLNG[1]),
         maxBoundsViscosity: 0.7,
-        minZoom: 9
-    }, opts || {})).setView(GT_CORFU_CENTER, 10);
+        minZoom: destMap.minZoom != null ? destMap.minZoom : 9
+    }, opts || {})).setView(GT_CORFU_CENTER, destMap.defaultZoom != null ? destMap.defaultZoom : 10);
 
     gtAddTileLayerWithFallback(map);
 
@@ -430,8 +440,11 @@ function buildLayerGroup(items, color, layerKey, indexStore, onTap) {
 // single reliable lookup instead of the old data-name/heading-text
 // fallback that only worked for beaches.
 function openCardFromMap(layerKey, id) {
-    const tabMap = { beaches: 'beaches', food: 'food', attractions: 'attractions', gems: 'gems' };
-    const tabId = tabMap[layerKey] || 'attractions';
+    // Every category's legacy tab id equals its own key (see
+    // window.DESTINATION.categories) - falls back to the first category if
+    // layerKey is somehow unrecognized.
+    const categories = (window.DESTINATION && window.DESTINATION.categories) || [];
+    const tabId = categories.some(c => c.key === layerKey) ? layerKey : ((categories[0] && categories[0].key) || layerKey);
     switchTab(tabId, true);
     setTimeout(() => {
         const card = document.querySelector(`#${tabId} [data-id="${CSS.escape(id)}"]`);
@@ -506,7 +519,8 @@ function openDayMap(dayNum) {
 function focusMapOnDayLocations(matches) {
     if (!exploreMapInstance) return;
     if (!matches.length) {
-        exploreMapInstance.setView([39.62, 19.85], 10);
+        const destMap = (window.DESTINATION && window.DESTINATION.map) || {};
+        exploreMapInstance.setView(GT_CORFU_CENTER, destMap.defaultZoom != null ? destMap.defaultZoom : 10);
         return;
     }
 
@@ -534,7 +548,7 @@ function focusMapOnDayLocations(matches) {
     }
 
     const first = matches[0];
-    const item = ((window.CORFU_LOCATIONS || {})[first.category] || []).find(x => x.id === first.id);
+    const item = (((window.DESTINATION && window.DESTINATION.locations) || {})[first.category] || []).find(x => x.id === first.id);
     if (item) gtOnMarkerTap('explore', exploreMapInstance, exploreMarkerIndex, item, first.category);
 }
 
@@ -576,20 +590,24 @@ window.openDayMap = openDayMap;
 // day-view), which links out to that same Explore sheet via one
 // "open full card" action.
 // ============================================================================
-const GT_MAP_CATEGORY_META = {
-    // No `color` here any more - the selection ring reads gtCategoryColor()
-    // (the live --gt-cat-* token) so the ring, the pin and the legend chip
-    // can never drift apart again. See gtCategoryColor() above.
-    beaches: { label: 'חוף', icon: '🏖️', tag: 'beach' },
-    food: { label: 'מסעדה', icon: '🍽️', tag: 'food' },
-    attractions: { label: 'אטרקציה', icon: '📸', tag: 'attraction' },
-    gems: { label: 'פנינה', icon: '💎', tag: 'gem' }
-};
+// Built from window.DESTINATION.categories rather than hardcoded per key -
+// see gtCategoryColor() above for why `color` is deliberately absent (the
+// selection ring reads the live --gt-cat-* token instead, so ring/pin/chip
+// can never drift apart).
+function gtBuildMapCategoryMeta() {
+    const meta = {};
+    ((window.DESTINATION && window.DESTINATION.categories) || []).forEach(cat => {
+        meta[cat.key] = { label: cat.label, icon: cat.emoji, tag: cat.tag };
+    });
+    return meta;
+}
+const GT_MAP_CATEGORY_META = gtBuildMapCategoryMeta();
 
 // Straight-line distance in km from the hotel (same coordinates as the
-// hotel marker in initBeachMap() above) to a location record - real
-// geometry from real coordinates, not a fabricated "X min away" estimate.
-const GT_HOTEL_LATLNG = [39.6500, 19.8520];
+// hotel marker built by gtBuildHotelLayer() above) to a location record -
+// real geometry from real coordinates, not a fabricated "X min away" estimate.
+const gtHomeBase = (window.DESTINATION && window.DESTINATION.map && window.DESTINATION.map.homeBase) || {};
+const GT_HOTEL_LATLNG = [gtHomeBase.lat, gtHomeBase.lon];
 function gtHaversineKm(lat1, lon1, lat2, lon2) {
     const R = 6371;
     const toRad = deg => deg * Math.PI / 180;
@@ -789,7 +807,7 @@ window.gtOpenFullCardFromMapSheet = gtOpenFullCardFromMapSheet;
 // two competing copies of either.
 // ============================================================================
 let exploreMapInstance = null;
-let exploreMapLayerGroups = { beaches: null, food: null, attractions: null, gems: null };
+let exploreMapLayerGroups = {};
 const exploreMarkerIndex = {};
 
 function initExploreMap() {
@@ -823,7 +841,8 @@ function initExploreMap() {
     // Show whatever the category chips are currently filtering to (js/explore.js) -
     // the map's visible pins and the list below it are one shared state, not
     // two filters that can drift.
-    const active = (typeof getExploreActiveCategories === 'function') ? getExploreActiveCategories() : ['beaches', 'food', 'attractions', 'gems'];
+    const allCategoryKeys = ((window.DESTINATION && window.DESTINATION.categories) || []).map(c => c.key);
+    const active = (typeof getExploreActiveCategories === 'function') ? getExploreActiveCategories() : allCategoryKeys;
     setExploreMapCategories(active);
 }
 
@@ -874,7 +893,8 @@ function toggleExploreMap() {
 // Explore tab's category chips instead of checkboxes.
 function setExploreMapCategories(activeCategories) {
     if (!exploreMapInstance) return;
-    ['beaches', 'food', 'attractions', 'gems'].forEach(key => {
+    const categoryKeys = ((window.DESTINATION && window.DESTINATION.categories) || []).map(c => c.key);
+    categoryKeys.forEach(key => {
         const group = exploreMapLayerGroups[key];
         if (!group) return;
         const shouldShow = activeCategories.includes(key);
@@ -910,7 +930,7 @@ function setExploreMapVisibleIds(catKey, visibleIds) {
     const group = exploreMapLayerGroups[catKey];
     if (!group || typeof group.clearLayers !== 'function') return;
 
-    const all = (window.CORFU_LOCATIONS || {})[catKey] || [];
+    const all = ((window.DESTINATION && window.DESTINATION.locations) || {})[catKey] || [];
     const show = visibleIds ? new Set(visibleIds) : null;
 
     group.clearLayers();
@@ -936,7 +956,7 @@ function showOnExploreMap(layerKey, id) {
         const group = exploreMapLayerGroups[layerKey];
         if (!marker || !exploreMapInstance) return;
         const selectIt = () => {
-            const item = ((window.CORFU_LOCATIONS || {})[layerKey] || []).find(x => x.id === id);
+            const item = (((window.DESTINATION && window.DESTINATION.locations) || {})[layerKey] || []).find(x => x.id === id);
             if (item) gtOnMarkerTap('explore', exploreMapInstance, exploreMarkerIndex, item, layerKey);
         };
         if (group && typeof group.zoomToShowLayer === 'function') {
@@ -986,7 +1006,7 @@ window.showOnExploreMap = showOnExploreMap;
 // glance", not a filtered subset.
 // ============================================================================
 let homeMapInstance = null;
-let homeMapLayerGroups = { beaches: null, food: null, attractions: null, gems: null, hotel: null };
+let homeMapLayerGroups = { hotel: null };
 const homeMarkerIndex = {};
 
 function initHomeMap() {
@@ -1018,10 +1038,10 @@ function initHomeMap() {
 
     // Every category on by default (Home shows the whole trip, not a
     // filtered subset) plus the hotel marker.
-    homeMapLayerGroups.beaches.addTo(homeMapInstance);
-    homeMapLayerGroups.food.addTo(homeMapInstance);
-    homeMapLayerGroups.attractions.addTo(homeMapInstance);
-    homeMapLayerGroups.gems.addTo(homeMapInstance);
+    ((window.DESTINATION && window.DESTINATION.categories) || []).forEach(cat => {
+        const group = homeMapLayerGroups[cat.key];
+        if (group) group.addTo(homeMapInstance);
+    });
     homeMapLayerGroups.hotel.addTo(homeMapInstance);
 }
 
@@ -1049,7 +1069,7 @@ function initHomeMap() {
 // common part is the zoomToShowLayer-or-setView tail, which is four lines -
 // not enough to justify reshaping two functions other call sites depend on.
 function showOnHomeMap(layerKey, id) {
-    const item = ((window.CORFU_LOCATIONS || {})[layerKey] || []).find(x => x.id === id);
+    const item = (((window.DESTINATION && window.DESTINATION.locations) || {})[layerKey] || []).find(x => x.id === id);
     if (!item) return;
 
     // switchTab() (js/ui.js) owns both the nav button's active state and the

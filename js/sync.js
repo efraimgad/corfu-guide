@@ -11,7 +11,8 @@
 // can't reach the network.
 // ============================================================================
 
-const SYNC_QUEUE_KEY = 'corfu-guide-sync-queue';
+const SYNC_QUEUE_KEY = gtDestKey('corfu-guide-sync-queue');
+gtMigrateLegacyKey('corfu-guide-sync-queue');
 
 // When Supabase is not configured (the default), this whole module becomes a
 // no-op: nothing is queued, nothing is retried, and the status dot is hidden

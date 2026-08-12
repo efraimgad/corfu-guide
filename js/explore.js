@@ -10,33 +10,32 @@
 // DOM, fully working, as the established hidden fallback.
 //
 // "activities" is one of the five categories named in the Phase 3 spec, but
-// is deliberately NOT one of the four chips here: CORFU_LOCATIONS has no
-// `activities` array (the #activities tab is hand-written HTML, not
-// data-driven - see index.html) and css/design-system.css defines no
-// --gt-cat-activity token. Folding hand-authored activity cards into this
-// data-driven unified list is a data-modeling change outside this batch's
-// scope, not a UI change - deferred, not silently dropped.
+// is deliberately not one of the chips here: Corfu's own location data has
+// no `activities` array (the #activities tab is hand-written HTML, not
+// data-driven - see index.html), so it isn't listed in
+// window.DESTINATION.categories either. EXPLORE_CATEGORIES itself no longer
+// assumes any fixed category count - it is built straight from
+// window.DESTINATION.categories, whatever that destination defines - so
+// adding a 5th (or 2nd, see testdest) category is purely a data change now,
+// not a code change. Folding hand-authored activity cards into this
+// data-driven unified list is a separate data-modeling change outside this
+// batch's scope, not a UI change - deferred, not silently dropped.
 //
 // This first slice covers row-card rendering + the shared category-chip
 // filter (list + map together). Reserve-button wiring and the tap-to-open
 // detail sheet land in the next two commits.
 // ============================================================================
 
-// Category icons reuse the exact same .icon-line path data as the
-// dashboard-quicknav-btn / gt-app-nav SVGs for these same four categories
-// (index.html) - one visual vocabulary for "beach/food/attraction/gem"
-// across the whole app, not a second hand-drawn set.
-const GT_ICON_BEACH = '<svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 18 0Z"/><path d="M12 12v7a2 2 0 0 1-2 2"/><path d="M12 3v2"/></svg>';
-const GT_ICON_FOOD = '<svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v6a1.5 1.5 0 0 0 3 0V3M8.5 9V21"/><path d="M16.5 3c-1.4 0-2.5 1.8-2.5 4.5S15.1 12 16.5 12V21"/></svg>';
-const GT_ICON_ATTRACTION = '<svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.3-2.5h5.4L16 7"/><circle cx="12" cy="13.5" r="3.3"/></svg>';
-const GT_ICON_GEM = '<svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8 9 3.5h6l2.5 4.5L12 20.5Z"/><path d="M6.5 8h11"/></svg>';
-
-const EXPLORE_CATEGORIES = [
-    { key: 'beaches', tag: 'beach', label: 'חוף', icon: GT_ICON_BEACH },
-    { key: 'food', tag: 'food', label: 'מסעדה', icon: GT_ICON_FOOD },
-    { key: 'attractions', tag: 'attraction', label: 'אטרקציה', icon: GT_ICON_ATTRACTION },
-    { key: 'gems', tag: 'gem', label: 'פנינה', icon: GT_ICON_GEM }
-];
+// Category icons used to be four hand-copied SVG constants here (one per
+// Corfu category), duplicating the exact same path data already living in
+// window.DESTINATION.categories[].iconSvg (data/destinations/corfu.js) -
+// one visual vocabulary, sourced once, not two copies that can drift.
+// EXPLORE_CATEGORIES is built directly from the active destination's
+// categories, in whatever order and count that destination defines (2 for
+// testdest, 4 for Corfu, or any other count a future destination adds) -
+// never a hardcoded 4-item literal.
+const EXPLORE_CATEGORIES = ((window.DESTINATION && window.DESTINATION.categories) || [])
+    .map(cat => ({ key: cat.key, tag: cat.tag, label: cat.label, icon: cat.iconSvg }));
 
 function exploreCategoryMeta(catKey) {
     return EXPLORE_CATEGORIES.find(c => c.key === catKey);
@@ -62,30 +61,13 @@ function exploreCategoryMeta(catKey) {
 // and `shopping` (1 record) are not filters - a control that narrows 34 items
 // to 1 is a search. The inline search box above already covers the tail, and
 // covers it better: typing "איטלקי" beats hunting for a 4-record chip.
-const EXPLORE_FACETS = {
-    beaches: [
-        { tag: 'family', label: 'משפחתי' },
-        { tag: 'romantic', label: 'רומנטי' },
-        { tag: 'quiet', label: 'שקט' },
-        { tag: 'snorkeling', label: 'שנרקול' }
-    ],
-    food: [
-        { tag: 'budget', label: '€' },
-        { tag: 'midrange', label: '€€' },
-        { tag: 'upscale', label: '€€€' }
-    ],
-    attractions: [
-        { tag: 'history', label: 'היסטוריה' },
-        { tag: 'nature', label: 'טבע' },
-        { tag: 'beach', label: 'חוף' }
-    ],
-    gems: [
-        { tag: 'food', label: 'אוכל' },
-        { tag: 'village', label: 'כפר' },
-        { tag: 'nature', label: 'טבע' },
-        { tag: 'beach', label: 'חוף' }
-    ]
-};
+// Built from each category's own .facets (window.DESTINATION.categories),
+// keyed by category key - not a hardcoded per-category literal, so a
+// destination's facet vocabulary is entirely data-driven.
+const EXPLORE_FACETS = {};
+((window.DESTINATION && window.DESTINATION.categories) || []).forEach(cat => {
+    EXPLORE_FACETS[cat.key] = cat.facets || [];
+});
 
 // '' means "all" - the always-present first chip, not a tag.
 let exploreActiveFacet = '';
@@ -277,7 +259,7 @@ function buildExploreGroups(catKey) {
     // here rather than at render time so the grouping, empty state, lazy
     // batch threshold and the aria-live count all see the same row set and
     // cannot drift out of sync with each other.
-    const rows = (window.CORFU_LOCATIONS[catKey] || [])
+    const rows = (((window.DESTINATION && window.DESTINATION.locations) || {})[catKey] || [])
         .filter(d => exploreMatchesFacet(d))
         .filter(d => exploreMatchesSearch(d, catKey, term));
     const groupField = EXPLORE_GROUP_FIELD[catKey];
@@ -462,7 +444,7 @@ function exploreSetupSentinelObserver() {
 // EXPLORE_VIRTUALIZE_THRESHOLD above).
 function renderExploreList() {
     const container = document.getElementById('explore-list');
-    if (!container || !window.CORFU_LOCATIONS) return;
+    if (!container || !(window.DESTINATION && window.DESTINATION.locations)) return;
 
     if (exploreRenderState.observer) exploreRenderState.observer.disconnect();
     container.innerHTML = '';
@@ -589,7 +571,7 @@ document.addEventListener('click', (e) => {
 // then act" pattern as openCardFromMap()/scrollToLocationCard() elsewhere.
 function handleExploreReserve(catKey, id) {
     if (catKey !== 'food') return;
-    const d = (window.CORFU_LOCATIONS.food || []).find(x => x.id === id);
+    const d = (((window.DESTINATION && window.DESTINATION.locations) || {}).food || []).find(x => x.id === id);
     if (!d) return;
     const existing = getReservations().find(r => r.place === d.name);
     switchTab('dashboard', true);
@@ -611,7 +593,7 @@ window.handleExploreReserve = handleExploreReserve;
 let exploreSheetTriggerEl = null;
 
 function openExploreSheet(catKey, id) {
-    const d = (window.CORFU_LOCATIONS[catKey] || []).find(x => x.id === id);
+    const d = (((window.DESTINATION && window.DESTINATION.locations) || {})[catKey] || []).find(x => x.id === id);
     if (!d) return;
     const cat = exploreCategoryMeta(catKey);
     const name = exploreDisplayName(d, catKey);

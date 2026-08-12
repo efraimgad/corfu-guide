@@ -202,7 +202,10 @@ ok(/gtDayNavHtml\(day\)/.test(VIEW), 'the day summary renders it');
 // Only the numbered days form a sequence. Alt days stand in for a numbered day
 // rather than holding a position ("the day after Paxos" is not a thing).
 ok(/day\.isAlt \|\| !day\.dayNumber/.test(VIEW), 'alt days render no pager');
-ok(/day\.dayNumber < 7/.test(VIEW), 'the final day renders no next link');
+// Generalized (Phase 1 destination-template refactor): the cutoff is now the
+// active destination's own last numbered day, not a literal 7, so a
+// destination with a different trip length still stops correctly.
+ok(/day\.dayNumber < maxDayNumber/.test(VIEW), 'the final day renders no next link');
 ok(/day\.dayNumber > 1/.test(VIEW), 'the first day renders no previous link');
 ok(/data-gt-goto-day=/.test(VIEW), 'each link carries its target day as a data attribute');
 ok(/\[data-gt-goto-day\]/.test(VIEW), 'a delegated click handler is wired to that attribute');
