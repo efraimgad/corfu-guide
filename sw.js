@@ -9,7 +9,7 @@
 // Bump this on every deploy that changes any APP_SHELL file — the SW
 // cache is otherwise not invalidated, and returning visitors would stay
 // pinned to the old cached JS/CSS indefinitely.
-const CACHE_NAME = 'corfu-guide-v35';
+const CACHE_NAME = 'corfu-guide-v36';
 
 // Photos live in their own cache so they can be evicted (and capped)
 // independently of the app shell, and so bumping CACHE_NAME for a code
@@ -53,6 +53,9 @@ const APP_SHELL = [
     'js/corfu-language.js',
     'js/testdest-language.js',
     'js/paxos-language.js',
+    'js/corfu-tripplanning-static.js',
+    'js/testdest-tripplanning-static.js',
+    'js/paxos-tripplanning-static.js',
     'js/location-shared.js',
     'js/search.js',
     'js/faq-filters.js',

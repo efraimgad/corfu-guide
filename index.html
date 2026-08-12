@@ -711,58 +711,19 @@
         </div>
     </div>
 
-    <!-- ליד מקום הלינה: גוביה -->
+    <!-- ליד מקום הלינה: filled by renderPlanAccommodation() (js/trip-planning.js)
+         from window.DESTINATION.editorial.tripPlanning.accommodation -->
     <div id="plan-accommodation" class="bg-white rounded-2xl shadow-xl p-8 border gt-border-hair mt-8 scroll-mt-24">
         <div class="flex items-center gap-4 mb-2">
             <span class="text-4xl">🏨</span>
             <div>
                 <h3 class="text-3xl font-bold gt-text-accent">ליד מקום הלינה שלכם</h3>
-                <p class="text-sm gt-text-500 mt-1"><span class="trip-private-hotel-name">המלון שלכם</span> · גוביה (Gouvia), קורפו</p>
+                <p class="text-sm gt-text-500 mt-1"><span class="trip-private-hotel-name">המלון שלכם</span> · <span id="plan-accommodation-area-label"></span></p>
             </div>
         </div>
-        <p class="gt-text-500 mb-6 leading-relaxed">
-            גוביה הוא כפר נופש שקט על החוף המזרחי, כ-10 דקות נסיעה צפונית לעיר קורפו, בנוי סביב אחת המרינות הגדולות ביוון. הכול כאן בטווח של עד כ-15 דקות מהמלון - ברגל או בנסיעה קצרה.
-        </p>
+        <p id="plan-accommodation-intro" class="gt-text-500 mb-6 leading-relaxed"></p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-            <div class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent">
-                <div class="text-3xl mb-2">⛵</div>
-                <h4 class="font-bold gt-text-accent mb-2">מרינת גוביה</h4>
-                <p class="text-sm gt-text-accent leading-relaxed">כ-5 דקות הליכה/נסיעה מהמלון (בהתאם למיקום המדויק בכפר). אחת המרינות הגדולות ביוון, עוגנות בה מאות יאכטות שייט. הטיילת סביבה עמוסה בטברנות, ברים ובתי קפה עם נוף לים - היעד הטבעי לארוחת ערב או טיול ערב.</p>
-            </div>
-
-            <div class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent">
-                <div class="text-3xl mb-2" style="display:flex;"><svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 18 0Z"/><path d="M12 12v7a2 2 0 0 1-2 2"/><path d="M12 3v2"/></svg></div>
-                <h4 class="font-bold gt-text-accent mb-2">חופים קרובים</h4>
-                <p class="text-sm gt-text-accent leading-relaxed"><strong>חוף גוביה:</strong> קטן ושקט, ממש ליד המלון. <strong>חוף דאסיה:</strong> כ-5 דקות נסיעה צפונה - חוף ארוך ופופולרי עם מתקני ספורט ימי (קיאקים, פאראסיילינג) וביץ' בארים.</p>
-            </div>
-
-            <div class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent">
-                <div class="text-3xl mb-2">🥐</div>
-                <h4 class="font-bold gt-text-accent mb-2">מסעדות, קפה ומאפיות</h4>
-                <p class="text-sm gt-text-accent leading-relaxed">רצועת הטברנות והברים לאורך טיילת המרינה מציעה מגוון רחב לארוחת ערב, כולל דגים טריים. לאורך הכביש הראשי בגוביה יש גם בתי קפה ומאפיות/פררי מקומיות. ⚠️ שמות ובעלות של עסקים קטנים משתנים משנה לשנה - מומלץ לבדוק ב-Google Maps עם ההגעה איזה מקום פתוח ומדורג טוב כרגע.</p>
-            </div>
-
-            <div class="gt-bg-sunken rounded-xl p-6 shadow-sm border gt-border-hair">
-                <div class="text-3xl mb-2">🛒</div>
-                <h4 class="font-bold gt-text-900 mb-2">סופרמרקטים, בתי מרקחת וכספומטים</h4>
-                <p class="text-sm gt-text-700 leading-relaxed">גוביה היא כפר נופש מבוסס עם רצועת שירותים יומיומיים לאורך הכביש הראשי (הישן): <strong>Maria's Supermarket</strong> במרכז הכפר ורשת <strong>AB (Vasilopoulos)</strong> גדולה יותר כ-1.5 ק"מ צפונה, בית מרקחת מקומי, וכספומטים (כספומט Emporiki Bank בכיכר המרכזית). ⚠️ עסקים קטנים מתחלפים משנה לשנה - מומלץ לאמת מיקום מדויק ושעות פתיחה ב-Google Maps עם ההגעה.</p>
-            </div>
-
-            <div class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent">
-                <div class="text-3xl mb-2">🏛️</div>
-                <h4 class="font-bold gt-text-accent mb-2">קונטוקאלי ושרידי הארסנל הוונציאני</h4>
-                <p class="text-sm gt-text-accent leading-relaxed"><strong>קונטוקאלי (Kontokali):</strong> כפר שכן דרומה, כ-5 דקות נסיעה, עם מרינה נוספת קטנה יותר וכמה טברנות על החוף. ליד מרינת גוביה עצמה נמצאים גם שרידי מספנת ספינות ונציאנית מהמאה ה-16 (Gouvia Arsenal) - עצירה קצרה ומעניינת בטיול ערב. ⚠️ יש לאמת שעות ביקור.</p>
-            </div>
-
-            <div class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent">
-                <div class="text-3xl mb-2">🌇</div>
-                <h4 class="font-bold gt-text-accent mb-2">שקיעה וטיול ערב</h4>
-                <p class="text-sm gt-text-accent leading-relaxed">גוביה נמצאת על החוף <strong>המזרחי</strong> של האי, מול היבשת - השקיעה כאן היא מעל הגבעות, לא מעל הים. לשקיעה הקלאסית "מעל הים" סעו למערב האי (כ-30-40 דקות; ראו נקודות שקיעה בחלק האטרקציות). בערב, טיילת המרינה עצמה - מוארת ורגועה עם נוף ליאכטות - היא האופציה הנוחה ביותר להליכה קרובה למלון.</p>
-            </div>
-
-        </div>
+        <div id="plan-accommodation-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </div>
 
     <!-- מידע שימושי: מזג אוויר -->
@@ -770,8 +731,8 @@
          <div class="flex items-center gap-4 mb-6">
             <span class="text-5xl">☀️</span>
             <div>
-                <h3 class="text-3xl font-bold gt-text-accent">מזג אוויר חודשי בקורפו</h3>
-                <p class="gt-text-500 mt-1">קורפו הוא האי הירוק ביותר ביוון, מה שאומר גשמי חורף רבים לצד קיץ חם ושמשי.</p>
+                <h3 class="text-3xl font-bold gt-text-accent"></h3>
+                <p class="gt-text-500 mt-1"></p>
             </div>
          </div>
          
@@ -803,87 +764,28 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div class="gt-bg-accent-soft rounded-xl p-5 border-2 gt-border-accent">
-                <h4 class="font-bold gt-text-accent mb-3 text-lg flex items-center gap-2">❄️ נובמבר - מרץ (סגור)</h4>
-                <ul class="text-sm gt-text-accent space-y-2 list-disc list-inside">
-                    <li>רוב המלונות והריזורטים סגורים לגמרי</li>
-                    <li>טברנות כפריות/חוף (כמו Ambelonas, Sunset Taverna) - סגורות או בשעות מצומצמות מאוד</li>
-                    <li>Aqualand וכל פארקי המים - סגורים</li>
-                    <li>ערים כמו קאבוס, בניצס - כמעט רפאים, ריקות מתיירים</li>
-                    <li>טיסות שכר בינלאומיות לא פועלות (רק דרך אתונה)</li>
-                    <li>מעבורות לפאקסוס/אנטיפאקסוס - מצומצמות מאוד</li>
-                </ul>
-            </div>
-
-            <div class="gt-bg-accent-soft rounded-xl p-5 border-2 gt-border-accent">
-                <h4 class="font-bold gt-text-accent mb-3 text-lg flex items-center gap-2">🌤️ אפריל-מאי, אוקטובר (חלקי)</h4>
-                <ul class="text-sm gt-text-accent space-y-2 list-disc list-inside">
-                    <li>רוב המלונות פותחים בהדרגה (חלקם רק מ-1 במאי)</li>
-                    <li>יקבים כמו Theotoky ו-Pontiglio - פתוחים לרוב, שווה להתקשר לוודא</li>
-                    <li>מנזרים ואתרים דתיים - פתוחים כרגיל, כולל פסחא (מרץ/אפריל - עמוס!)</li>
-                    <li>ביץ' בארים - חלקם פותחים רק אחרי חג הפסחא</li>
-                    <li>הים עדיין קריר יחסית (16-19°) - לא כולם ירצו לשחות</li>
-                </ul>
-            </div>
-
-            <div class="gt-bg-accent-soft rounded-xl p-5 border-2 gt-border-accent">
-                <h4 class="font-bold gt-text-accent mb-3 text-lg flex items-center gap-2">☀️ יוני - ספטמבר (הכל פתוח)</h4>
-                <ul class="text-sm gt-text-accent space-y-2 list-disc list-inside">
-                    <li>הכל פתוח במלואו - מלונות, טברנות, ביץ' בארים, יקבים</li>
-                    <li>Aqualand ופארקי המים פועלים במלוא הקיבולת</li>
-                    <li>מעבורות לפאקסוס פועלות בתדירות גבוהה</li>
-                    <li>יולי-אוגוסט: עומס מקסימלי, מומלץ להזמין מקום מראש בכל מסעדה</li>
-                    <li>יוני וספטמבר: "המתיקות שבאמצע" - הכל פתוח אך פחות עמוס מיולי-אוגוסט</li>
-                </ul>
-            </div>
-        </div>
+        <!-- Filled by renderPlanSeasonality() (js/trip-planning.js) from
+             window.DESTINATION.editorial.tripPlanning.seasonality -->
+        <div id="plan-seasonality-bands" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6"></div>
 
         <div class="gt-bg-accent-soft rounded-xl p-5 border-r-4 gt-border-accent">
-            <p class="text-sm gt-text-accent"><strong>💡 טיפ זהב:</strong> אם אתם מתכננים לבקר במקום ספציפי שמופיע במדריך (כמו יקב, טברנה כפרית מבודדת, או אתר עם שעות מוזרות) בתחילת/סוף העונה (אפריל-מאי או אוקטובר-נובמבר), <strong>התקשרו או בדקו אתר/פייסבוק מראש</strong>. שעות הפתיחה משתנות משנה לשנה ולעיתים תלויות במזג האוויר או בהחלטת הבעלים.</p>
+            <p id="plan-seasonality-tip" class="text-sm gt-text-accent"></p>
         </div>
     </div>
 
-    <!-- תקציב יומי משוער -->
+    <!-- תקציב יומי משוער: filled by renderPlanBudget() (js/trip-planning.js)
+         from window.DESTINATION.editorial.tripPlanning.budget. Two shapes:
+         days[] (a real per-item price breakdown, like Corfu's) or
+         generalNote (honest general wording when no verified price
+         research exists for a destination, like Paxos's) — never both. -->
     <div id="plan-budget" class="bg-white rounded-2xl shadow-xl p-8 border gt-border-hair scroll-mt-24">
-        <h3 class="text-3xl font-bold gt-text-accent mb-3 flex items-center gap-3"><span class="text-4xl" style="display:flex;"><svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 6.8a6.3 6.3 0 1 0 0 10.4"/><path d="M5.5 10.2h8M5.5 13.4h7"/></svg></span> כמה עולה יום בקורפו? תקציב יומי לזוג</h3>
-        <p class="gt-text-500 mb-6">הערכה גסה המבוססת על המחירים שמופיעים במדריך זה (מסעדות, ביץ' בארים, פעילויות). מיועדת לזוג; להוסיף כ-30-40% לכל ילד.</p>
+        <h3 class="text-3xl font-bold gt-text-accent mb-3 flex items-center gap-3"><span class="text-4xl" style="display:flex;"><svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 6.8a6.3 6.3 0 1 0 0 10.4"/><path d="M5.5 10.2h8M5.5 13.4h7"/></svg></span><span id="plan-budget-title"></span></h3>
+        <p id="plan-budget-intro" class="gt-text-500 mb-6"></p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="gt-bg-accent-soft rounded-xl p-6 border-2 gt-border-accent">
-                <h4 class="font-bold gt-text-accent mb-4 text-xl flex items-center gap-2">🎒 יום תקציבי</h4>
-                <ul class="text-sm gt-text-accent space-y-2.5">
-                    <li class="flex justify-between"><span>ארוחת בוקר (בית קפה מקומי)</span><strong>€10-14</strong></li>
-                    <li class="flex justify-between"><span>חוף ציבורי (ללא מיטות שיזוף)</span><strong>€0</strong></li>
-                    <li class="flex justify-between"><span>ארוחת צהריים (טברנה עממית)</span><strong>€25-35</strong></li>
-                    <li class="flex justify-between"><span>קפה/גלידה אחה"צ</span><strong>€8-10</strong></li>
-                    <li class="flex justify-between"><span>ארוחת ערב (טברנה מקומית)</span><strong>€35-45</strong></li>
-                    <li class="flex justify-between"><span>דלק/חניה</span><strong>€10-15</strong></li>
-                </ul>
-                <div class="mt-4 pt-3 border-t-2 gt-border-accent flex justify-between items-center">
-                    <span class="font-bold gt-text-accent text-lg">סה"כ ליום לזוג:</span>
-                    <span class="font-extrabold gt-text-accent text-2xl">€90-120</span>
-                </div>
-            </div>
+        <div id="plan-budget-days" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+        <p id="plan-budget-general-note" class="gt-text-500 leading-relaxed gt-bg-sunken rounded-lg p-4"></p>
 
-            <div class="gt-bg-accent-soft rounded-xl p-6 border-2 gt-border-accent">
-                <h4 class="font-bold gt-text-accent mb-4 text-xl flex items-center gap-2">✨ יום מפנק</h4>
-                <ul class="text-sm gt-text-accent space-y-2.5">
-                    <li class="flex justify-between"><span>ארוחת בוקר (בבית מלון/קפה יוקרתי)</span><strong>€25-35</strong></li>
-                    <li class="flex justify-between"><span>מיטות שיזוף בביץ' בר יוקרתי</span><strong>€30-50</strong></li>
-                    <li class="flex justify-between"><span>ארוחת צהריים + קוקטיילים בים</span><strong>€60-80</strong></li>
-                    <li class="flex justify-between"><span>פעילות (סירה/צלילה/יין)</span><strong>€80-150</strong></li>
-                    <li class="flex justify-between"><span>ארוחת ערב במסעדת שף / Fine Dining</span><strong>€90-140</strong></li>
-                    <li class="flex justify-between"><span>דלק/חניה/טיפים</span><strong>€20-25</strong></li>
-                </ul>
-                <div class="mt-4 pt-3 border-t-2 gt-border-accent flex justify-between items-center">
-                    <span class="font-bold gt-text-accent text-lg">סה"כ ליום לזוג:</span>
-                    <span class="font-extrabold gt-text-accent text-2xl">€305-480</span>
-                </div>
-            </div>
-        </div>
-
-        <p class="text-xs gt-text-500 mt-5 gt-bg-sunken rounded-lg p-3">💡 <strong>טיפ:</strong> רוב המטיילים נופלים באמצע - יום "בינוני" סביר עם ארוחה טובה אחת ושאר הזמן חסכוני נע סביב <strong>€150-220</strong> לזוג ליום, לא כולל לינה. המחירים לא כוללים עלות שכירת רכב (~€25-45/יום) והלינה עצמה, ומשתנים לפי עונה.</p>
+        <p id="plan-budget-footer-tip" class="text-xs gt-text-500 mt-5 gt-bg-sunken rounded-lg p-3"></p>
     </div>
 
     <!-- טיפים ומחשבון מטבע -->
@@ -946,13 +848,12 @@
         <h3 class="text-3xl font-bold gt-text-accent mb-6 flex items-center gap-3"><span class="text-4xl">🚗</span> תחבורה, נהיגה והתניידות באי</h3>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent hover:-translate-y-1 transition-transform">
+            <!-- Filled by renderPlanTransportStatic() (js/trip-planning.js)
+                 from window.DESTINATION.editorial.tripPlanning.transport -->
+            <div id="plan-transport-public" class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent hover:-translate-y-1 transition-transform">
                 <div class="text-4xl mb-3 drop-shadow">🚌</div>
-                <h4 class="font-bold gt-text-accent mb-2 text-lg">תחבורה ציבורית</h4>
-                <ul class="text-sm gt-text-accent space-y-2 list-disc list-inside">
-                    <li><strong class="gt-text-accent">אוטובוסים כחולים:</strong> משרתים את העיר קורפו והפרברים הקרובים.</li>
-                    <li><strong class="gt-text-accent">אוטובוסים ירוקים (KTEL):</strong> לתחנות בין-עירוניות, כפרים, וחופים רחוקים.</li>
-                </ul>
+                <h4 class="font-bold gt-text-accent mb-2 text-lg"></h4>
+                <ul class="text-sm gt-text-accent space-y-2 list-disc list-inside"></ul>
             </div>
             
             <div class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent hover:-translate-y-1 transition-transform">
@@ -963,52 +864,39 @@
                 </p>
             </div>
             
-            <div class="gt-bg-sunken rounded-xl p-6 shadow-sm border gt-border-hair hover:-translate-y-1 transition-transform">
+            <div id="plan-transport-fuel-parking" class="gt-bg-sunken rounded-xl p-6 shadow-sm border gt-border-hair hover:-translate-y-1 transition-transform">
                 <div class="text-4xl mb-3 drop-shadow">⛽</div>
-                <h4 class="font-bold gt-text-900 mb-2 text-lg">דלק וחניה</h4>
-                <p class="text-sm gt-text-700 leading-relaxed">
-                    <strong>תחנות דלק:</strong> מתדלק יעשה הכל עבורכם, אין שירות עצמי. רובן נסגרות ב-21:00. <br>
-                    <strong>חניה בעיר:</strong> מומלץ לחנות בחניון הענק של רחבת ה-Spianada בתשלום יומי נמוך. <br>
-                    <strong>טעינת רכב חשמלי (EV):</strong> תשתית מצומצמת מאוד באי - מעט עמדות טעינה, בעיקר ליד סופרמרקטים ובחלק מבתי המלון. אם שכרתם רכב חשמלי, בדקו זמינות מראש באפליקציות כמו PlugShare/Chargemap. ⚠️ המצב משתנה - יש לאמת לפני הנסיעה.
-                </p>
+                <h4 class="font-bold gt-text-900 mb-2 text-lg"></h4>
+                <p class="text-sm gt-text-700 leading-relaxed"></p>
             </div>
             
-             <div class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent hover:-translate-y-1 transition-transform">
+             <div id="plan-transport-tolls" class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent hover:-translate-y-1 transition-transform">
                 <div class="text-4xl mb-3 drop-shadow">🛣️</div>
-                <h4 class="font-bold gt-text-accent mb-2 text-lg">כבישי אגרה (Tolls)</h4>
-                <p class="text-sm gt-text-accent leading-relaxed font-medium mt-2">
-                    ברחבי האי קורפו <strong class="gt-text-accent underline">אין כלל</strong> כבישי אגרה! 
-                </p>
+                <h4 class="font-bold gt-text-accent mb-2 text-lg"></h4>
+                <p class="text-sm gt-text-accent leading-relaxed font-medium mt-2"></p>
+                <!-- Generic fact, applies regardless of which Greek island is
+                     active: stays static. -->
                 <p class="text-xs gt-text-accent mt-2">
                     (תתקלו באגרות רק אם תקחו מעבורת ליבשת יוון ותנהגו לכיוון אתונה או סלוניקי).
                 </p>
             </div>
 
-            <div class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent hover:-translate-y-1 transition-transform">
+            <div id="plan-transport-driving-from-base" class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent hover:-translate-y-1 transition-transform">
                 <div class="text-4xl mb-3 drop-shadow">📍</div>
-                <h4 class="font-bold gt-text-accent mb-2 text-lg">נהיגה מגוביה - הבסיס שלכם</h4>
-                <ul class="text-sm gt-text-accent space-y-2 list-disc list-inside">
-                    <li><strong>לעיר קורפו העתיקה:</strong> כ-15 דקות (כ-9 ק"מ), ישר על כביש החוף.</li>
-                    <li><strong>לשדה התעופה:</strong> כ-15-20 דקות (כ-8 ק"מ).</li>
-                    <li><strong>לחופי הצפון</strong> (ברבטי, ניסאקי, קאסיופי): גוביה כבר באמצע הדרך צפונה, כך שהנסיעה קצרה משמעותית מאשר מהעיר עצמה.</li>
-                    <li><strong>לחופי המערב</strong> (פלאוקסטריצה, גליפאדה, ארמונס): יש לעבור דרך/סביב העיר קודם - הוסיפו כ-10-15 דקות לזמנים בטבלת זמני הנסיעה למטה.</li>
-                    <li><strong>חניה:</strong> ⚠️ בדקו מול המלון מראש את אפשרויות החניה הפרטית; לאורך טיילת מרינת גוביה יש גם שטחי חניה ציבוריים.</li>
-                </ul>
+                <h4 class="font-bold gt-text-accent mb-2 text-lg"></h4>
+                <ul class="text-sm gt-text-accent space-y-2 list-disc list-inside"></ul>
             </div>
 
-            <div class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent hover:-translate-y-1 transition-transform">
+            <div id="plan-transport-ferries-summary" class="gt-bg-accent-soft rounded-xl p-6 shadow-sm border gt-border-accent hover:-translate-y-1 transition-transform">
                 <div class="text-4xl mb-3 drop-shadow">⛴️</div>
-                <h4 class="font-bold gt-text-accent mb-2 text-lg">מעבורות (פרומים)</h4>
-                <p class="text-sm gt-text-accent leading-relaxed">
-                    <strong>ליבשת יוון:</strong> מהנמל החדש בעיר קורפו לאיגומניצה, תדירות גבוהה במיוחד בקיץ. <br>
-                    <strong>לאיטליה:</strong> קווים עונתיים לברינדיזי, בארי ואנקונה - פרטים מלאים בהמשך.
-                </p>
+                <h4 class="font-bold gt-text-accent mb-2 text-lg"></h4>
+                <p class="text-sm gt-text-accent leading-relaxed"></p>
             </div>
         </div>
 
         <div class="gt-bg-accent-soft rounded-xl p-6 border-r-4 gt-border-accent shadow-sm mb-8">
             <h4 class="font-bold gt-text-accent text-xl mb-2 flex items-center gap-2"><span class="text-2xl" style="display:flex;"><svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3Z"/><path d="M9 3v15M15 6v15"/></svg></span> טבלת זמני נסיעה: כמה זמן לנהוג בין האזורים?</h4>
-            <p class="text-sm gt-text-accent mb-4">שכרתם רכב? הנה זמני הנהיגה המשוערים <strong>מהעיר קורפו (Corfu Town)</strong> לאזורי הנופש המרכזיים, כדי לתכנן את הימים שלכם נכון. הזמנים כוללים כבישי הרים מפותלים - אל תמהרו.</p>
+            <p id="plan-drivetimes-tip" class="text-sm gt-text-accent mb-4"></p>
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-right border-collapse">
                     <thead>
@@ -1026,14 +914,14 @@
                     <tbody id="plan-driving-times-tbody" class="gt-text-accent"></tbody>
                 </table>
             </div>
-            <p class="text-xs gt-text-accent mt-3">💡 <strong>טיפ תכנון:</strong> קורפו הוא אי מוארך, לא עגול - נסיעה בין שתי נקודות "קיצוניות" (למשל קאבוס בדרום לקאסיופי בצפון) עלולה לקחת כ-2 שעות ברציפות. עדיף לתכנן ימי טיול לפי אזור אחד (צפון, מרכז/מערב, או דרום) ולא לקפוץ בין קצוות האי באותו יום.</p>
-            <p class="text-xs gt-text-accent mt-2 bg-white/60 rounded-lg p-3">🏨 <strong>הטבלה הזו מחושבת מהעיר קורפו.</strong> אתם ישנים בגוביה, כ-10 דקות צפונית לעיר - כך שמתאימים את הזמנים: ליעדי <strong>צפון</strong> (ברבטי, ניסאקי, קאסיופי, רודה, אכרווי, סידארי) <strong>הורידו כ-10-15 דקות</strong> מהטבלה, כי אתם כבר באמצע הדרך. ליעדי <strong>מערב ודרום</strong> (פלקאס, אגיוס גורדיוס, פלאוקסטריצה, קאבוס) <strong>הוסיפו כ-10-15 דקות</strong>, כי צריך לעבור דרך/סביב העיר קודם.</p>
+            <p id="plan-drivetimes-shape-tip" class="text-xs gt-text-accent mt-3"></p>
+            <p id="plan-drivetimes-base-note" class="text-xs gt-text-accent mt-2 bg-white/60 rounded-lg p-3"></p>
         </div>
 
         <!-- מחשבון מרחקים -->
         <div id="plan-transport-distance-block" class="gt-bg-accent-soft rounded-xl p-6 border-r-4 gt-border-accent shadow-sm mb-8">
             <h4 class="font-bold gt-text-accent text-xl mb-2 flex items-center gap-2"><span class="text-2xl">📐</span> מחשבון מרחקים: כמה רחוק החוף מהמלון?</h4>
-            <p class="text-sm gt-text-accent mb-4">המחשבון מוגדר כברירת מחדל מגוביה (Gouvia) - מקום הלינה שלכם. בחרו יעד, או שנו את נקודת המוצא לכל מקום אחר באי.</p>
+            <p class="text-sm gt-text-accent mb-4">המחשבון מוגדר כברירת מחדל ממקום הלינה שלכם. בחרו יעד, או שנו את נקודת המוצא לכל מקום אחר באי.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
@@ -1056,13 +944,17 @@
                 <p class="text-xs gt-text-300 mt-2">* מרחק ישיר משוער × מקדם כפיפות כבישים. לניווט מדויק השתמשו בקישור למפות גוגל.</p>
             </div>
 
-            <p class="text-xs gt-text-accent mt-3">💡 ההערכה מבוססת על מרחק אווירי + מקדם תיקון לכבישי הרים מפותלים (טיפוסי לקורפו). המספרים בפועל עשויים להשתנות לפי מסלול, תנועה ומזג אוויר.</p>
+            <p class="text-xs gt-text-accent mt-3">💡 ההערכה מבוססת על מרחק אווירי + מקדם תיקון לכבישים מפותלים. המספרים בפועל עשויים להשתנות לפי מסלול, תנועה ומזג אוויר.</p>
         </div>
 
         <div class="gt-bg-accent-soft rounded-xl p-6 border-r-4 gt-border-accent shadow-sm flex flex-col md:flex-row gap-6 items-start">
             <div class="text-5xl shrink-0 drop-shadow-md" style="display:flex;"><svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 3 19h18Z"/><path d="M12 10v4"/><circle cx="12" cy="16.7" r="0.15" fill="currentColor" stroke-width="1.4"/></svg></div>
             <div>
-                <h4 class="font-bold gt-text-accent text-xl mb-3">טיפי נהיגה ובטיחות בכבישי קורפו (חשוב לקרוא!)</h4>
+                <!-- Filled by renderPlanTransportStatic() (js/trip-planning.js)
+                     from window.DESTINATION.editorial.tripPlanning.transport.roadSafetyHeadingTitle.
+                     The bullet list below is confirmed genuinely generic
+                     Greek-island driving-safety advice and stays static. -->
+                <h4 id="plan-road-safety-title" class="font-bold gt-text-accent text-xl mb-3"></h4>
                 <ul class="text-sm list-disc list-inside gt-text-accent space-y-2 font-medium">
                     <li>הכבישים מחוץ לערים המרכזיות צרים מאוד, מפותלים על צלע ההר ולעתים חסרי שוליים ומעקות בטיחות. סעו לאט ובזהירות.</li>
                     <li>נהגים מקומיים רגילים לכביש, נוטים לנסוע מהר, לעקוף על קו הפרדה רצוף ולחתוך סיבובים. שמרו על ערנות שיא.</li>
@@ -1082,41 +974,26 @@
                 </div>
                 <div class="gt-bg-accent-soft rounded-lg p-4 border gt-border-accent">
                     <p class="font-bold gt-text-accent mb-1">🟡 כביש הררי מפותל</p>
-                    <p class="gt-text-accent">אספלט אך צר עם סיבובי מחסה חדים (כמו לפנטוקרטור, פלקאס, לאקונס). נהגו בהילוך נמוך בירידה, צפרו לפני עיקולים עיוורים. אין תחנות דלק בדרך - תדלקו מראש.</p>
+                    <p class="gt-text-accent">אספלט אך צר עם סיבובי מחסה חדים, בדרך כלל בדרכי הרים. נהגו בהילוך נמוך בירידה, צפרו לפני עיקולים עיוורים. אין תחנות דלק בדרך - תדלקו מראש.</p>
                 </div>
                 <div class="gt-bg-accent-soft rounded-lg p-4 border gt-border-accent">
                     <p class="font-bold gt-text-accent mb-1">🟠 כביש כפרי צר ("הסחיטה")</p>
-                    <p class="gt-text-accent">ברוב הכפרים (פלאוקסטריצה, פלקאס, כפרי ההרים) הכביש מצטמצם לרוחב מכונית אחת עם קירות אבן משני הצדדים. קפלו מראות במידת הצורך. הרכב שנוסע במעלה - זכות קדימה (לא חוק, אלא נוהג).</p>
+                    <p class="gt-text-accent">ברוב הכפרים הקטנים הכביש מצטמצם לרוחב מכונית אחת עם קירות אבן משני הצדדים. קפלו מראות במידת הצורך. הרכב שנוסע במעלה - זכות קדימה (לא חוק, אלא נוהג).</p>
                 </div>
                 <div class="gt-bg-accent-soft rounded-lg p-4 border gt-border-accent">
                     <p class="font-bold gt-text-accent mb-1">🔴 כביש עפר / נדרשת הליכה</p>
-                    <p class="gt-text-accent">חלק מהחופים הכי יפים (מירטיוטיסה, פורטו טימוני) לא נגישים ברכב עד הסוף - חובה לחנות למעלה ולרדת ברגל (לעיתים 20-40 דקות הליכה תלולה). נעליים סגורות מומלצות.</p>
+                    <p class="gt-text-accent">חלק מהחופים הכי יפים לא נגישים ברכב עד הסוף - חובה לחנות למעלה ולרדת ברגל (לעיתים 20-40 דקות הליכה תלולה). נעליים סגורות מומלצות.</p>
                 </div>
             </div>
         </div>
 
         <!-- מעבורות מפורט -->
+        <!-- Filled by renderPlanFerriesDetailed() (js/trip-planning.js) from
+             window.DESTINATION.editorial.tripPlanning.ferriesDetailed -->
         <div id="plan-ferries" class="gt-bg-accent-soft rounded-xl p-6 border-r-4 gt-border-accent shadow-sm mt-6 scroll-mt-24">
-            <h4 class="font-bold gt-text-accent text-xl mb-3 flex items-center gap-2"><span class="text-2xl">⛴️</span> מעבורות מקורפו: ליבשת, לאיים ולאיטליה</h4>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-sm">
-                <div class="bg-white rounded-lg p-4 border gt-border-accent">
-                    <p class="font-bold gt-text-accent mb-1">🇬🇷 לאיגומניצה (יבשת יוון)</p>
-                    <p class="gt-text-accent">כמה חברות (בהן Kerkyra Lines ו-Kerkyra Seaways) מפליגות מהנמל החדש בעיר קורפו, בתדירות גבוהה במיוחד בקיץ. משך ההפלגה כ-70-90 דקות. מנמל לפקימי שבדרום האי יש גם קו מהיר יותר (כ-50 דקות), נוח יותר למי שישן באזור הדרומי.</p>
-                </div>
-                <div class="bg-white rounded-lg p-4 border gt-border-accent">
-                    <p class="font-bold gt-text-accent mb-1">🇮🇹 לאיטליה (ברינדיזי, בארי, אנקונה)</p>
-                    <p class="gt-text-accent">קווים עונתיים (בעיקר קיץ) מחברים את קורפו לנמלי איטליה: ברינדיזי (כ-7 שעות שייט), בארי (כ-9-11 שעות) ואנקונה (כ-20 שעות). פופולרי בקרב מטיילי אינטרייל וגיבוב איים.</p>
-                </div>
-                <div class="bg-white rounded-lg p-4 border gt-border-accent">
-                    <p class="font-bold gt-text-accent mb-1">🇦🇱 לאלבניה (סרנדה)</p>
-                    <p class="gt-text-accent">מעבורת מהירה לעיר סרנדה, כ-30 דקות שייט - פופולרי לביקור יום בפארק הלאומי בוטרינט. אל תשכחו דרכון בתוקף.</p>
-                </div>
-                <div class="bg-white rounded-lg p-4 border gt-border-accent">
-                    <p class="font-bold gt-text-accent mb-1">🏝️ לפאקסי ולאיים נוספים</p>
-                    <p class="gt-text-accent">הפלגות יומיות (בעיקר עונתיות) לאי פאקסי הציורי, לרוב כשעה-שעה וחצי שייט.</p>
-                </div>
-            </div>
-            <p class="text-xs gt-text-accent mt-4 bg-white p-3 rounded-lg border gt-border-accent">⚠️ <strong>חשוב:</strong> לוחות זמנים, מחירים ואפילו החברות המפעילות משתנים לפי עונה ומתעדכנים בתדירות. המידע כאן הוא בסיס לתכנון בלבד - יש לאמת ולהזמין מראש דרך אתרים כמו Ferryhopper או ישירות מול החברות, במיוחד בעונת השיא.</p>
+            <h4 id="plan-ferries-title" class="font-bold gt-text-accent text-xl mb-3 flex items-center gap-2"></h4>
+            <div id="plan-ferries-routes" class="grid grid-cols-1 md:grid-cols-2 gap-5 text-sm"></div>
+            <p id="plan-ferries-disclaimer" class="text-xs gt-text-accent mt-4 bg-white p-3 rounded-lg border gt-border-accent"></p>
         </div>
     </div>
 
@@ -1211,11 +1088,10 @@
             <!-- רחובות וקניונים -->
             <div class="space-y-6">
                 <h4 class="text-2xl font-semibold gt-text-900 border-b pb-2">קניונים, אאוטלטים ורחובות קניות</h4>
+                <!-- Filled by renderLanguageStaticText() (js/language.js) from
+                     window.DESTINATION.editorial.language.noMallsIntro -->
                 <div class="gt-bg-accent-soft p-5 rounded-xl border gt-border-accent">
-                    <p class="gt-text-700 leading-relaxed">
-                        בניגוד לערים אירופאיות גדולות, <strong>בקורפו אין קניוני ענק או מתחמי אאוטלט</strong> מובהקים. חוויית השופינג מתרכזת באווירה האותנטית של רחובות העיר העתיקה והחדשה. 
-                        רשת <strong>Hondos Center</strong> בעיר החדשה היא המקבילה הקרובה ביותר למונח "כלבו", ומציעה קוסמטיקה, בישום ואופנה בינלאומית.
-                    </p>
+                    <p id="lang-no-malls-intro" class="gt-text-700 leading-relaxed"></p>
                 </div>
                 <!-- Filled by renderShoppingStreets() (js/language.js) from
                      window.DESTINATION.editorial.language.shoppingStreets -->
@@ -1256,16 +1132,18 @@
         <!-- שירותים ציבוריים -->
         <div class="bg-white rounded-xl p-6 border gt-border-hair shadow-sm mt-6">
             <h4 class="font-bold text-xl mb-2 flex items-center gap-2 gt-text-900">🚻 שירותים ציבוריים</h4>
-            <p class="text-sm gt-text-700 leading-relaxed">
-                בניגוד לישראל, שירותים ציבוריים חינמיים נדירים יחסית בקורפו מחוץ לאתרים תיירותיים מרכזיים (כמו כיכר ספיאנאדה, נמל קורפו החדש ותחנות אוטובוס מרכזיות). הנוהג המקובל הוא להשתמש בשירותים של בית קפה, מסעדה או ביץ' בר - בדרך כלל בתמורה להזמנת משקה קטן. חוף מאורגן עם ביץ' בר כמעט תמיד כולל שירותים לציבור. שימו לב לכך במיוחד בימי טיול ארוכים בכפרים או באתרי טבע מרוחקים (כמו קייפ דראסטיס או שבילי הליכה), שם לרוב אין שירותים כלל.
-            </p>
+            <!-- Filled by renderLanguageStaticText() (js/language.js) from
+                 window.DESTINATION.editorial.language.restroomsHtml -->
+            <p id="lang-restrooms-text" class="text-sm gt-text-700 leading-relaxed"></p>
         </div>
     </div>
 
     <!-- מדריך ניבים ביוונית -->
     <div id="lang-phrasebook" class="bg-white rounded-2xl shadow-xl p-8 border gt-border-hair mt-8 scroll-mt-24">
         <h3 class="text-3xl font-bold gt-text-accent mb-3 flex items-center gap-3"><span class="text-4xl">🇬🇷</span> מילון שרידות: משפטים בסיסיים ביוונית</h3>
-        <p class="gt-text-500 mb-6">רוב היוונים בקורפו דוברים אנגלית טובה, אך כמה מילים ביוונית תמיד מתקבלות בחיוך גדול ושירות חם יותר. הנה המשפטים הכי שימושיים, עם תעתיק עברי קריא.</p>
+        <!-- Filled by renderLanguageStaticText() (js/language.js) from
+             window.DESTINATION.editorial.language.phrasebookIntro -->
+        <p id="lang-phrasebook-intro" class="gt-text-500 mb-6"></p>
 
         <!-- Filled by renderPhrasebook() (js/language.js) from
              window.DESTINATION.editorial.language.phrasebook + .pronunciationTip -->
@@ -1503,6 +1381,7 @@
     <script src="js/corfu-weather.js" defer></script>
     <script src="js/corfu-about.js" defer></script>
     <script src="js/corfu-language.js" defer></script>
+    <script src="js/corfu-tripplanning-static.js" defer></script>
     <!-- Destination data layer. corfu.js/testdest.js/empty.js wrap the
          location + itinerary data above (and testdest's own small data
          files) into window.DESTINATIONS.<id>; destination-registry.js then
@@ -1526,6 +1405,7 @@
     <script src="js/testdest-weather.js" defer></script>
     <script src="js/testdest-about.js" defer></script>
     <script src="js/testdest-language.js" defer></script>
+    <script src="js/testdest-tripplanning-static.js" defer></script>
     <script src="data/destinations/testdest.js" defer></script>
     <!-- Paxos: the third, real destination — proves the template
          architecture beyond "Corfu (real) + Test Destination (fictional
@@ -1537,6 +1417,7 @@
     <script src="js/paxos-weather.js" defer></script>
     <script src="js/paxos-about.js" defer></script>
     <script src="js/paxos-language.js" defer></script>
+    <script src="js/paxos-tripplanning-static.js" defer></script>
     <script src="data/destinations/paxos.js" defer></script>
     <script src="data/destinations/empty.js" defer></script>
     <script src="js/destination-registry.js" defer></script>

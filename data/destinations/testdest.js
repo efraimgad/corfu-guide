@@ -97,7 +97,7 @@ window.DESTINATIONS.testdest = {
 
     editorial: {
         about: window.TESTDEST_ABOUT,
-        tripPlanning: { weather: window.TESTDEST_WEATHER },
+        tripPlanning: { weather: window.TESTDEST_WEATHER, ...window.TESTDEST_TRIPPLANNING_STATIC },
         language: window.TESTDEST_LANGUAGE,
         activities: window.TESTDEST_ACTIVITIES,
         faq: window.TESTDEST_FAQ,

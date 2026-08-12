@@ -167,7 +167,7 @@ window.DESTINATIONS.paxos = {
 
     editorial: {
         about: window.PAXOS_ABOUT,
-        tripPlanning: { weather: window.PAXOS_WEATHER },
+        tripPlanning: { weather: window.PAXOS_WEATHER, ...window.PAXOS_TRIPPLANNING_STATIC },
         language: window.PAXOS_LANGUAGE,
         activities: window.PAXOS_ACTIVITIES,
         faq: window.PAXOS_FAQ,

@@ -142,3 +142,22 @@ window.renderShoppingStreets = renderShoppingStreets;
 window.renderSouvenirs = renderSouvenirs;
 window.renderSupermarkets = renderSupermarkets;
 window.renderPhrasebook = renderPhrasebook;
+
+// Renders the 3 remaining static-Corfu Language text blocks found in a
+// follow-up leakage-fix pass (no-malls intro, restrooms, phrasebook
+// intro) — see js/corfu-tripplanning-static.js's header for the full
+// context. The pharmacies block was confirmed genuinely generic-to-Greece
+// and stays static HTML, untouched — no renderer needed for it.
+function renderLanguageStaticText() {
+    const lang = getLanguageData();
+
+    const noMallsEl = document.getElementById('lang-no-malls-intro');
+    if (noMallsEl) noMallsEl.innerHTML = (lang && lang.noMallsIntro) || '';
+
+    const restroomsEl = document.getElementById('lang-restrooms-text');
+    if (restroomsEl) restroomsEl.innerHTML = (lang && lang.restroomsHtml) || '';
+
+    const phrasebookIntroEl = document.getElementById('lang-phrasebook-intro');
+    if (phrasebookIntroEl) phrasebookIntroEl.textContent = (lang && lang.phrasebookIntro) || '';
+}
+window.renderLanguageStaticText = renderLanguageStaticText;

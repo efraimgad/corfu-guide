@@ -148,27 +148,23 @@ async function main() {
     // can switch to it). Only genuinely rendered markup counts here.
     const bodyClone = document.body.cloneNode(true);
     bodyClone.querySelectorAll('script').forEach(s => s.remove());
-    // Also exclude the About/Health/Language/FAQ/Activities/Trip-Planning-
-    // weather-and-driving-times containers this task's own renderers fill —
-    // isolates the check to whatever ELSE is in the DOM (i.e. the static
-    // editorial blocks Phase 2 deliberately left unmigrated).
+    // Also exclude containers Paxos's OWN generic renderers fill (About/
+    // Health/Language/FAQ/Activities/weather/driving-times) — narrows the
+    // check to whatever else is in the DOM; harmless either way since
+    // those containers only ever hold Paxos's own correctly-labeled data.
     ['about-regions-grid', 'about-quick-facts-pills', 'about-hero-banner', 'plan-weather', 'plan-driving-times-tbody',
      'health-emergency', 'health-mistakes', 'lang-shopping', 'lang-phrasebook', 'faq-list', 'activities-grid']
         .forEach(id => { const el = bodyClone.querySelector('#' + id); if (el) el.remove(); });
     const renderedHtml = bodyClone.innerHTML;
     const CORFU_EXCLUSIVE_TERMS = ['פלאוקסטריצה', 'Paleokastritsa', 'Pantokrator', 'פלקאס', 'Pelekas', 'קאבוס', 'Kavos', 'גוביה', 'Gouvia', 'סידארי', 'Sidari'];
     const exclusiveHit = CORFU_EXCLUSIVE_TERMS.find(t => renderedHtml.includes(t));
-    if (!exclusiveHit) {
-        ok('No Corfu-EXCLUSIVE place names/content in the Paxos-loaded rendered DOM, outside this task\'s own migrated sections');
-    } else {
-        // NOT asserted as a failure: this is a genuine, pre-existing, KNOWN
-        // limitation (Trip Planning's accommodation/transport/seasonality
-        // blocks are static editorial HTML Phase 2 deliberately left
-        // unmigrated — a scoping decision this task is not authorized to
-        // change), not something the Paxos addition introduced or could fix
-        // without expanding Phase 2's architecture. See final report.
-        console.log('NOTE:  known pre-existing limitation confirmed — static Trip Planning editorial prose (accommodation/transport/seasonality, outside this task\'s migrated sections) still shows Corfu-specific content ("' + exclusiveHit + '") regardless of active destination. Not a regression from adding Paxos; not fixed here (would require expanding Phase 2 scope). See final report.');
-    }
+    // A hard assertion, not a soft note: a follow-up pass migrated Trip
+    // Planning's accommodation/seasonality/budget/transport/ferries blocks
+    // and Language's no-malls/restrooms/phrasebook-intro text (previously
+    // static Corfu prose shown regardless of active destination), so this
+    // must now be genuinely clean.
+    if (!exclusiveHit) ok('No Corfu-EXCLUSIVE place names/content anywhere in the Paxos-loaded rendered DOM');
+    else fail('Corfu-exclusive content found in the Paxos-loaded rendered DOM (real leakage)', 'matched: ' + exclusiveHit);
 
     // Duplicate ids
     const idCounts = {};
@@ -207,15 +203,13 @@ async function main() {
         if (!leakedExploreOrItinerary) ok('No Corfu-only beaches/attractions/itinerary entries in the Paxos search index (the fixed bug)');
         else fail('Corfu-only explore/itinerary content still in the Paxos search index', JSON.stringify(leakedExploreOrItinerary).slice(0, 200));
 
-        // A SEPARATE, pre-existing, KNOWN limitation: trip-planning/health-
-        // safety/language-daily search entries are built from the live DOM's
-        // static editorial HTML (buildContentBlockIndexEntries()), which
-        // still includes Corfu-specific prose Phase 2 deliberately left
-        // static (accommodation/transport/seasonality blocks — a scoping
-        // decision, not a bug this task is authorized to change). Reported,
-        // not asserted as a failure.
+        // trip-planning/health-safety/language-daily search entries are
+        // built from the live DOM's content blocks
+        // (buildContentBlockIndexEntries()) — now that those blocks are
+        // migrated to destination data (this task), this must be clean too.
         const leakedContentBlock = idx.find(m => m.tab === 'trip-planning' && m.haystack && m.haystack.includes('פלאוקסטריצה'));
-        if (leakedContentBlock) console.log('NOTE:  known pre-existing limitation confirmed — static Trip Planning editorial content (tab="trip-planning") still indexes Corfu-specific prose regardless of active destination; see final report, not treated as a failure here.');
+        if (!leakedContentBlock) ok('No Corfu-specific content in Paxos\'s trip-planning search entries');
+        else fail('Corfu-specific content still indexed under tab="trip-planning" for Paxos', JSON.stringify(leakedContentBlock).slice(0, 200));
     } else {
         fail('window.searchIndex not accessible for isolation check');
     }

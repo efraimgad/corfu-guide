@@ -64,5 +64,8 @@ window.TESTDEST_LANGUAGE = {
         icon: '💡',
         title: 'טיפ הגייה לדוגמה',
         html: 'טקסט placeholder על הגייה — נתוני בדיקה בלבד, אין כאן מידע אמיתי על שום שפה.'
-    }
+    },
+    noMallsIntro: 'טקסט placeholder על קניות ביעד הבדיקה — נתוני בדיקה בלבד.',
+    restroomsHtml: 'טקסט placeholder על שירותים ציבוריים ביעד הבדיקה — נתוני בדיקה בלבד.',
+    phrasebookIntro: 'טקסט placeholder פתיחה למילון הניבים — נתוני בדיקה בלבד.'
 };

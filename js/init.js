@@ -165,6 +165,13 @@ document.addEventListener("DOMContentLoaded", function() {
     // load-bearing beyond running after window.DESTINATION exists.
     if (typeof renderWeatherTable === 'function') renderWeatherTable();
 
+    // Follow-up leakage-fix pass: the rest of Trip Planning's static blocks
+    // (weather heading, accommodation, seasonality, budget, several
+    // #plan-transport cards, driving-times footnotes, detailed ferries)
+    // that stayed static Corfu prose after the Phase 2 migration above —
+    // see js/corfu-tripplanning-static.js's header for the full context.
+    if (typeof renderTripPlanningStatic === 'function') renderTripPlanningStatic();
+
     // Phase 2 (hybrid): the About tab's 4 region cards, from
     // window.DESTINATION.editorial.about (js/about.js).
     if (typeof renderAboutRegions === 'function') renderAboutRegions();
@@ -205,6 +212,13 @@ document.addEventListener("DOMContentLoaded", function() {
     if (typeof renderSouvenirs === 'function') renderSouvenirs();
     if (typeof renderSupermarkets === 'function') renderSupermarkets();
     if (typeof renderPhrasebook === 'function') renderPhrasebook();
+
+    // Follow-up leakage-fix pass: Language's remaining static-Corfu text
+    // blocks (no-malls intro, restrooms, phrasebook intro) — see
+    // js/corfu-tripplanning-static.js's header for the full context. The
+    // pharmacies block was confirmed genuinely generic-to-Greece and stays
+    // static, untouched.
+    if (typeof renderLanguageStaticText === 'function') renderLanguageStaticText();
 
     // Quality-gate finding (FAQ/Activities migration): js/search.js builds
     // its search index on its OWN DOMContentLoaded listener, registered

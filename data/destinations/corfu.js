@@ -254,7 +254,7 @@ window.DESTINATIONS.corfu = {
         // can add sibling fields here without another restructure. Only
         // the monthly weather table is migrated so far — see
         // js/corfu-weather.js / js/trip-planning.js.
-        tripPlanning: { weather: window.CORFU_WEATHER },
+        tripPlanning: { weather: window.CORFU_WEATHER, ...window.CORFU_TRIPPLANNING_STATIC },
         // Structured pieces of the Language & Daily Life tab only: shopping
         // streets, souvenirs, supermarket chains, and the 5 uniform
         // phrasebook category cards + the 6th prose-only pronunciation-tip

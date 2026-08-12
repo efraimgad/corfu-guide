@@ -651,8 +651,19 @@ function gtItineraryDaySubtitle(day) {
     return day.isAlt ? day.subtitle : gtItineraryResolveTemplate(day.subtitleTemplate, day.dayNumber);
 }
 
+// Reads window.DESTINATION.itineraryDays (not the bare window.ITINERARY_DAYS
+// global) - the same bug class js/search.js's buildItineraryIndexEntries()
+// had (see that file's own header comment): window.ITINERARY_DAYS always
+// holds Corfu's real 9-day itinerary regardless of which destination is
+// active, and Paxos's own itinerary happens to reuse the same key values
+// ("1", "2") - so this function returned CORFU's day 1/2 while Paxos was
+// active, silently overriding the correct scrubber-button labels with
+// Corfu's own day content (dayArea, items, brief - everything) the moment
+// a day was selected. Found via the "אזור היום: גוביה ↔ שדה התעופה" label
+// appearing on the Paxos itinerary tab.
 function findItineraryDay(key) {
-    return (window.ITINERARY_DAYS || []).find(d => d.key === String(key));
+    const days = (window.DESTINATION && window.DESTINATION.itineraryDays) || [];
+    return days.find(d => d.key === String(key));
 }
 
 window.gtItineraryResolveTemplate = gtItineraryResolveTemplate;
