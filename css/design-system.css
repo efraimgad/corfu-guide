@@ -129,24 +129,32 @@
      text-on-soft use only (dark theme keeps these solid-fill values
      unchanged, so the aria-selected chips stay exactly as vivid as
      before). */
-  --gt-cat-beach:      #2160eb;
-  --gt-cat-beach-soft: #e6edfd;
-  --gt-cat-food:       #bb460a;
-  --gt-cat-food-soft:  #fdeadd;
-  --gt-cat-attraction: #9230ea;
-  --gt-cat-attraction-soft: #f2e4fc;
-  --gt-cat-gem:        #047b56;
-  --gt-cat-gem-soft:   #dcf3ea;
+  /* Positional slots, not semantic category names: a destination's category
+     N (window.DESTINATION.categories[N-1].colorVar) points at --gt-cat-N,
+     whatever that category is actually called. Corfu maps
+     beaches/food/attractions/gems to 1/2/3/4 in that order (see
+     data/destinations/corfu.js); a destination with a different taxonomy
+     (e.g. testdest's museums/trails) just points its own categories at
+     these same 4 slots. Up to 4 categories need zero CSS changes ever
+     again; a 5th+ would need one new --gt-cat-5 rule added here. */
+  --gt-cat-1:      #2160eb;
+  --gt-cat-1-soft: #e6edfd;
+  --gt-cat-2:       #bb460a;
+  --gt-cat-2-soft:  #fdeadd;
+  --gt-cat-3: #9230ea;
+  --gt-cat-3-soft: #f2e4fc;
+  --gt-cat-4:        #047b56;
+  --gt-cat-4-soft:   #dcf3ea;
 
   /* Text-on-*-soft variants (.gt-cat-*, .gt-cat-*-bg color): identical to
      the base category color in light theme (defined via var() so there's
      only one light-theme value to maintain) - dark theme overrides these
      ONLY, below, leaving the base --gt-cat-* tokens (solid-fill chip
      backgrounds, checkbox accent-color) untouched across themes. */
-  --gt-cat-beach-text:      var(--gt-cat-beach);
-  --gt-cat-food-text:       var(--gt-cat-food);
-  --gt-cat-attraction-text: var(--gt-cat-attraction);
-  --gt-cat-gem-text:        var(--gt-cat-gem);
+  --gt-cat-1-text: var(--gt-cat-1);
+  --gt-cat-2-text:       var(--gt-cat-2);
+  --gt-cat-3-text: var(--gt-cat-3);
+  --gt-cat-4-text:        var(--gt-cat-4);
 
   /* ---------- Status semantics (separate from accent/category color) ----------
      Same darkening rationale as the category colors above: the originals
@@ -294,10 +302,10 @@
   --gt-primary-100:   #163444;
   --gt-primary-50:    #0f2530;
 
-  --gt-cat-beach-soft:      #16233f;
-  --gt-cat-food-soft:       #3a2415;
-  --gt-cat-attraction-soft: #2d1f3c;
-  --gt-cat-gem-soft:        #123027;
+  --gt-cat-1-soft:      #16233f;
+  --gt-cat-2-soft:       #3a2415;
+  --gt-cat-3-soft: #2d1f3c;
+  --gt-cat-4-soft:        #123027;
 
   --gt-status-open-soft:   #123322;
   --gt-status-soon-soft:   #3a2c10;
@@ -314,10 +322,10 @@
      lightened values are what .gt-cat-*, .gt-status--* actually render as
      text against the dark *-soft backgrounds above: the base (unlightened)
      colors were only 2.82-4.09:1 there, failing WCAG AA. */
-  --gt-cat-beach-text:      #5786f0;
-  --gt-cat-food-text:       #f36114;
-  --gt-cat-attraction-text: #b16bf0;
-  --gt-cat-gem-text:        #06a674;
+  --gt-cat-1-text:      #5786f0;
+  --gt-cat-2-text:       #f36114;
+  --gt-cat-3-text: #b16bf0;
+  --gt-cat-4-text:        #06a674;
   --gt-status-open-text:        #20a95d;
   --gt-status-soon-text:         #ce8511;
   --gt-status-closed-text:       #db695d;
@@ -370,12 +378,12 @@
     /* --gt-primary-600 intentionally not flipped — see the
        :root[data-theme="dark"] block above. */
     --gt-primary-100:   #163444; --gt-primary-50:    #0f2530;
-    --gt-cat-beach-soft:      #16233f; --gt-cat-food-soft:       #3a2415;
-    --gt-cat-attraction-soft: #2d1f3c; --gt-cat-gem-soft:        #123027;
+    --gt-cat-1-soft:      #16233f; --gt-cat-2-soft:       #3a2415;
+    --gt-cat-3-soft: #2d1f3c; --gt-cat-4-soft:        #123027;
     --gt-status-open-soft:   #123322; --gt-status-soon-soft:   #3a2c10;
     --gt-status-closed-soft: #3a1d18; --gt-status-unverified-soft: #202a2c;
-    --gt-cat-beach-text:      #5786f0; --gt-cat-food-text:       #f36114;
-    --gt-cat-attraction-text: #b16bf0; --gt-cat-gem-text:        #06a674;
+    --gt-cat-1-text:      #5786f0; --gt-cat-2-text:       #f36114;
+    --gt-cat-3-text: #b16bf0; --gt-cat-4-text:        #06a674;
     --gt-status-open-text:        #20a95d; --gt-status-soon-text:         #ce8511;
     --gt-status-closed-text:       #db695d; --gt-status-unverified-text:  #8b9799;
     --gt-accent-gold-100: #3a2c10;
@@ -507,10 +515,10 @@ textarea.gt-border-hair,
    these genuinely are the four map-pin categories, so token-bound to
    --gt-cat-* rather than collapsed to the single accent; the 5th "hotel"
    layer isn't one of the four categories, so it gets the plain accent. */
-.gt-accent-beach{ accent-color:var(--gt-cat-beach); }
-.gt-accent-food{ accent-color:var(--gt-cat-food); }
-.gt-accent-attraction{ accent-color:var(--gt-cat-attraction); }
-.gt-accent-gem{ accent-color:var(--gt-cat-gem); }
+.gt-accent-beach{ accent-color:var(--gt-cat-1); }
+.gt-accent-food{ accent-color:var(--gt-cat-2); }
+.gt-accent-attraction{ accent-color:var(--gt-cat-3); }
+.gt-accent-gem{ accent-color:var(--gt-cat-4); }
 .gt-accent-hotel{ accent-color:var(--gt-primary-600); }
 
 /* -- Buttons -- */
@@ -550,13 +558,13 @@ textarea.gt-border-hair,
    The -bg (and bare, text-only) variants use the --gt-cat-*-text tokens,
    not the plain --gt-cat-* base tokens: they're the same value in light
    theme, but dark theme gives them separately-tuned values (see :root's
-   own comment on --gt-cat-beach-text etc.) so this text-on-*-soft usage
+   own comment on --gt-cat-1-text etc.) so this text-on-*-soft usage
    clears WCAG AA in both themes without touching .gt-chip--*'s unrelated
    solid-fill-plus-white-text usage of the base tokens. */
-.gt-cat-beach{ color:var(--gt-cat-beach-text); } .gt-cat-beach-bg{ background:var(--gt-cat-beach-soft); color:var(--gt-cat-beach-text); }
-.gt-cat-food{ color:var(--gt-cat-food-text); } .gt-cat-food-bg{ background:var(--gt-cat-food-soft); color:var(--gt-cat-food-text); }
-.gt-cat-attraction{ color:var(--gt-cat-attraction-text); } .gt-cat-attraction-bg{ background:var(--gt-cat-attraction-soft); color:var(--gt-cat-attraction-text); }
-.gt-cat-gem{ color:var(--gt-cat-gem-text); } .gt-cat-gem-bg{ background:var(--gt-cat-gem-soft); color:var(--gt-cat-gem-text); }
+.gt-cat-beach{ color:var(--gt-cat-1-text); } .gt-cat-beach-bg{ background:var(--gt-cat-1-soft); color:var(--gt-cat-1-text); }
+.gt-cat-food{ color:var(--gt-cat-2-text); } .gt-cat-food-bg{ background:var(--gt-cat-2-soft); color:var(--gt-cat-2-text); }
+.gt-cat-attraction{ color:var(--gt-cat-3-text); } .gt-cat-attraction-bg{ background:var(--gt-cat-3-soft); color:var(--gt-cat-3-text); }
+.gt-cat-gem{ color:var(--gt-cat-4-text); } .gt-cat-gem-bg{ background:var(--gt-cat-4-soft); color:var(--gt-cat-4-text); }
 
 /* -- Status badge (open/closing/closed/unverified — semantic, not a category color) -- */
 .gt-status{
@@ -907,10 +915,10 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
    role="tab" / aria-selected — see js/explore.js selectExploreCategory()),
    so the "active" signal is aria-selected, not aria-pressed. */
 .gt-explore-chips{ display:flex; gap:var(--gt-space-2); flex-wrap:wrap; }
-.gt-chip--beach[aria-selected="true"]{ background:var(--gt-cat-beach); color:#fff; }
-.gt-chip--food[aria-selected="true"]{ background:var(--gt-cat-food); color:#fff; }
-.gt-chip--attraction[aria-selected="true"]{ background:var(--gt-cat-attraction); color:#fff; }
-.gt-chip--gem[aria-selected="true"]{ background:var(--gt-cat-gem); color:#fff; }
+.gt-chip--beach[aria-selected="true"]{ background:var(--gt-cat-1); color:#fff; }
+.gt-chip--food[aria-selected="true"]{ background:var(--gt-cat-2); color:#fff; }
+.gt-chip--attraction[aria-selected="true"]{ background:var(--gt-cat-3); color:#fff; }
+.gt-chip--gem[aria-selected="true"]{ background:var(--gt-cat-4); color:#fff; }
 
 /* Secondary facet row (js/explore.js EXPLORE_FACETS). Deliberately NOT
    category-tinted: the category chips above already own the colour
