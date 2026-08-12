@@ -87,22 +87,24 @@ async function fetchAllItemStates() {
     const { data, error } = await supabaseClient
         .from('user_item_state')
         .select('item_id, is_favorite, is_visited, note, rating, extra, updated_at')
-        .eq('user_id', userId);
+        .eq('user_id', userId)
+        .eq('destination', window.DESTINATION.id);
     if (error) throw error;
     return data;
 }
 
 // Partial upsert: pass only the fields that changed (e.g. { is_favorite: true }).
-// Relies on the (user_id, item_id) unique constraint from the schema so this
-// is always a single safe call, never a manual "insert or update?" check.
+// Relies on the (user_id, destination, item_id) unique constraint from the
+// schema so this is always a single safe call, never a manual "insert or
+// update?" check.
 async function upsertItemState(itemId, partialState) {
     const userId = await ensureAuth();
     const supabaseClient = await getClient();
     const { error } = await supabaseClient
         .from('user_item_state')
         .upsert(
-            { user_id: userId, item_id: itemId, ...partialState },
-            { onConflict: 'user_id,item_id' }
+            { user_id: userId, destination: window.DESTINATION.id, item_id: itemId, ...partialState },
+            { onConflict: 'user_id,destination,item_id' }
         );
     if (error) throw error;
 }
@@ -115,7 +117,8 @@ async function fetchItineraryProgress() {
     const { data, error } = await supabaseClient
         .from('user_itinerary_progress')
         .select('day_number, completed, completed_at')
-        .eq('user_id', userId);
+        .eq('user_id', userId)
+        .eq('destination', window.DESTINATION.id);
     if (error) throw error;
     return data;
 }
@@ -128,11 +131,12 @@ async function upsertItineraryDay(dayNumber, completed) {
         .upsert(
             {
                 user_id: userId,
+                destination: window.DESTINATION.id,
                 day_number: dayNumber,
                 completed,
                 completed_at: completed ? new Date().toISOString() : null
             },
-            { onConflict: 'user_id,day_number' }
+            { onConflict: 'user_id,destination,day_number' }
         );
     if (error) throw error;
 }
