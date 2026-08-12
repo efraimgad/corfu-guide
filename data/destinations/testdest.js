@@ -9,8 +9,8 @@
 // inventing realistic-looking destination content — see
 // js/testdest-locations.js and js/testdest-itinerary.js headers.
 //
-// Must load AFTER js/testdest-locations.js and js/testdest-itinerary.js,
-// and BEFORE js/destination-registry.js.
+// Must load AFTER js/testdest-locations.js, js/testdest-itinerary.js and
+// js/testdest-faq.js, and BEFORE js/destination-registry.js.
 // ============================================================================
 
 window.DESTINATIONS = window.DESTINATIONS || {};
@@ -100,7 +100,7 @@ window.DESTINATIONS.testdest = {
         tripPlanning: null,
         healthSafety: null,
         language: null,
-        activities: null,
-        faq: null
+        activities: window.TESTDEST_ACTIVITIES,
+        faq: window.TESTDEST_FAQ
     }
 };

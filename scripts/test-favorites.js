@@ -74,21 +74,6 @@ const dom = new JSDOM(html, { runScripts: 'outside-only', url: 'http://localhost
 const win = dom.window;
 const doc = win.document;
 
-const dataIdEls = Array.from(doc.querySelectorAll('[data-id]'));
-const nonActivity = dataIdEls.filter(e => !/^activity-/.test(e.getAttribute('data-id')));
-eq(nonActivity.length, 0, 'every [data-id] card is an activity-* card');
-if (dataIdEls.length === 0) fail('expected some [data-id] activity cards, found none');
-else ok('favouritable cards found (' + dataIdEls.length + ')');
-
-const heartsOutsideActivities = Array.from(doc.querySelectorAll('.favorite-btn'))
-    .filter(b => !b.closest('#activities-grid'));
-eq(heartsOutsideActivities.length, 0, 'every .favorite-btn lives inside #activities-grid');
-
-// --- 3. Runtime: the two previously-throwing paths ---------------------------
-console.log('\n--- viewFavorites() and toggleFavorite() must not throw ---');
-// jsdom supplies a real localStorage once the DOM has a url — it is a
-// getter-only property, so it must be used, not replaced.
-win.localStorage.clear();
 win.IntersectionObserver = function () { return { observe() {}, disconnect() {}, unobserve() {} }; };
 win.matchMedia = win.matchMedia || (() => ({ matches: false, addEventListener() {}, removeEventListener() {} }));
 win.scrollTo = () => {};
@@ -104,22 +89,48 @@ win.fetch = () => new Promise(() => {});   // dashboard's weather call: never se
 // favorites.js/dashboard.js both read window.DESTINATION (storage-key
 // namespacing, TRIP_CONFIG/timezone, weather coords) at their own top level,
 // so the destination-data bootstrap chain has to be evaluated first, same
-// as index.html's real script order.
+// as index.html's real script order. Phase 2: the activity cards themselves
+// are now rendered by js/activities.js's renderActivitiesGrid() from
+// destination data rather than static markup, so that has to run too before
+// anything below can find [data-id]/.favorite-btn elements.
 win.eval(
     [
         'js/html-utils.js',
         'js/locations-data.js',
         'js/itinerary-data.js',
+        'js/corfu-faq.js',
+        'js/corfu-activities.js',
         'data/destinations/corfu.js',
         'js/testdest-locations.js',
         'js/testdest-itinerary.js',
+        'js/testdest-faq.js',
+        'js/testdest-activities.js',
         'data/destinations/testdest.js',
+        'data/destinations/empty.js',
         'js/destination-registry.js',
+        'js/activities.js',
         'js/favorites.js',
         'js/dashboard.js'
     ]
         .map(f => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n;\n')
+    + '\n;renderActivitiesGrid();'
 );
+
+const dataIdEls = Array.from(doc.querySelectorAll('[data-id]'));
+const nonActivity = dataIdEls.filter(e => !/^activity-/.test(e.getAttribute('data-id')));
+eq(nonActivity.length, 0, 'every [data-id] card is an activity-* card');
+if (dataIdEls.length === 0) fail('expected some [data-id] activity cards, found none');
+else ok('favouritable cards found (' + dataIdEls.length + ')');
+
+const heartsOutsideActivities = Array.from(doc.querySelectorAll('.favorite-btn'))
+    .filter(b => !b.closest('#activities-grid'));
+eq(heartsOutsideActivities.length, 0, 'every .favorite-btn lives inside #activities-grid');
+
+// --- 3. Runtime: the two previously-throwing paths ---------------------------
+console.log('\n--- viewFavorites() and toggleFavorite() must not throw ---');
+// jsdom supplies a real localStorage once the DOM has a url — it is a
+// getter-only property, so it must be used, not replaced.
+win.localStorage.clear();
 
 const grid = doc.getElementById('activities-grid');
 const cards = Array.from(grid.querySelectorAll('article[data-id]'));

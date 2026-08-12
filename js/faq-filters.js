@@ -14,8 +14,66 @@
 //
 // Nothing here touches applyFilter() or the *ButtonStyle helpers in
 // filters.js, so this is a clean lift with no shared state.
+//
+// Phase 2 (FAQ data migration): #faq-list used to be 51-53 hand-written
+// <details> elements baked directly into index.html. renderFAQList() below
+// now builds that same markup at runtime from window.DESTINATION.editorial.faq
+// (an array of {id, q, a, cat}, populated per-destination — see
+// js/corfu-faq.js / js/testdest-faq.js, auto-generated/placeholder
+// respectively). applyFAQFilters()/filterFAQ()/filterFAQCategory() below are
+// UNCHANGED: they only ever queried the live DOM (#faq-list details), so
+// they work identically whether those <details> were typed by hand or
+// rendered by renderFAQList() — the render step just has to run first.
 
 let faqActiveCategory = 'all';
+
+// Builds the exact same <details data-cat="..."> markup the static HTML
+// used to hand-author, from window.DESTINATION.editorial.faq. Gracefully
+// renders nothing (leaves #faq-list empty) when a destination has no FAQ
+// data yet (null/missing/empty array — e.g. the content-free 'empty'
+// destination), rather than throwing.
+function renderFAQList() {
+    const list = document.getElementById('faq-list');
+    if (!list) return;
+
+    const dest = window.DESTINATION;
+    const faq = (dest && dest.editorial && Array.isArray(dest.editorial.faq)) ? dest.editorial.faq : [];
+
+    list.innerHTML = faq.map(item => {
+        const cat = escapeAttr(item.cat || '');
+        const q = escapeHtml(item.q || '');
+        // item.a is trusted, pre-built HTML (extracted verbatim from the
+        // original hand-authored markup / written as placeholder data
+        // alongside this codebase) — inserted as-is, same as the static
+        // markup it replaces, so any nested tags (e.g. <strong>) survive.
+        const a = item.a || '';
+        return `<details data-cat="${cat}" class="group bg-white rounded-xl shadow-sm border gt-border-hair overflow-hidden hover:shadow-md transition duration-300">
+    <summary class="cursor-pointer font-bold p-5 gt-bg-sunken gt-text-900 text-lg gt-bg-accent-soft gt-text-accent transition-colors flex justify-between items-center select-none">
+        <span class="pl-4">${q}</span>
+        <span class="text-2xl group-open:rotate-180 transition-transform gt-text-accent">▾</span>
+    </summary>
+    <div class="p-6 gt-text-700 bg-white border-t gt-border-hair leading-relaxed text-base">
+        ${a}
+    </div>
+</details>`;
+    }).join('\n');
+
+    // The intro paragraph above the search box used to hand-state a
+    // question count ("ריכזנו עבורכם 51 שאלות..."); replace that number
+    // with the real, live count instead of leaving it able to go stale
+    // again (the count now known to have drifted once already — 51 vs the
+    // real 53 — is exactly the failure mode this avoids repeating).
+    const introEl = document.querySelector('#faq p.max-w-3xl');
+    if (introEl) {
+        introEl.textContent = introEl.textContent.replace(/\d+/, String(faq.length));
+    }
+
+    // Recompute #faq-search-count / the empty-state now that #faq-list
+    // actually has (or doesn't have) content, so the count shown on first
+    // paint reflects the real data instead of the static HTML's fallback
+    // text.
+    applyFAQFilters();
+}
 
 function applyFAQFilters() {
     const input = document.getElementById('faq-search-input');
@@ -61,3 +119,4 @@ function filterFAQCategory(cat) {
 
 window.filterFAQ = filterFAQ;
 window.filterFAQCategory = filterFAQCategory;
+window.renderFAQList = renderFAQList;

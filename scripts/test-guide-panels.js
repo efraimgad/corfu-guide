@@ -36,10 +36,33 @@ win.IntersectionObserver = function () { return { observe() {}, disconnect() {},
 win.matchMedia = win.matchMedia || (() => ({ matches: false, addEventListener() {}, removeEventListener() {} }));
 win.scrollTo = () => {};
 
+// The Day 5 deep link's scroll anchor (#act-boats) is now rendered by
+// js/activities.js's renderActivitiesGrid() from destination data (Phase 2
+// migration) rather than existing as static markup, so the destination-data
+// bootstrap chain + that renderer have to run before checking for it -
+// same reasoning as every other harness that switched to ?destination=corfu.
 win.eval(
-    ['js/html-utils.js', 'js/ui.js', 'js/guide.js']
+    [
+        'js/html-utils.js',
+        'js/locations-data.js',
+        'js/itinerary-data.js',
+        'js/corfu-faq.js',
+        'js/corfu-activities.js',
+        'data/destinations/corfu.js',
+        'js/testdest-locations.js',
+        'js/testdest-itinerary.js',
+        'js/testdest-faq.js',
+        'js/testdest-activities.js',
+        'data/destinations/testdest.js',
+        'data/destinations/empty.js',
+        'js/destination-registry.js',
+        'js/activities.js',
+        'js/ui.js',
+        'js/guide.js'
+    ]
         .map(f => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n;\n')
-    + `\n;window.__g = {
+    + `\n;renderActivitiesGrid();
+    window.__g = {
         uiList: GT_GUIDE_PANEL_IDS,
         guideList: GT_GUIDE_PANEL_IDS_LIST,
         validTabs: VALID_TAB_IDS,

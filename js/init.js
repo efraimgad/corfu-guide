@@ -108,6 +108,13 @@ document.addEventListener("DOMContentLoaded", function() {
         history.replaceState(null, '', location.pathname + location.search);
     }
 
+    // Phase 2: builds #activities-grid / #activities-quick-nav from
+    // window.DESTINATION.editorial.activities (js/activities.js) — must run
+    // before initFavoriteButtons() and injectPersonalTrackingWidgets() below,
+    // both of which locate their targets by querying the DOM for cards this
+    // creates.
+    if (typeof renderActivitiesGrid === 'function') renderActivitiesGrid();
+
     initFavoriteButtons();
     initTripProgress();
     populateDistanceSelects();
@@ -144,6 +151,11 @@ document.addEventListener("DOMContentLoaded", function() {
     if (typeof initCloudSync === 'function') {
         initCloudSync();
     }
+
+    // Phase 2: builds #faq-list's <details> markup from
+    // window.DESTINATION.editorial.faq (js/faq-filters.js) — must run
+    // before injectFaqStructuredData() below, which reads that same DOM.
+    if (typeof renderFAQList === 'function') renderFAQList();
 
     injectFaqStructuredData();
 });
