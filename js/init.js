@@ -173,6 +173,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // window.DESTINATION.editorial.about.quickFacts (js/about.js).
     if (typeof renderAboutQuickFacts === 'function') renderAboutQuickFacts();
 
+    // Phase 3 (persistent chrome): the About tab's chapter-01 hero banner
+    // (title/subtitle/image-alt), from
+    // window.DESTINATION.editorial.about.heroBanner (js/about.js).
+    if (typeof renderAboutHeroBanner === 'function') renderAboutHeroBanner();
+
     // Phase 2 (hybrid): Trip Planning's driving-times TABLE, rendered from
     // the same distanceTool data js/tools.js's interactive calculator
     // already uses (js/tools.js's renderDrivingTimesTable()) instead of a

@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>קורפו 2026: מדריך הטיולים השלם</title>
-    <meta name="description" content="מדריך קורפו 2026: 28 חופים, 69 מסעדות, מסלולי טיול שעתיים מפורטים, ו-34 פנינים נסתרות.">
+    <!-- Generic default, overwritten by js/destination-chrome.js from the
+         active destination's own hero.title/hero.subtitle as soon as it
+         runs (a plain <script defer>, so effectively immediately - before
+         first paint in practice). Deliberately generic rather than
+         Corfu-specific: this is what a user (or a JS-disabled crawler)
+         would see if that script somehow failed to run, for ANY
+         destination, not just Corfu's. -->
+    <title>מדריך טיולים</title>
+    <meta name="description" content="בחרו יעד כדי להתחיל לתכנן את הטיול.">
     <meta name="robots" content="index, follow">
     <!-- Matches the real .gt-topbar background (var(--gt-paper-raised)), measured
          #ffffff light / #182022 dark. The previous single #0d3355 was a navy that
@@ -231,7 +238,10 @@
 
 
     <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 md:pb-8">
-        <h1 class="sr-only">קורפו 2026: מדריך הטיולים השלם</h1>
+        <!-- Filled by js/destination-chrome.js from the active destination's
+             hero.title (generic default below, matching <title>'s own
+             comment above). -->
+        <h1 class="sr-only" id="gt-page-heading">מדריך טיולים</h1>
 <!-- ============================================================
      Phase D, sub-step 1: Home tab ("מפה" in the bottom nav) becomes a
      real, full-bleed live map instead of the old stat-row + summary
@@ -356,17 +366,21 @@
     <div id="gt-map-sheet-body" aria-live="polite"></div>
 </div>
 <section id="about" class="tab-content space-y-8" dir="rtl" role="tabpanel" aria-label="היכרות עם קורפו" tabindex="0">
-    <div class="section-hero-banner">
+    <!-- Filled by renderAboutHeroBanner() (js/about.js) from
+         window.DESTINATION.editorial.about.heroBanner. Only the title/
+         subtitle/image-alt are destination-specific; the chapter label and
+         illustration below are generic UI chrome and stay static. -->
+    <div class="section-hero-banner" id="about-hero-banner">
         <!-- Local illustrative card art, not a photograph. Replaced a stock image the
          repo's own TODOs identified as a Gulf of Mexico sunset, which was reused
          across About, three gems and a restaurant. Swap for a real trip photo
-         when one exists — but never for something that is not Corfu. -->
-        <img src="images/cards/history.svg" alt="איור: אדריכלות ונציאנית בקורפו" width="1600" height="320" class="section-hero-banner-img" loading="eager" fetchpriority="high" decoding="async">
+         when one exists — but never for something that is not the active destination. -->
+        <img id="about-hero-banner-img" src="images/cards/history.svg" alt="" width="1600" height="320" class="section-hero-banner-img" loading="eager" fetchpriority="high" decoding="async">
         <div class="section-hero-banner-overlay"></div>
         <span class="journey-chapter">01 — היכרות</span>
         <div class="section-hero-banner-content">
-            <h2 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight">היכרות עם קורפו: האי הירוק של יוון 🌿</h2>
-            <p class="text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto">שכבה עבה של עבר ונציאני, בריטי וצרפתי הפכה את קורפו לאי הכי "אירופאי" ביוון - סמטאות אבן, מגרשי קריקט וקתדרלות לצד 217 ק"מ של קווי חוף עוצרי נשימה. לפני שצוללים למסלול המפורט, הנה כל מה שכדאי לדעת כדי לתכנן טיול חכם.</p>
+            <h2 id="about-hero-banner-title" class="text-4xl md:text-5xl font-extrabold text-white tracking-tight"></h2>
+            <p id="about-hero-banner-subtitle" class="text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto"></p>
         </div>
     </div>
 
@@ -1515,6 +1529,7 @@
     <script src="data/destinations/testdest.js" defer></script>
     <script src="data/destinations/empty.js" defer></script>
     <script src="js/destination-registry.js" defer></script>
+    <script src="js/destination-chrome.js" defer></script>
     <script src="js/destination-gate.js" defer></script>
     <script src="js/location-shared.js" defer></script>
     <script src="js/search.js" defer></script>

@@ -27,5 +27,13 @@ window.TESTDEST_ABOUT = {
         { icon: '🧪', text: 'עובדה לדוגמה מס\' 1 — נתוני placeholder בלבד' },
         { icon: '🧪', text: 'עובדה לדוגמה מס\' 2 — נתוני placeholder בלבד' },
         { iconHtml: '<svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/></svg>', text: 'מטבע לדוגמה: יורו (€)' }
-    ]
+    ],
+    // Placeholder hero-banner text — proves renderAboutHeroBanner()
+    // (js/about.js) works for a destination other than Corfu, and that it
+    // renders DIFFERENT text than Corfu's (not a hardcoded/stale copy).
+    heroBanner: {
+        imageAlt: 'איור לדוגמה: יעד בדיקה',
+        title: 'היכרות עם יעד הבדיקה 🧪',
+        subtitle: 'טקסט פתיחה לדוגמה עבור יעד הבדיקה — נתוני placeholder בלבד, לא תוכן אמיתי על שום יעד.'
+    }
 };
