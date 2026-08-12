@@ -96,11 +96,38 @@ window.DESTINATIONS.testdest = {
     },
 
     editorial: {
-        about: null,
-        tripPlanning: null,
-        healthSafety: null,
+        about: window.TESTDEST_ABOUT,
+        tripPlanning: { weather: window.TESTDEST_WEATHER },
         language: null,
         activities: window.TESTDEST_ACTIVITIES,
-        faq: window.TESTDEST_FAQ
+        faq: window.TESTDEST_FAQ,
+        // Placeholder healthSafety data, matching the labeling convention
+        // used throughout this file (e.g. testdest-faq.js's "שאלה
+        // לדוגמה") — proves js/health-safety.js's two renderers work with
+        // an arbitrary destination's data, not just Corfu's real numbers.
+        healthSafety: {
+            emergencyNumbers: [
+                { number: '000', icon: '🆘', label: 'מספר בדיקה כללי', sublabel: '(placeholder)' },
+                { number: '111', icon: '👮', label: 'מספר בדיקה למשטרה', sublabel: '(placeholder)' }
+            ],
+            touristPolice: {
+                number: '222',
+                label: 'משטרת תיירות לדוגמה',
+                description: 'תיאור placeholder של משטרת התיירות ביעד הבדיקה — אין כאן מידע אמיתי על שום יעד.'
+            },
+            hospitalsIntro: 'טקסט placeholder על רמת הרפואה ביעד הבדיקה.',
+            hospitals: [
+                {
+                    name: 'בית החולים לדוגמה',
+                    tag: 'ציבורי / בדיקה',
+                    description: 'תיאור placeholder של בית חולים לדוגמה ביעד הבדיקה.',
+                    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Example+Test+Hospital',
+                    phone: '+390000000',
+                    phoneDisplay: '000-0000000 (מוקד לדוגמה)',
+                    showInModal: true
+                }
+            ],
+            insuranceReminderHtml: '💡 טיפ placeholder: זכרו ליצור קשר עם חברת הביטוח שלכם (טקסט לדוגמה בלבד).'
+        }
     }
 };

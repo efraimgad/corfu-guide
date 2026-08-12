@@ -13,6 +13,55 @@ function lookupRoadDistance(from, to) {
     return ROAD_DISTANCES[pairKey] || null;
 }
 
+// Trip Planning's driving-times TABLE (distinct from the interactive
+// calculator above it) used to hardcode a second copy of these exact
+// villages/km/min values directly in index.html - this renders it instead
+// from the same distanceTool data the calculator already uses, so there is
+// one source of truth, not two that can silently drift apart. Only rows
+// involving distanceTool.referenceLocationKey (the point the table is
+// measured from - "Corfu Town" for this destination) are shown, matching
+// what the original table always did; a destination with no
+// referenceLocationKey configured, or no matching roadDistances entries,
+// renders no rows rather than throwing.
+function renderDrivingTimesTable() {
+    const tbody = document.getElementById('plan-driving-times-tbody');
+    if (!tbody) return;
+
+    const dt = (window.DESTINATION && window.DESTINATION.distanceTool) || {};
+    const refKey = dt.referenceLocationKey;
+    const locations = dt.locations || [];
+    const roadDistances = dt.roadDistances || {};
+    if (!refKey) { tbody.innerHTML = ''; return; }
+
+    const byKey = {};
+    locations.forEach(loc => { byKey[loc.key] = loc; });
+
+    const rows = Object.keys(roadDistances)
+        .map(pairKey => {
+            const [a, b] = pairKey.split('|');
+            if (a !== refKey && b !== refKey) return null;
+            const otherKey = a === refKey ? b : a;
+            const other = byKey[otherKey];
+            if (!other) return null;
+            const entry = roadDistances[pairKey];
+            return { name: entry.nameDisplay || other.name, region: other.region || '', entry };
+        })
+        .filter(Boolean);
+
+    tbody.innerHTML = rows.map((row, i) => {
+        const zebra = i % 2 === 1 ? ' gt-bg-accent-soft/50' : '';
+        const km = row.entry.kmDisplay || `כ-${row.entry.km} ק"מ`;
+        const time = row.entry.timeDisplay || `~${row.entry.min} דק'`;
+        return `<tr class="border-b gt-border-accent${zebra}">` +
+            `<td class="p-2 font-semibold">${escapeHtml(row.name)}</td>` +
+            `<td class="p-2">${escapeHtml(row.region)}</td>` +
+            `<td class="p-2">${escapeHtml(km)}</td>` +
+            `<td class="p-2">${escapeHtml(time)}</td>` +
+            `</tr>`;
+    }).join('');
+}
+window.renderDrivingTimesTable = renderDrivingTimesTable;
+
 function haversineKm(lat1, lon1, lat2, lon2) {
     const R = 6371;
     const dLat = (lat2 - lat1) * Math.PI / 180;

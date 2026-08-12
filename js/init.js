@@ -158,6 +158,42 @@ document.addEventListener("DOMContentLoaded", function() {
     if (typeof renderFAQList === 'function') renderFAQList();
 
     injectFaqStructuredData();
+
+    // Phase 2 (hybrid): builds the #plan-weather table's <tbody> from
+    // window.DESTINATION.editorial.tripPlanning.weather (js/trip-planning.js).
+    // Nothing else in this handler reads that table's DOM, so position isn't
+    // load-bearing beyond running after window.DESTINATION exists.
+    if (typeof renderWeatherTable === 'function') renderWeatherTable();
+
+    // Phase 2 (hybrid): the About tab's 4 region cards, from
+    // window.DESTINATION.editorial.about (js/about.js).
+    if (typeof renderAboutRegions === 'function') renderAboutRegions();
+
+    // Phase 2 (hybrid): Trip Planning's driving-times TABLE, rendered from
+    // the same distanceTool data js/tools.js's interactive calculator
+    // already uses (js/tools.js's renderDrivingTimesTable()) instead of a
+    // second hardcoded copy.
+    if (typeof renderDrivingTimesTable === 'function') renderDrivingTimesTable();
+
+    // Phase 2 (hybrid): Health & Safety's emergency numbers/hospitals, and
+    // the matching quick-access modal reachable from every tab
+    // (js/health-safety.js) - both read the same
+    // window.DESTINATION.editorial.healthSafety object, replacing what used
+    // to be two independently hand-maintained copies.
+    if (typeof renderEmergencyModal === 'function') renderEmergencyModal();
+    if (typeof renderHealthSafetyEmergency === 'function') renderHealthSafetyEmergency();
+
+    // Quality-gate finding (FAQ/Activities migration): js/search.js builds
+    // its search index on its OWN DOMContentLoaded listener, registered
+    // earlier in script load order than this one - so anything rendered
+    // above (FAQ, Activities, weather table, About regions, driving-times
+    // table, emergency contacts) may not have existed in the DOM yet when
+    // that first index build ran. Re-running it here, now that every
+    // destination-data renderer in this handler has run, is the blanket fix
+    // - cheap (rebuilds one in-memory array) and correct regardless of which
+    // future section becomes data-driven, without teaching search.js a new
+    // per-section data reader every time.
+    if (typeof buildSearchIndex === 'function') buildSearchIndex();
 });
 
 // Basic offline support (see sw.js) - "page loads and works when offline",

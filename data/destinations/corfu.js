@@ -131,37 +131,64 @@ window.DESTINATIONS.corfu = {
     // Previously js/tools.js's DISTANCE_LOCATIONS / ROAD_DISTANCES / the
     // 1.45 windiness correction and 32km/h average-speed fallback constants.
     distanceTool: {
+        // referenceLocationKey: which location the Trip Planning tab's
+        // driving-times TABLE (as opposed to the interactive calculator,
+        // which lets the traveler pick any two points) is measured from -
+        // was hardcoded as "Corfu Town" prose in that table's own static
+        // markup; now the table is rendered from roadDistances entries
+        // involving this key (see js/tools.js's renderDrivingTimesTable()).
+        referenceLocationKey: 'corfu-town',
+        // region: only set on the 10 locations the driving-times table
+        // itself names (extracted verbatim from that table's own "אזור"
+        // column) - purely a display label for that table, not used by the
+        // interactive distance calculator, so it's fine that most entries
+        // below don't have one.
         locations: [
             { name: 'העיר העתיקה קורפו (Corfu Town)', key: 'corfu-town', lat: 39.6243, lon: 19.9217 },
-            { name: 'פלקאס (Pelekas)', key: 'pelekas', lat: 39.6000, lon: 19.8170 },
-            { name: 'אגיוס גורדיוס (Agios Gordios)', key: 'agios-gordios', lat: 39.5470, lon: 19.8530 },
+            { name: 'פלקאס (Pelekas)', key: 'pelekas', lat: 39.6000, lon: 19.8170, region: 'מרכז/מערב' },
+            { name: 'אגיוס גורדיוס (Agios Gordios)', key: 'agios-gordios', lat: 39.5470, lon: 19.8530, region: 'מערב' },
             { name: 'ארמונס (Ermones)', key: 'ermones', lat: 39.6105, lon: 19.7801 },
             { name: 'גליפאדה (Glyfada)', key: 'glyfada', lat: 39.5937, lon: 19.8080 },
-            { name: 'פלאוקסטריצה (Paleokastritsa)', key: 'paleokastritsa', lat: 39.6726, lon: 19.7011 },
-            { name: 'סידארי (Sidari)', key: 'sidari', lat: 39.7915, lon: 19.7042 },
-            { name: 'רודה (Roda)', key: 'roda', lat: 39.7790, lon: 19.7930 },
-            { name: 'אכרווי (Acharavi)', key: 'acharavi', lat: 39.7830, lon: 19.8170 },
-            { name: 'קאסיופי (Kassiopi)', key: 'kassiopi', lat: 39.7946, lon: 19.9213 },
-            { name: 'ברבטי (Barbati)', key: 'barbati', lat: 39.7214, lon: 19.8665 },
-            { name: 'ניסאקי (Nissaki)', key: 'nissaki', lat: 39.7258, lon: 19.8974 },
+            { name: 'פלאוקסטריצה (Paleokastritsa)', key: 'paleokastritsa', lat: 39.6726, lon: 19.7011, region: 'צפון-מערב' },
+            { name: 'סידארי (Sidari)', key: 'sidari', lat: 39.7915, lon: 19.7042, region: 'צפון-מערב' },
+            { name: 'רודה (Roda)', key: 'roda', lat: 39.7790, lon: 19.7930, region: 'צפון' },
+            { name: 'אכרווי (Acharavi)', key: 'acharavi', lat: 39.7830, lon: 19.8170, region: 'צפון' },
+            { name: 'קאסיופי (Kassiopi)', key: 'kassiopi', lat: 39.7946, lon: 19.9213, region: 'צפון-מזרח' },
+            { name: 'ברבטי (Barbati)', key: 'barbati', lat: 39.7214, lon: 19.8665, region: 'מזרח' },
+            { name: 'ניסאקי (Nissaki)', key: 'nissaki', lat: 39.7258, lon: 19.8974, region: 'מזרח' },
             { name: 'גוביה (Gouvia) - מקום הלינה שלכם', key: 'gouvia', lat: 39.6500, lon: 19.8520 },
             { name: 'דאסיה (Dassia)', key: 'dassia', lat: 39.6800, lon: 19.8398 },
             { name: 'איפסוס (Ipsos)', key: 'ipsos', lat: 39.6995, lon: 19.8395 },
             { name: 'בניצס (Benitses)', key: 'benitses', lat: 39.5433, lon: 19.9139 },
             { name: 'מוראיטיקה / מסונגי (Moraitika)', key: 'moraitika', lat: 39.5200, lon: 19.9000 },
-            { name: 'קאבוס (Kavos)', key: 'kavos', lat: 39.3860, lon: 20.1130 }
+            { name: 'קאבוס (Kavos)', key: 'kavos', lat: 39.3860, lon: 20.1130, region: 'דרום' }
         ],
+        // kmDisplay/timeDisplay (only on the 10 entries the driving-times
+        // TABLE itself names): the table's original hand-authored text used
+        // fuzzy ranges/hour-rounding ("~1 שעה עד 1:15", "~35-40 דק'") that a
+        // formula over the plain km/min numbers below cannot reproduce
+        // exactly - preserved verbatim as their own fields rather than
+        // silently reformatted. The interactive distance calculator
+        // (js/tools.js's calculateDistance()) uses only the numeric km/min
+        // and has its own live-computed display format; it doesn't read
+        // these two fields.
         roadDistances: {
-            'corfu-town|pelekas': { km: 13, min: 20 },
-            'agios-gordios|corfu-town': { km: 18, min: 35 },
-            'barbati|corfu-town': { km: 20, min: 30 },
-            'corfu-town|nissaki': { km: 22, min: 35 },
-            'corfu-town|paleokastritsa': { km: 25, min: 38 },
-            'corfu-town|roda': { km: 36, min: 50 },
-            'corfu-town|sidari': { km: 37, min: 50 },
-            'corfu-town|kassiopi': { km: 35, min: 55 },
-            'acharavi|corfu-town': { km: 44, min: 60 },
-            'corfu-town|kavos': { km: 46, min: 67 },
+            'corfu-town|pelekas': { km: 13, min: 20, kmDisplay: 'כ-13 ק"מ', timeDisplay: "~20 דק'" },
+            // nameDisplay: the driving-times table itself names these two
+            // without the English transliteration its other 8 rows carry
+            // (unlike this location's own distanceTool.locations entry,
+            // used elsewhere e.g. the interactive calculator's dropdown) -
+            // preserved verbatim rather than "corrected" to match the other
+            // rows' style.
+            'agios-gordios|corfu-town': { km: 18, min: 35, kmDisplay: 'כ-18 ק"מ', timeDisplay: "~35 דק'", nameDisplay: 'אגיוס גורדיוס' },
+            'barbati|corfu-town': { km: 20, min: 30, kmDisplay: 'כ-20 ק"מ', timeDisplay: "~30 דק'" },
+            'corfu-town|nissaki': { km: 22, min: 35, kmDisplay: 'כ-22 ק"מ', timeDisplay: "~35 דק'" },
+            'corfu-town|paleokastritsa': { km: 25, min: 38, kmDisplay: 'כ-25 ק"מ', timeDisplay: "~35-40 דק'", nameDisplay: 'פלאוקסטריצה' },
+            'corfu-town|roda': { km: 36, min: 50, kmDisplay: 'כ-36 ק"מ', timeDisplay: "~50 דק'" },
+            'corfu-town|sidari': { km: 37, min: 50, kmDisplay: 'כ-37 ק"מ', timeDisplay: "~50 דק'" },
+            'corfu-town|kassiopi': { km: 35, min: 55, kmDisplay: 'כ-35 ק"מ', timeDisplay: "~55 דק'" },
+            'acharavi|corfu-town': { km: 44, min: 60, kmDisplay: 'כ-44 ק"מ', timeDisplay: '~1 שעה' },
+            'corfu-town|kavos': { km: 46, min: 67, kmDisplay: 'כ-46 ק"מ', timeDisplay: '~1 שעה עד 1:15' },
             'barbati|gouvia': { km: 11, min: 18 },
             'gouvia|nissaki': { km: 13, min: 23 },
             'gouvia|kassiopi': { km: 26, min: 43 },
@@ -206,19 +233,92 @@ window.DESTINATIONS.corfu = {
         ]
     },
 
-    // Phase 2 slot: the About / Trip Planning / Health & Safety / Language
-    // tabs stay Corfu-only static HTML in index.html for Phase 1 (see
-    // _audit/ for the Phase 2 migration plan). This object exists now so
-    // Phase 2 has a shape to land in without another architectural pass —
-    // those remaining fields are left null on purpose, unused by any
-    // renderer yet. faq is migrated: see js/corfu-faq.js / js/faq-filters.js.
-    // activities is migrated: see js/corfu-activities.js / js/activities.js.
+    // Phase 2 slot: the About / Trip Planning / Language tabs stay
+    // Corfu-only static HTML in index.html for Phase 1 (see _audit/ for the
+    // Phase 2 migration plan) except where noted below. faq is migrated:
+    // see js/corfu-faq.js / js/faq-filters.js. activities is migrated: see
+    // js/corfu-activities.js / js/activities.js. healthSafety is migrated:
+    // see js/health-safety.js. It backs BOTH the #emergency-modal-backdrop
+    // quick-access modal (reachable from every tab via #emergency-fab-btn)
+    // and the #health-emergency block inside the Health & Safety tab —
+    // those two used to be independently hardcoded copies of the exact
+    // same numbers/hospital info (index.html even carried a comment
+    // admitting it), now a single source. The two pre-migration copies had
+    // already drifted slightly by the time this was written — see
+    // js/health-safety.js's header comment for exactly what differed and
+    // which version was kept.
     editorial: {
-        about: null,
-        tripPlanning: null,
-        healthSafety: null,
+        about: window.CORFU_ABOUT,
+        // Object (not the bare array) on purpose: later hybrid Trip
+        // Planning pieces (accommodation, budget, tipping, transport, etc.)
+        // can add sibling fields here without another restructure. Only
+        // the monthly weather table is migrated so far — see
+        // js/corfu-weather.js / js/trip-planning.js.
+        tripPlanning: { weather: window.CORFU_WEATHER },
         language: null,
         activities: window.CORFU_ACTIVITIES,
-        faq: window.CORFU_FAQ
+        faq: window.CORFU_FAQ,
+        healthSafety: {
+            // Rendered compactly (label only, no sublabel) in the
+            // emergency-modal's 2x2 grid, and fully (icon + label +
+            // sublabel) in the Health & Safety tab's larger tiles — see
+            // js/health-safety.js. `label` here is the Health & Safety
+            // tab's original wording, used as the single source of truth:
+            // cross-checking the two pre-migration hardcoded copies found
+            // the 112 entry had already drifted between them (the modal
+            // said "חירום כללי", the tab said "מוקד חירום כללי" — the
+            // other three numbers matched exactly). The tab's fuller
+            // wording was kept.
+            emergencyNumbers: [
+                { number: '112', icon: '🆘', label: 'מוקד חירום כללי', sublabel: '(אירופאי, עונה באנגלית)' },
+                { number: '100', icon: '👮', label: 'משטרה', sublabel: '(Police)' },
+                { number: '166', icon: '🚑', label: 'אמבולנס', sublabel: '(Ambulance)' },
+                { number: '199', icon: '🚒', label: 'מכבי אש', sublabel: '(Fire Brigade)' }
+            ],
+            touristPolice: {
+                number: '171',
+                label: 'משטרת התיירות',
+                description: 'משטרת התיירות. הכתובת שלכם לכל דיווח על גניבה, אובדן מסמכים, או סכסוך עסקי עם ספק מקומי.'
+            },
+            hospitalsIntro: 'רמת הרפואה בקורפו טובה מאוד. למקרי חירום קריטיים קיים בית חולים ציבורי, ולמקרים קלים יותר מומלץ לגשת למרפאות פרטיות או להזמין רופא למלון.',
+            hospitals: [
+                {
+                    name: 'Corfu General Hospital',
+                    tag: 'ציבורי / חירום',
+                    // Full wording (Health & Safety tab). The modal used a
+                    // shorter version — see shortDescription below; these
+                    // two had genuinely different text pre-migration (not
+                    // just different styling), so both are kept rather
+                    // than collapsing to one.
+                    description: 'בית החולים המרכזי של האי ("Agia Eirini"), בכתובת Kontokali. חדר מיון פתוח 24/7. ממוקם במרחק נסיעה קצר מהעיר העתיקה.',
+                    shortDescription: 'בית החולים המרכזי של האי ("Agia Eirini"), Kontokali. חדר מיון 24/7.',
+                    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Corfu+General+Hospital',
+                    phone: '+302661360400',
+                    phoneDisplay: '26613-60400',
+                    // Tab-only suffix on the phone link ("26613-60400 (מוקד
+                    // מרכזי)"); the modal shows just the bare number.
+                    phoneNote: '(מוקד מרכזי)',
+                    note: '⚠️ מספרי טלפון ושעות מרפאות עשויים להתעדכן - מומלץ לאמת מול corfuhospital.gr לפני הנסיעה.',
+                    // Only Corfu General appears in the compact modal (it
+                    // only ever referenced one hospital); Corfu Medica is
+                    // tab-only.
+                    showInModal: true
+                },
+                {
+                    name: 'Corfu Medica',
+                    tag: 'פרטי / תיירים',
+                    description: 'מרפאה פרטית רב-תחומית המיועדת בעיקר לתיירים ולגולים. עובדת בהסדר עם מרבית חברות הביטוח הבינלאומיות ומספקת שירות באנגלית מצוינת.',
+                    showInModal: false
+                }
+            ],
+            // The Health & Safety tab's insurance tip box. Note: js/ui.js's
+            // EMERGENCY_INSURANCE_FALLBACK_TEXT constant (used by the modal
+            // when window.TRIP_PRIVATE has no insurance info) already holds
+            // this exact same string as its own fallback — a separate,
+            // pre-existing duplication outside this migration's scope
+            // (that constant drives dynamic TRIP_PRIVATE-aware logic, not
+            // a hardcoded index.html copy), left untouched here.
+            insuranceReminderHtml: '💡 טיפ חשוב: זכרו תמיד ליצור קשר עם מוקד החירום של חברת ביטוח הנסיעות שלכם מיד לפני או אחרי קבלת טיפול רפואי להסדרת התשלומים!'
+        }
     }
 };

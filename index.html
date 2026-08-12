@@ -214,36 +214,13 @@
                 <button onclick="closeEmergencyModal()" aria-label="סגירה" class="gt-text-300 gt-hover-700 text-2xl leading-none px-2">×</button>
             </div>
 
-            <div class="grid grid-cols-2 gap-3 mb-4">
-                <a href="tel:112" class="gt-bg-accent-soft p-3 rounded-xl text-center border gt-border-accent gt-hover-accent-soft transition-colors">
-                    <div class="font-black text-2xl gt-text-accent">112</div>
-                    <div class="text-xs gt-text-accent font-bold">חירום כללי</div>
-                </a>
-                <a href="tel:100" class="gt-bg-accent-soft p-3 rounded-xl text-center border gt-border-accent gt-hover-accent-soft transition-colors">
-                    <div class="font-black text-2xl gt-text-accent">100</div>
-                    <div class="text-xs gt-text-accent font-bold">משטרה</div>
-                </a>
-                <a href="tel:166" class="gt-bg-accent-soft p-3 rounded-xl text-center border gt-border-accent gt-hover-accent-soft transition-colors">
-                    <div class="font-black text-2xl gt-text-accent">166</div>
-                    <div class="text-xs gt-text-accent font-bold">אמבולנס</div>
-                </a>
-                <a href="tel:199" class="gt-bg-accent-soft p-3 rounded-xl text-center border gt-border-accent gt-hover-accent-soft transition-colors">
-                    <div class="font-black text-2xl gt-text-accent">199</div>
-                    <div class="text-xs gt-text-accent font-bold">מכבי אש</div>
-                </a>
-            </div>
-            <a href="tel:171" class="block gt-bg-accent text-white p-3 rounded-xl text-center mb-4 gt-hover-accent-solid transition-colors">
-                <span class="font-bold">171 - משטרת התיירות</span>
-            </a>
-
-            <div class="bg-white p-4 rounded-xl border gt-border-hair mb-4">
-                <h5 class="font-bold gt-text-900 mb-1">Corfu General Hospital</h5>
-                <p class="text-xs gt-text-500 mb-2">בית החולים המרכזי של האי ("Agia Eirini"), Kontokali. חדר מיון 24/7.</p>
-                <div class="flex flex-wrap gap-3">
-                    <a href="https://www.google.com/maps/search/?api=1&query=Corfu+General+Hospital" class="inline-flex items-center gap-1 gt-text-accent font-semibold text-sm hover:underline"><span>📍</span> ניווט</a>
-                    <a href="tel:+302661360400" class="inline-flex items-center gap-1 gt-text-accent font-semibold text-sm hover:underline"><span>☎️</span> 26613-60400</a>
-                </div>
-            </div>
+            <!-- Filled by renderEmergencyModal() (js/health-safety.js) from
+                 window.DESTINATION.editorial.healthSafety - the SAME data
+                 the Health & Safety tab's fuller cards use (see
+                 #health-hospitals-col / #health-emergency-numbers-col
+                 below), replacing what used to be two independently
+                 hand-maintained copies of the same numbers/hospital info. -->
+            <div id="emergency-modal-numbers"></div>
 
             <div id="emergency-modal-insurance" class="text-xs font-bold gt-text-accent gt-bg-accent-soft p-3 rounded-lg border gt-border-accent"></div>
 
@@ -416,28 +393,11 @@
     </div>
 
     <!-- Regions comparison grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
-        <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 p-6 border gt-border-hair hover-card premium-card">
-            <span class="inline-block gt-bg-sunken gt-text-700 text-xs font-bold px-2.5 py-1 rounded-full mb-3">צפון</span>
-            <h4 class="text-lg font-bold gt-text-900 mb-2">🏔️ צוקי חימר ותעלות טורקיז</h4>
-            <p class="text-sm gt-text-500 leading-relaxed">הנוף הכי דרמטי באי: צוקי חימר לבנים (כף דראסטיס), מים בגוון טורקיז עז ותצורות סלע כמו תעלת האהבה. פחות מתאים למשפחות עם פעוטות בגלל הגישה התלולה, אידיאלי לצלמים.</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 p-6 border gt-border-hair hover-card premium-card">
-            <span class="inline-block gt-bg-sunken gt-text-700 text-xs font-bold px-2.5 py-1 rounded-full mb-3">מזרח</span>
-            <h4 class="text-lg font-bold gt-text-900 mb-2">🏖️ חופי חלוקים ומים רגועים</h4>
-            <p class="text-sm gt-text-500 leading-relaxed">מוגן מרוחות ולכן הים כאן חם ורגוע במיוחד - האזור האהוב על משפחות. כפרים ציוריים כמו קלאמי וברבטי, קרוב מאוד לקורפו טאון ולנמל התעופה.</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 p-6 border gt-border-hair hover-card premium-card">
-            <span class="inline-block gt-bg-sunken gt-text-700 text-xs font-bold px-2.5 py-1 rounded-full mb-3">מערב</span>
-            <h4 class="text-lg font-bold gt-text-900 mb-2">🌅 שקיעות אגדיות, ים קריר</h4>
-            <p class="text-sm gt-text-500 leading-relaxed">חשוף לגלי הים היוני הפתוח - המים קרירים וגליים יותר, אך הנוף פראי ובלתי נשכח. כאן נמצאות חלק מהשקיעות המצולמות ביותר ביוון, בפלאוקסטריצה ובלוגאס.</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 p-6 border gt-border-hair hover-card premium-card">
-            <span class="inline-block gt-bg-sunken gt-text-700 text-xs font-bold px-2.5 py-1 rounded-full mb-3">דרום</span>
-            <h4 class="text-lg font-bold gt-text-900 mb-2">🏜️ דיונות חול וחופים אינסופיים</h4>
-            <p class="text-sm gt-text-500 leading-relaxed">שטוח, פחות תיירותי ומפתיע: דיונות חול ליד אגם קוריסיון, חופים ארוכים ורחבים ואווירה צעירה יותר. אידיאלי לספורט ימי כמו קייט-סרפינג.</p>
-        </div>
-    </div>
+    <!-- Filled by renderAboutRegions() (js/about.js) from
+         window.DESTINATION.editorial.about.regions rather than hardcoded
+         here, so a different destination's own regions render instead of
+         Corfu's four. -->
+    <div id="about-regions-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 max-w-6xl mx-auto"></div>
 
     <!-- Driving tips (teaser) -->
     <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg p-8 border gt-border-hair premium-card">
@@ -816,17 +776,9 @@
                          <th class="p-4 font-bold border-b gt-border-accent">מה מצפה לכם?</th>
                      </tr>
                  </thead>
-                 <tbody class="text-sm gt-text-700">
-                     <tr class="border-b gt-hover-sunken transition-colors"><td class="p-4 font-semibold gt-text-900">ינואר - פברואר</td><td class="p-4 text-center">14°</td><td class="p-4 text-center">15°</td><td class="p-4 text-center">12-14</td><td class="p-4">חורפי, קר וגשום מאוד. האי בתרדמת חורף ורוב בתי העסק לתיירים סגורים.</td></tr>
-                     <tr class="border-b gt-hover-sunken transition-colors"><td class="p-4 font-semibold gt-text-900">מרץ</td><td class="p-4 text-center">16°</td><td class="p-4 text-center">15°</td><td class="p-4 text-center">9</td><td class="p-4">ניצני אביב, האי פורח וירוק בצורה מרהיבה, אך עדיין לא מתאים לרחצה בים.</td></tr>
-                     <tr class="border-b gt-hover-sunken transition-colors"><td class="p-4 font-semibold gt-text-900">אפריל</td><td class="p-4 text-center">19°</td><td class="p-4 text-center">16°</td><td class="p-4 text-center">7</td><td class="p-4">מזג אוויר אידיאלי לטיולי טבע ורגליים. חג הפסחא נחגג בחודש זה והעיר מלאה.</td></tr>
-                     <tr class="border-b gt-bg-accent-soft gt-hover-accent-soft transition-colors"><td class="p-4 font-semibold gt-text-accent">מאי</td><td class="p-4 text-center font-bold">24°</td><td class="p-4 text-center">19°</td><td class="p-4 text-center">4</td><td class="p-4 font-medium">פתיחת העונה הרשמית! חמים ונעים במהלך היום, ערבים קרירים. הים עדיין קריר יחסית.</td></tr>
-                     <tr class="border-b gt-bg-accent-soft gt-hover-accent-soft transition-colors"><td class="p-4 font-semibold gt-text-accent">יוני</td><td class="p-4 text-center font-bold">28°</td><td class="p-4 text-center font-bold">23°</td><td class="p-4 text-center">2</td><td class="p-4 font-bold gt-text-accent">אחד החודשים המומלצים! חם מספיק לבטן-גב, המים נעימים, ואין עומס תיירים מוגזם.</td></tr>
-                     <tr class="border-b gt-bg-accent-soft gt-hover-accent-soft transition-colors"><td class="p-4 font-semibold gt-text-accent">יולי - אוגוסט</td><td class="p-4 text-center font-bold gt-text-accent">32°+</td><td class="p-4 text-center font-bold gt-text-accent">26°</td><td class="p-4 text-center">0-1</td><td class="p-4 font-medium gt-text-accent">שיא הקיץ. חם מאוד, לח ועמוס במיליוני מבקרים. המים בטמפרטורה נעימה ומזמינה.</td></tr>
-                     <tr class="border-b gt-bg-accent-soft gt-hover-accent-soft transition-colors"><td class="p-4 font-semibold gt-text-accent">ספטמבר</td><td class="p-4 text-center font-bold">28°</td><td class="p-4 text-center font-bold gt-text-accent">25°</td><td class="p-4 text-center">5</td><td class="p-4 font-bold gt-text-accent">החודש המנצח של קורפו. הים אגר חום כל הקיץ, עומס המבקרים יורד ומזג האוויר נעים.</td></tr>
-                     <tr class="border-b gt-hover-sunken transition-colors"><td class="p-4 font-semibold gt-text-900">אוקטובר</td><td class="p-4 text-center">23°</td><td class="p-4 text-center">22°</td><td class="p-4 text-center">9</td><td class="p-4">סוף העונה. ימים חמים לסירוגין עם סופות וגשמים פתאומיים. מחירים אטרקטיביים.</td></tr>
-                     <tr class="gt-hover-sunken transition-colors"><td class="p-4 font-semibold gt-text-900">נובמבר - דצמבר</td><td class="p-4 text-center">16°</td><td class="p-4 text-center">18°</td><td class="p-4 text-center">15</td><td class="p-4">חזרה לעונת החורף. רטוב, קר ושקט מאוד ברחבי האי.</td></tr>
-                 </tbody>
+                 <!-- Filled by renderWeatherTable() (js/trip-planning.js) from
+                      window.DESTINATION.editorial.tripPlanning.weather. -->
+                 <tbody class="text-sm gt-text-700"></tbody>
              </table>
          </div>
     </div>
@@ -1057,18 +1009,11 @@
                             <th class="p-2 rounded-tl-lg">זמן נהיגה</th>
                         </tr>
                     </thead>
-                    <tbody class="gt-text-accent">
-                        <tr class="border-b gt-border-accent"><td class="p-2 font-semibold">פלקאס (Pelekas)</td><td class="p-2">מרכז/מערב</td><td class="p-2">כ-13 ק"מ</td><td class="p-2">~20 דק'</td></tr>
-                        <tr class="border-b gt-border-accent gt-bg-accent-soft/50"><td class="p-2 font-semibold">אגיוס גורדיוס</td><td class="p-2">מערב</td><td class="p-2">כ-18 ק"מ</td><td class="p-2">~35 דק'</td></tr>
-                        <tr class="border-b gt-border-accent"><td class="p-2 font-semibold">ברבטי (Barbati)</td><td class="p-2">מזרח</td><td class="p-2">כ-20 ק"מ</td><td class="p-2">~30 דק'</td></tr>
-                        <tr class="border-b gt-border-accent gt-bg-accent-soft/50"><td class="p-2 font-semibold">ניסאקי (Nissaki)</td><td class="p-2">מזרח</td><td class="p-2">כ-22 ק"מ</td><td class="p-2">~35 דק'</td></tr>
-                        <tr class="border-b gt-border-accent"><td class="p-2 font-semibold">פלאוקסטריצה</td><td class="p-2">צפון-מערב</td><td class="p-2">כ-25 ק"מ</td><td class="p-2">~35-40 דק'</td></tr>
-                        <tr class="border-b gt-border-accent gt-bg-accent-soft/50"><td class="p-2 font-semibold">רודה (Roda)</td><td class="p-2">צפון</td><td class="p-2">כ-36 ק"מ</td><td class="p-2">~50 דק'</td></tr>
-                        <tr class="border-b gt-border-accent"><td class="p-2 font-semibold">סידארי (Sidari)</td><td class="p-2">צפון-מערב</td><td class="p-2">כ-37 ק"מ</td><td class="p-2">~50 דק'</td></tr>
-                        <tr class="border-b gt-border-accent gt-bg-accent-soft/50"><td class="p-2 font-semibold">קאסיופי (Kassiopi)</td><td class="p-2">צפון-מזרח</td><td class="p-2">כ-35 ק"מ</td><td class="p-2">~55 דק'</td></tr>
-                        <tr class="border-b gt-border-accent"><td class="p-2 font-semibold">אכרווי (Acharavi)</td><td class="p-2">צפון</td><td class="p-2">כ-44 ק"מ</td><td class="p-2">~1 שעה</td></tr>
-                        <tr><td class="p-2 font-semibold">קאבוס (Kavos)</td><td class="p-2">דרום</td><td class="p-2">כ-46 ק"מ</td><td class="p-2">~1 שעה עד 1:15</td></tr>
-                    </tbody>
+                    <!-- Filled by renderDrivingTimesTable() (js/tools.js) from
+                         window.DESTINATION.distanceTool (the SAME data the
+                         interactive calculator below already uses) rather
+                         than a second hardcoded copy. -->
+                    <tbody id="plan-driving-times-tbody" class="gt-text-accent"></tbody>
                 </table>
             </div>
             <p class="text-xs gt-text-accent mt-3">💡 <strong>טיפ תכנון:</strong> קורפו הוא אי מוארך, לא עגול - נסיעה בין שתי נקודות "קיצוניות" (למשל קאבוס בדרום לקאסיופי בצפון) עלולה לקחת כ-2 שעות ברציפות. עדיף לתכנן ימי טיול לפי אזור אחד (צפון, מרכז/מערב, או דרום) ולא לקפוץ בין קצוות האי באותו יום.</p>
@@ -1197,70 +1142,16 @@
         <h3 class="text-3xl font-bold gt-text-accent mb-6 flex items-center gap-3"><span class="text-4xl">🚑</span> בריאות, בטיחות ומספרי חירום</h3>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="space-y-5">
-                <div>
-                    <h4 class="text-2xl font-bold gt-text-900 mb-2">בתי חולים ומרפאות</h4>
-                    <p class="text-sm gt-text-500 mb-4">רמת הרפואה בקורפו טובה מאוד. למקרי חירום קריטיים קיים בית חולים ציבורי, ולמקרים קלים יותר מומלץ לגשת למרפאות פרטיות או להזמין רופא למלון.</p>
-                </div>
-                
-                <div class="bg-white p-5 rounded-xl border gt-border-hair shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center justify-between mb-2">
-                        <h5 class="font-bold gt-text-900 text-lg">Corfu General Hospital</h5>
-                        <span class="gt-bg-accent-soft gt-text-accent text-xs px-2 py-1 rounded font-bold">ציבורי / חירום</span>
-                    </div>
-                    <p class="text-sm gt-text-500 mb-3">בית החולים המרכזי של האי ("Agia Eirini"), בכתובת Kontokali. חדר מיון פתוח 24/7. ממוקם במרחק נסיעה קצר מהעיר העתיקה.</p>
-                    <div class="flex flex-wrap gap-4 mb-2">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Corfu+General+Hospital" class="inline-flex items-center gap-1 gt-text-accent font-semibold text-sm hover:underline"><span>📍</span> נווט ב-Google Maps</a>
-                        <a href="tel:+302661360400" class="inline-flex items-center gap-1 gt-text-accent font-semibold text-sm hover:underline"><span>☎️</span> 26613-60400 (מוקד מרכזי)</a>
-                    </div>
-                    <p class="text-[11px] gt-text-300">⚠️ מספרי טלפון ושעות מרפאות עשויים להתעדכן - מומלץ לאמת מול corfuhospital.gr לפני הנסיעה.</p>
-                </div>
-                
-                 <div class="bg-white p-5 rounded-xl border gt-border-hair shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex items-center justify-between mb-2">
-                        <h5 class="font-bold gt-text-900 text-lg">Corfu Medica</h5>
-                        <span class="gt-bg-accent-soft gt-text-accent text-xs px-2 py-1 rounded font-bold">פרטי / תיירים</span>
-                    </div>
-                    <p class="text-sm gt-text-500">מרפאה פרטית רב-תחומית המיועדת בעיקר לתיירים ולגולים. עובדת בהסדר עם מרבית חברות הביטוח הבינלאומיות ומספקת שירות באנגלית מצוינת.</p>
-                </div>
-                <div class="text-xs font-bold gt-text-accent gt-bg-accent-soft p-3 rounded-lg border gt-border-accent">
-                    💡 טיפ חשוב: זכרו תמיד ליצור קשר עם מוקד החירום של חברת ביטוח הנסיעות שלכם מיד לפני או אחרי קבלת טיפול רפואי להסדרת התשלומים!
-                </div>
-            </div>
+            <!-- Both columns filled by renderHealthSafetyEmergency()
+                 (js/health-safety.js) from window.DESTINATION.editorial.healthSafety
+                 - the SAME data the emergency modal (#emergency-modal-numbers
+                 above) reads, replacing what used to be two independently
+                 hand-maintained copies (which had actually drifted from
+                 each other in three places - see the data file's own
+                 comments for what was found and kept). -->
+            <div class="space-y-5" id="health-hospitals-col"></div>
 
-            <div class="space-y-4">
-                <h4 class="text-2xl font-bold gt-text-900 mb-2">מספרי חירום (חיוג חינם מכל טלפון)</h4>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="gt-bg-accent-soft p-6 rounded-xl text-center border gt-border-accent gt-hover-accent-soft transition-colors">
-                        <div class="text-4xl mb-2">🆘</div>
-                        <div class="font-black text-4xl gt-text-accent mb-1">112</div>
-                        <div class="text-sm gt-text-accent font-bold">מוקד חירום כללי<br>(אירופאי, עונה באנגלית)</div>
-                    </div>
-                    <div class="gt-bg-accent-soft p-6 rounded-xl text-center border gt-border-accent gt-hover-accent-soft transition-colors">
-                        <div class="text-4xl mb-2">👮</div>
-                        <div class="font-black text-4xl gt-text-accent mb-1">100</div>
-                        <div class="text-sm gt-text-accent font-bold">משטרה<br>(Police)</div>
-                    </div>
-                    <div class="gt-bg-accent-soft p-6 rounded-xl text-center border gt-border-accent gt-hover-accent-soft transition-colors">
-                        <div class="text-4xl mb-2">🚑</div>
-                        <div class="font-black text-4xl gt-text-accent mb-1">166</div>
-                        <div class="text-sm gt-text-accent font-bold">אמבולנס<br>(Ambulance)</div>
-                    </div>
-                    <div class="gt-bg-accent-soft p-6 rounded-xl text-center border gt-border-accent gt-hover-accent-soft transition-colors">
-                        <div class="text-4xl mb-2">🚒</div>
-                        <div class="font-black text-4xl gt-text-accent mb-1">199</div>
-                        <div class="text-sm gt-text-accent font-bold">מכבי אש<br>(Fire Brigade)</div>
-                    </div>
-                </div>
-                
-                <div class="gt-bg-accent text-white p-5 rounded-xl text-center shadow-md flex items-center justify-center gap-4 mt-2">
-                    <div class="text-3xl">🛡️</div>
-                    <div class="text-right">
-                        <div class="font-bold text-2xl text-white">חייגו 171</div>
-                        <div class="text-sm text-white/95 mt-1">משטרת התיירות. הכתובת שלכם לכל דיווח על גניבה, אובדן מסמכים, או סכסוך עסקי עם ספק מקומי.</div>
-                    </div>
-                </div>
-            </div>
+            <div class="space-y-4" id="health-emergency-numbers-col"></div>
         </div>
     </div>
 
@@ -1745,6 +1636,8 @@
     <script src="js/itinerary-data.js" defer></script>
     <script src="js/corfu-faq.js" defer></script>
     <script src="js/corfu-activities.js" defer></script>
+    <script src="js/corfu-weather.js" defer></script>
+    <script src="js/corfu-about.js" defer></script>
     <!-- Destination data layer. corfu.js/testdest.js/empty.js wrap the
          location + itinerary data above (and testdest's own small data
          files) into window.DESTINATIONS.<id>; destination-registry.js then
@@ -1765,6 +1658,8 @@
     <script src="js/testdest-itinerary.js" defer></script>
     <script src="js/testdest-faq.js" defer></script>
     <script src="js/testdest-activities.js" defer></script>
+    <script src="js/testdest-weather.js" defer></script>
+    <script src="js/testdest-about.js" defer></script>
     <script src="data/destinations/testdest.js" defer></script>
     <script src="data/destinations/empty.js" defer></script>
     <script src="js/destination-registry.js" defer></script>
@@ -1773,6 +1668,9 @@
     <script src="js/search.js" defer></script>
     <script src="js/faq-filters.js" defer></script>
     <script src="js/activities.js" defer></script>
+    <script src="js/health-safety.js" defer></script>
+    <script src="js/trip-planning.js" defer></script>
+    <script src="js/about.js" defer></script>
     <script src="js/favorites.js" defer></script>
     <script src="js/notes-favorites.js" defer></script>
     <script src="js/solar.js" defer></script>
