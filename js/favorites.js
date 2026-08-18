@@ -19,24 +19,23 @@ function saveFavorites(favArr) {
     }
 }
 
-function toggleFavorite(btnEl) {
-    const card = btnEl.closest('[data-id]');
-    if (!card) return;
-    const id = card.getAttribute('data-id');
-    let favorites = getFavorites();
+// isFavorite() + toggleFavoriteId() are the id-level primitives every
+// favouriting surface shares (legacy Activities cards, Explore row/sheet
+// save buttons, the Saved tab). Everything else in this file is UI: reading
+// an id off a specific piece of markup and painting the result back.
+function isFavoriteId(id) {
+    return getFavorites().includes(id);
+}
 
+function toggleFavoriteId(id) {
+    let favorites = getFavorites();
+    let isFav;
     if (favorites.includes(id)) {
         favorites = favorites.filter(f => f !== id);
-        btnEl.textContent = '🤍';
-        btnEl.classList.remove('text-red-500', 'bg-red-50');
-        btnEl.classList.add('text-gray-400', 'bg-gray-50');
-        btnEl.setAttribute('aria-pressed', 'false');
+        isFav = false;
     } else {
         favorites.push(id);
-        btnEl.textContent = '❤️';
-        btnEl.classList.remove('text-gray-400', 'bg-gray-50');
-        btnEl.classList.add('text-red-500', 'bg-red-50');
-        btnEl.setAttribute('aria-pressed', 'true');
+        isFav = true;
     }
     saveFavorites(favorites);
     updateDashFavCount();
@@ -44,11 +43,47 @@ function toggleFavorite(btnEl) {
     // Push this change to Supabase in the background (Step 7) - never
     // blocks or reverts the local toggle above, even if it fails.
     if (typeof queueItemStateSync === 'function') queueItemStateSync(id);
+    return isFav;
+}
 
-    // Small tactile confirmation that the tap registered
+// Paints one save/heart button's visuals + a11y state. Three markup shapes
+// share this: the legacy large .favorite-btn (Tailwind color-pair classes),
+// the compact .gt-explore-icon-btn used by Explore rows and the Saved tab
+// (a single --saved modifier class, styled in design-system.css), and the
+// explore sheet's full-width .gt-btn--secondary "שמירה" button (label text
+// carries the state, no colour swap - it already has its own resting style).
+function setFavoriteHeartUI(btnEl, isFav) {
+    if (!btnEl) return;
+    btnEl.setAttribute('aria-pressed', isFav ? 'true' : 'false');
+    if (btnEl.classList.contains('gt-explore-icon-btn')) {
+        btnEl.textContent = isFav ? '❤️' : '🤍';
+        btnEl.classList.toggle('gt-explore-icon-btn--saved', isFav);
+    } else if (btnEl.classList.contains('favorite-btn')) {
+        btnEl.textContent = isFav ? '❤️' : '🤍';
+        btnEl.classList.toggle('text-red-500', isFav);
+        btnEl.classList.toggle('bg-red-50', isFav);
+        btnEl.classList.toggle('text-gray-400', !isFav);
+        btnEl.classList.toggle('bg-gray-50', !isFav);
+    } else {
+        btnEl.textContent = isFav ? '❤️ נשמר' : '🤍 שמירה';
+    }
+}
+
+function heartPop(btnEl) {
+    // Small tactile confirmation that the tap registered - restarts even if
+    // toggled twice quickly.
     btnEl.classList.remove('heart-pop');
-    void btnEl.offsetWidth; // restart the animation even if toggled twice quickly
+    void btnEl.offsetWidth;
     btnEl.classList.add('heart-pop');
+}
+
+function toggleFavorite(btnEl) {
+    const card = btnEl.closest('[data-id]');
+    if (!card) return;
+    const id = card.getAttribute('data-id');
+    const isFav = toggleFavoriteId(id);
+    setFavoriteHeartUI(btnEl, isFav);
+    heartPop(btnEl);
 
     // If the Activities tab is currently filtered to favourites, refresh it
     // live so an unfavourited card disappears immediately.
@@ -61,6 +96,31 @@ function toggleFavorite(btnEl) {
     // the bug stayed invisible in normal use.
     if (activityFavoritesOnly) showActivityFavoritesOnly(true);
 }
+
+// Explore rows, the Explore detail sheet, and the Saved tab all favourite a
+// window.DESTINATION.locations record (data-loc-id, not the legacy
+// data-id) - this is their shared handler. Beyond the toggle itself, it
+// keeps every other on-screen copy of the same id's save button in sync
+// (a place can appear as an Explore row AND in the Saved tab at once), and
+// refreshes the Saved tab live if it's the one currently open.
+function toggleExploreFavorite(id, btnEl) {
+    const isFav = toggleFavoriteId(id);
+    if (btnEl) {
+        setFavoriteHeartUI(btnEl, isFav);
+        heartPop(btnEl);
+    }
+    document.querySelectorAll(`[data-loc-id="${CSS.escape(id)}"] [data-explore-action="save"]`).forEach(el => {
+        if (el !== btnEl) setFavoriteHeartUI(el, isFav);
+    });
+    const sheet = document.getElementById('explore-sheet');
+    const sheetSaveBtn = document.getElementById('explore-sheet-save-btn');
+    if (sheet && sheetSaveBtn && sheet.getAttribute('data-sheet-loc-id') === id) {
+        setFavoriteHeartUI(sheetSaveBtn, isFav);
+    }
+    if (typeof refreshSavedTabIfActive === 'function') refreshSavedTabIfActive();
+}
+window.toggleExploreFavorite = toggleExploreFavorite;
+window.isFavoriteId = isFavoriteId;
 
 // --- "Favourites only" view for the Activities tab --------------------------
 //
@@ -122,18 +182,19 @@ function showActivityFavoritesOnly(on) {
 window.showActivityFavoritesOnly = showActivityFavoritesOnly;
 window.isActivityFavoritesOnly = () => activityFavoritesOnly;
 
-// Applies saved favorite state to every heart button on the page (all sections, not just beaches)
+// Applies saved favorite state to every heart button on the page - the
+// legacy Activities cards' .favorite-btn, and every Explore/Saved row's
+// compact save button.
 function initFavoriteButtons() {
     const favorites = getFavorites();
     document.querySelectorAll('[data-id]').forEach(card => {
         const id = card.getAttribute('data-id');
         const btn = card.querySelector('.favorite-btn');
-        if (btn && favorites.includes(id)) {
-            btn.textContent = '❤️';
-            btn.classList.remove('text-gray-400', 'bg-gray-50');
-            btn.classList.add('text-red-500', 'bg-red-50');
-            btn.setAttribute('aria-pressed', 'true');
-        }
+        if (btn) setFavoriteHeartUI(btn, favorites.includes(id));
+    });
+    document.querySelectorAll('[data-loc-id] [data-explore-action="save"]').forEach(btn => {
+        const id = btn.closest('[data-loc-id]').getAttribute('data-loc-id');
+        setFavoriteHeartUI(btn, favorites.includes(id));
     });
 }
 

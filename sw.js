@@ -9,7 +9,7 @@
 // Bump this on every deploy that changes any APP_SHELL file — the SW
 // cache is otherwise not invalidated, and returning visitors would stay
 // pinned to the old cached JS/CSS indefinitely.
-const CACHE_NAME = 'corfu-guide-v29';
+const CACHE_NAME = 'corfu-guide-v30';
 
 // Photos live in their own cache so they can be evicted (and capped)
 // independently of the app shell, and so bumping CACHE_NAME for a code
@@ -53,8 +53,10 @@ const APP_SHELL = [
     // it does not sink the rest of the precache.
     'js/trip-private.js',
     'js/dashboard.js',
+    'js/today.js',
     'js/map.js',
     'js/explore.js',
+    'js/saved.js',
     'js/tools.js',
     'js/ui.js',
     'js/init.js',

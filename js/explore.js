@@ -362,6 +362,7 @@ function exploreRowCardHtml(d, catKey) {
         </div>
       </button>
       <div class="gt-explore-row__actions">
+        <button type="button" class="gt-explore-icon-btn" data-explore-action="save" title="שמירה" aria-label="שמירת ${escapeAttr(name)} במועדפים" aria-pressed="false">🤍</button>
         <button type="button" class="gt-explore-icon-btn" data-explore-action="map" title="הצג במפה" aria-label="הצג את ${escapeAttr(name)} במפה">${GT_ICON_MAP}</button>
         ${showReserve ? `<button type="button" class="gt-explore-icon-btn gt-explore-icon-btn--reserve" data-explore-action="reserve" title="הזמנת מקום" aria-label="הזמנת מקום ב-${escapeAttr(name)}">${GT_ICON_PHONE} הזמן</button>` : ''}
       </div>
@@ -527,9 +528,15 @@ window.renderExploreTab = renderExploreTab;
 // above) - each branch below is reached by its own distinct element, so
 // there's no double-trigger risk to guard against with stopPropagation()
 // the way the old nested-role="button" markup needed.
+// Shared by #explore-list and #saved-list (js/saved.js) - both render rows
+// with the exact same exploreRowCardHtml() markup, so one delegated
+// listener handles taps on either. The only behaviour that differs by list
+// is the map action: Explore keeps its own inline map on screen (below),
+// while Saved has no inline map of its own and jumps to the full Map tab
+// instead - same as the detail sheet's "במפה" button does everywhere.
 document.addEventListener('click', (e) => {
-    const list = document.getElementById('explore-list');
-    if (!list || !list.contains(e.target)) return;
+    const list = e.target.closest('#explore-list, #saved-list');
+    if (!list) return;
 
     const actionBtn = e.target.closest('[data-explore-action]');
     if (actionBtn) {
@@ -538,12 +545,11 @@ document.addEventListener('click', (e) => {
         const catKey = row.getAttribute('data-loc-cat');
         const id = row.getAttribute('data-loc-id');
         const action = actionBtn.getAttribute('data-explore-action');
-        // Stays on the Explore tab's inline map rather than jumping to the Map
-        // tab like the detail sheet's "במפה" button does: this button is tapped
-        // *from the list*, where keeping the surrounding rows on screen is the
-        // whole point (and at 1024px+ the inline map is already open beside the
-        // list, so a tab switch would throw away a view the user can see).
-        if (action === 'map' && typeof showOnExploreMap === 'function') showOnExploreMap(catKey, id);
+        if (action === 'save') { toggleExploreFavorite(id, actionBtn); return; }
+        if (action === 'map') {
+            if (list.id === 'saved-list' && typeof showOnHomeMap === 'function') showOnHomeMap(catKey, id);
+            else if (typeof showOnExploreMap === 'function') showOnExploreMap(catKey, id);
+        }
         if (action === 'reserve') handleExploreReserve(catKey, id);
         return;
     }
@@ -622,6 +628,8 @@ function openExploreSheet(catKey, id) {
     // bottom nav stayed on "גלה". The row cards' 🗺️ icon button still uses the
     // inline map on purpose - see the click handler above.
     const mapBtn = `<button type="button" class="gt-btn gt-btn--secondary" onclick="gtCloseExploreSheet(); showOnHomeMap('${escapeAttr(catKey)}','${escapeAttr(id)}');">${GT_ICON_MAP} במפה</button>`;
+    const isFav = typeof isFavoriteId === 'function' && isFavoriteId(id);
+    const saveBtn = `<button type="button" id="explore-sheet-save-btn" class="gt-btn gt-btn--secondary" aria-pressed="${isFav ? 'true' : 'false'}" onclick="toggleExploreFavorite('${escapeAttr(id)}', this);">${isFav ? '❤️ נשמר' : '🤍 שמירה'}</button>`;
 
     bodyEl.innerHTML = `
       ${img.src ? `<img class="gt-explore-sheet-thumb" src="${escapeAttr(img.src)}" alt="${escapeAttr(img.alt || name)}" width="640" height="360" loading="lazy" decoding="async">` : ''}
@@ -629,7 +637,7 @@ function openExploreSheet(catKey, id) {
         <span class="gt-cat-${cat.tag}-bg" style="display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:var(--gt-r-full);font-weight:700;">${cat.icon} ${cat.label}</span>
         <span class="sep">·</span><span class="gt-status ${status.cls}">${status.label}</span>
       </div>
-      <div class="gt-explore-sheet-actions">${reserveBtn}${directionsBtn}${mapBtn}</div>
+      <div class="gt-explore-sheet-actions">${saveBtn}${reserveBtn}${directionsBtn}${mapBtn}</div>
       <div id="explore-sheet-tracking"></div>
       <div class="gt-explore-sheet-body">${exploreBodyHtml(d, catKey)}</div>
       <details class="gt-explore-verified-fold">

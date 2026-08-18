@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
     } catch (e) { /* storage unavailable (private browsing, etc.) - default to first-visit behavior */ }
 
     const hashTab = getTabIdFromHash();
-    switchTab(hashTab || (isFirstVisit ? 'about' : 'itinerary'), true);
+    switchTab(hashTab || (isFirstVisit ? 'about' : 'today'), true);
     // switchTab() always syncs the URL hash to whatever tab it opens
     // (Step 12), including a synthetic default no one actually navigated
     // to - left alone, that default would get baked into the URL and then

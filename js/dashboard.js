@@ -211,6 +211,13 @@ function updateDashToday() {
         el.textContent = `יום ${dayNum}: ${ITINERARY_DAY_TITLES[dayNum] || ''}`;
         window._currentTripDayNum = dayNum;
     }
+    // Today tab (redesign) reads window._currentTripDayNum/#dash-today - both
+    // set just above. Its own live-refresh (js/ui.js switchTab()) already
+    // covers every visit; this call additionally covers the specific case of
+    // the app being *opened straight into* Today on load, where switchTab()
+    // runs before initDashboard() has had a chance to compute these values
+    // at all - see js/init.js's DOMContentLoaded handler ordering.
+    if (typeof refreshTodayTab === 'function') refreshTodayTab();
 }
 
 function updateDashFavCount() {
@@ -276,6 +283,7 @@ function fetchDashWeather() {
         valEl.textContent = '📡 לא זמין';
         subEl.textContent = 'לא הצלחנו לטעון תחזית חיה כרגע';
         if (fallbackLinkEl) fallbackLinkEl.classList.remove('hidden');
+        if (typeof refreshTodayTab === 'function') refreshTodayTab();
     };
     const timeoutId = setTimeout(showFailure, DASH_WEATHER_TIMEOUT_MS);
 
@@ -291,6 +299,7 @@ function fetchDashWeather() {
             valEl.textContent = `${icon} ${Math.round(w.temperature)}°C`;
             subEl.textContent = 'תחזית חיה כרגע (עכשיו) - לממוצעים חודשיים ראו טבלה למטה';
             if (fallbackLinkEl) fallbackLinkEl.classList.add('hidden');
+            if (typeof refreshTodayTab === 'function') refreshTodayTab();
         })
         .catch(() => {
             clearTimeout(timeoutId);

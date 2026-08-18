@@ -27,7 +27,7 @@ const io_read = (p) => fs.readFileSync(p, 'utf8');
 const SCRIPT_ORDER = [...io_read(INDEX_PATH).matchAll(/<script[^>]+src="((?:js|data)\/[^"]+)"/g)].map(m => m[1]);
 if (!SCRIPT_ORDER.length) throw new Error('smoke-test: found no js/ or data/ <script> tags in index.html');
 
-const TABS = ['home', 'about', 'dashboard', 'itinerary', 'explore', 'beaches', 'food', 'attractions', 'gems', 'activities', 'trip-planning', 'health-safety', 'language-daily', 'faq', 'guide'];
+const TABS = ['today', 'home', 'about', 'dashboard', 'itinerary', 'explore', 'saved', 'beaches', 'food', 'attractions', 'gems', 'activities', 'trip-planning', 'health-safety', 'language-daily', 'faq', 'guide'];
 
 const errors = [];
 const failures = [];

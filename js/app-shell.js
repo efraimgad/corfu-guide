@@ -18,23 +18,23 @@
 
 // -- Bottom-nav highlight state --------------------------------------------
 // Which real tab id(s) each of the 5 nav buttons should show as "current"
-// for. גלה now routes to the real 'explore' tab (Phase 4, batch 2); the old
+// for. Redesign: the primary bar is now היום/מפה/גלה/שמורים/עוד - itinerary
+// and guide moved into the "עוד" sheet (see index.html), so they
+// deliberately have NO key of their own here any more. That is what makes
+// "עוד" light up correctly while either is open: anyGroupMatched below only
+// becomes true for a tab one of the FOUR primary buttons actually claims,
+// and itinerary/guide (plus their old redirect-only ids) are no longer
+// claimed by anyone.
+//
+// גלה routes to the real 'explore' tab (Phase 4, batch 2); the old
 // beaches/food/attractions/gems/activities tab ids stay in this group too,
 // so the "גלה" button still highlights correctly if something reaches one
 // of those hidden-fallback tabs directly (e.g. a bookmarked #beaches hash).
-// מדריך now routes to the real merged 'guide' tab (js/guide.js), which
-// bundles trip-planning/health-safety/language-daily/FAQ behind a .gt-chip
-// sub-nav - see index.html's #guide section and js/guide.js.
 const GT_NAV_TAB_GROUPS = {
-    home: ['home'],
-    itinerary: ['itinerary'],
+    today: ['today'],
+    map: ['home'],
     explore: ['explore', 'beaches', 'food', 'attractions', 'gems', 'activities'],
-    // Phase 4, final batch: 'guide' is now the real merged tab id (see
-    // js/guide.js) - the old trip-planning/health-safety/language-daily/faq
-    // ids stay in this group too, since js/ui.js's switchTab() still
-    // accepts them directly (old links, bookmarks) and now redirects them
-    // into 'guide' rather than showing them standalone.
-    guide: ['guide', 'trip-planning', 'health-safety', 'language-daily', 'faq']
+    saved: ['saved']
 };
 
 function syncAppShellNav(tabId) {

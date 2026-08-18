@@ -1,7 +1,7 @@
 // Tab ids this app actually has a .tab-content section for - used to
 // validate incoming hash values (URL bar edits, bookmarks, Back/Forward)
 // before ever treating one as a tab id.
-const VALID_TAB_IDS = ['home', 'about', 'dashboard', 'itinerary', 'explore', 'beaches', 'food', 'attractions', 'gems', 'activities', 'trip-planning', 'health-safety', 'language-daily', 'faq', 'guide'];
+const VALID_TAB_IDS = ['today', 'home', 'about', 'dashboard', 'itinerary', 'explore', 'saved', 'beaches', 'food', 'attractions', 'gems', 'activities', 'trip-planning', 'health-safety', 'language-daily', 'faq', 'guide'];
 
 function getTabIdFromHash() {
     const id = location.hash.slice(1);
@@ -40,7 +40,20 @@ const CATEGORY_RENDERERS = {
     // own compact .gt-row-card list from the same CORFU_LOCATIONS data, once
     // per page load, via the same ensureTabRendered() caching as the four
     // renderers above.
-    explore: 'renderExploreTab'
+    explore: 'renderExploreTab',
+    // Today (redesign): its live content (weather/day/greeting) is NOT a
+    // one-time render - see the dedicated tabId === 'today' block in
+    // switchTab() below, which refreshes it on every visit the same way
+    // Home's map does. Listed here anyway so the very first visit gets an
+    // initial paint even before that block's own call lands.
+    //
+    // Saved (redesign) is deliberately NOT listed here: unlike every other
+    // tab, its whole point is to reflect favourites toggled from OTHER tabs
+    // (Explore, the detail sheet) - a "render once" cache would mean a
+    // favourite added while Saved wasn't open never appears on a later
+    // visit. It gets its own unconditional per-visit call below instead,
+    // same shape as Today's.
+    today: 'renderTodayTab'
 };
 const renderedTabs = new Set();
 
@@ -134,6 +147,19 @@ function switchTab(tabId, skipScroll) {
                     gtActivateHomeMap();
                     requestAnimationFrame(() => requestAnimationFrame(gtActivateHomeMap));
                 }
+            }
+            // Today's greeting/weather/day-brief are time-sensitive (a visit
+            // at 09:00 and another at 21:00 on the same day should not show
+            // the same greeting) - refreshed on every visit, not just the
+            // one-time shell render ensureTabRendered() already did above.
+            if (tabId === 'today' && typeof refreshTodayTab === 'function') {
+                refreshTodayTab();
+            }
+            // Saved: rebuilt on every visit rather than cached (see the
+            // CATEGORY_RENDERERS comment above) - it has to pick up
+            // favourites toggled elsewhere since the last time it was open.
+            if (tabId === 'saved' && typeof renderSavedTab === 'function') {
+                renderSavedTab();
             }
             // Desktop split-view (1024px+, css/design-system.css): the map
             // is always visible beside the list there, not behind a tap on

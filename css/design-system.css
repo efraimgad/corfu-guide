@@ -206,6 +206,8 @@
   --gt-accent-olive-soft: #f2f5ea;
   --gt-accent-olive-soft-strong: #e6ecd8;
   --gt-fav-text: #8e304a;
+  --gt-fav-soft: #fbe9ee;
+  --gt-fav-soft-strong: #f6d3dc;
   /* Red stays red on purpose (genuine safety/emergency signals), but the
      foreground still needs a per-theme value or it strands on the *-50/-100
      surfaces that DO flip. Hue preserved, luminance retuned. */
@@ -341,6 +343,8 @@
   --gt-accent-olive-soft: #1d2417;
   --gt-accent-olive-soft-strong: #26301d;
   --gt-fav-text: #e8899e;
+  --gt-fav-soft: #3a1d26;
+  --gt-fav-soft-strong: #4a2530;
   --gt-danger-text: #ff8a80;
 
   /* --- Translucent surfaces --- */
@@ -392,7 +396,7 @@
     --gt-primary-600-text: #5aa8dd; --gt-primary-700-text: #7cbde8;
     --gt-accent-gold-text:  #d6ad63; --gt-accent-olive-text: #a3b47a;
     --gt-accent-olive-soft: #1d2417; --gt-accent-olive-soft-strong: #26301d;
-    --gt-fav-text: #e8899e; --gt-danger-text: #ff8a80;
+    --gt-fav-text: #e8899e; --gt-fav-soft: #3a1d26; --gt-fav-soft-strong: #4a2530; --gt-danger-text: #ff8a80;
     --gt-glass-bg: rgba(24, 32, 34, 0.78); --gt-glass-bg-strong: rgba(24, 32, 34, 0.94);
     --gt-glass-hair: rgba(255, 255, 255, 0.10);
     --gt-scrim-raised: rgba(12, 17, 19, 0.82); --gt-scrim-ink: #eaeff0;
@@ -1114,6 +1118,7 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
      regardless. */
 }
 .gt-explore-icon-btn--reserve{ background:var(--gt-primary-50); color:var(--gt-primary-700); border-color:var(--gt-primary-100); }
+.gt-explore-icon-btn--saved{ background:var(--gt-fav-soft); color:var(--gt-fav-text); border-color:var(--gt-fav-soft-strong); }
 .gt-explore-icon-btn:focus-visible{ outline:2px solid var(--gt-primary-500); outline-offset:1px; }
 
 /* -- Detail sheet -- */
@@ -1205,6 +1210,19 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
    collapsed by default - so adding this content does NOT lengthen the
    default phone view by more than the brief itself.
    ========================================================================== */
+/* -- Today tab (redesign) -- reuses .gt-day-brief/.gt-day-stats/.gt-day-sun
+   below for its own teaser card and stat row (same shapes, same tokens) -
+   only the hero greeting and the mood-chip row below are new. */
+.gt-today-hero{
+  padding:var(--gt-space-2) 0 0;
+  border-bottom:1px solid var(--gt-hair);
+  padding-bottom:var(--gt-space-4);
+}
+.gt-today-mood{
+  background:var(--gt-accent-olive-soft); border-radius:var(--gt-r-lg);
+  padding:var(--gt-space-4);
+}
+
 .gt-day-brief{
   background:var(--gt-paper-raised); border:1px solid var(--gt-hair);
   border-radius:var(--gt-r-lg); padding:var(--gt-space-4);
