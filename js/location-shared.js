@@ -253,12 +253,22 @@ function gtNearHotelItems(limit) {
     const base = window.DESTINATION && window.DESTINATION.map && window.DESTINATION.map.homeBase;
     if (!base || typeof haversineKm !== 'function') return [];
     const locations = (window.DESTINATION && window.DESTINATION.locations) || {};
+    // A handful of real places are catalogued twice under two categories at
+    // the same coordinates (Phase 4 content audit - e.g. Afionas village
+    // under both attractions and gems) - deduped by rounding to ~11m so this
+    // short, high-visibility list (Map's "near you" sheet, Today's "already
+    // nearby" box) never spends two of its few slots on the same physical
+    // place. Object.keys() order keeps the same "first category wins" result
+    // js/explore.js's gtSelectMood() dedup already relies on.
+    const seenCoords = new Set();
     const all = [];
     Object.keys(locations).forEach(catKey => {
         (locations[catKey] || []).forEach(d => {
-            if (typeof d.lat === 'number' && typeof d.lon === 'number') {
-                all.push({ item: d, catKey, km: haversineKm(base.lat, base.lon, d.lat, d.lon) });
-            }
+            if (typeof d.lat !== 'number' || typeof d.lon !== 'number') return;
+            const coordKey = d.lat.toFixed(4) + ',' + d.lon.toFixed(4);
+            if (seenCoords.has(coordKey)) return;
+            seenCoords.add(coordKey);
+            all.push({ item: d, catKey, km: haversineKm(base.lat, base.lon, d.lat, d.lon) });
         });
     });
     all.sort((a, b) => a.km - b.km);

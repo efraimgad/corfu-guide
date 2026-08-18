@@ -180,12 +180,29 @@ function gtSelectMood(moodKey) {
         return;
     }
 
+    // A handful of real places (Phase 4 content audit - e.g. Afionas village,
+    // Mon Repos, Kaiser's Throne/Pelekas, Nymfes waterfall, Arkoudilas forest)
+    // are catalogued TWICE, once under "attractions" and once under "gems" -
+    // same coordinates, near-identical name, two independent write-ups. That's
+    // fine for browsing Explore's own attractions/gems tabs separately (each
+    // still shows its own entry there), but a cross-category mood result
+    // showing the same physical place twice reads as a real bug. Deduped here
+    // by rounding to ~11m (4 decimals) - EXPLORE_CATEGORIES order (beaches,
+    // food, attractions, gems) means the first one seen wins, which in
+    // practice keeps the more structured attractions-style write-up.
+    const seenCoords = new Set();
     const matches = [];
     EXPLORE_CATEGORIES.forEach(cat => {
         const locs = ((window.DESTINATION && window.DESTINATION.locations) || {})[cat.key] || [];
         locs.forEach(d => {
             const tags = (d.tags || '').split(',').map(t => t.trim());
-            if (tags.includes(mood.tag)) matches.push({ d, catKey: cat.key });
+            if (!tags.includes(mood.tag)) return;
+            if (typeof d.lat === 'number' && typeof d.lon === 'number') {
+                const coordKey = d.lat.toFixed(4) + ',' + d.lon.toFixed(4);
+                if (seenCoords.has(coordKey)) return;
+                seenCoords.add(coordKey);
+            }
+            matches.push({ d, catKey: cat.key });
         });
     });
     // Ranked by real distance from the trip's home base (same haversine
