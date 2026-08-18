@@ -838,6 +838,19 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 /* -- App sheets (Home's "trip status" sheet + the "עוד" sheet) -- reuse
       .gt-sheet, just need a backdrop and a z-index above the app nav. -- */
 .gt-app-sheet{ z-index:calc(var(--gt-z-nav) + 5); max-height:80vh; overflow-y:auto; }
+/* Phase 3: the floating action buttons (back-to-top/emergency/map/tools -
+   all Tailwind z-50, ABOVE every .gt-app-sheet's z-index:25) were visibly
+   floating on top of any open sheet whenever the page behind it had
+   already scrolled past 400px (back-to-top's own show/hide threshold,
+   js/ui.js updateScrollUI()) - clutter over what's supposed to read as a
+   focused, immersive detail page. Hidden for the duration any sheet/modal
+   is open, the same body.modal-open convention every sheet already toggles. */
+body.modal-open #back-to-top-btn,
+body.modal-open #emergency-fab-btn,
+body.modal-open #map-fab-btn,
+body.modal-open #gt-tools-fab-btn{
+  opacity:0 !important; pointer-events:none !important;
+}
 .gt-app-sheet-backdrop{
   position:fixed; inset:0; z-index:calc(var(--gt-z-nav) + 4);
   background:rgba(10,20,22,0.45);
@@ -984,6 +997,10 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 .gt-mood-tile:focus-visible{ outline:2px solid var(--gt-primary-500); outline-offset:2px; }
 .gt-mood-tile__emoji{ font-size:1.75rem; line-height:1; }
 
+.gt-mood-results-intro{
+  font-size:var(--gt-text-md); color:var(--gt-ink-700); line-height:var(--gt-lh-body);
+  margin:0 0 var(--gt-space-3);
+}
 .gt-mood-banner{
   display:flex; align-items:center; justify-content:space-between; gap:var(--gt-space-2);
   background:var(--gt-accent-olive-soft); border-radius:var(--gt-r-md);
@@ -1181,14 +1198,27 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
    should create emotion"; the sheet is a full page of its own with room to
    spare, unlike the compact row card). */
 .gt-explore-sheet-thumb{ width:100%; max-height:260px; aspect-ratio:16/9; object-fit:cover; border-radius:var(--gt-r-md); margin-bottom:var(--gt-space-3); }
+/* Short viewports (mobile landscape, e.g. 844x390) - a 260px-tall image
+   would eat most of the available height before any real information is
+   visible. Capped relative to the viewport instead, so the name/category/
+   "why go" text is never pushed past a full screen of scrolling on its own. */
+@media (max-height:480px){
+  .gt-explore-sheet-thumb{ max-height:30vh; }
+}
 .gt-explore-sheet-actions{ display:flex; gap:var(--gt-space-2); flex-wrap:wrap; margin:var(--gt-space-3) 0; }
-/* The closing action bar (save/reserve/directions/map), moved to the
-   bottom of the sheet per the redesign's "editorial destination page"
-   structure - actions are the page's final call, not its header. */
+/* The closing action bar, moved to the bottom of the sheet per the
+   redesign's "editorial destination page" structure - actions are the
+   page's final call, not its header. Phase 3: exactly two obvious primary
+   actions (Save/Navigate, equal width) - anything else (Reserve) is real
+   but secondary, and sits in its own row underneath rather than competing
+   for the same visual weight. */
 .gt-explore-sheet-actions--bottom{
   margin-top:var(--gt-space-4); padding-top:var(--gt-space-4);
   border-top:1px solid var(--gt-hair);
 }
+.gt-explore-sheet-actions--primary{ margin:0 0 var(--gt-space-2); }
+.gt-explore-sheet-actions--primary:last-child{ margin-bottom:0; }
+.gt-explore-sheet-actions--primary .gt-btn{ flex:1; }
 .gt-explore-sheet-body{ font-family:var(--gt-font-sans); font-size:var(--gt-text-md); line-height:var(--gt-lh-body); color:var(--gt-ink-700); }
 .gt-explore-sheet-body p{ margin:0 0 var(--gt-space-2); }
 .gt-explore-sheet-section{ margin:0 0 var(--gt-space-4); }
@@ -1340,6 +1370,44 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
   line-height:var(--gt-lh-body); margin:0; font-weight:600;
 }
 
+/* -- Anchor (Phase 3) --
+   The one dominant answer to "what should we do today" - deliberately the
+   loudest card on the screen (warm filled surface, biggest title, a real
+   primary button), so it reads as THE answer rather than the first of
+   three equally-weighted priority tiers. */
+.gt-today-anchor{
+  background:var(--gt-accent-gold-100); border-radius:var(--gt-r-lg);
+  padding:var(--gt-space-5) var(--gt-space-4);
+}
+.gt-today-anchor__eyebrow{
+  font-size:var(--gt-text-sm); font-weight:800; color:var(--gt-accent-gold-text);
+  margin:0 0 var(--gt-space-2);
+}
+.gt-today-anchor__title{
+  font-size:var(--gt-text-2xl); font-weight:800; color:var(--gt-ink-900);
+  line-height:1.2; margin:0 0 var(--gt-space-2);
+}
+.gt-today-anchor__why{
+  font-size:var(--gt-text-md); color:var(--gt-ink-700);
+  line-height:var(--gt-lh-body); margin:0 0 var(--gt-space-4);
+}
+
+/* Story timeline part-of-day label ("בוקר"/"אחר הצהריים"/"ערב") - a quiet
+   divider, not another heading competing with the anchor/mood cards
+   above it. */
+.gt-today-timeline__part{
+  font-size:var(--gt-text-xs); font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--gt-ink-300); margin:var(--gt-space-4) 0 var(--gt-space-2);
+}
+.gt-today-timeline__part:first-child{ margin-top:0; }
+
+/* The lighter card variant for the skippable/supporting sections
+   (recommended+optional, "already nearby") - no border/surface weight, so
+   they visibly recede behind the Anchor/timeline instead of matching them
+   card-for-card. "Optional must look optional" applies to the section
+   itself, not just its label text. */
+.gt-today-card--light{ background:transparent; border:none; padding:0; }
+
 .gt-today-mood-picker{
   background:var(--gt-paper-sunken); border-radius:var(--gt-r-lg);
   padding:var(--gt-space-4);
@@ -1371,10 +1439,12 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
      column, side rail" rather than an interleaved two-up grid. */
   .gt-today-hero{ grid-column:1 / -1; grid-row:1; }
   #today-mood-wrap{ grid-column:1; grid-row:2; }
-  #today-timeline-wrap{ grid-column:1; grid-row:3; }
-  #today-priorities-wrap{ grid-column:1; grid-row:4; }
+  #today-anchor-wrap{ grid-column:1; grid-row:3; }
+  #today-timeline-wrap{ grid-column:1; grid-row:4; }
+  #today-priorities-wrap{ grid-column:1; grid-row:5; }
+  #today-nearby-wrap{ grid-column:1; grid-row:6; }
   .gt-today-mood-picker{
-    grid-column:2; grid-row:2 / 5;
+    grid-column:2; grid-row:2 / 7;
     position:sticky; top:calc(var(--gt-space-5) + 72px);
   }
 }

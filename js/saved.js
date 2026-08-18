@@ -18,26 +18,51 @@
 // (viewFavorites(), js/dashboard.js) rather than invented a second time here.
 // ============================================================================
 
-function gtSavedGroupsByCategory() {
+// Phase 3: grouped by real mood/use, not raw data category - "the places
+// we want to remember" reads as a personal list, not a database export.
+// Priority order below matters: a sunset-tagged beach lands under "לשקיעה"
+// (the more specific, distinguishing reason it was saved), not duplicated
+// into "לשחות" too - every saved place appears in exactly one bucket.
+// Built from the same real `tags`/category fields Discover's mood grid
+// already reads, not a new classification.
+const GT_SAVED_BUCKETS = [
+    { key: 'sunset', emoji: '🌅', label: 'לשקיעה', test: (d, catKey) => (d.tags || '').split(',').map(t => t.trim()).includes('sunset') },
+    { key: 'swim', emoji: '🌊', label: 'לשחות', test: (d, catKey) => catKey === 'beaches' },
+    { key: 'eat', emoji: '🍴', label: 'לאכול', test: (d, catKey) => catKey === 'food' },
+    { key: 'mustsee', emoji: '⭐', label: 'לא לפספס', test: () => true }
+];
+
+function gtSavedGroupsByMood() {
     const favorites = (typeof getFavorites === 'function') ? getFavorites() : [];
     const favSet = new Set(favorites);
     const locations = (window.DESTINATION && window.DESTINATION.locations) || {};
     const categories = (typeof EXPLORE_CATEGORIES !== 'undefined') ? EXPLORE_CATEGORIES : [];
 
-    return categories
-        .map(cat => ({ cat, items: (locations[cat.key] || []).filter(d => favSet.has(d.id)) }))
-        .filter(group => group.items.length > 0);
+    let remaining = [];
+    categories.forEach(cat => {
+        (locations[cat.key] || []).forEach(d => {
+            if (favSet.has(d.id)) remaining.push({ d, catKey: cat.key });
+        });
+    });
+
+    const groups = [];
+    GT_SAVED_BUCKETS.forEach(bucket => {
+        const items = remaining.filter(s => bucket.test(s.d, s.catKey));
+        if (items.length) groups.push({ bucket, items });
+        remaining = remaining.filter(s => !bucket.test(s.d, s.catKey));
+    });
+    return groups;
 }
 
 function renderSavedTab() {
     const container = document.getElementById('saved-list');
     if (!container) return;
 
-    const groups = gtSavedGroupsByCategory();
+    const groups = gtSavedGroupsByMood();
     let html = '';
-    groups.forEach(({ cat, items }) => {
-        html += `<h3 class="gt-explore-group-header">${escapeHtml(cat.label)} · ${items.length}</h3>`;
-        items.forEach(d => { html += exploreRowCardHtml(d, cat.key); });
+    groups.forEach(({ bucket, items }) => {
+        html += `<h3 class="gt-explore-group-header">${bucket.emoji} ${escapeHtml(bucket.label)} · ${items.length}</h3>`;
+        items.forEach(({ d, catKey }) => { html += exploreRowCardHtml(d, catKey); });
     });
     container.innerHTML = html;
 

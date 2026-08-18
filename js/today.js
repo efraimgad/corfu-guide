@@ -84,12 +84,50 @@ function gtTodayMoodHtml(day) {
     </div>`;
 }
 
-// "Your day": the real time-stamped schedule, rendered with the exact same
-// row-card + connector markup the Itinerary tab uses (js/itinerary-view.js).
-// gtItineraryCurrentItems is shared, module-top-level state that
-// gtOpenItinerarySheet() reads by index - pointing it at today's items here
-// is correct, not a hack: the Itinerary tab's own default day IS today's day
-// (see initItineraryScrubberView()), so this never disagrees with it.
+// -- Anchor (Phase 3) --------------------------------------------------------
+// "If we only do one thing today, what is it?" - dayBrief.mustDo[0], the
+// day's real single anchor (every day names at least one - see
+// scripts/test-itinerary-brief.js), promoted into its own dominant card
+// ahead of the timeline instead of living inside the priority-tier list
+// alongside recommended/optional (which visually flattened it to "just the
+// first of three equally-weighted groups"). A day very occasionally names
+// more than one mustDo entry (rare - most days name exactly one); the rest,
+// if any, still render in the recommended/optional card below via
+// gtTodayPrioritiesHtml(), not dropped.
+function gtTodayAnchorHtml(day) {
+    if (!day || !day.dayBrief || !day.dayBrief.mustDo || !day.dayBrief.mustDo.length) return '';
+    const anchor = day.dayBrief.mustDo[0];
+    return `<div class="gt-today-anchor">
+      <p class="gt-today-anchor__eyebrow">⭐ אם עושים רק דבר אחד היום</p>
+      <p class="gt-today-anchor__title">${escapeHtml(anchor.title)}</p>
+      ${anchor.why ? `<p class="gt-today-anchor__why">${escapeHtml(anchor.why)}</p>` : ''}
+      <button type="button" class="gt-btn gt-btn--primary" onclick="gtTodayOpenFullDay('${escapeAttr(day.key)}')">ללוח היום המלא ←</button>
+    </div>`;
+}
+
+// -- "Your day" as a story, not a schedule (Phase 3) -------------------------
+// Same real time-stamped items + connectors as before (row-card + connector
+// markup the Itinerary tab uses, js/itinerary-view.js) - only new here is a
+// "Morning/Afternoon/Evening" narrative label ahead of each part-of-day's
+// first item, derived from the item's OWN real time string (gtItemStartEnd(),
+// already used elsewhere for exactly this kind of parsing) rather than a
+// second, hand-authored grouping. gtItineraryCurrentItems is shared,
+// module-top-level state that gtOpenItinerarySheet() reads by index -
+// pointing it at today's items here is correct, not a hack: the Itinerary
+// tab's own default day IS today's day (see initItineraryScrubberView()), so
+// this never disagrees with it.
+const GT_DAY_PARTS = [
+    { max: 12 * 60, label: 'בוקר' },
+    { max: 17 * 60, label: 'אחר הצהריים' },
+    { max: 24 * 60, label: 'ערב' }
+];
+function gtDayPartLabel(timeText) {
+    const se = (typeof gtItemStartEnd === 'function') ? gtItemStartEnd(timeText) : null;
+    if (!se || se.start == null) return null;
+    const part = GT_DAY_PARTS.find(p => se.start < p.max);
+    return part ? part.label : null;
+}
+
 function gtTodayTimelineHtml(day) {
     if (!day || !day.items || !day.items.length) return '';
     if (typeof gtItineraryRowCardHtml !== 'function') return '';
@@ -102,7 +140,13 @@ function gtTodayTimelineHtml(day) {
         rows += gtHotelEndpointHtml();
         rows += gtTransitionConnectorHtml(tr.fromHotel);
     }
+    let lastPart = null;
     day.items.forEach((item, i) => {
+        const part = gtDayPartLabel(item.time);
+        if (part && part !== lastPart) {
+            rows += `<p class="gt-today-timeline__part">${escapeHtml(part)}</p>`;
+            lastPart = part;
+        }
         rows += gtItineraryRowCardHtml(item, i);
         if (i < day.items.length - 1) rows += gtTransitionConnectorHtml((tr.between || [])[i]);
     });
@@ -112,7 +156,7 @@ function gtTodayTimelineHtml(day) {
     }
 
     return `<div class="gt-today-card">
-      <p class="gt-today-card__heading">היום שלכם</p>
+      <p class="gt-today-card__heading">איך היום נראה</p>
       <div id="today-timeline-list" class="gt-explore-list">${rows}</div>
     </div>`;
 }
@@ -125,26 +169,44 @@ document.addEventListener('click', (e) => {
     gtOpenItinerarySheet(Number(row.getAttribute('data-gt-row-index')));
 });
 
-// ANCHOR / "if you feel like it" / "if you still have energy" - all three
-// real judgment tiers (mustDo/recommended/optional), plus the sunset note.
-// "View the full day" links to the richer Itinerary view (overview prose,
-// weather fold, flex-time fold) rather than duplicating those here.
+// "אם יש לכם כוח" / "אם עוד יש לכם כוח" - the two lighter, skippable tiers
+// (mustDo's first entry is now the dominant Anchor card above; any FURTHER
+// mustDo entries beyond the first still render here so nothing is dropped),
+// plus the sunset note. "View the full day" links to the richer Itinerary
+// view (overview prose, weather fold, flex-time fold) rather than
+// duplicating those here.
 function gtTodayPrioritiesHtml(day) {
     if (!day || !day.dayBrief) return '';
     const brief = day.dayBrief;
     const totals = (typeof gtDayComputedTotals === 'function') ? gtDayComputedTotals(day) : {};
+    const extraMustDo = (brief.mustDo || []).slice(1);
     const groups = [
-        (typeof gtPriorityGroupHtml === 'function') ? gtPriorityGroupHtml(brief.mustDo, 'must', 'העוגן של היום', '⭐') : '',
+        (typeof gtPriorityGroupHtml === 'function' && extraMustDo.length) ? gtPriorityGroupHtml(extraMustDo, 'must', 'עוד לב של היום', '⭐') : '',
         (typeof gtPriorityGroupHtml === 'function') ? gtPriorityGroupHtml(brief.recommended, 'rec', 'אם אתם כבר באזור', '💡') : '',
         (typeof gtPriorityGroupHtml === 'function') ? gtPriorityGroupHtml(brief.optional, 'opt', 'אם עוד יש לכם כוח', '🌿') : ''
     ].join('');
     const sunsetHtml = (typeof gtSunsetNoteHtml === 'function') ? gtSunsetNoteHtml(day, totals) : '';
     if (!groups && !sunsetHtml) return '';
 
-    return `<div class="gt-today-card">
+    return `<div class="gt-today-card gt-today-card--light">
       ${groups ? `<div class="gt-day-prio gt-judgment">${groups}</div>` : ''}
       ${sunsetHtml}
       <button type="button" class="gt-btn gt-btn--secondary" style="width:100%;margin-top:var(--gt-space-3);" onclick="gtTodayOpenFullDay('${escapeAttr(day.key)}')">מסלול היום המלא ←</button>
+    </div>`;
+}
+
+// "כבר קרובים למלון?" (Phase 3) - the same real "near you" engine the Map
+// tab's own sheet uses (js/location-shared.js gtNearHotelItems(), real
+// haversine distance, no invented picks), surfaced contextually on Today
+// too rather than only behind a map button. Deliberately small (3, not 5) -
+// this is a supporting nudge, not another full list to scan.
+function gtTodayNearbyHtml() {
+    if (typeof gtNearHotelItems !== 'function' || typeof exploreRowCardHtml !== 'function') return '';
+    const items = gtNearHotelItems(3);
+    if (!items.length) return '';
+    return `<div class="gt-today-card gt-today-card--light">
+      <p class="gt-today-card__heading">כבר קרובים למלון?</p>
+      <div id="today-nearby-list" class="gt-explore-list">${items.map(x => exploreRowCardHtml(x.item, x.catKey)).join('')}</div>
     </div>`;
 }
 
@@ -195,17 +257,24 @@ function refreshTodayTab() {
         ? findItineraryDay(String(dayNum)) : null;
 
     const moodWrap = document.getElementById('today-mood-wrap');
+    const anchorWrap = document.getElementById('today-anchor-wrap');
     const timelineWrap = document.getElementById('today-timeline-wrap');
     const prioritiesWrap = document.getElementById('today-priorities-wrap');
+    const nearbyWrap = document.getElementById('today-nearby-wrap');
 
     if (day) {
         if (moodWrap) moodWrap.innerHTML = gtTodayMoodHtml(day);
+        if (anchorWrap) anchorWrap.innerHTML = gtTodayAnchorHtml(day);
         if (timelineWrap) timelineWrap.innerHTML = gtTodayTimelineHtml(day);
         if (prioritiesWrap) prioritiesWrap.innerHTML = gtTodayPrioritiesHtml(day);
+        if (nearbyWrap) nearbyWrap.innerHTML = gtTodayNearbyHtml();
+        if (typeof initFavoriteButtons === 'function') initFavoriteButtons();
     } else {
         if (moodWrap) moodWrap.innerHTML = gtTodayFallbackHtml();
+        if (anchorWrap) anchorWrap.innerHTML = '';
         if (timelineWrap) timelineWrap.innerHTML = '';
         if (prioritiesWrap) prioritiesWrap.innerHTML = '';
+        if (nearbyWrap) nearbyWrap.innerHTML = '';
     }
 }
 window.refreshTodayTab = refreshTodayTab;

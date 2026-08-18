@@ -154,15 +154,19 @@ window.selectExploreCategory = selectExploreCategory;
 // layer keyed by an arbitrary id set rather than a category, which is a
 // bigger change than this pass; the row list (this feature's actual
 // deliverable per the redesign) is unaffected.
+// `intro` (Phase 3): one short editorial line per mood - UI chrome/framing
+// text, the same kind of authored label this app's nav/section headings
+// already are (e.g. "הלב של היום"), not itinerary content and not a claim
+// about any specific place - kept generic on purpose.
 const GT_MOODS = {
     beach: { emoji: '🏖️', label: 'יום חוף', kind: 'category', cat: 'beaches' },
-    sunset: { emoji: '🌅', label: 'שקיעה', kind: 'tag', tag: 'sunset' },
-    romantic: { emoji: '🍷', label: 'ערב רומנטי', kind: 'tag', tag: 'romantic' },
+    sunset: { emoji: '🌅', label: 'שקיעה', kind: 'tag', tag: 'sunset', intro: 'קורפו יודעת לעשות שקיעות. הנה כמה מקומות ששווה לשקול הערב.' },
+    romantic: { emoji: '🍷', label: 'ערב רומנטי', kind: 'tag', tag: 'romantic', intro: 'לערב שקט לשניים - כמה אפשרויות שנעים להתחיל מהן.' },
     food: { emoji: '🍴', label: 'לאכול משהו טוב', kind: 'category', cat: 'food' },
     explore: { emoji: '🚗', label: 'לסייר באי', kind: 'category', cat: 'attractions' },
-    villages: { emoji: '🏘️', label: 'כפרים', kind: 'tag', tag: 'village' },
-    views: { emoji: '📸', label: 'נופים יפים', kind: 'tag', tag: 'viewpoint' },
-    nothing: { emoji: '🧘', label: 'לא לעשות כלום', kind: 'tag', tag: 'quiet' }
+    villages: { emoji: '🏘️', label: 'כפרים', kind: 'tag', tag: 'village', intro: 'כפרים שנשארו כמעט כמו שהיו - טובים להליכה איטית בלי יעד ברור.' },
+    views: { emoji: '📸', label: 'נופים יפים', kind: 'tag', tag: 'viewpoint', intro: 'כמה נקודות תצפית ששווה לעצור בהן, גם רק לכמה דקות.' },
+    nothing: { emoji: '🧘', label: 'לא לעשות כלום', kind: 'tag', tag: 'quiet', intro: 'לפעמים הכי טוב זה שלא לתכנן. כמה מקומות שקטים לשבת בהם.' }
 };
 
 function gtSelectMood(moodKey) {
@@ -184,6 +188,16 @@ function gtSelectMood(moodKey) {
             if (tags.includes(mood.tag)) matches.push({ d, catKey: cat.key });
         });
     });
+    // Ranked by real distance from the trip's home base (same haversine
+    // method as everywhere else) - the only honest, non-arbitrary signal
+    // available across every category, not a fabricated "best" pick.
+    // Splitting into "our pick"/"also worth considering"/"already nearby"
+    // is presentation only; every entry came from the exact same real
+    // tag match above.
+    if (typeof gtLocationDriveEstimate === 'function') {
+        matches.forEach(m => { m.drive = gtLocationDriveEstimate(m.d); });
+        matches.sort((a, b) => (a.drive ? a.drive.min : 999) - (b.drive ? b.drive.min : 999));
+    }
 
     const listEl = document.getElementById('explore-list');
     const countEl = document.getElementById('explore-filter-count');
@@ -193,7 +207,17 @@ function gtSelectMood(moodKey) {
     if (exploreRenderState.observer) exploreRenderState.observer.disconnect();
     exploreRenderState = { catKey: null, entries: [], rendered: 0, observer: null };
 
-    listEl.innerHTML = matches.map(m => exploreRowCardHtml(m.d, m.catKey)).join('');
+    const introHtml = mood.intro ? `<p class="gt-mood-results-intro">${escapeHtml(mood.intro)}</p>` : '';
+    const tiers = [
+        { rows: matches.slice(0, 1), label: 'המומלץ שלנו' },
+        { rows: matches.slice(1, 4), label: 'גם שווה לשקול' },
+        { rows: matches.slice(4), label: 'כבר קרובים?' }
+    ].filter(t => t.rows.length);
+    const tiersHtml = tiers.map(t =>
+        `<h3 class="gt-explore-group-header">${escapeHtml(t.label)}</h3>${t.rows.map(m => exploreRowCardHtml(m.d, m.catKey)).join('')}`
+    ).join('');
+
+    listEl.innerHTML = introHtml + tiersHtml;
     if (emptyEl) emptyEl.classList.toggle('hidden', matches.length > 0);
     if (countEl) countEl.textContent = matches.length === 0 ? 'לא נמצאו תוצאות עבור המצב רוח הזה' : `מציג ${matches.length} תוצאות`;
 
@@ -640,16 +664,17 @@ window.renderExploreTab = renderExploreTab;
 // above) - each branch below is reached by its own distinct element, so
 // there's no double-trigger risk to guard against with stopPropagation()
 // the way the old nested-role="button" markup needed.
-// Shared by #explore-list, #saved-list (js/saved.js) and
-// #gt-nearby-sheet-list (js/app-shell.js's Map-tab "Near you" sheet) - all
-// three render rows with the exact same exploreRowCardHtml() markup, so
-// one delegated listener handles taps on any of them. The only behaviour
-// that differs by list is the map action: Explore keeps its own inline map
-// on screen (below), while the other two have no inline map of their own
-// and jump to the full Map tab instead - same as the detail sheet's
-// "במפה" button does everywhere.
+// Shared by #explore-list, #saved-list (js/saved.js), #gt-nearby-sheet-list
+// (js/app-shell.js's Map-tab "Near you" sheet) and #today-nearby-list
+// (js/today.js's "כבר קרובים למלון?" card) - all four render rows with the
+// exact same exploreRowCardHtml() markup, so one delegated listener
+// handles taps on any of them. The only behaviour that differs by list is
+// the map action: Explore keeps its own inline map on screen (below),
+// while the others have no inline map of their own and jump to the full
+// Map tab instead - same as the detail sheet's "במפה" button does
+// everywhere.
 document.addEventListener('click', (e) => {
-    const list = e.target.closest('#explore-list, #saved-list, #gt-nearby-sheet-list');
+    const list = e.target.closest('#explore-list, #saved-list, #gt-nearby-sheet-list, #today-nearby-list');
     if (!list) return;
 
     const actionBtn = e.target.closest('[data-explore-action]');
@@ -761,18 +786,20 @@ function openExploreSheet(catKey, id) {
     sheet.setAttribute('data-sheet-loc-cat', catKey);
     sheet.setAttribute('data-sheet-loc-id', id);
 
+    // Phase 3: the primary action row is exactly Save + Navigate - "the
+    // primary planning action" and "the primary functional action" per the
+    // redesign brief, not a row of 3-4 competing buttons. Reserve (food
+    // only) is real and stays, but demoted to its own secondary row below;
+    // the old "🗺️ במפה" jump-to-Map-tab button is dropped entirely -
+    // Navigate (an external Maps deep link) already does the one thing a
+    // user opening this sheet to get somewhere actually needs, and keeping
+    // both was exactly the "5-6 competing actions" this pass called out.
     const reserveBtn = catKey === 'food'
-        ? `<button type="button" class="gt-btn gt-btn--primary" onclick="gtCloseExploreSheet(); handleExploreReserve('food','${escapeAttr(id)}');">${GT_ICON_PHONE} הזמנה</button>`
+        ? `<button type="button" class="gt-btn gt-btn--secondary" style="width:100%;" onclick="gtCloseExploreSheet(); handleExploreReserve('food','${escapeAttr(id)}');">${GT_ICON_PHONE} הזמנת מקום</button>`
         : '';
     const directionsBtn = d.mapsUrl
-        ? `<a href="${escapeAttr(d.mapsUrl)}" target="_blank" rel="noopener noreferrer" class="gt-btn gt-btn--secondary">📍 ניווט</a>`
+        ? `<a href="${escapeAttr(d.mapsUrl)}" target="_blank" rel="noopener noreferrer" class="gt-btn gt-btn--primary">↗ ניווט</a>`
         : '';
-    // Goes to the full-screen Map tab (showOnHomeMap, js/map.js), not the
-    // Explore tab's own inline map: showOnExploreMap() re-opens this very sheet
-    // through gtOnMarkerTap('explore'), so the panel looked stuck open and the
-    // bottom nav stayed on "גלה". The row cards' 🗺️ icon button still uses the
-    // inline map on purpose - see the click handler above.
-    const mapBtn = `<button type="button" class="gt-btn gt-btn--secondary" onclick="gtCloseExploreSheet(); showOnHomeMap('${escapeAttr(catKey)}','${escapeAttr(id)}');">${GT_ICON_MAP} במפה</button>`;
     const isFav = typeof isFavoriteId === 'function' && isFavoriteId(id);
     const saveBtn = `<button type="button" id="explore-sheet-save-btn" class="gt-btn gt-btn--secondary" aria-pressed="${isFav ? 'true' : 'false'}" onclick="toggleExploreFavorite('${escapeAttr(id)}', this);">${isFav ? '❤️ נשמר' : '🤍 שמירה'}</button>`;
 
@@ -817,7 +844,10 @@ function openExploreSheet(catKey, id) {
         <div id="explore-sheet-tracking"></div>
       </div>
       ${exploreNearbyHtml(d, catKey)}
-      <div class="gt-explore-sheet-actions gt-explore-sheet-actions--bottom">${saveBtn}${reserveBtn}${directionsBtn}${mapBtn}</div>`;
+      <div class="gt-explore-sheet-actions--bottom">
+        <div class="gt-explore-sheet-actions gt-explore-sheet-actions--primary">${saveBtn}${directionsBtn}</div>
+        ${reserveBtn}
+      </div>`;
 
     // Personal-tracking widget (visited/rate/note): reuses the exact same
     // markup + storage functions as every other card (buildPersonalTrackingWidgetHTML/
