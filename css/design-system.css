@@ -43,11 +43,20 @@
      :root (not just the dark blocks) so the light case is explicit too. */
   color-scheme: light;
 
-  /* ---------- Neutrals (cool, not warm) ---------- */
-  --gt-paper:        #f4f6f6;
-  --gt-paper-raised:  #ffffff;
-  --gt-paper-sunken:  #e9edec;
-  --gt-hair:          #dde2e2;
+  /* ---------- Neutrals ----------
+     Phase 2 (visual redesign): warmed from the original cool grays
+     (#f4f6f6/#ffffff/#e9edec/#dde2e2) to an ivory/sand register per the
+     Mediterranean-editorial direction. Each new value keeps its
+     predecessor's relative luminance within ~2% (hue shifted, not
+     lightness) specifically so the AA contrast pairs already tuned
+     against these tokens (--gt-ink-300 at 4.52/4.90/4.53:1 against
+     paper/paper-raised/paper-sunken - see that token's own comment) do
+     not need to be re-derived; --gt-hair-strong (the WCAG 1.4.11
+     FUNCTIONAL boundary token) is deliberately left untouched. */
+  --gt-paper:        #f6f4ee;
+  --gt-paper-raised:  #fefcf7;
+  --gt-paper-sunken:  #eee9dd;
+  --gt-hair:          #e3ddd0;
   /* --gt-hair is tuned to read as a quiet DECORATIVE divider and measures
      1.11-1.31:1 against the surfaces it sits on. That is fine for a section
      rule, but WCAG 1.4.11 needs 3:1 for a boundary that is the only way to
@@ -605,13 +614,30 @@ button.gt-row-card{
   width:100%; font:inherit; color:inherit; text-align:inherit; cursor:pointer;
 }
 button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outline-offset:2px; }
-.gt-row-card__thumb{ width:64px; height:64px; border-radius:var(--gt-r-md); object-fit:cover; flex-shrink:0; }
+/* 88px, not the original 64px (Phase 2 visual redesign - a place card's
+   photo needed more presence to read as "editorial recommendation" rather
+   than a database thumbnail). .gt-explore-row__actions grows to match on
+   food rows (3 stacked icon buttons, ~144px) - the row's height already
+   flexes to its tallest child (align-items:center, no fixed height), so
+   this is a taller row, never overflow/clipping. */
+.gt-row-card__thumb{ width:88px; height:88px; border-radius:var(--gt-r-md); object-fit:cover; flex-shrink:0; }
 .gt-row-card__body{ min-width:0; flex:1; }
 .gt-row-card__title{ font-family:var(--gt-font-sans); font-weight:700; font-size:var(--gt-text-md); color:var(--gt-ink-900);
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.gt-row-card__snippet{
+  font-family:var(--gt-font-sans); font-size:var(--gt-text-sm); color:var(--gt-ink-700);
+  line-height:var(--gt-lh-body); margin:2px 0 0;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
 .gt-row-card__meta{ font-family:var(--gt-font-sans); font-size:var(--gt-text-sm); color:var(--gt-ink-500);
-  display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-top:2px; }
+  display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-top:4px; }
 .gt-row-card__meta .sep{ opacity:.5; }
+.gt-row-card__vibes{ display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+.gt-vibe-chip{
+  font-size:11px; font-weight:700; color:var(--gt-accent-olive-text);
+  background:var(--gt-accent-olive-soft); border-radius:var(--gt-r-full);
+  padding:2px 8px; white-space:nowrap;
+}
 
 /* -- Bottom sheet (map/list split view) -- */
 .gt-sheet{
@@ -936,6 +962,35 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 .gt-chip--facet{ font-size:0.875rem; }
 .gt-chip--facet[aria-selected="true"]{ background:var(--gt-primary-600); color:#fff; border-color:var(--gt-primary-600); }
 
+/* -- Discover mood entry (Phase 2 visual redesign) --
+   A calmer, emotional front door above the functional category chips -
+   large tap targets, one line of label each, no filter-UI chrome. */
+.gt-mood-grid{ margin:0 0 var(--gt-space-4); }
+.gt-mood-grid__tiles{
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:var(--gt-space-2);
+}
+@media (max-width:480px){
+  .gt-mood-grid__tiles{ grid-template-columns:repeat(2, 1fr); }
+}
+.gt-mood-tile{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+  background:var(--gt-paper-raised); border:1px solid var(--gt-hair); border-radius:var(--gt-r-lg);
+  padding:var(--gt-space-3) var(--gt-space-2); min-height:84px;
+  font:inherit; font-weight:700; font-size:var(--gt-text-sm); color:var(--gt-ink-900);
+  cursor:pointer; text-align:center;
+  transition:box-shadow var(--gt-dur-base) var(--gt-ease), transform var(--gt-dur-base) var(--gt-ease);
+}
+.gt-mood-tile:hover{ box-shadow:var(--gt-sh-2); transform:translateY(-1px); }
+.gt-mood-tile:focus-visible{ outline:2px solid var(--gt-primary-500); outline-offset:2px; }
+.gt-mood-tile__emoji{ font-size:1.75rem; line-height:1; }
+
+.gt-mood-banner{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--gt-space-2);
+  background:var(--gt-accent-olive-soft); border-radius:var(--gt-r-md);
+  padding:var(--gt-space-2) var(--gt-space-3); margin:0 0 var(--gt-space-3);
+  font-weight:800; color:var(--gt-accent-olive-text);
+}
+
 /* The chip row sits in its own sticky bar just under the top nav (same
    --sticky-filter-top convention as #beach-filter-bar etc. - js/ui.js
    updateScrollUI()), so the sticky group headers below it (added next -
@@ -1122,11 +1177,36 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
 .gt-explore-icon-btn:focus-visible{ outline:2px solid var(--gt-primary-500); outline-offset:1px; }
 
 /* -- Detail sheet -- */
-.gt-explore-sheet-thumb{ width:100%; max-height:180px; aspect-ratio:16/9; object-fit:cover; border-radius:var(--gt-r-md); margin-bottom:var(--gt-space-3); }
+/* 260px, not the original 180px (Phase 2 visual redesign - "a large image
+   should create emotion"; the sheet is a full page of its own with room to
+   spare, unlike the compact row card). */
+.gt-explore-sheet-thumb{ width:100%; max-height:260px; aspect-ratio:16/9; object-fit:cover; border-radius:var(--gt-r-md); margin-bottom:var(--gt-space-3); }
 .gt-explore-sheet-actions{ display:flex; gap:var(--gt-space-2); flex-wrap:wrap; margin:var(--gt-space-3) 0; }
-.gt-explore-sheet-body{ font-family:var(--gt-font-sans); font-size:var(--gt-text-md); line-height:var(--gt-lh-body); color:var(--gt-ink-700); margin-bottom:var(--gt-space-3); }
+/* The closing action bar (save/reserve/directions/map), moved to the
+   bottom of the sheet per the redesign's "editorial destination page"
+   structure - actions are the page's final call, not its header. */
+.gt-explore-sheet-actions--bottom{
+  margin-top:var(--gt-space-4); padding-top:var(--gt-space-4);
+  border-top:1px solid var(--gt-hair);
+}
+.gt-explore-sheet-body{ font-family:var(--gt-font-sans); font-size:var(--gt-text-md); line-height:var(--gt-lh-body); color:var(--gt-ink-700); }
 .gt-explore-sheet-body p{ margin:0 0 var(--gt-space-2); }
-.gt-explore-verified-fold{ border:1px solid var(--gt-hair); border-radius:var(--gt-r-md); overflow:hidden; }
+.gt-explore-sheet-section{ margin:0 0 var(--gt-space-4); }
+.gt-explore-sheet-section__heading{
+  font-size:var(--gt-text-sm); font-weight:800; letter-spacing:.02em;
+  color:var(--gt-ink-500); margin:0 0 var(--gt-space-2);
+}
+.gt-nearby-list{ display:flex; flex-direction:column; gap:var(--gt-space-2); }
+.gt-nearby-item{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--gt-space-2);
+  width:100%; min-height:44px; padding:var(--gt-space-2) var(--gt-space-3);
+  background:var(--gt-paper-sunken); border:none; border-radius:var(--gt-r-md);
+  font:inherit; color:var(--gt-ink-900); font-weight:600; cursor:pointer; text-align:inherit;
+}
+.gt-nearby-item:hover{ background:var(--gt-hair); }
+.gt-nearby-item:focus-visible{ outline:2px solid var(--gt-primary-500); outline-offset:1px; }
+.gt-nearby-item__arrow{ color:var(--gt-ink-500); flex-shrink:0; }
+.gt-explore-verified-fold{ border:1px solid var(--gt-hair); border-radius:var(--gt-r-md); overflow:hidden; margin-bottom:var(--gt-space-4); }
 .gt-explore-verified-fold summary{ cursor:pointer; padding:var(--gt-space-3); font-weight:700; font-size:var(--gt-text-sm); color:var(--gt-ink-700); list-style:none; display:flex; align-items:center; justify-content:space-between; }
 .gt-explore-verified-fold summary::-webkit-details-marker{ display:none; }
 .gt-explore-verified-fold .verified-info{ padding:0 var(--gt-space-3) var(--gt-space-3); }
@@ -1210,17 +1290,104 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
    collapsed by default - so adding this content does NOT lengthen the
    default phone view by more than the brief itself.
    ========================================================================== */
-/* -- Today tab (redesign) -- reuses .gt-day-brief/.gt-day-stats/.gt-day-sun
-   below for its own teaser card and stat row (same shapes, same tokens) -
-   only the hero greeting and the mood-chip row below are new. */
+/* -- Today tab (Phase 2 visual redesign) --
+   An editorial hero (large greeting, quiet stat row), then a stack of
+   distinct sections - mood, real timeline, priority tiers, mood-picker -
+   each its own breathing-room block rather than one dense card. Reuses
+   .gt-day-prio/.gt-day-sun/.gt-explore-list/.gt-itinerary-row from the
+   Itinerary view (same component, same rhythm) - only the hero and the
+   section/card shells below are new. */
+.gt-today{ padding-bottom:var(--gt-space-6); }
 .gt-today-hero{
-  padding:var(--gt-space-2) 0 0;
-  border-bottom:1px solid var(--gt-hair);
-  padding-bottom:var(--gt-space-4);
+  padding:var(--gt-space-3) 0 var(--gt-space-5);
 }
-.gt-today-mood{
-  background:var(--gt-accent-olive-soft); border-radius:var(--gt-r-lg);
+.gt-today-hero__greeting{
+  font-family:var(--gt-font-sans); font-size:var(--gt-text-3xl, 2rem); font-weight:800;
+  line-height:1.1; color:var(--gt-ink-900); margin:var(--gt-space-1) 0 var(--gt-space-3);
+  letter-spacing:-0.01em;
+}
+.gt-today-hero__stats{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--gt-space-3) var(--gt-space-4);
+}
+.gt-today-hero__stat{
+  font-size:var(--gt-text-md); font-weight:600; color:var(--gt-ink-700);
+  display:inline-flex; align-items:center; gap:6px;
+}
+.gt-today-hero__stat--temp{
+  font-size:var(--gt-text-xl); font-weight:800; color:var(--gt-ink-900);
+}
+
+/* One vertical rhythm for every block on the screen - a section is either a
+   .gt-today-card (has its own surface) or plain (the mood-picker, which
+   deliberately sits on an olive-tinted band instead, see below). */
+.gt-today-section{ margin:0 0 var(--gt-space-5); }
+.gt-today-section:last-child{ margin-bottom:0; }
+.gt-today-card{
+  background:var(--gt-paper-raised); border:1px solid var(--gt-hair);
+  border-radius:var(--gt-r-lg); padding:var(--gt-space-4);
+}
+.gt-today-card__heading{
+  font-size:var(--gt-text-lg); font-weight:800; color:var(--gt-ink-900);
+  margin:0 0 var(--gt-space-3);
+}
+.gt-today-mood-card{ background:var(--gt-accent-olive-soft); border-color:transparent; }
+.gt-today-mood-card__theme{
+  font-size:var(--gt-text-xl); font-weight:800; color:var(--gt-ink-900);
+  line-height:1.25; margin:0 0 var(--gt-space-2);
+}
+.gt-today-mood-card__line{
+  font-size:var(--gt-text-md); color:var(--gt-accent-olive-text);
+  line-height:var(--gt-lh-body); margin:0; font-weight:600;
+}
+
+.gt-today-mood-picker{
+  background:var(--gt-paper-sunken); border-radius:var(--gt-r-lg);
   padding:var(--gt-space-4);
+}
+
+/* Desktop (Phase 2, Phase I): a real two-column editorial layout, not the
+   mobile stack stretched wide - the hero spans both columns, the mood/
+   timeline/priorities read as the main column, and the mood-picker becomes
+   a sticky side rail instead of the page's last, easy-to-miss block. Pure
+   CSS reflow of the exact same DOM (each block already has its own id/
+   class) - no markup duplicated per breakpoint. */
+@media (min-width:1024px){
+  /* .active + !important, not just .gt-today: switchTab() (js/ui.js) sets
+     this section's own display via an inline style attribute
+     (style="display:block"), which beats any plain stylesheet rule
+     regardless of selector specificity - the exact same trap the B4 fix
+     for #explore's desktop split-view already hit and documented (see
+     that rule's own comment, a few hundred lines up). Scoping to
+     "currently the active tab" is also correct on its own merits: no
+     point laying out a grid for a section that isn't even displayed. */
+  .gt-today.active{
+    display:grid !important; grid-template-columns:1.6fr 1fr; gap:var(--gt-space-5);
+    align-items:start;
+  }
+  /* Explicit placement, not auto-flow: with two columns, grid auto-
+     placement would fill left-to-right/row-by-row and put
+     #today-timeline-wrap in column 2 - explicit grid-column/grid-row on
+     every child (not just the picker) is what actually produces "main
+     column, side rail" rather than an interleaved two-up grid. */
+  .gt-today-hero{ grid-column:1 / -1; grid-row:1; }
+  #today-mood-wrap{ grid-column:1; grid-row:2; }
+  #today-timeline-wrap{ grid-column:1; grid-row:3; }
+  #today-priorities-wrap{ grid-column:1; grid-row:4; }
+  .gt-today-mood-picker{
+    grid-column:2; grid-row:2 / 5;
+    position:sticky; top:calc(var(--gt-space-5) + 72px);
+  }
+}
+
+/* -- "עוד" (More) sheet grouping (Phase 2 visual redesign) --
+   Trip / Plan / Information, instead of one flat button list - More is
+   secondary utility, not a peer of Today, so it reads as organized rather
+   than a dumping ground. */
+.gt-more-group{ display:flex; flex-direction:column; gap:var(--gt-space-2); margin:0 0 var(--gt-space-4); }
+.gt-more-group:last-child{ margin-bottom:0; }
+.gt-more-group__heading{
+  font-size:var(--gt-text-xs); font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--gt-ink-300); margin:0 0 2px;
 }
 
 .gt-day-brief{
@@ -1317,9 +1484,21 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
   margin:0 0 var(--gt-space-3);
 }
 .gt-day-prio__group:last-child{ margin-bottom:0; }
-.gt-day-prio__group--must{ border-inline-start-color:var(--gt-accent-gold-600); }
+/* "The heart of the day" (mustDo) is the one anchor - the single thing
+   that gives the day structure, per the redesign's ANCHOR vs. optional
+   distinction. It gets a filled tinted card, not just a border, so it
+   reads as structurally different at a glance, not merely first in a
+   list of three equally-weighted groups. Recommended/optional stay as
+   the plain left-rule treatment on purpose - "optional must look
+   optional" is the whole point; giving them the same weight as the
+   anchor would undo it. */
+.gt-day-prio__group--must{
+  border-inline-start:none; padding:var(--gt-space-3) var(--gt-space-3) var(--gt-space-3) var(--gt-space-3);
+  background:var(--gt-accent-gold-100); border-radius:var(--gt-r-lg);
+}
 .gt-day-prio__group--rec{ border-inline-start-color:var(--gt-primary-600); }
 .gt-day-prio__group--opt{ border-inline-start-color:var(--gt-hair-strong); }
+.gt-day-prio__group--must .gt-day-prio__label{ color:var(--gt-accent-gold-text); font-size:var(--gt-text-sm); }
 .gt-day-prio__label{
   font-size:var(--gt-text-xs); font-weight:800; letter-spacing:.02em;
   color:var(--gt-ink-500); margin:0 0 var(--gt-space-1);

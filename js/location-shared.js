@@ -150,6 +150,125 @@ function buildPersonalTrackingWidgetHTML() {
 }
 
 
+// ---------------------------------------------------------------------------
+// Phase 2 (visual redesign) — place-card / place-detail helpers.
+//
+// GT_VIBE_LABELS translates each record's real `vibe` array (English,
+// title-case - e.g. "Family", "Traditional Greek") into a Hebrew label +
+// icon for the redesigned card/detail "best for"/"vibe" chips. Built from
+// the actual vocabulary in window.CORFU_LOCATIONS (32 distinct tag values,
+// a superset covers `vibe` too - counted directly off the data, not
+// guessed), so coverage is real: an unmapped value is skipped rather than
+// shown in English or invented a Hebrew word for. Same principle
+// buildVerifiedInfoHTML() above already follows for missing fields.
+// ---------------------------------------------------------------------------
+const GT_VIBE_LABELS = {
+    'Family': { label: 'משפחתי', icon: '👨‍👩‍👧' },
+    'Romantic': { label: 'רומנטי', icon: '💞' },
+    'Snorkeling': { label: 'שנרקול', icon: '🤿' },
+    'Popular': { label: 'פופולרי', icon: '🌟' },
+    'Adventure': { label: 'הרפתקה', icon: '🧭' },
+    'Quiet': { label: 'שקט', icon: '🤫' },
+    'Sunset': { label: 'שקיעה', icon: '🌇' },
+    'Party': { label: 'מסיבתי', icon: '🎉' },
+    'Organized': { label: 'מאורגן', icon: '🏖️' },
+    'Nudist': { label: 'נודיסטי', icon: '' },
+    'Luxury': { label: 'יוקרתי', icon: '✨' },
+    'Traditional Greek': { label: 'יווני מסורתי', icon: '🇬🇷' },
+    'Midrange': { label: 'מחיר בינוני', icon: '' },
+    'Upscale': { label: 'יוקרתי', icon: '' },
+    'Budget-Friendly': { label: 'משתלם', icon: '' },
+    'Fish': { label: 'דגים', icon: '🐟' },
+    'Seafood': { label: 'פירות ים', icon: '🦐' },
+    'Italian': { label: 'איטלקי', icon: '🍝' },
+    'Meat': { label: 'בשרים', icon: '🥩' },
+    'Cafe': { label: 'בית קפה', icon: '☕' },
+    'Dessert': { label: 'קינוחים', icon: '🍰' },
+    'Bar': { label: 'בר', icon: '🍹' },
+    'Street Food': { label: 'אוכל רחוב', icon: '🌯' },
+    'Fine Dining': { label: 'פיין דיינינג', icon: '🍽️' },
+    'Beach Bar': { label: "ביץ' בר", icon: '🍹' },
+    'Relaxed': { label: 'רגוע', icon: '🧘' },
+    'Vegetarian': { label: 'צמחוני', icon: '🥗' },
+    'Seafront': { label: 'על קו המים', icon: '🌊' },
+    'Village': { label: 'כפר', icon: '🏘️' },
+    'Traditional': { label: 'מסורתי', icon: '' },
+    'Viewpoint': { label: 'תצפית', icon: '📸' },
+    'Historic': { label: 'היסטורי', icon: '🏛️' },
+    'Nature': { label: 'טבע', icon: '🌿' },
+    'Beach': { label: 'חוף', icon: '🏖️' },
+    'Culinary': { label: 'קולינרי', icon: '🍴' },
+    'Culture': { label: 'תרבות', icon: '🎭' }
+};
+
+const GT_BEST_TIME_LABELS = {
+    'Early Morning': 'בוקר מוקדם',
+    'Morning': 'בוקר',
+    'Afternoon': 'אחר הצהריים',
+    'Evening': 'ערב',
+    'Sunset': 'שקיעה',
+    'Anytime': 'בכל שעה'
+};
+
+// Real vibe entries with a known label, in the record's own authored order
+// (never re-sorted or padded) - `limit` caps how many render (cards show
+// fewer than the detail sheet).
+function gtVibeChips(d, limit) {
+    const list = (Array.isArray(d.vibe) ? d.vibe : [])
+        .map(v => GT_VIBE_LABELS[v])
+        .filter(Boolean);
+    return typeof limit === 'number' ? list.slice(0, limit) : list;
+}
+
+function gtBestTimeLabel(d) {
+    return GT_BEST_TIME_LABELS[d.bestTime] || '';
+}
+
+// Estimated drive time from the trip's home base, reusing the EXACT same
+// haversine + windiness-factor + avg-speed method js/tools.js's own
+// distance calculator already uses for named locations (see
+// haversineKm()/calculateDistance()) - a derived estimate from real
+// coordinates and the destination's own researched road-windiness
+// constant, not an invented number. Returns null (never a fabricated
+// value) when either coordinate is missing.
+function gtLocationDriveEstimate(d) {
+    const base = window.DESTINATION && window.DESTINATION.map && window.DESTINATION.map.homeBase;
+    const tool = window.DESTINATION && window.DESTINATION.distanceTool;
+    if (!base || !tool || typeof d.lat !== 'number' || typeof d.lon !== 'number') return null;
+    if (typeof haversineKm !== 'function') return null;
+    const straightKm = haversineKm(base.lat, base.lon, d.lat, d.lon);
+    const roadKm = straightKm * tool.windinessFactor;
+    const min = Math.round((roadKm / tool.avgSpeedKmh) * 60);
+    return { km: Math.round(roadKm), min };
+}
+
+// The Map tab's "Near you" layer (Phase 2 visual redesign) reads "you" as
+// the trip's home base (the hotel) - the same reference point the app
+// already uses everywhere else (dashboard distances, the drive-time
+// estimate above) - real device geolocation was deliberately not
+// introduced for this (a new permission prompt for a redesign pass with no
+// other geolocation use anywhere in the app). Across ALL categories, by
+// the same real haversine distance.
+function gtNearHotelItems(limit) {
+    const base = window.DESTINATION && window.DESTINATION.map && window.DESTINATION.map.homeBase;
+    if (!base || typeof haversineKm !== 'function') return [];
+    const locations = (window.DESTINATION && window.DESTINATION.locations) || {};
+    const all = [];
+    Object.keys(locations).forEach(catKey => {
+        (locations[catKey] || []).forEach(d => {
+            if (typeof d.lat === 'number' && typeof d.lon === 'number') {
+                all.push({ item: d, catKey, km: haversineKm(base.lat, base.lon, d.lat, d.lon) });
+            }
+        });
+    });
+    all.sort((a, b) => a.km - b.km);
+    return all.slice(0, limit);
+}
+
 window.buildVerifiedInfoHTML = buildVerifiedInfoHTML;
 window.formatPhone = formatPhone;
 window.buildPersonalTrackingWidgetHTML = buildPersonalTrackingWidgetHTML;
+window.gtVibeChips = gtVibeChips;
+window.gtBestTimeLabel = gtBestTimeLabel;
+window.gtLocationDriveEstimate = gtLocationDriveEstimate;
+window.gtNearHotelItems = gtNearHotelItems;

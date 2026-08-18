@@ -265,18 +265,20 @@
      condensed teaser of today's real itinerary day-brief (theme, the one
      anchor, a few optional ideas, the sunset note) with a link to the full
      day. Nothing here is a second data source. ============================================================ -->
-<section id="today" class="tab-content space-y-6 gt-today" dir="rtl" role="tabpanel" aria-labelledby="gt-nav-today-btn" tabindex="0">
+<section id="today" class="tab-content gt-today" dir="rtl" role="tabpanel" aria-labelledby="gt-nav-today-btn" tabindex="0">
     <div class="gt-today-hero">
         <p class="gt-eyebrow" id="today-date">—</p>
-        <h1 class="gt-h1" id="today-greeting">שלום</h1>
-        <p class="gt-body" id="today-status" style="color:var(--gt-ink-700);margin-top:var(--gt-space-1);">—</p>
+        <h1 class="gt-today-hero__greeting" id="today-greeting">שלום</h1>
+        <div class="gt-today-hero__stats" id="today-stats"></div>
     </div>
 
-    <div class="gt-day-stats" id="today-stats"></div>
+    <div id="today-mood-wrap" class="gt-today-section"></div>
 
-    <div id="today-brief-wrap"></div>
+    <div id="today-timeline-wrap" class="gt-today-section"></div>
 
-    <div class="gt-today-mood">
+    <div id="today-priorities-wrap" class="gt-today-section"></div>
+
+    <div class="gt-today-section gt-today-mood-picker">
         <p class="gt-eyebrow" style="margin-bottom:var(--gt-space-2);">מה בא לכם היום?</p>
         <div style="display:flex;flex-wrap:wrap;gap:var(--gt-space-2);">
             <button type="button" class="gt-chip" onclick="gtTodayGoDiscover('beaches')">🏖️ חוף</button>
@@ -298,10 +300,25 @@
              Map tab is supposed to maximise. -->
         <div class="gt-home-stats gt-home-stats--overlay">
             <button type="button" class="gt-chip gt-home-stats__trip-btn" onclick="gtOpenTripSheet()">🏨 לינה ורכב</button>
+            <button type="button" class="gt-chip gt-home-stats__trip-btn" onclick="gtOpenNearbySheet()">📍 קרוב למלון</button>
         </div>
         <div id="home-map" class="gt-home-map"></div>
     </div>
 </section>
+
+<!-- Map tab "Near you" sheet (Phase 2 visual redesign): the 5 real closest
+     places to the trip's home base, across every category, by real
+     distance - see js/location-shared.js gtNearHotelItems() and
+     js/app-shell.js gtOpenNearbySheet(). -->
+<div id="gt-nearby-sheet-backdrop" class="gt-app-sheet-backdrop hidden" onclick="if(event.target===this) gtCloseNearbySheet()"></div>
+<div id="gt-nearby-sheet" class="gt-sheet gt-app-sheet hidden" role="dialog" aria-modal="true" aria-labelledby="gt-nearby-sheet-title">
+    <div class="gt-sheet__handle"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--gt-space-3);">
+        <h3 class="gt-h3" id="gt-nearby-sheet-title">📍 קרוב למלון</h3>
+        <button type="button" onclick="gtCloseNearbySheet()" aria-label="סגירה" class="gt-btn gt-btn--secondary" style="min-height:44px;padding:var(--gt-space-2) var(--gt-space-3);">×</button>
+    </div>
+    <div id="gt-nearby-sheet-list" class="gt-explore-list"></div>
+</div>
 
 <!-- ============================================================
      Phase 4, batch 2 — Explore ("גלה"): beaches/food/attractions/gems
@@ -313,6 +330,31 @@
      reachable as a fallback (see js/app-shell.js / .gt-legacy-hidden).
      ============================================================ -->
 <section id="explore" class="tab-content gt-explore" dir="rtl" role="tabpanel" aria-labelledby="gt-nav-explore-btn" tabindex="0">
+  <!-- Mood entry (Phase 2 visual redesign): "מה בא לכם היום?" - a lighter,
+       emotional front door onto the exact same category/facet browsing
+       below. Each tile is either "show this category" (reuses
+       selectExploreCategory(), zero new filtering logic) or a cross-
+       category real-tag lookup (gtSelectMood(), js/explore.js) over
+       window.DESTINATION.locations - never a new/invented grouping. -->
+  <div id="explore-mood-grid" class="gt-mood-grid">
+    <p class="gt-eyebrow" style="margin-bottom:var(--gt-space-2);">מה בא לכם היום?</p>
+    <div class="gt-mood-grid__tiles">
+      <button type="button" class="gt-mood-tile" onclick="gtSelectMood('beach')"><span class="gt-mood-tile__emoji">🏖️</span><span>יום חוף</span></button>
+      <button type="button" class="gt-mood-tile" onclick="gtSelectMood('sunset')"><span class="gt-mood-tile__emoji">🌅</span><span>שקיעה</span></button>
+      <button type="button" class="gt-mood-tile" onclick="gtSelectMood('romantic')"><span class="gt-mood-tile__emoji">🍷</span><span>ערב רומנטי</span></button>
+      <button type="button" class="gt-mood-tile" onclick="gtSelectMood('food')"><span class="gt-mood-tile__emoji">🍴</span><span>לאכול משהו טוב</span></button>
+      <button type="button" class="gt-mood-tile" onclick="gtSelectMood('explore')"><span class="gt-mood-tile__emoji">🚗</span><span>לסייר באי</span></button>
+      <button type="button" class="gt-mood-tile" onclick="gtSelectMood('villages')"><span class="gt-mood-tile__emoji">🏘️</span><span>כפרים</span></button>
+      <button type="button" class="gt-mood-tile" onclick="gtSelectMood('views')"><span class="gt-mood-tile__emoji">📸</span><span>נופים יפים</span></button>
+      <button type="button" class="gt-mood-tile" onclick="gtSelectMood('nothing')"><span class="gt-mood-tile__emoji">🧘</span><span>לא לעשות כלום</span></button>
+    </div>
+  </div>
+
+  <div id="explore-mood-banner" class="gt-mood-banner hidden">
+    <span id="explore-mood-banner-label"></span>
+    <button type="button" class="gt-btn gt-btn--secondary" onclick="gtClearMood()">← כל הקטגוריות</button>
+  </div>
+
   <div id="explore-subheader" class="gt-explore-subheader">
     <div id="explore-cat-tablist" class="gt-explore-chips" role="tablist" aria-label="סינון לפי קטגוריה" onkeydown="handleTablistKeydown(event)">
       <button type="button" class="gt-chip gt-chip--beach" role="tab" data-cat="beaches" aria-selected="true" onclick="selectExploreCategory('beaches', this)"><svg class="icon-line" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 18 0Z"/><path d="M12 12v7a2 2 0 0 1-2 2"/><path d="M12 3v2"/></svg> חופים</button>
@@ -393,13 +435,14 @@
      Discover shows up here without a reload. ============================================================ -->
 <section id="saved" class="tab-content space-y-6" dir="rtl" role="tabpanel" aria-labelledby="gt-nav-saved-btn" tabindex="0">
     <div>
-        <h1 class="gt-h1">שמורים</h1>
-        <p class="gt-body" style="margin-top:var(--gt-space-1);">כל מה ששמרתם, במקום אחד.</p>
+        <h1 class="gt-h1">הקורפו שלנו</h1>
+        <p class="gt-body" style="margin-top:var(--gt-space-1);">המקומות ששמרנו כדי לזכור.</p>
     </div>
 
-    <div id="saved-empty-state" class="hidden text-center py-10">
-        <p class="gt-body">עדיין לא שמרתם כלום. הוסיפו לב 🤍 לכל מקום שאתם רוצים לזכור — ב"גלה" או במפה.</p>
-        <button type="button" class="gt-btn gt-btn--secondary" style="margin-top:var(--gt-space-3);" onclick="switchTab('explore')">מעבר לגלה ←</button>
+    <div id="saved-empty-state" class="hidden gt-today-card" style="text-align:center;">
+        <p class="gt-today-mood-card__theme" style="font-size:var(--gt-text-lg);">עדיין לא שמרתם כלום.</p>
+        <p class="gt-body" style="margin-top:var(--gt-space-2);">כשמשהו ימשוך את העין - שמרו אותו כאן.</p>
+        <button type="button" class="gt-btn gt-btn--primary" style="margin-top:var(--gt-space-3);" onclick="switchTab('explore')">גלו את קורפו ←</button>
     </div>
 
     <div id="saved-list" class="gt-explore-list"></div>
@@ -3029,13 +3072,21 @@
             <h3 class="gt-h3" id="gt-more-sheet-title">עוד</h3>
             <button type="button" onclick="gtCloseMoreSheet()" aria-label="סגירה" class="gt-btn gt-btn--secondary" style="min-height:44px;padding:var(--gt-space-2) var(--gt-space-3);">×</button>
         </div>
-        <div style="display:flex;flex-direction:column;gap:var(--gt-space-2);">
+        <div class="gt-more-group">
+            <p class="gt-more-group__heading">הטיול שלנו</p>
             <button type="button" class="gt-btn gt-btn--secondary" style="justify-content:flex-start;" onclick="gtCloseMoreSheet(); switchTab('itinerary');">🗓️ המסלול המלא</button>
-            <button type="button" class="gt-btn gt-btn--secondary" style="justify-content:flex-start;" onclick="gtCloseMoreSheet(); switchTab('guide');">📖 המדריך המלא</button>
-            <button type="button" class="gt-btn gt-btn--secondary" style="justify-content:flex-start;" onclick="gtCloseMoreSheet(); switchTab('about');">🏝️ היכרות עם קורפו</button>
+            <button type="button" class="gt-btn gt-btn--secondary" style="justify-content:flex-start;" onclick="gtCloseMoreSheet(); gtOpenTripSheet();">🏨 לינה, רכב והזמנות</button>
             <button type="button" class="gt-btn gt-btn--secondary" style="justify-content:flex-start;" onclick="gtCloseMoreSheet(); switchTab('dashboard', true); setTimeout(() => { const el = document.getElementById('packing-panel'); if (el) el.scrollIntoView({behavior:'smooth', block:'start'}); }, 200);">🎒 רשימת ציוד ואריזה</button>
-            <button type="button" class="gt-btn gt-btn--secondary" style="justify-content:flex-start;" onclick="gtCloseMoreSheet(); if (typeof openNotesModal === 'function') openNotesModal();">📝 התיעוד שלנו</button>
+        </div>
+        <div class="gt-more-group">
+            <p class="gt-more-group__heading">תכנון</p>
+            <button type="button" class="gt-btn gt-btn--secondary" style="justify-content:flex-start;" onclick="gtCloseMoreSheet(); switchTab('guide');">📖 המדריך המלא</button>
             <button type="button" class="gt-btn gt-btn--secondary" style="justify-content:flex-start;" onclick="gtCloseMoreSheet(); switchTab('faq');">❓ שאלות נפוצות</button>
+        </div>
+        <div class="gt-more-group">
+            <p class="gt-more-group__heading">מידע</p>
+            <button type="button" class="gt-btn gt-btn--secondary" style="justify-content:flex-start;" onclick="gtCloseMoreSheet(); switchTab('about');">🏝️ היכרות עם קורפו</button>
+            <button type="button" class="gt-btn gt-btn--secondary" style="justify-content:flex-start;" onclick="gtCloseMoreSheet(); if (typeof openNotesModal === 'function') openNotesModal();">📝 התיעוד שלנו</button>
         </div>
     </div>
 

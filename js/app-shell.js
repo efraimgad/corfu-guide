@@ -199,6 +199,42 @@ window.gtCloseMoreSheet = gtCloseMoreSheet;
 window.gtOpenTripSheet = gtOpenTripSheet;
 window.gtCloseTripSheet = gtCloseTripSheet;
 
+// -- Map tab's "Near you" sheet (Phase 2 visual redesign) -------------------
+// Same open/close/focus-trap shape as the trip sheet above. Rows reuse
+// js/explore.js's own exploreRowCardHtml() (Explore's real card, not a
+// third design) and its click delegation already handles taps inside any
+// element matching #explore-list/#saved-list - this sheet's list carries
+// the id gtNearbySheetListId points at, added to that same selector set in
+// js/explore.js's delegated listener.
+let gtNearbySheetTriggerEl = null;
+function gtOpenNearbySheet() {
+    const listEl = document.getElementById('gt-nearby-sheet-list');
+    if (listEl && typeof gtNearHotelItems === 'function' && typeof exploreRowCardHtml === 'function') {
+        const items = gtNearHotelItems(5);
+        listEl.innerHTML = items.map(x => exploreRowCardHtml(x.item, x.catKey)).join('');
+        if (typeof initFavoriteButtons === 'function') initFavoriteButtons();
+    }
+    const backdrop = document.getElementById('gt-nearby-sheet-backdrop');
+    const sheet = document.getElementById('gt-nearby-sheet');
+    if (!backdrop || !sheet) return;
+    gtNearbySheetTriggerEl = document.activeElement;
+    backdrop.classList.remove('hidden');
+    sheet.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+    const closeBtn = sheet.querySelector('button[aria-label="סגירה"]');
+    if (closeBtn) closeBtn.focus();
+}
+function gtCloseNearbySheet() {
+    const backdrop = document.getElementById('gt-nearby-sheet-backdrop');
+    const sheet = document.getElementById('gt-nearby-sheet');
+    if (backdrop) backdrop.classList.add('hidden');
+    if (sheet) sheet.classList.add('hidden');
+    if (!isAnyGtSheetOpen()) document.body.classList.remove('modal-open');
+    if (gtNearbySheetTriggerEl) gtNearbySheetTriggerEl.focus();
+}
+window.gtOpenNearbySheet = gtOpenNearbySheet;
+window.gtCloseNearbySheet = gtCloseNearbySheet;
+
 // -- Home tab map overlay -----------------------------------------------------
 // There is no longer a stat row to sync here: the countdown/weather/today
 // chips that used to overlay the map duplicated the sticky top bar (which
