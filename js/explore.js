@@ -137,6 +137,127 @@ function selectExploreCategory(catKey, btn) {
 }
 window.selectExploreCategory = selectExploreCategory;
 
+// -- "מה בא לכם היום?" mood entry (Phase 2 visual redesign) -----------------
+// Two shapes: a mood that's really just "go look at this whole category"
+// (reuses selectExploreCategory() as-is, zero new filtering logic), and a
+// mood that's a real cross-category tag lookup over the SAME `tags` field
+// every facet chip already filters by (js/data - window.CORFU_LOCATIONS) -
+// no new/invented grouping, no second data source. The 8 tag values below
+// were counted directly off the real dataset (32 distinct tags total;
+// these 5 cross-category ones - sunset/romantic/village/viewpoint/quiet -
+// each have real, non-trivial matches; see the commit that introduced
+// this for the counts).
+//
+// Scope note: the inline Explore map is NOT re-synced to a mood's results
+// (mood results can span categories the map's per-category layer toggle
+// doesn't model) - left showing whatever it last had. A real fix is a map
+// layer keyed by an arbitrary id set rather than a category, which is a
+// bigger change than this pass; the row list (this feature's actual
+// deliverable per the redesign) is unaffected.
+// `intro` (Phase 3): one short editorial line per mood - UI chrome/framing
+// text, the same kind of authored label this app's nav/section headings
+// already are (e.g. "הלב של היום"), not itinerary content and not a claim
+// about any specific place - kept generic on purpose.
+const GT_MOODS = {
+    beach: { emoji: '🏖️', label: 'יום חוף', kind: 'category', cat: 'beaches' },
+    sunset: { emoji: '🌅', label: 'שקיעה', kind: 'tag', tag: 'sunset', intro: 'קורפו יודעת לעשות שקיעות. הנה כמה מקומות ששווה לשקול הערב.' },
+    romantic: { emoji: '🍷', label: 'ערב רומנטי', kind: 'tag', tag: 'romantic', intro: 'לערב שקט לשניים - כמה אפשרויות שנעים להתחיל מהן.' },
+    food: { emoji: '🍴', label: 'לאכול משהו טוב', kind: 'category', cat: 'food' },
+    explore: { emoji: '🚗', label: 'לסייר באי', kind: 'category', cat: 'attractions' },
+    villages: { emoji: '🏘️', label: 'כפרים', kind: 'tag', tag: 'village', intro: 'כפרים שנשארו כמעט כמו שהיו - טובים להליכה איטית בלי יעד ברור.' },
+    views: { emoji: '📸', label: 'נופים יפים', kind: 'tag', tag: 'viewpoint', intro: 'כמה נקודות תצפית ששווה לעצור בהן, גם רק לכמה דקות.' },
+    nothing: { emoji: '🧘', label: 'לא לעשות כלום', kind: 'tag', tag: 'quiet', intro: 'לפעמים הכי טוב זה שלא לתכנן. כמה מקומות שקטים לשבת בהם.' }
+};
+
+function gtSelectMood(moodKey) {
+    const mood = GT_MOODS[moodKey];
+    if (!mood) return;
+
+    if (mood.kind === 'category') {
+        const banner = document.getElementById('explore-mood-banner');
+        if (banner) banner.classList.add('hidden');
+        selectExploreCategory(mood.cat, null);
+        return;
+    }
+
+    // A handful of real places (Phase 4 content audit - e.g. Afionas village,
+    // Mon Repos, Kaiser's Throne/Pelekas, Nymfes waterfall, Arkoudilas forest)
+    // are catalogued TWICE, once under "attractions" and once under "gems" -
+    // same coordinates, near-identical name, two independent write-ups. That's
+    // fine for browsing Explore's own attractions/gems tabs separately (each
+    // still shows its own entry there), but a cross-category mood result
+    // showing the same physical place twice reads as a real bug. Deduped here
+    // by rounding to ~11m (4 decimals) - EXPLORE_CATEGORIES order (beaches,
+    // food, attractions, gems) means the first one seen wins, which in
+    // practice keeps the more structured attractions-style write-up.
+    const seenCoords = new Set();
+    const matches = [];
+    EXPLORE_CATEGORIES.forEach(cat => {
+        const locs = ((window.DESTINATION && window.DESTINATION.locations) || {})[cat.key] || [];
+        locs.forEach(d => {
+            const tags = (d.tags || '').split(',').map(t => t.trim());
+            if (!tags.includes(mood.tag)) return;
+            if (typeof d.lat === 'number' && typeof d.lon === 'number') {
+                const coordKey = d.lat.toFixed(4) + ',' + d.lon.toFixed(4);
+                if (seenCoords.has(coordKey)) return;
+                seenCoords.add(coordKey);
+            }
+            matches.push({ d, catKey: cat.key });
+        });
+    });
+    // Ranked by real distance from the trip's home base (same haversine
+    // method as everywhere else) - the only honest, non-arbitrary signal
+    // available across every category, not a fabricated "best" pick.
+    // Splitting into "our pick"/"also worth considering"/"already nearby"
+    // is presentation only; every entry came from the exact same real
+    // tag match above.
+    if (typeof gtLocationDriveEstimate === 'function') {
+        matches.forEach(m => { m.drive = gtLocationDriveEstimate(m.d); });
+        matches.sort((a, b) => (a.drive ? a.drive.min : 999) - (b.drive ? b.drive.min : 999));
+    }
+
+    const listEl = document.getElementById('explore-list');
+    const countEl = document.getElementById('explore-filter-count');
+    const emptyEl = document.getElementById('explore-empty-state');
+    if (!listEl) return;
+
+    if (exploreRenderState.observer) exploreRenderState.observer.disconnect();
+    exploreRenderState = { catKey: null, entries: [], rendered: 0, observer: null };
+
+    const introHtml = mood.intro ? `<p class="gt-mood-results-intro">${escapeHtml(mood.intro)}</p>` : '';
+    const tiers = [
+        { rows: matches.slice(0, 1), label: 'המומלץ שלנו' },
+        { rows: matches.slice(1, 4), label: 'גם שווה לשקול' },
+        { rows: matches.slice(4), label: 'כבר קרובים?' }
+    ].filter(t => t.rows.length);
+    const tiersHtml = tiers.map(t =>
+        `<h3 class="gt-explore-group-header">${escapeHtml(t.label)}</h3>${t.rows.map(m => exploreRowCardHtml(m.d, m.catKey)).join('')}`
+    ).join('');
+
+    listEl.innerHTML = introHtml + tiersHtml;
+    if (emptyEl) emptyEl.classList.toggle('hidden', matches.length > 0);
+    if (countEl) countEl.textContent = matches.length === 0 ? 'לא נמצאו תוצאות עבור המצב רוח הזה' : `מציג ${matches.length} תוצאות`;
+
+    document.querySelectorAll('#explore-cat-tablist [role="tab"]').forEach(c => c.setAttribute('aria-selected', 'false'));
+    const facetRow = document.getElementById('explore-facet-row');
+    if (facetRow) facetRow.innerHTML = '';
+
+    const banner = document.getElementById('explore-mood-banner');
+    const bannerLabel = document.getElementById('explore-mood-banner-label');
+    if (banner) banner.classList.remove('hidden');
+    if (bannerLabel) bannerLabel.textContent = `${mood.emoji} ${mood.label}`;
+
+    if (typeof initFavoriteButtons === 'function') initFavoriteButtons();
+}
+window.gtSelectMood = gtSelectMood;
+
+function gtClearMood() {
+    const banner = document.getElementById('explore-mood-banner');
+    if (banner) banner.classList.add('hidden');
+    selectExploreCategory(exploreActiveCategory || 'beaches', null);
+}
+window.gtClearMood = gtClearMood;
+
 // Built in JS rather than as four static markup blocks in index.html: the
 // chip set is per-category, so static markup would mean four rows that all
 // have to be kept in sync with EXPLORE_FACETS by hand - the exact drift the
@@ -343,25 +464,58 @@ function exploreBodyHtml(d, catKey) {
 // being first: the secondary meta (price/rating/score) and the status
 // badge each already own their own leading content, so with the pill gone
 // the row just starts directly at whichever of those two is first.
+// One real, already-authored sentence per record where a clean one exists -
+// beaches/gems carry a plain `description` string; attractions' first
+// paragraph inside bodyHtml reads the same way (parsed into a detached
+// <div>, never regexed off the raw HTML - same technique
+// js/itinerary-view.js's gtParseItineraryItemHtml() uses). Food has no
+// clean standalone description field (restHtml is a structured hours/
+// dishes/facilities block, not prose) - rather than mangling that into a
+// fake one-liner, the card simply has no description line for food, and
+// leans on its metadata row (price/rating/region) instead.
+function exploreCardSnippet(d, catKey) {
+    if (catKey === 'beaches' || catKey === 'gems') return d.description || '';
+    if (catKey === 'attractions') {
+        const el = document.createElement('div');
+        el.innerHTML = d.bodyHtml || '';
+        const p = el.querySelector('p');
+        return p ? p.textContent.trim() : '';
+    }
+    return '';
+}
+
 function exploreRowCardHtml(d, catKey) {
     const name = exploreDisplayName(d, catKey);
     const img = d.image || {};
     const secondary = exploreSecondaryMeta(d, catKey);
     const status = exploreStatusBadge(d);
     const showReserve = catKey === 'food';
+    const snippet = exploreCardSnippet(d, catKey);
+    const vibes = (typeof gtVibeChips === 'function') ? gtVibeChips(d, 2) : [];
+    const drive = (typeof gtLocationDriveEstimate === 'function') ? gtLocationDriveEstimate(d) : null;
+
+    const metaBits = [];
+    if (secondary) metaBits.push(`<span class="gt-tabular">${escapeHtml(secondary)}</span>`);
+    if (drive) metaBits.push(`<span class="gt-tabular">🚗 <span dir="ltr">${drive.min}</span> דק׳</span>`);
+    const metaHtml = metaBits.length
+        ? `<div class="gt-row-card__meta">${metaBits.join('<span class="sep">·</span>')}<span class="sep">·</span><span class="gt-status ${status.cls}">${status.label}</span></div>`
+        : `<div class="gt-row-card__meta"><span class="gt-status ${status.cls}">${status.label}</span></div>`;
+    const vibeHtml = vibes.length
+        ? `<div class="gt-row-card__vibes">${vibes.map(v => `<span class="gt-vibe-chip">${v.icon} ${escapeHtml(v.label)}</span>`).join('')}</div>`
+        : '';
 
     return `<div class="gt-row-card gt-explore-row" data-loc-cat="${escapeAttr(catKey)}" data-loc-id="${escapeAttr(d.id)}">
       <button type="button" class="gt-explore-row__main" aria-label="${escapeAttr(name)}">
-        <img class="gt-row-card__thumb" src="${escapeAttr(img.src || '')}" alt="${escapeAttr(img.alt || name)}" width="64" height="64" loading="lazy" decoding="async">
+        <img class="gt-row-card__thumb" src="${escapeAttr(img.src || '')}" alt="${escapeAttr(img.alt || name)}" width="88" height="88" loading="lazy" decoding="async">
         <div class="gt-row-card__body">
           <p class="gt-row-card__title">${escapeHtml(name)}</p>
-          <div class="gt-row-card__meta">
-            ${secondary ? `<span class="gt-tabular">${escapeHtml(secondary)}</span><span class="sep">·</span>` : ''}
-            <span class="gt-status ${status.cls}">${status.label}</span>
-          </div>
+          ${snippet ? `<p class="gt-row-card__snippet">${escapeHtml(snippet)}</p>` : ''}
+          ${metaHtml}
+          ${vibeHtml}
         </div>
       </button>
       <div class="gt-explore-row__actions">
+        <button type="button" class="gt-explore-icon-btn" data-explore-action="save" title="שמירה" aria-label="שמירת ${escapeAttr(name)} במועדפים" aria-pressed="false">🤍</button>
         <button type="button" class="gt-explore-icon-btn" data-explore-action="map" title="הצג במפה" aria-label="הצג את ${escapeAttr(name)} במפה">${GT_ICON_MAP}</button>
         ${showReserve ? `<button type="button" class="gt-explore-icon-btn gt-explore-icon-btn--reserve" data-explore-action="reserve" title="הזמנת מקום" aria-label="הזמנת מקום ב-${escapeAttr(name)}">${GT_ICON_PHONE} הזמן</button>` : ''}
       </div>
@@ -527,9 +681,18 @@ window.renderExploreTab = renderExploreTab;
 // above) - each branch below is reached by its own distinct element, so
 // there's no double-trigger risk to guard against with stopPropagation()
 // the way the old nested-role="button" markup needed.
+// Shared by #explore-list, #saved-list (js/saved.js), #gt-nearby-sheet-list
+// (js/app-shell.js's Map-tab "Near you" sheet) and #today-nearby-list
+// (js/today.js's "כבר קרובים למלון?" card) - all four render rows with the
+// exact same exploreRowCardHtml() markup, so one delegated listener
+// handles taps on any of them. The only behaviour that differs by list is
+// the map action: Explore keeps its own inline map on screen (below),
+// while the others have no inline map of their own and jump to the full
+// Map tab instead - same as the detail sheet's "במפה" button does
+// everywhere.
 document.addEventListener('click', (e) => {
-    const list = document.getElementById('explore-list');
-    if (!list || !list.contains(e.target)) return;
+    const list = e.target.closest('#explore-list, #saved-list, #gt-nearby-sheet-list, #today-nearby-list');
+    if (!list) return;
 
     const actionBtn = e.target.closest('[data-explore-action]');
     if (actionBtn) {
@@ -538,12 +701,11 @@ document.addEventListener('click', (e) => {
         const catKey = row.getAttribute('data-loc-cat');
         const id = row.getAttribute('data-loc-id');
         const action = actionBtn.getAttribute('data-explore-action');
-        // Stays on the Explore tab's inline map rather than jumping to the Map
-        // tab like the detail sheet's "במפה" button does: this button is tapped
-        // *from the list*, where keeping the surrounding rows on screen is the
-        // whole point (and at 1024px+ the inline map is already open beside the
-        // list, so a tab switch would throw away a view the user can see).
-        if (action === 'map' && typeof showOnExploreMap === 'function') showOnExploreMap(catKey, id);
+        if (action === 'save') { toggleExploreFavorite(id, actionBtn); return; }
+        if (action === 'map') {
+            if (list.id !== 'explore-list' && typeof showOnHomeMap === 'function') showOnHomeMap(catKey, id);
+            else if (typeof showOnExploreMap === 'function') showOnExploreMap(catKey, id);
+        }
         if (action === 'reserve') handleExploreReserve(catKey, id);
         return;
     }
@@ -569,6 +731,37 @@ document.addEventListener('click', (e) => {
 // to be retyped. #reservation-form lives inside the #dashboard tab (not
 // #explore), so this jumps there first - same "switch to the owning tab,
 // then act" pattern as openCardFromMap()/scrollToLocationCard() elsewhere.
+// Up to `limit` OTHER same-category records nearest this one, by real
+// haversine distance between their own coordinates (not from the hotel) -
+// genuinely "already nearby", not an arbitrary pick. Records without a
+// coordinate can't be ranked and are excluded rather than guessed at.
+function exploreNearbyItems(d, catKey, limit) {
+    if (typeof d.lat !== 'number' || typeof d.lon !== 'number' || typeof haversineKm !== 'function') return [];
+    const all = ((window.DESTINATION && window.DESTINATION.locations) || {})[catKey] || [];
+    return all
+        .filter(o => o.id !== d.id && typeof o.lat === 'number' && typeof o.lon === 'number')
+        .map(o => ({ item: o, km: haversineKm(d.lat, d.lon, o.lat, o.lon) }))
+        .sort((a, b) => a.km - b.km)
+        .slice(0, limit)
+        .map(x => x.item);
+}
+
+function exploreNearbyHtml(d, catKey) {
+    const items = exploreNearbyItems(d, catKey, 3);
+    if (!items.length) return '';
+    const rows = items.map(o => {
+        const oName = exploreDisplayName(o, catKey);
+        return `<button type="button" class="gt-nearby-item" onclick="openExploreSheet('${escapeAttr(catKey)}','${escapeAttr(o.id)}')">
+          <span class="gt-nearby-item__name">${escapeHtml(oName)}</span>
+          <span class="gt-nearby-item__arrow" aria-hidden="true">←</span>
+        </button>`;
+    }).join('');
+    return `<div class="gt-explore-sheet-section">
+      <p class="gt-explore-sheet-section__heading">בקרבת מקום</p>
+      <div class="gt-nearby-list">${rows}</div>
+    </div>`;
+}
+
 function handleExploreReserve(catKey, id) {
     if (catKey !== 'food') return;
     const d = (((window.DESTINATION && window.DESTINATION.locations) || {}).food || []).find(x => x.id === id);
@@ -610,32 +803,68 @@ function openExploreSheet(catKey, id) {
     sheet.setAttribute('data-sheet-loc-cat', catKey);
     sheet.setAttribute('data-sheet-loc-id', id);
 
+    // Phase 3: the primary action row is exactly Save + Navigate - "the
+    // primary planning action" and "the primary functional action" per the
+    // redesign brief, not a row of 3-4 competing buttons. Reserve (food
+    // only) is real and stays, but demoted to its own secondary row below;
+    // the old "🗺️ במפה" jump-to-Map-tab button is dropped entirely -
+    // Navigate (an external Maps deep link) already does the one thing a
+    // user opening this sheet to get somewhere actually needs, and keeping
+    // both was exactly the "5-6 competing actions" this pass called out.
     const reserveBtn = catKey === 'food'
-        ? `<button type="button" class="gt-btn gt-btn--primary" onclick="gtCloseExploreSheet(); handleExploreReserve('food','${escapeAttr(id)}');">${GT_ICON_PHONE} הזמנה</button>`
+        ? `<button type="button" class="gt-btn gt-btn--secondary" style="width:100%;" onclick="gtCloseExploreSheet(); handleExploreReserve('food','${escapeAttr(id)}');">${GT_ICON_PHONE} הזמנת מקום</button>`
         : '';
     const directionsBtn = d.mapsUrl
-        ? `<a href="${escapeAttr(d.mapsUrl)}" target="_blank" rel="noopener noreferrer" class="gt-btn gt-btn--secondary">📍 ניווט</a>`
+        ? `<a href="${escapeAttr(d.mapsUrl)}" target="_blank" rel="noopener noreferrer" class="gt-btn gt-btn--primary">↗ ניווט</a>`
         : '';
-    // Goes to the full-screen Map tab (showOnHomeMap, js/map.js), not the
-    // Explore tab's own inline map: showOnExploreMap() re-opens this very sheet
-    // through gtOnMarkerTap('explore'), so the panel looked stuck open and the
-    // bottom nav stayed on "גלה". The row cards' 🗺️ icon button still uses the
-    // inline map on purpose - see the click handler above.
-    const mapBtn = `<button type="button" class="gt-btn gt-btn--secondary" onclick="gtCloseExploreSheet(); showOnHomeMap('${escapeAttr(catKey)}','${escapeAttr(id)}');">${GT_ICON_MAP} במפה</button>`;
+    const isFav = typeof isFavoriteId === 'function' && isFavoriteId(id);
+    const saveBtn = `<button type="button" id="explore-sheet-save-btn" class="gt-btn gt-btn--secondary" aria-pressed="${isFav ? 'true' : 'false'}" onclick="toggleExploreFavorite('${escapeAttr(id)}', this);">${isFav ? '❤️ נשמר' : '🤍 שמירה'}</button>`;
+
+    // "The vibe" - the record's full real vibe list (no cap, unlike the
+    // card's 2-chip teaser), and "best time" - both already-authored data,
+    // not new copy.
+    const vibes = (typeof gtVibeChips === 'function') ? gtVibeChips(d) : [];
+    const vibeHtml = vibes.length
+        ? `<div class="gt-explore-sheet-section">
+             <p class="gt-explore-sheet-section__heading">האווירה</p>
+             <div class="gt-row-card__vibes">${vibes.map(v => `<span class="gt-vibe-chip">${v.icon} ${escapeHtml(v.label)}</span>`).join('')}</div>
+           </div>`
+        : '';
+    const bestTime = (typeof gtBestTimeLabel === 'function') ? gtBestTimeLabel(d) : '';
+    const bestTimeHtml = bestTime
+        ? `<div class="gt-explore-sheet-section">
+             <p class="gt-explore-sheet-section__heading">הזמן הכי טוב</p>
+             <p class="gt-body">${escapeHtml(bestTime)}</p>
+           </div>`
+        : '';
+    const drive = (typeof gtLocationDriveEstimate === 'function') ? gtLocationDriveEstimate(d) : null;
+    const driveHtml = drive ? `<span class="gt-tabular">🚗 <span dir="ltr">${drive.min}</span> דק׳ מהמלון</span><span class="sep">·</span>` : '';
 
     bodyEl.innerHTML = `
-      ${img.src ? `<img class="gt-explore-sheet-thumb" src="${escapeAttr(img.src)}" alt="${escapeAttr(img.alt || name)}" width="640" height="360" loading="lazy" decoding="async">` : ''}
-      <div class="gt-row-card__meta" style="margin-bottom:var(--gt-space-2);">
+      ${img.src ? `<img class="gt-explore-sheet-thumb" src="${escapeAttr(img.src)}" alt="${escapeAttr(img.alt || name)}" width="640" height="420" loading="lazy" decoding="async">` : ''}
+      <div class="gt-row-card__meta" style="margin-bottom:var(--gt-space-3);">
         <span class="gt-cat-${cat.tag}-bg" style="display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:var(--gt-r-full);font-weight:700;">${cat.icon} ${cat.label}</span>
-        <span class="sep">·</span><span class="gt-status ${status.cls}">${status.label}</span>
+        <span class="sep">·</span>${driveHtml}<span class="gt-status ${status.cls}">${status.label}</span>
       </div>
-      <div class="gt-explore-sheet-actions">${reserveBtn}${directionsBtn}${mapBtn}</div>
-      <div id="explore-sheet-tracking"></div>
-      <div class="gt-explore-sheet-body">${exploreBodyHtml(d, catKey)}</div>
+      <div class="gt-explore-sheet-section">
+        <p class="gt-explore-sheet-section__heading">למה כדאי לבקר?</p>
+        <div class="gt-explore-sheet-body">${exploreBodyHtml(d, catKey)}</div>
+      </div>
+      ${vibeHtml}
+      ${bestTimeHtml}
       <details class="gt-explore-verified-fold">
-        <summary><span>מידע מאומת</span><span aria-hidden="true">▼</span></summary>
+        <summary><span>כדאי לדעת</span><span aria-hidden="true">▼</span></summary>
         ${buildVerifiedInfoHTML(d)}
-      </details>`;
+      </details>
+      <div class="gt-explore-sheet-section">
+        <p class="gt-explore-sheet-section__heading">המעקב האישי שלי</p>
+        <div id="explore-sheet-tracking"></div>
+      </div>
+      ${exploreNearbyHtml(d, catKey)}
+      <div class="gt-explore-sheet-actions--bottom">
+        <div class="gt-explore-sheet-actions gt-explore-sheet-actions--primary">${saveBtn}${directionsBtn}</div>
+        ${reserveBtn}
+      </div>`;
 
     // Personal-tracking widget (visited/rate/note): reuses the exact same
     // markup + storage functions as every other card (buildPersonalTrackingWidgetHTML/

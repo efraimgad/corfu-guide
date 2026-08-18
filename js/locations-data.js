@@ -2245,7 +2245,7 @@ window.CORFU_LOCATIONS = {
     {
       "id": "food-אמפלונאס-Ambelonas",
       "category": "cat-sunset",
-      "tags": "sunset,upscale",
+      "tags": "sunset,upscale,romantic",
       "image": {
         "src": "https://images.pexels.com/photos/1395964/pexels-photo-1395964.jpeg?auto=compress&cs=tinysrgb&w=600",
         "alt": "Ambelonas Corfu"
@@ -2263,7 +2263,8 @@ window.CORFU_LOCATIONS = {
       "parking": "Unknown",
       "vibe": [
         "Sunset",
-        "Upscale"
+        "Upscale",
+        "Romantic"
       ],
       "beachType": null,
       "bestTime": "Sunset",
@@ -4208,7 +4209,7 @@ window.CORFU_LOCATIONS = {
       "hasRealPhoto": false,
       "typeBadgeHtml": "<span>🍽️</span> קולינריה עילית",
       "name": "Toula's Gastronomy",
-      "description": "ממוקמת במפרץ אגני (Agni Bay). אומנם מדובר במסעדה ידועה לפודיז, אך היא נחשבת לפנינה נסתרת שכן היא מציעה מאכלי ים מתוחכמים בטעם עילאי על קו המים עצמו.",
+      "description": "ממוקמת במפרץ אגני (Agni Bay), מוכרת בעיקר בין חובבי אוכל טובים - מאכלי ים מתוחכמים ברמה גבוהה, ממש על קו המים.",
       "tipHtml": "💡 מנת הדגל \"שרימפס מילפיי\" שלהם שברה את הרשת. אל תעזבו מבלי לנסות אותה. המחירים יקרים יותר מבטברנה רגילה, אך שווים כל סנט.",
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.7394%2C19.9381",
       "lat": 39.7394,
