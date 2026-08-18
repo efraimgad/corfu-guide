@@ -38,10 +38,28 @@ function gtSavedGroupsByMood() {
     const locations = (window.DESTINATION && window.DESTINATION.locations) || {};
     const categories = (typeof EXPLORE_CATEGORIES !== 'undefined') ? EXPLORE_CATEGORIES : [];
 
+    // A handful of real places are catalogued twice under two categories at
+    // the same coordinates (Phase 4 content audit - e.g. Afionas village
+    // under both attractions and gems - see the identical dedup in
+    // js/location-shared.js's gtNearHotelItems() and js/explore.js's
+    // gtSelectMood()). Saving both copies from two different browsing
+    // contexts is easy to do without realizing they're the same place, and
+    // showing them as two separate cards here would read as a duplicate-
+    // entry bug in the one list this app frames as a personal, curated
+    // shortlist - so it gets the same coordinate-rounding dedup as those
+    // other two lists, keeping whichever copy is favorited/encountered
+    // first.
+    const seenCoords = new Set();
     let remaining = [];
     categories.forEach(cat => {
         (locations[cat.key] || []).forEach(d => {
-            if (favSet.has(d.id)) remaining.push({ d, catKey: cat.key });
+            if (!favSet.has(d.id)) return;
+            if (typeof d.lat === 'number' && typeof d.lon === 'number') {
+                const coordKey = d.lat.toFixed(4) + ',' + d.lon.toFixed(4);
+                if (seenCoords.has(coordKey)) return;
+                seenCoords.add(coordKey);
+            }
+            remaining.push({ d, catKey: cat.key });
         });
     });
 
