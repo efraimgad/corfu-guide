@@ -441,7 +441,8 @@ const GT_BEST_FOR = {
     couples:     '💞 זוגי',
     water:       '🤿 מים',
     scenic:      '🚗 נסיעה נופית',
-    logistics:   '🧳 לוגיסטיקה'
+    logistics:   '🧳 לוגיסטיקה',
+    shopping:    '🛍️ קניות'
 };
 
 // Start-of-day / end-of-day from the items' own time strings. Most items carry
