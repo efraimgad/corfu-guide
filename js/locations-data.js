@@ -4385,6 +4385,102 @@ window.CORFU_LOCATIONS = {
       "needsCoordCheck": true
     },
     {
+      "id": "gem-olive-wood-workshop",
+      "tags": "culture,shopping",
+      "image": {
+        "src": "https://images.pexels.com/photos/1126935/pexels-photo-1126935.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "alt": "בית המלאכה לעץ זית של טום (Olive Wood Workshop)"
+      },
+      "hasRealPhoto": false,
+      "typeBadgeHtml": "<span>🪵</span> סדנת אומן",
+      "name": "בית המלאכה לעץ זית של טום (Olive Wood Workshop)",
+      "description": "סדנת עץ זית משפחתית הפועלת בעיר העתיקה למעלה מ-55 שנה, בסמטה היוצאת מרחוב ניקיפורו תיאוטוקי. טום ובנו מגלפים במקום את הכול - מקערות סלט וכלי מטבח ועד עיטורי בית.",
+      "tipHtml": "💡 זו סדנה עובדת ולא רק חנות: אם תגיעו כשטום ליד המחרטה, תראו את החפץ נוצר לפני שאתם קונים אותו.",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6236%2C19.9219",
+      "lat": 39.6236,
+      "lon": 19.9219,
+      "parking": "Unknown",
+      "vibe": [
+        "Culture",
+        "Traditional"
+      ],
+      "beachType": null,
+      "bestTime": "Anytime",
+      "needsCoordCheck": true
+    },
+    {
+      "id": "gem-firsthing-noel",
+      "tags": "culture,shopping",
+      "image": {
+        "src": "https://images.pexels.com/photos/1126935/pexels-photo-1126935.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "alt": "פירסטינג ונואל (Firsthing & Noel)"
+      },
+      "hasRealPhoto": false,
+      "typeBadgeHtml": "<span>🏺</span> קרמיקה בעבודת יד",
+      "name": "פירסטינג ונואל (Firsthing & Noel)",
+      "description": "חנות-אטלייה קטנה ברחוב ניקיפורו תיאוטוקי, מאחורי כנסיית אגיוס ואסיליוס, שבה הזוג שמנהל אותה מייצר בעצמו כל פריט. קרמיקה בצבעי הים לצד עבודות אמנות קטנות.",
+      "tipHtml": "💡 הקרמיקה נשרפת באטלייה שמאחורי החנות, כך שהמלאי משתנה כל הזמן ואין שני פריטים זהים.",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6233%2C19.9226",
+      "lat": 39.6233,
+      "lon": 19.9226,
+      "parking": "Unknown",
+      "vibe": [
+        "Culture",
+        "Traditional"
+      ],
+      "beachType": null,
+      "bestTime": "Anytime",
+      "needsCoordCheck": true
+    },
+    {
+      "id": "gem-rolandos",
+      "tags": "culture,shopping",
+      "image": {
+        "src": "https://images.pexels.com/photos/1126935/pexels-photo-1126935.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "alt": "רולנדוס - תכשיטים בעבודת יד (Rolandos)"
+      },
+      "hasRealPhoto": false,
+      "typeBadgeHtml": "<span>💍</span> תכשיטי אומן",
+      "name": "רולנדוס - תכשיטים בעבודת יד (Rolandos)",
+      "description": "סדנת תכשיטים משפחתית ברחוב ניקיפורו תיאוטוקי, שבה רולנדוס קסנתופולוס עובד מול הלקוחות. עיצובים יווניים עכשוויים בעבודת יד, לצד פסלונים קטנים ואובייקטים חד-פעמיים.",
+      "tipHtml": "💡 המחירים גבוהים מחנויות התכשיטים התיירותיות בסביבה, וזה ההבדל בין עבודת יד לייצור המוני.",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6238%2C19.9205",
+      "lat": 39.6238,
+      "lon": 19.9205,
+      "parking": "Unknown",
+      "vibe": [
+        "Culture",
+        "Traditional"
+      ],
+      "beachType": null,
+      "bestTime": "Anytime",
+      "needsCoordCheck": true
+    },
+    {
+      "id": "gem-corfu-market",
+      "tags": "food,shopping",
+      "image": {
+        "src": "https://images.pexels.com/photos/1126935/pexels-photo-1126935.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "alt": "השוק העירוני של קורפו (Corfu Central Market)"
+      },
+      "hasRealPhoto": false,
+      "typeBadgeHtml": "<span>🧺</span> שוק מקומי",
+      "name": "השוק העירוני של קורפו (Corfu Central Market)",
+      "description": "השוק שבו העיר קונה לעצמה: דוכני ירקות ותבלינים, דגה טרייה מהיוני, ולצידם שמן זית, דבש, זיתים ומוצרי קומקוואט מקומיים. לא אטרקציה מתויירת - מקום עבודה.",
+      "tipHtml": "💡 השוק סוגר אחר הצהריים המוקדמות ואינו פועל בימי ראשון, אז זו עצירת בוקר בלבד. כדאי להביא מזומן קטן.",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6232%2C19.9178",
+      "lat": 39.6232,
+      "lon": 19.9178,
+      "parking": "Unknown",
+      "vibe": [
+        "Culinary",
+        "Traditional"
+      ],
+      "beachType": null,
+      "bestTime": "Morning",
+      "needsCoordCheck": false
+    },
+    {
       "id": "gem-mavroudis",
       "tags": "food,culture",
       "image": {
