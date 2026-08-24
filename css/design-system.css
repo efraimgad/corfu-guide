@@ -719,13 +719,31 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
   background:var(--gt-paper-raised); border-bottom:1px solid var(--gt-hair);
   box-shadow:var(--gt-sh-2);
 }
-.gt-topbar__status{ display:flex; align-items:center; gap:var(--gt-space-2); flex-shrink:0; }
+.gt-topbar__status{ display:flex; align-items:center; gap:var(--gt-space-2); flex-shrink:1; min-width:0; }
 .gt-topbar__stat{ cursor:default; padding:6px 12px; min-height:0; }
+/* #topbar-day's text is a runtime-injected "יום N: {theme}" string with no
+   length cap — on 8 of 9 trip days it's long enough that, combined with
+   .gt-topbar__status now being allowed to shrink, it would still eat all
+   available width itself. Truncate with an ellipsis instead of letting it
+   force the sibling search field toward 0px. */
+#topbar-day{
+  min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
 /* flex:1 alone stretched the search field to ~1080px on a 1440px monitor —
    a single-line input the width of a billboard, and even worse on ultrawide.
    Capped and end-aligned so it stays a search box rather than a banner,
    while still filling the available width on phones. */
-.gt-topbar__search{ position:relative; flex:1; min-width:0; max-width:560px; margin-inline-start:auto; }
+/* min-width:96px, not 0 — `flex:1` expands to flex-basis:0%, and a 0%-basis
+   item's flex-shrink *weight* (basis × shrink-factor) is always 0, so it
+   never absorbs any of the negative space when the line overflows: with
+   .gt-topbar__status now shrinkable, ALL of the deficit landed on
+   .gt-topbar__search instead, collapsing it to a literal 0px box (confirmed
+   in-browser — the ~56px that still rendered was only the <input>'s own
+   un-shrinkable intrinsic min-width, padding+border, escaping outside its
+   0-width parent with a negative offset and visually overlapping the status
+   chips). An explicit min-width gives it a real floor in the shrink
+   algorithm, so .gt-topbar__status absorbs the rest instead. */
+.gt-topbar__search{ position:relative; flex:1; min-width:96px; max-width:560px; margin-inline-start:auto; }
 .gt-topbar__search-icon{
   position:absolute; inset-inline-end:14px; top:50%; transform:translateY(-50%);
   font-size:1rem; pointer-events:none;
@@ -983,7 +1001,7 @@ body.modal-open #gt-tools-fab-btn{
   display:grid; grid-template-columns:repeat(4, 1fr); gap:var(--gt-space-2);
 }
 @media (max-width:480px){
-  .gt-mood-grid__tiles{ grid-template-columns:repeat(2, 1fr); }
+  .gt-mood-grid__tiles{ grid-template-columns:repeat(2, 1fr); gap:var(--gt-space-1); }
 }
 .gt-mood-tile{
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
@@ -1053,6 +1071,35 @@ body.modal-open #gt-tools-fab-btn{
 .gt-explore-map-toggle{ width:100%; margin-bottom:var(--gt-space-4); }
 .gt-explore-map-container{ margin-bottom:var(--gt-space-4); border-radius:var(--gt-r-lg); overflow:hidden; border:1px solid var(--gt-hair); }
 .gt-explore-map-layer-bar{ display:flex; flex-wrap:wrap; gap:var(--gt-space-3); padding:var(--gt-space-2) var(--gt-space-3); background:var(--gt-paper-sunken); font-size:var(--gt-text-sm); }
+
+/* Phase C fold fix (phone widths only, <=480px - desktop's 1024px+ split
+   view further below and the 481-1023px tablet range are both untouched):
+   the first Discover result card (#explore-list's first child) sat below
+   the fold at 320-430px, measured firstElementChild.getBoundingClientRect()
+   .top:848px against an ~844px-tall viewport - i.e. zero results visible
+   without scrolling. The mood grid above the category chips was the single
+   biggest contributor (4 rows of 84px-min-height tiles on a 2-column phone
+   grid). Trimmed here across several small, independently-safe levers
+   rather than dropping to a 3-column grid: 3-up wrapped several of the
+   longer Hebrew labels ("ערב רומנטי", "לאכול משהו טוב", "לא לעשות כלום")
+   onto two lines, breaking this grid's one-line-label design (see the
+   "Discover mood entry" comment above .gt-mood-grid) and reading as
+   uneven/awkward next to the one-line tiles beside them in the same row -
+   confirmed in a real screenshot before this approach was chosen instead.
+   Placed after every unconditional rule it overrides (.gt-explore,
+   .gt-mood-grid, .gt-mood-tile, .gt-mood-tile__emoji, .gt-explore-
+   subheader, .gt-explore-search, .gt-explore-map-toggle above) so the
+   cascade favours this block at equal specificity without needing
+   !important anywhere. */
+@media (max-width:480px){
+  .gt-explore{ padding-top:var(--gt-space-3); }
+  .gt-mood-grid{ margin-bottom:var(--gt-space-3); }
+  .gt-mood-tile{ min-height:64px; padding:var(--gt-space-2); }
+  .gt-mood-tile__emoji{ font-size:1.5rem; }
+  .gt-explore-subheader{ padding:var(--gt-space-2) 0 var(--gt-space-2); margin-bottom:var(--gt-space-1); }
+  .gt-explore-search{ margin-top:var(--gt-space-1); }
+  .gt-explore-map-toggle{ margin-bottom:var(--gt-space-2); }
+}
 
 /* ============================================================
    EXPLORE — desktop split view (1024px+ only; mobile/tablet keep the

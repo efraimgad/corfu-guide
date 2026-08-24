@@ -42,7 +42,8 @@ window.CORFU_LOCATIONS = {
         "Popular"
       ],
       "beachType": "Sand & Pebble",
-      "bestTime": "Early Morning"
+      "bestTime": "Early Morning",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "beach-רוביניה-Rovinia",
@@ -65,7 +66,8 @@ window.CORFU_LOCATIONS = {
         "Adventure"
       ],
       "beachType": "Pebble",
-      "bestTime": "Anytime"
+      "bestTime": "Anytime",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "beach-פורטו-טימוני-Porto-Timoni",
@@ -134,17 +136,18 @@ window.CORFU_LOCATIONS = {
         "Sunset"
       ],
       "beachType": "Sandy",
-      "bestTime": "Sunset"
+      "bestTime": "Sunset",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "beach-תעלת-האהבה-Canal-d-Amour",
       "name": "תעלת האהבה (Canal d'Amour)",
       "tags": "romantic,party",
       "image": {
-        "src": "https://images.unsplash.com/photo-1544473244-f6895e69da8a?auto=format&fit=crop&q=80&w=800",
-        "alt": "תעלת האהבה"
+        "src": "https://upload.wikimedia.org/wikipedia/commons/7/74/Canal_d'amour_at_Sidari_in_Corfu.jpg",
+        "alt": "תעלת האהבה - תצורות הסלע הלבנות בסידארי"
       },
-      "hasRealPhoto": false,
+      "hasRealPhoto": true,
       "popularityBadge": "אגדת אהבה מקומית 💖",
       "description": "פלא טבע של סלעי אבן-חול בצורות ייחודיות היוצרים תעלות מי-ים. אגדה מקומית מספרת שזוגות שישחו יחד לאורך התעלה יישארו מאוהבים לנצח. אזור קטן, מתוייר מאוד ועמוס, אך מהווה חוויית צילום וביקור מרתקת.",
       "infoPanelHtml": "<div>🍽️ מסעדות: מגוון אדיר מסביב</div>\n            <div>🚻 שירותים: בברים באזור</div>\n            <div>🚿 מקלחות: מסודרות חלקית</div>\n            <div>🌳 צל טבעי: אין</div>\n            <div>🚗 גישה: הליכה קצרה ונוחה</div>\n            <div>🅿️ חניה: בעייתית ברחובות</div>",
@@ -158,17 +161,18 @@ window.CORFU_LOCATIONS = {
         "Popular"
       ],
       "beachType": "Sand & Pebble",
-      "bestTime": "Early Morning"
+      "bestTime": "Early Morning",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "beach-סידארי-Sidari",
       "name": "סידארי (Sidari)",
       "tags": "family,organized,party",
       "image": {
-        "src": "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80&w=800",
-        "alt": "סידארי"
+        "src": "https://upload.wikimedia.org/wikipedia/commons/f/f6/2018-06-21_Sidari,_Corfu.jpg",
+        "alt": "חוף סידארי"
       },
-      "hasRealPhoto": false,
+      "hasRealPhoto": true,
       "popularityBadge": "עיירת נופש תוססת 🎉",
       "description": "חוף הדגל של אחת מעיירות הנופש הגדולות באי. רצועת חוף רחבה מאוד עם מים רדודים וחמימים למרחק רב, אידיאלית ובטוחה במיוחד לילדים קטנים. מציעה שפע של פעילויות ספורט ימי ואווירה משפחתית-צעירה ורועשת.",
       "infoPanelHtml": "<div>🍽️ מסעדות: עשרות לאורך הטיילת</div>\n            <div>🚻 שירותים: זמין וקל למצוא</div>\n            <div>🚿 מקלחות: בחוף</div>\n            <div>🌳 צל טבעי: אין</div>\n            <div>🚗 גישה: מעולה עם כסאות גלגלים</div>\n            <div>🅿️ חניה: מסודרת וברחובות</div>",
@@ -183,7 +187,8 @@ window.CORFU_LOCATIONS = {
         "Popular"
       ],
       "beachType": "Sandy",
-      "bestTime": "Early Morning"
+      "bestTime": "Early Morning",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "beach-ארילאס-Arillas",
@@ -206,7 +211,8 @@ window.CORFU_LOCATIONS = {
         "Quiet"
       ],
       "beachType": "Sandy",
-      "bestTime": "Anytime"
+      "bestTime": "Anytime",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "beach-אגיוס-סטפנוס-צפון-מערב",
@@ -356,10 +362,10 @@ window.CORFU_LOCATIONS = {
       "name": "איסוס (Issos)",
       "tags": "family,organized",
       "image": {
-        "src": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800",
-        "alt": "איסוס"
+        "src": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Pl%C3%A1%C5%BE_Issos%2C_Korfu.jpg",
+        "alt": "דיונות החול של חוף איסוס"
       },
-      "hasRealPhoto": false,
+      "hasRealPhoto": true,
       "popularityBadge": "הסהרה של קורפו 🐪",
       "description": "תופעת טבע מרתקת - דיונות חול ענקיות המפרידות בין הים לאגם קוריסיון. רצועה עצומה, פראית לחלוטין ורחבת ידיים. המקום פופולרי במיוחד בקרב גולשי קייטסרפינג בזכות הרוחות המתונות, והופיע בסרט של ג'יימס בונד.",
       "infoPanelHtml": "<div>🍽️ מסעדות: קיוסק בלבד</div>\n            <div>🚻 שירותים: כימיים בסיסיים</div>\n            <div>🚿 מקלחות: אין</div>\n            <div>🌳 צל טבעי: יער ארזים במרחק</div>\n            <div>🚗 גישה: כביש נוח</div>\n            <div>🅿️ חניה: מגרש ענק בחינם</div>",
@@ -395,7 +401,8 @@ window.CORFU_LOCATIONS = {
         "Quiet"
       ],
       "beachType": "Sandy",
-      "bestTime": "Anytime"
+      "bestTime": "Anytime",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "beach-מרתיאס-Marathias",
@@ -515,7 +522,8 @@ window.CORFU_LOCATIONS = {
         "Luxury"
       ],
       "beachType": "Pebble",
-      "bestTime": "Anytime"
+      "bestTime": "Anytime",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "beach-ניסאקי-Nissaki",
@@ -560,17 +568,18 @@ window.CORFU_LOCATIONS = {
         "Quiet"
       ],
       "beachType": "Pebble",
-      "bestTime": "Anytime"
+      "bestTime": "Anytime",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "beach-קלאמי-Kalami",
       "name": "קלאמי (Kalami)",
       "tags": "family,quiet,snorkeling",
       "image": {
-        "src": "images/cards/beach.svg",
-        "alt": "קלאמי"
+        "src": "https://upload.wikimedia.org/wikipedia/commons/4/41/Kalami%2C_Corfu%2C_July_1985_%2801%29.jpg",
+        "alt": "מפרץ קלאמי"
       },
-      "hasRealPhoto": false,
+      "hasRealPhoto": true,
       "popularityBadge": "השראה ספרותית 📖",
       "description": "מפרץ ירוק בצורת פרסה, הידוע כביתה ההיסטורי של משפחת דארל (\"משפחתי וחיות אחרות\"). המים תמיד שקטים כמו אגם - אידיאלי לסאפ (SUP). \"הבית הלבן\" ההיסטורי מתפקד כיום כטברנה נהדרת המשקיפה על המים החלקים.",
       "infoPanelHtml": "<div>🍽️ מסעדות: בתי קפה וטברנות</div>\n            <div>🚻 שירותים: זמין בקלות</div>\n            <div>🚿 מקלחות: פזורות בחוף</div>\n            <div>🌳 צל טבעי: עצי ברוש מהממים</div>\n            <div>🚗 גישה: ירידה קצרה מהכביש</div>\n            <div>🅿️ חניה: בעייתית באוגוסט</div>",
@@ -653,7 +662,8 @@ window.CORFU_LOCATIONS = {
       ],
       "beachType": "Sand & Pebble",
       "bestTime": "Morning",
-      "needsCoordCheck": true
+      "needsCoordCheck": true,
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "beach-אליפא-Alipa",
@@ -677,7 +687,8 @@ window.CORFU_LOCATIONS = {
       ],
       "beachType": "Sand & Pebble",
       "bestTime": "Morning",
-      "needsCoordCheck": true
+      "needsCoordCheck": true,
+      "verifiedOn": "2026-08-24"
     }
   ],
   "food": [
@@ -2333,7 +2344,11 @@ window.CORFU_LOCATIONS = {
         "Relaxed"
       ],
       "beachType": null,
-      "bestTime": "Evening"
+      "bestTime": "Evening",
+      "phone": "+302663041226",
+      "verifiedHours": "09:00 - עד מאוחר בלילה",
+      "address": "Agia Triada, Paleokastritsa, Corfu 49083",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "food-נגואל-ביץ-בר-Nagual",
@@ -2572,7 +2587,10 @@ window.CORFU_LOCATIONS = {
       "beachType": null,
       "bestTime": "Afternoon",
       "needsCoordCheck": true,
-      "verifyNote": "שעות, מחיר וטלפון לא אומתו מול Google Places - התקשרו להזמנת מקום לפני ההגעה, כפי שממליץ המדריך."
+      "phone": "+302663091142",
+      "verifiedHours": "12:00-23:00 (מאי-אוקטובר)",
+      "address": "Agni Bay, Corfu 49083",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "food-אוגניסטרה-Ognistra",
@@ -2599,7 +2617,9 @@ window.CORFU_LOCATIONS = {
       "beachType": null,
       "bestTime": "Afternoon",
       "needsCoordCheck": true,
-      "verifyNote": "שעות פתיחה ומחירים לא אומתו - כדאי לוודא טלפונית שהטברנה פתוחה לפני הנסיעה ההררית."
+      "phone": "+302663098050",
+      "verifiedHours": "11:00-22:00",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "food-פורוס-Foros",
@@ -2626,7 +2646,9 @@ window.CORFU_LOCATIONS = {
       "beachType": null,
       "bestTime": "Afternoon",
       "needsCoordCheck": true,
-      "verifyNote": "שעות פתיחה ומחירים לא אומתו - כדאי לוודא טלפונית שהטברנה פתוחה לפני הנסיעה ההררית."
+      "phone": "+302663098373",
+      "verifyNote": "שעות פתיחה לא אומתו - כדאי לוודא טלפונית שהטברנה פתוחה לפני הנסיעה ההררית.",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "food-בלה-ויסטה-Bella-Vista",
@@ -2653,7 +2675,9 @@ window.CORFU_LOCATIONS = {
       "beachType": null,
       "bestTime": "Sunset",
       "needsCoordCheck": true,
-      "verifyNote": "שעות ומחירים לא אומתו מול Google Places."
+      "phone": "+302663049271",
+      "verifyNote": "שעות פתיחה לא אומתו מול Google Places.",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "food-גולדן-פוקס-Golden-Fox",
@@ -2708,7 +2732,10 @@ window.CORFU_LOCATIONS = {
       "beachType": null,
       "bestTime": "Afternoon",
       "needsCoordCheck": true,
-      "verifyNote": "שעות ומחירים לא אומתו מול Google Places."
+      "phone": "+302663041233",
+      "address": "Paleokastritsa, Corfu 49083",
+      "verifyNote": "שעות פתיחה לא אומתו מול Google Places.",
+      "verifiedOn": "2026-08-24"
     }
   ],
   "attractions": [
@@ -3651,10 +3678,10 @@ window.CORFU_LOCATIONS = {
       "id": "gem-2",
       "tags": "village,history",
       "image": {
-        "src": "https://images.pexels.com/photos/1659438/pexels-photo-1659438.jpeg?auto=compress&cs=tinysrgb&w=600",
-        "alt": "פריתיה העתיקה"
+        "src": "https://upload.wikimedia.org/wikipedia/commons/4/41/Korfu_%28GR%29%2C_Palea_Peritheia_--_2018_--_1033.jpg",
+        "alt": "בתי האבן הנטושים של פריתיה העתיקה"
       },
-      "hasRealPhoto": false,
+      "hasRealPhoto": true,
       "typeBadgeHtml": "<span>🏘️</span> כפר מסורתי",
       "name": "פריתיה העתיקה (Old Perithia)",
       "description": "כפר ונציאני עתיק שקפא בזמן על מורדות הר פנטוקרטור. משוטטים בין חורבות אבן, כנסיות עתיקות ומבנים מהמאה ה-14 שמספרים סיפור ארוך.",
@@ -3668,16 +3695,17 @@ window.CORFU_LOCATIONS = {
       ],
       "beachType": null,
       "bestTime": "Anytime",
-      "needsCoordCheck": true
+      "needsCoordCheck": true,
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "gem-3",
       "tags": "viewpoint",
       "image": {
-        "src": "https://images.pexels.com/photos/3411135/pexels-photo-3411135.jpeg?auto=compress&cs=tinysrgb&w=600",
-        "alt": "כף דראסטיס"
+        "src": "https://upload.wikimedia.org/wikipedia/commons/3/31/Cape_Drastis%2C_Corfu_%2817255759472%29.jpg",
+        "alt": "צוקי האבן הלבנים של כף דראסטיס"
       },
-      "hasRealPhoto": false,
+      "hasRealPhoto": true,
       "typeBadgeHtml": "<span>📸</span> נקודת תצפית",
       "name": "כף דראסטיס (Cape Drastis)",
       "description": "תצורות סלע גיר לבנות ומרהיבות המזדקרות מתוך הים היוני בקצה הצפון-מערבי של האי. מקום אידיאלי לצפייה בשקיעה ובנופים דרמטיים ביותר.",
@@ -3690,7 +3718,8 @@ window.CORFU_LOCATIONS = {
         "Viewpoint"
       ],
       "beachType": null,
-      "bestTime": "Anytime"
+      "bestTime": "Anytime",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "gem-4",
@@ -3714,7 +3743,14 @@ window.CORFU_LOCATIONS = {
       ],
       "beachType": null,
       "bestTime": "Anytime",
-      "needsCoordCheck": true
+      "needsCoordCheck": true,
+      "phone": "+306945593016",
+      "verifiedHours": "10:00-15:00 (ב'-ש', בתיאום מראש)",
+      "closedDays": [
+        "SU"
+      ],
+      "address": "Ropa Valley, Giannades, Corfu 49100",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "gem-5",
@@ -3857,10 +3893,10 @@ window.CORFU_LOCATIONS = {
       "id": "gem-11",
       "tags": "nature",
       "image": {
-        "src": "https://images.pexels.com/photos/1033082/pexels-photo-1033082.jpeg?auto=compress&cs=tinysrgb&w=600",
-        "alt": "אגם קוריסיון"
+        "src": "https://upload.wikimedia.org/wikipedia/commons/0/09/Korission_see_d%C3%BCnen_korfu_-_2.jpg",
+        "alt": "דיונות ואגם קוריסיון"
       },
-      "hasRealPhoto": false,
+      "hasRealPhoto": true,
       "typeBadgeHtml": "<span>🦩</span> טבע וחיות",
       "name": "אגם קוריסיון (Lake Korission)",
       "description": "לגונת מים מתוקים-מלוחים ייחודית בדרום קורפו, המשמשת תחנת מעבר למגוון עצום של ציפורים וביניהן פלמינגו ורודים יפהפיים.",
@@ -3873,7 +3909,8 @@ window.CORFU_LOCATIONS = {
         "Nature"
       ],
       "beachType": null,
-      "bestTime": "Anytime"
+      "bestTime": "Anytime",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "gem-12",
@@ -3967,7 +4004,10 @@ window.CORFU_LOCATIONS = {
       ],
       "beachType": null,
       "bestTime": "Anytime",
-      "needsCoordCheck": true
+      "needsCoordCheck": true,
+      "phone": "+302661100792",
+      "address": "Velissariou 35, Corfu Town 49100",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "gem-16",
@@ -3996,10 +4036,10 @@ window.CORFU_LOCATIONS = {
       "id": "gem-17",
       "tags": "village",
       "image": {
-        "src": "https://images.pexels.com/photos/1032652/pexels-photo-1032652.jpeg?auto=compress&cs=tinysrgb&w=600",
-        "alt": "הכפר חלומאס"
+        "src": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Chlomos_Aussicht.JPG",
+        "alt": "הנוף מהכפר חלומאס"
       },
-      "hasRealPhoto": false,
+      "hasRealPhoto": true,
       "typeBadgeHtml": "<span>🏘️</span> כפר מסורתי",
       "name": "הכפר חלומאס (Chlomos)",
       "description": "ידוע כ\"מרפסת של קורפו\". כפר הררי בדרום האי המאופיין בסמטאות ורודות וצהומות צרות במיוחד, מהן נשקף נוף פנורמי מרהיב לחופים המזרחיים.",
@@ -4013,7 +4053,8 @@ window.CORFU_LOCATIONS = {
       ],
       "beachType": null,
       "bestTime": "Anytime",
-      "needsCoordCheck": true
+      "needsCoordCheck": true,
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "gem-18",
@@ -4219,7 +4260,11 @@ window.CORFU_LOCATIONS = {
         "Culinary"
       ],
       "beachType": null,
-      "bestTime": "Anytime"
+      "bestTime": "Anytime",
+      "phone": "+302663091350",
+      "verifiedHours": "13:00-22:30 (מאי-אוקטובר)",
+      "address": "Agni Bay, Corfu 49083",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "gem-27",
@@ -4382,7 +4427,123 @@ window.CORFU_LOCATIONS = {
       ],
       "beachType": null,
       "bestTime": "Anytime",
-      "needsCoordCheck": true
+      "needsCoordCheck": true,
+      "verifiedHours": "ב'-ו' 09:00-17:00, ש' 09:30-14:30",
+      "closedDays": [
+        "SU"
+      ],
+      "address": "Ioannou Theotoki 9, Corfu Town 49100",
+      "verifiedOn": "2026-08-24"
+    },
+    {
+      "id": "gem-olive-wood-workshop",
+      "tags": "culture,shopping",
+      "image": {
+        "src": "https://images.pexels.com/photos/1126935/pexels-photo-1126935.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "alt": "בית המלאכה לעץ זית של טום (Olive Wood Workshop)"
+      },
+      "hasRealPhoto": false,
+      "typeBadgeHtml": "<span>🪵</span> סדנת אומן",
+      "name": "בית המלאכה לעץ זית של טום (Olive Wood Workshop)",
+      "description": "סדנת עץ זית משפחתית הפועלת בעיר העתיקה למעלה מ-55 שנה, בסמטה היוצאת מרחוב ניקיפורו תיאוטוקי. טום ובנו מגלפים במקום את הכול - מקערות סלט וכלי מטבח ועד עיטורי בית.",
+      "tipHtml": "💡 זו סדנה עובדת ולא רק חנות: אם תגיעו כשטום ליד המחרטה, תראו את החפץ נוצר לפני שאתם קונים אותו.",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6236%2C19.9219",
+      "lat": 39.6236,
+      "lon": 19.9219,
+      "parking": "Unknown",
+      "vibe": [
+        "Culture",
+        "Traditional"
+      ],
+      "beachType": null,
+      "bestTime": "Anytime",
+      "needsCoordCheck": true,
+      "verifiedHours": "09:00-19:00 (מאי-ספטמבר) / ב'-ש' 08:00-15:00 (אוקטובר-אפריל)",
+      "address": "Nikiforou Theotoki, Corfu Town 49100",
+      "verifiedOn": "2026-08-24"
+    },
+    {
+      "id": "gem-firsthing-noel",
+      "tags": "culture,shopping",
+      "image": {
+        "src": "https://images.pexels.com/photos/1126935/pexels-photo-1126935.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "alt": "פירסטינג ונואל (Firsthing & Noel)"
+      },
+      "hasRealPhoto": false,
+      "typeBadgeHtml": "<span>🏺</span> קרמיקה בעבודת יד",
+      "name": "פירסטינג ונואל (Firsthing & Noel)",
+      "description": "חנות-אטלייה קטנה ברחוב ניקיפורו תיאוטוקי, מאחורי כנסיית אגיוס ואסיליוס, שבה הזוג שמנהל אותה מייצר בעצמו כל פריט. קרמיקה בצבעי הים לצד עבודות אמנות קטנות.",
+      "tipHtml": "💡 הקרמיקה נשרפת באטלייה שמאחורי החנות, כך שהמלאי משתנה כל הזמן ואין שני פריטים זהים.",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6233%2C19.9226",
+      "lat": 39.6233,
+      "lon": 19.9226,
+      "parking": "Unknown",
+      "vibe": [
+        "Culture",
+        "Traditional"
+      ],
+      "beachType": null,
+      "bestTime": "Anytime",
+      "needsCoordCheck": true,
+      "verifiedHours": "10:00-15:00, 18:00-21:00",
+      "address": "Agios Vasilios 28 (פינת Agia Varvara), Corfu Town 49100",
+      "verifiedOn": "2026-08-24"
+    },
+    {
+      "id": "gem-rolandos",
+      "tags": "culture,shopping",
+      "image": {
+        "src": "https://images.pexels.com/photos/1126935/pexels-photo-1126935.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "alt": "רולנדוס - תכשיטים בעבודת יד (Rolandos)"
+      },
+      "hasRealPhoto": false,
+      "typeBadgeHtml": "<span>💍</span> תכשיטי אומן",
+      "name": "רולנדוס - תכשיטים בעבודת יד (Rolandos)",
+      "description": "סדנת תכשיטים משפחתית ברחוב ניקיפורו תיאוטוקי, שבה רולנדוס קסנתופולוס עובד מול הלקוחות. עיצובים יווניים עכשוויים בעבודת יד, לצד פסלונים קטנים ואובייקטים חד-פעמיים.",
+      "tipHtml": "💡 המחירים גבוהים מחנויות התכשיטים התיירותיות בסביבה, וזה ההבדל בין עבודת יד לייצור המוני.",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6238%2C19.9205",
+      "lat": 39.6238,
+      "lon": 19.9205,
+      "parking": "Unknown",
+      "vibe": [
+        "Culture",
+        "Traditional"
+      ],
+      "beachType": null,
+      "bestTime": "Anytime",
+      "needsCoordCheck": true,
+      "phone": "+302661045004",
+      "address": "Nikiforou Theotoki 95-99, Corfu Town 49100",
+      "verifiedOn": "2026-08-24"
+    },
+    {
+      "id": "gem-corfu-market",
+      "tags": "food,shopping",
+      "image": {
+        "src": "https://images.pexels.com/photos/1126935/pexels-photo-1126935.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "alt": "השוק העירוני של קורפו (Corfu Central Market)"
+      },
+      "hasRealPhoto": false,
+      "typeBadgeHtml": "<span>🧺</span> שוק מקומי",
+      "name": "השוק העירוני של קורפו (Corfu Central Market)",
+      "description": "השוק שבו העיר קונה לעצמה: דוכני ירקות ותבלינים, דגה טרייה מהיוני, ולצידם שמן זית, דבש, זיתים ומוצרי קומקוואט מקומיים. לא אטרקציה מתויירת - מקום עבודה.",
+      "tipHtml": "💡 השוק סוגר אחר הצהריים המוקדמות ואינו פועל בימי ראשון, אז זו עצירת בוקר בלבד. כדאי להביא מזומן קטן.",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=39.6232%2C19.9178",
+      "lat": 39.6232,
+      "lon": 19.9178,
+      "parking": "Unknown",
+      "vibe": [
+        "Culinary",
+        "Traditional"
+      ],
+      "beachType": null,
+      "bestTime": "Morning",
+      "needsCoordCheck": false,
+      "closedDays": [
+        "SU"
+      ],
+      "address": "Lochagou Spyrou Vlaikou 69-71, Corfu Town",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "gem-mavroudis",
@@ -4406,7 +4567,11 @@ window.CORFU_LOCATIONS = {
       ],
       "beachType": null,
       "bestTime": "Anytime",
-      "needsCoordCheck": true
+      "needsCoordCheck": true,
+      "phone": "+302661076759",
+      "verifiedHours": "ב'-ש' 08:30-20:00, א' 09:00-13:00",
+      "address": "Vraganiotika, Corfu 49080",
+      "verifiedOn": "2026-08-24"
     },
     {
       "id": "gem-corfu-microbrewery",
@@ -4430,7 +4595,10 @@ window.CORFU_LOCATIONS = {
       ],
       "beachType": null,
       "bestTime": "Anytime",
-      "needsCoordCheck": true
+      "needsCoordCheck": true,
+      "phone": "+302663052132",
+      "verifiedHours": "סיורים בתיאום מראש: שבת 11:00-12:00, 13:00",
+      "verifiedOn": "2026-08-24"
     }
   ]
 };

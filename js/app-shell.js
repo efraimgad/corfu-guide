@@ -207,13 +207,31 @@ window.gtCloseTripSheet = gtCloseTripSheet;
 // the id gtNearbySheetListId points at, added to that same selector set in
 // js/explore.js's delegated listener.
 let gtNearbySheetTriggerEl = null;
-function gtOpenNearbySheet() {
+
+// Renders the current top-N "near you" list into the sheet body, plus the
+// sheet title reflecting whichever origin gtNearHotelItems() is actually
+// using right now (real opted-in location vs the hotel fallback - see
+// gtNearbyOrigin() in js/location-shared.js). Shared by the initial open
+// and by gtNearbyUseMyLocation() below so a successful location request
+// re-renders the exact same list, just from a different origin.
+function gtRenderNearbySheetList() {
     const listEl = document.getElementById('gt-nearby-sheet-list');
     if (listEl && typeof gtNearHotelItems === 'function' && typeof exploreRowCardHtml === 'function') {
         const items = gtNearHotelItems(5);
         listEl.innerHTML = items.map(x => exploreRowCardHtml(x.item, x.catKey)).join('');
         if (typeof initFavoriteButtons === 'function') initFavoriteButtons();
     }
+    const titleEl = document.getElementById('gt-nearby-sheet-title');
+    if (titleEl) {
+        const usingRealLocation = typeof gtNearbyOrigin === 'function'
+            && window.DESTINATION && window.DESTINATION.map
+            && gtNearbyOrigin() !== window.DESTINATION.map.homeBase;
+        titleEl.textContent = usingRealLocation ? '📍 קרוב אליי' : '📍 קרוב למלון';
+    }
+}
+
+function gtOpenNearbySheet() {
+    gtRenderNearbySheetList();
     const backdrop = document.getElementById('gt-nearby-sheet-backdrop');
     const sheet = document.getElementById('gt-nearby-sheet');
     if (!backdrop || !sheet) return;
@@ -232,8 +250,34 @@ function gtCloseNearbySheet() {
     if (!isAnyGtSheetOpen()) document.body.classList.remove('modal-open');
     if (gtNearbySheetTriggerEl) gtNearbySheetTriggerEl.focus();
 }
+
+// "Use my location" action inside the nearby sheet header - single opt-in
+// getCurrentPosition request (see gtRequestMyLocation() in
+// js/location-shared.js), never fired automatically. Disables the button
+// and swaps its label while the request is in flight so a slow GPS fix
+// can't be double-tapped; restores it afterwards either way. On success
+// the list (and title) re-render from the real location; on denial/error
+// they simply stay as they were (hotel-based), no error UI.
+function gtNearbyUseMyLocation() {
+    const btn = document.getElementById('gt-nearby-use-location-btn');
+    if (typeof gtRequestMyLocation !== 'function') return;
+    const originalLabel = btn ? btn.textContent : '';
+    if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'מאתר מיקום...';
+    }
+    gtRequestMyLocation(() => {
+        gtRenderNearbySheetList();
+        if (btn) {
+            btn.disabled = false;
+            btn.textContent = originalLabel;
+        }
+    });
+}
+
 window.gtOpenNearbySheet = gtOpenNearbySheet;
 window.gtCloseNearbySheet = gtCloseNearbySheet;
+window.gtNearbyUseMyLocation = gtNearbyUseMyLocation;
 
 // -- Home tab map overlay -----------------------------------------------------
 // There is no longer a stat row to sync here: the countdown/weather/today
