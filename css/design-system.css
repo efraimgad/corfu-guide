@@ -719,13 +719,31 @@ button.gt-row-card:focus-visible{ outline:2px solid var(--gt-primary-500); outli
   background:var(--gt-paper-raised); border-bottom:1px solid var(--gt-hair);
   box-shadow:var(--gt-sh-2);
 }
-.gt-topbar__status{ display:flex; align-items:center; gap:var(--gt-space-2); flex-shrink:0; }
+.gt-topbar__status{ display:flex; align-items:center; gap:var(--gt-space-2); flex-shrink:1; min-width:0; }
 .gt-topbar__stat{ cursor:default; padding:6px 12px; min-height:0; }
+/* #topbar-day's text is a runtime-injected "יום N: {theme}" string with no
+   length cap — on 8 of 9 trip days it's long enough that, combined with
+   .gt-topbar__status now being allowed to shrink, it would still eat all
+   available width itself. Truncate with an ellipsis instead of letting it
+   force the sibling search field toward 0px. */
+#topbar-day{
+  min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
 /* flex:1 alone stretched the search field to ~1080px on a 1440px monitor —
    a single-line input the width of a billboard, and even worse on ultrawide.
    Capped and end-aligned so it stays a search box rather than a banner,
    while still filling the available width on phones. */
-.gt-topbar__search{ position:relative; flex:1; min-width:0; max-width:560px; margin-inline-start:auto; }
+/* min-width:96px, not 0 — `flex:1` expands to flex-basis:0%, and a 0%-basis
+   item's flex-shrink *weight* (basis × shrink-factor) is always 0, so it
+   never absorbs any of the negative space when the line overflows: with
+   .gt-topbar__status now shrinkable, ALL of the deficit landed on
+   .gt-topbar__search instead, collapsing it to a literal 0px box (confirmed
+   in-browser — the ~56px that still rendered was only the <input>'s own
+   un-shrinkable intrinsic min-width, padding+border, escaping outside its
+   0-width parent with a negative offset and visually overlapping the status
+   chips). An explicit min-width gives it a real floor in the shrink
+   algorithm, so .gt-topbar__status absorbs the rest instead. */
+.gt-topbar__search{ position:relative; flex:1; min-width:96px; max-width:560px; margin-inline-start:auto; }
 .gt-topbar__search-icon{
   position:absolute; inset-inline-end:14px; top:50%; transform:translateY(-50%);
   font-size:1rem; pointer-events:none;
