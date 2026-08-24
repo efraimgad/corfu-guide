@@ -242,15 +242,56 @@ function gtLocationDriveEstimate(d) {
     return { km: Math.round(roadKm), min };
 }
 
-// The Map tab's "Near you" layer (Phase 2 visual redesign) reads "you" as
-// the trip's home base (the hotel) - the same reference point the app
-// already uses everywhere else (dashboard distances, the drive-time
-// estimate above) - real device geolocation was deliberately not
-// introduced for this (a new permission prompt for a redesign pass with no
-// other geolocation use anywhere in the app). Across ALL categories, by
-// the same real haversine distance.
+// The Map tab's "Near you" layer (Phase 2 visual redesign) originally read
+// "you" as the trip's home base (the hotel) unconditionally - real device
+// geolocation was deliberately withheld for that pass (a new permission
+// prompt for a redesign with no other geolocation use anywhere in the app).
+//
+// Phase B (this pass) adds a strictly OPT-IN real-location origin: the user
+// must explicitly tap "Use my location" (see gtRequestMyLocation() below,
+// wired from the nearby sheet in js/app-shell.js) before gtUserCoords is
+// ever set. Nothing here calls getCurrentPosition on its own, and the
+// coordinate is kept in this in-memory variable only - never persisted to
+// localStorage, never sent to CorfuDB/CorfuSync/Supabase. Until the user
+// opts in, gtNearbyOrigin() falls back to the hotel exactly as before, so
+// every existing caller (this function, the drive-time estimate above)
+// keeps working unchanged with no new permission prompt forced on anyone.
+let gtUserCoords = null;
+
+function gtNearbyOrigin() {
+    return gtUserCoords || (window.DESTINATION && window.DESTINATION.map && window.DESTINATION.map.homeBase);
+}
+
+// Single opt-in geolocation request - fired only from an explicit user tap
+// (never automatically, never watchPosition/continuous tracking). Stores
+// the resulting coordinate in the in-memory gtUserCoords above only.
+// `onDone`, if given, is called with true on success or false on any
+// failure/denial/unsupported-browser case, so the caller can re-render its
+// list; on failure gtUserCoords is simply left as-is (null unless a prior
+// successful request already set it), so gtNearbyOrigin() naturally keeps
+// falling back to the hotel.
+function gtRequestMyLocation(onDone) {
+    if (!navigator.geolocation || typeof navigator.geolocation.getCurrentPosition !== 'function') {
+        if (typeof onDone === 'function') onDone(false);
+        return;
+    }
+    navigator.geolocation.getCurrentPosition(
+        pos => {
+            gtUserCoords = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+            if (typeof onDone === 'function') onDone(true);
+        },
+        () => {
+            if (typeof onDone === 'function') onDone(false);
+        },
+        { timeout: 8000, maximumAge: 300000 }
+    );
+}
+
+// Across ALL categories, by the same real haversine distance - from
+// gtNearbyOrigin() above (the user's real location once opted in, the
+// hotel otherwise).
 function gtNearHotelItems(limit) {
-    const base = window.DESTINATION && window.DESTINATION.map && window.DESTINATION.map.homeBase;
+    const base = gtNearbyOrigin();
     if (!base || typeof haversineKm !== 'function') return [];
     const locations = (window.DESTINATION && window.DESTINATION.locations) || {};
     // A handful of real places are catalogued twice under two categories at
@@ -282,3 +323,5 @@ window.gtVibeChips = gtVibeChips;
 window.gtBestTimeLabel = gtBestTimeLabel;
 window.gtLocationDriveEstimate = gtLocationDriveEstimate;
 window.gtNearHotelItems = gtNearHotelItems;
+window.gtNearbyOrigin = gtNearbyOrigin;
+window.gtRequestMyLocation = gtRequestMyLocation;

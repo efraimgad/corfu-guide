@@ -317,10 +317,11 @@
 <div id="gt-nearby-sheet-backdrop" class="gt-app-sheet-backdrop hidden" onclick="if(event.target===this) gtCloseNearbySheet()"></div>
 <div id="gt-nearby-sheet" class="gt-sheet gt-app-sheet hidden" role="dialog" aria-modal="true" aria-labelledby="gt-nearby-sheet-title">
     <div class="gt-sheet__handle"></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--gt-space-3);">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--gt-space-2);">
         <h3 class="gt-h3" id="gt-nearby-sheet-title">📍 קרוב למלון</h3>
         <button type="button" onclick="gtCloseNearbySheet()" aria-label="סגירה" class="gt-btn gt-btn--secondary" style="min-height:44px;padding:var(--gt-space-2) var(--gt-space-3);">×</button>
     </div>
+    <button type="button" id="gt-nearby-use-location-btn" onclick="gtNearbyUseMyLocation()" class="gt-btn gt-btn--secondary" style="min-height:44px;width:100%;margin-bottom:var(--gt-space-3);">📍 השתמשו במיקום שלי</button>
     <div id="gt-nearby-sheet-list" class="gt-explore-list"></div>
 </div>
 
