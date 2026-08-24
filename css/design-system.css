@@ -1001,7 +1001,7 @@ body.modal-open #gt-tools-fab-btn{
   display:grid; grid-template-columns:repeat(4, 1fr); gap:var(--gt-space-2);
 }
 @media (max-width:480px){
-  .gt-mood-grid__tiles{ grid-template-columns:repeat(2, 1fr); }
+  .gt-mood-grid__tiles{ grid-template-columns:repeat(2, 1fr); gap:var(--gt-space-1); }
 }
 .gt-mood-tile{
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
@@ -1071,6 +1071,35 @@ body.modal-open #gt-tools-fab-btn{
 .gt-explore-map-toggle{ width:100%; margin-bottom:var(--gt-space-4); }
 .gt-explore-map-container{ margin-bottom:var(--gt-space-4); border-radius:var(--gt-r-lg); overflow:hidden; border:1px solid var(--gt-hair); }
 .gt-explore-map-layer-bar{ display:flex; flex-wrap:wrap; gap:var(--gt-space-3); padding:var(--gt-space-2) var(--gt-space-3); background:var(--gt-paper-sunken); font-size:var(--gt-text-sm); }
+
+/* Phase C fold fix (phone widths only, <=480px - desktop's 1024px+ split
+   view further below and the 481-1023px tablet range are both untouched):
+   the first Discover result card (#explore-list's first child) sat below
+   the fold at 320-430px, measured firstElementChild.getBoundingClientRect()
+   .top:848px against an ~844px-tall viewport - i.e. zero results visible
+   without scrolling. The mood grid above the category chips was the single
+   biggest contributor (4 rows of 84px-min-height tiles on a 2-column phone
+   grid). Trimmed here across several small, independently-safe levers
+   rather than dropping to a 3-column grid: 3-up wrapped several of the
+   longer Hebrew labels ("ערב רומנטי", "לאכול משהו טוב", "לא לעשות כלום")
+   onto two lines, breaking this grid's one-line-label design (see the
+   "Discover mood entry" comment above .gt-mood-grid) and reading as
+   uneven/awkward next to the one-line tiles beside them in the same row -
+   confirmed in a real screenshot before this approach was chosen instead.
+   Placed after every unconditional rule it overrides (.gt-explore,
+   .gt-mood-grid, .gt-mood-tile, .gt-mood-tile__emoji, .gt-explore-
+   subheader, .gt-explore-search, .gt-explore-map-toggle above) so the
+   cascade favours this block at equal specificity without needing
+   !important anywhere. */
+@media (max-width:480px){
+  .gt-explore{ padding-top:var(--gt-space-3); }
+  .gt-mood-grid{ margin-bottom:var(--gt-space-3); }
+  .gt-mood-tile{ min-height:64px; padding:var(--gt-space-2); }
+  .gt-mood-tile__emoji{ font-size:1.5rem; }
+  .gt-explore-subheader{ padding:var(--gt-space-2) 0 var(--gt-space-2); margin-bottom:var(--gt-space-1); }
+  .gt-explore-search{ margin-top:var(--gt-space-1); }
+  .gt-explore-map-toggle{ margin-bottom:var(--gt-space-2); }
+}
 
 /* ============================================================
    EXPLORE — desktop split view (1024px+ only; mobile/tablet keep the
